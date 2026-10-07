@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>املاک 058 | خرید، فروش، رهن و اجاره ملک</title>
+
+<meta name="description" content="سامانه آگهی و جستجوی املاک در سراسر ایران">
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Tahoma,Arial,sans-serif;
+    background:#f5f5f3;
+    color:#222;
+}
+
+header{
+    background:#151515;
+    color:white;
+    padding:16px 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-icon{
+    width:45px;
+    height:45px;
+    border:2px solid #c9a45c;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#c9a45c;
+    font-size:23px;
+}
+
+.logo-text strong{
+    display:block;
+    font-size:21px;
+}
+
+.logo-text span{
+    color:#c9a45c;
+    font-size:12px;
+}
+
+nav{
+    display:flex;
+    gap:24px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.add-btn{
+    background:#c9a45c;
+    color:#111;
+    border:0;
+    padding:11px 18px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.hero{
+    background:
+    linear-gradient(135deg,rgba(15,15,15,.96),rgba(48,43,35,.91));
+    padding:75px 6% 85px;
+    color:white;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:42px;
+    margin-bottom:18px;
+}
+
+.hero h1 span{
+    color:#d5b46a;
+}
+
+.hero p{
+    color:#ddd;
+    font-size:17px;
+    margin-bottom:35px;
+}
+
+.search-box{
+    max-width:1050px;
+    margin:auto;
+    background:white;
+    padding:12px;
+    border-radius:15px;
+    display:grid;
+    grid-template-columns:1.2fr 1fr 1fr 1fr auto;
+    gap:9px;
+}
+
+.search-box select,
+.search-box input{
+    border:1px solid #ddd;
+    border-radius:9px;
+    padding:14px;
+    font-family:inherit;
+    outline:none;
+}
+
+.search-btn{
+    background:#c9a45c;
+    border:0;
+    border-radius:9px;
+    padding:0 25px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.container{
+    width:88%;
+    max-width:1250px;
+    margin:45px auto;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px;
+}
+
+.section-title h2{
+    font-size:25px;
+}
+
+.section-title span{
+    color:#777;
+    font-size:13px;
+}
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:15px;
+}
+
+.category{
+    background:white;
+    border-radius:15px;
+    padding:24px 10px;
+    text-align:center;
+    box-shadow:0 5px 18px rgba(0,0,0,.05);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.category:hover{
+    transform:translateY(-4px);
+}
+
+.category .icon{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.category strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+.category small{
+    color:#777;
+}
+
+.filter{
+    background:white;
+    padding:18px;
+    border-radius:14px;
+    margin-bottom:25px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.filter button{
+    border:1px solid #ddd;
+    background:#fff;
+    padding:10px 17px;
+    border-radius:8px;
+    cursor:pointer;
+    font-family:inherit;
+}
+
+.filter button.active{
+    background:#151515;
+    color:white;
+}
+
+.properties{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-4px);
+}
+
+.card-img{
+    height:190px;
+    background:linear-gradient(135deg,#d8d8d8,#888);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:42px;
+    color:white;
+}
+
+.card-body{
+    padding:17px;
+}
+
+.tag{
+    display:inline-block;
+    background:#f1e6cf;
+    color:#8b6b2c;
+    padding:5px 9px;
+    border-radius:5px;
+    font-size:11px;
+    margin-bottom:10px;
+}
+
+.card h3{
+    font-size:17px;
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#777;
+    font-size:12px;
+    margin-bottom:7px;
+}
+
+.price{
+    margin-top:13px;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.feature{
+    background:#fff;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+}
+
+.feature-icon{
+    font-size:35px;
+    margin-bottom:12px;
+}
+
+.feature h3{
+    margin-bottom:8px;
+}
+
+.feature p{
+    color:#777;
+    font-size:13px;
+    line-height:2;
+}
+
+.cta{
+    background:#171717;
+    color:white;
+    border-radius:20px;
+    padding:45px;
+    text-align:center;
+    margin-top:50px;
+}
+
+.cta h2{
+    margin-bottom:12px;
+}
+
+.cta p{
+    color:#ccc;
+    margin-bottom:22px;
+}
+
+footer{
+    margin-top:60px;
+    background:#111;
+    color:white;
+    padding:40px 6%;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+   
