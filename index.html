@@ -329,4 +329,357 @@ footer{
 .footer-grid{
     display:grid;
     grid-template-columns:2fr 1fr 1fr;
-   
+   }
+
+@media(max-width:900px){
+    .search-box{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .properties{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .categories{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:600px){
+    header{
+        padding:12px 4%;
+    }
+
+    nav{
+        display:none;
+    }
+
+    .hero{
+        padding:50px 5%;
+    }
+
+    .hero h1{
+        font-size:30px;
+    }
+
+    .hero p{
+        font-size:14px;
+    }
+
+    .search-box{
+        grid-template-columns:1fr;
+    }
+
+    .categories{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .properties{
+        grid-template-columns:1fr;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .container{
+        width:92%;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <div class="logo-icon">⌂</div>
+        <div class="logo-text">
+            <strong>املاک 058</strong>
+            <span>مرکز مشاورین املاک ایمان</span>
+        </div>
+    </div>
+
+    <nav>
+        <a href="#properties">آگهی‌ها</a>
+        <a href="#categories">دسته‌بندی</a>
+        <a href="#about">درباره ما</a>
+    </nav>
+
+    <button class="add-btn" onclick="addProperty()">
+        ثبت آگهی
+    </button>
+</header>
+
+<section class="hero">
+
+    <h1>
+        ملک موردنظرتان را
+        <span>پیدا کنید</span>
+    </h1>
+
+    <p>
+        خرید، فروش، رهن و اجاره ملک در سراسر ایران
+    </p>
+
+    <div class="search-box">
+
+        <select id="city">
+            <option>همه شهرها</option>
+            <option>بجنورد</option>
+            <option>مشهد</option>
+            <option>تهران</option>
+            <option>گرگان</option>
+        </select>
+
+        <select id="deal">
+            <option>نوع معامله</option>
+            <option>خرید</option>
+            <option>فروش</option>
+            <option>رهن</option>
+            <option>اجاره</option>
+        </select>
+
+        <select id="type">
+            <option>نوع ملک</option>
+            <option>آپارتمان</option>
+            <option>خانه ویلایی</option>
+            <option>زمین</option>
+            <option>مغازه</option>
+        </select>
+
+        <input
+            type="text"
+            id="search"
+            placeholder="محله یا عبارت موردنظر..."
+        >
+
+        <button class="search-btn" onclick="searchProperty()">
+            جستجو
+        </button>
+
+    </div>
+</section>
+
+<section class="container" id="categories">
+
+    <div class="section-title">
+        <h2>دسته‌بندی املاک</h2>
+        <span>انتخاب سریع</span>
+    </div>
+
+    <div class="categories">
+
+        <div class="category">
+            <div class="icon">🏢</div>
+            <strong>آپارتمان</strong>
+            <small>خرید و اجاره</small>
+        </div>
+
+        <div class="category">
+            <div class="icon">🏠</div>
+            <strong>خانه ویلایی</strong>
+            <small>خرید و اجاره</small>
+        </div>
+
+        <div class="category">
+            <div class="icon">🌳</div>
+            <strong>زمین</strong>
+            <small>مسکونی و تجاری</small>
+        </div>
+
+        <div class="category">
+            <div class="icon">🏪</div>
+            <strong>تجاری</strong>
+            <small>مغازه و دفتر</small>
+        </div>
+
+        <div class="category">
+            <div class="icon">🏗️</div>
+            <strong>مشارکت</strong>
+            <small>مشارکت در ساخت</small>
+        </div>
+
+    </div>
+</section>
+
+<section class="container" id="properties">
+
+    <div class="section-title">
+        <h2>آگهی‌های تازه</h2>
+        <span>جدیدترین املاک</span>
+    </div>
+
+    <div class="filter">
+        <button class="active">همه</button>
+        <button>فروش</button>
+        <button>اجاره</button>
+        <button>رهن</button>
+        <button>زمین</button>
+        <button>تجاری</button>
+    </div>
+
+    <div class="properties">
+
+        <div class="card">
+            <div class="card-img">🏢</div>
+            <div class="card-body">
+                <span class="tag">فروش</span>
+                <h3>آپارتمان لوکس در بجنورد</h3>
+                <p>بجنورد، خیابان فردوسی</p>
+                <p>۲۳۰ متر • ۳ خواب • پارکینگ</p>
+                <div class="price">قیمت توافقی</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">🏢</div>
+            <div class="card-body">
+                <span class="tag">فروش</span>
+                <h3>آپارتمان مدرن مشهد</h3>
+                <p>مشهد، الهیه</p>
+                <p>۱۸۰ متر • ۳ خواب • آسانسور</p>
+                <div class="price">قیمت توافقی</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">🏠</div>
+            <div class="card-body">
+                <span class="tag">فروش</span>
+                <h3>خانه ویلایی</h3>
+                <p>بجنورد</p>
+                <p>۲۸۰ متر زمین • حیاط مستقل</p>
+                <div class="price">قیمت توافقی</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">🌳</div>
+            <div class="card-body">
+                <span class="tag">زمین</span>
+                <h3>زمین مناسب ساخت</h3>
+                <p>بجنورد</p>
+                <p>متراژ و موقعیت عالی</p>
+                <div class="price">قیمت توافقی</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="container" id="about">
+
+    <div class="section-title">
+        <h2>چرا املاک 058؟</h2>
+    </div>
+
+    <div class="features">
+
+        <div class="feature">
+            <div class="feature-icon">🔎</div>
+            <h3>جستجوی آسان</h3>
+            <p>
+                ملک موردنظر خود را بر اساس شهر،
+                نوع ملک و نوع معامله پیدا کنید.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">📍</div>
+            <h3>پوشش سراسر ایران</h3>
+            <p>
+                هدف ما ایجاد یک سامانه جامع
+                برای بازار املاک ایران است.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🏆</div>
+            <h3>تجربه و اعتبار</h3>
+            <p>
+                مرکز مشاورین املاک ایمان
+                از سال ۱۳۷۰ در حوزه املاک فعالیت دارد.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="cta">
+        <h2>ملک خود را در املاک 058 معرفی کنید</h2>
+        <p>
+            آگهی ملک خود را ثبت کنید و آن را در معرض دید خریداران قرار دهید.
+        </p>
+
+        <button class="add-btn" onclick="addProperty()">
+            ثبت آگهی ملک
+        </button>
+    </div>
+
+</section>
+
+<footer>
+
+    <div class="footer-grid">
+
+        <div>
+            <h3>املاک 058</h3>
+            <p style="margin-top:12px;color:#bbb;line-height:2;">
+                مرکز مشاورین املاک ایمان
+            </p>
+            <p style="color:#bbb;">
+                تأسیس ۱۳۷۰
+            </p>
+        </div>
+
+        <div>
+            <h3>خدمات</h3>
+            <p style="margin-top:12px;color:#bbb;">خرید و فروش</p>
+            <p style="color:#bbb;">رهن و اجاره</p>
+            <p style="color:#bbb;">مشارکت در ساخت</p>
+        </div>
+
+        <div>
+            <h3>تماس</h3>
+            <p style="margin-top:12px;color:#bbb;">
+                بجنورد، خیابان فردوسی، نبش چهارراه جمهوری
+            </p>
+            <p style="color:#c9a45c;">
+                ۰۹۱۵۰۸۴۱۰۰۶
+            </p>
+        </div>
+
+    </div>
+
+</footer>
+
+<script>
+
+function addProperty(){
+    alert("ثبت آگهی به‌زودی فعال می‌شود.");
+}
+
+function searchProperty(){
+
+    const city = document.getElementById("city").value;
+    const deal = document.getElementById("deal").value;
+    const type = document.getElementById("type").value;
+    const search = document.getElementById("search").value;
+
+    alert(
+        "جستجو:\n" +
+        "شهر: " + city + "\n" +
+        "معامله: " + deal + "\n" +
+        "ملک: " + type + "\n" +
+        "عبارت: " + search
+    );
+}
+
+</script>
+
+</body>
+</html>
