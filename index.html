@@ -657,10 +657,8 @@ footer{
 
 </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-
-function addProperty(){
-    alert("ثبت آگهی به‌زودی فعال می‌شود.");
 }
 
 function searchProperty(){
@@ -679,7 +677,263 @@ function searchProperty(){
     );
 }
 
-</script>
+    const SUPABASE_URL = 'https://lsttrmnxauaviyuipnim.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_V3ZIfuzEZ4y7KUY88lyv_Q_wF6kQAcb';
 
+const db = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+let properties = [];
+let activeFilter = '';
+
+function addProperty() {
+    const title = prompt('عنوان آگهی را وارد کنید:');
+    if (!title || !title.trim()) return;
+
+    const city = prompt('نام شهر:', 'بجنورد');
+    if (!city || !city.trim()) return;
+
+    const deal = prompt(
+        'نوع معامله را وارد کنید: فروش، اجاره، رهن، رهن و اجاره یا مشارکت در ساخت'
+    );
+    if (!deal || !deal.trim()) return;
+
+    const type = prompt(
+        'نوع ملک: آپارتمان، خانه ویلایی، زمین، مغازه، دفتر کار، باغ یا سایر'
+    );
+    if (!type || !type.trim()) return;
+
+    const priceInput = prompt('قیمت به تومان؛ برای قیمت توافقی خالی بگذارید:', '');
+    const areaInput = prompt('متراژ ملک به متر مربع:', '');
+    const bedroomsInput = prompt('تعداد خواب؛ اگر مشخص نیست خالی بگذارید:', '');
+    const phone = prompt('شماره تماس آگهی‌دهنده:');
+    if (!phone || !phone.trim()) return;
+
+    const addressInput = prompt('محله یا آدرس ملک:');
+    if (!addressInput || !addressInput.trim()) return;
+
+    const description = prompt('توضیحات ملک:', '') || '';
+
+    const price = priceInput.trim() ? Number(priceInput) : null;
+    const area = areaInput.trim() ? Number(areaInput) : null;
+    const bedrooms = bedroomsInput.trim()
+        ? Number(bedroomsInput)
+        : null;
+
+    if (price !== null && (!Number.isFinite(price) || price < 0)) {
+        alert('قیمت واردشده معتبر نیست.');
+        return;
+    }
+
+    if (area !== null && (!Number.isFinite(area) || area < 0)) {
+        alert('متراژ واردشده معتبر نیست.');
+        return;
+    }
+
+    if (bedrooms !== null &&
+        (!Number.isInteger(bedrooms) || bedrooms < 0)) {
+        alert('تعداد خواب معتبر نیست.');
+        return;
+    }
+
+    const address = addressInput.includes(city)
+        ? addressInput.trim()
+        : city.trim() + '، ' + addressInput.trim();
+
+    saveProperty({
+        title: title.trim(),
+        property_type: type.trim(),
+        transaction_type: deal.trim(),
+        price: price,
+        area: area,
+        bedrooms: bedrooms,
+        address: address,
+        description: description.trim(),
+        phone: phone.trim(),
+        status: 'pending'
+    });
+}
+
+async function saveProperty(property) {
+    try {
+        const { error } = await db
+            .from('properties')
+            .insert(property);
+
+        if (error) throw error;
+
+        alert(
+            'آگهی با موفقیت ثبت شد.\n' +
+            'پس از تأیید مدیر سایت، آگهی نمایش داده می‌شود.'
+        );
+
+    } catch (error) {
+        console.error('خطای ثبت آگهی:', error);
+
+        alert(
+            'ثبت آگهی ناموفق بود.\n' +
+            'اتصال اینترنت و تنظیمات دسترسی دیتابیس را بررسی کنید.'
+        );
+    }
+}
+
+async function loadProperties() {
+    const list = document.querySelector('.properties');
+
+    try {
+        const { data, error } = await db
+            .from('properties')
+            .select('*')
+            .eq('status', 'approved')
+            .order('created_at', { ascending: false });
+
+        if (error) throw error;
+
+        properties = data || [];
+        renderProperties();
+
+    } catch (error) {
+        console.error('خطای دریافت آگهی‌ها:', error);
+
+        list.innerHTML =
+            '<div style="padding:25px;background:white;border-radius:12px">' +
+            'دریافت آگهی‌ها با خطا روبه‌رو شد. تنظیمات دیتابیس را بررسی کنید.' +
+            '</div>';
+    }
+}
+
+function escapeHTML(value) {
+    return String(value ?? '').replace(/[&<>"']/g, function (char) {
+        return {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        }[char];
+    });
+}
+
+function formatPrice(price) {
+    if (price === null || price === undefined || price === '') {
+        return 'قیمت توافقی';
+    }
+
+    const amount = Number(price);
+
+    if (!Number.isFinite(amount) || amount <= 0) {
+        return 'قیمت توافقی';
+    }
+
+    return amount.toLocaleString('fa-IR') + ' تومان';
+}
+
+function renderProperties() {
+    const list = document.querySelector('.properties');
+
+    const cityValue = document.getElementById('city').value;
+    const dealValue = document.getElementById('deal').value;
+    const typeValue = document.getElementById('type').value;
+    const query = document.getElementById('search').value
+        .trim()
+        .toLocaleLowerCase('fa');
+
+    const city = cityValue === 'همه شهرها' ? '' : cityValue;
+    const deal = dealValue === 'نوع معامله' ? '' : dealValue;
+    const type = typeValue === 'نوع ملک' ? '' : typeValue;
+
+    const filtered = properties.filter(function (p) {
+        const text = [
+            p.title,
+            p.address,
+            p.description,
+            p.property_type,
+            p.transaction_type
+        ].join(' ').toLocaleLowerCase('fa');
+
+        const dealMatch =
+            !deal ||
+            p.transaction_type === deal ||
+            (deal === 'رهن' && String(p.transaction_type).includes('رهن')) ||
+            (deal === 'اجاره' && String(p.transaction_type).includes('اجاره'));
+
+        return (
+            (!city || String(p.address || '').includes(city)) &&
+            dealMatch &&
+            (!type || p.property_type === type) &&
+            (!activeFilter ||
+                p.transaction_type === activeFilter ||
+                p.property_type === activeFilter) &&
+            (!query || text.includes(query))
+        );
+    });
+
+    if (filtered.length === 0) {
+        list.innerHTML =
+            '<div style="grid-column:1/-1;background:white;padding:30px;' +
+            'border-radius:12px;text-align:center;color:#666">' +
+            'آگهی تأییدشده‌ای پیدا نشد.' +
+            '</div>';
+        return;
+    }
+
+    list.innerHTML = filtered.map(function (p) {
+        const area = p.area
+            ? Number(p.area).toLocaleString('fa-IR') + ' متر'
+            : 'متراژ ثبت نشده';
+
+        const rooms = p.bedrooms !== null && p.bedrooms !== undefined
+            ? ' • ' + p.bedrooms.toLocaleString('fa-IR') + ' خواب'
+            : '';
+
+        return `
+            <div class="card">
+                <div class="card-img">🏠</div>
+                <div class="card-body">
+                    <span class="tag">${escapeHTML(p.transaction_type)}</span>
+                    <h3>${escapeHTML(p.title)}</h3>
+                    <p>${escapeHTML(p.address)}</p>
+                    <p>${area}${rooms}</p>
+                    <p>${escapeHTML(p.description || '')}</p>
+                    <div class="price">${formatPrice(p.price)}</div>
+                    <p style="margin-top:12px">
+                        تماس:
+                        <a href="tel:${escapeHTML(p.phone)}">
+                            ${escapeHTML(p.phone)}
+                        </a>
+                    </p>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function searchProperty() {
+    activeFilter = '';
+    document.querySelectorAll('.filter button').forEach(function (button) {
+        button.classList.remove('active');
+    });
+
+    renderProperties();
+}
+
+document.querySelectorAll('.filter button').forEach(function (button) {
+    button.onclick = function () {
+        document.querySelectorAll('.filter button').forEach(function (item) {
+            item.classList.remove('active');
+        });
+
+        button.classList.add('active');
+
+        const value = button.textContent.trim();
+        activeFilter = value === 'همه' ? '' : value;
+
+        renderProperties();
+    };
+});
+
+loadProperties();
 </body>
 </html>
