@@ -134,4 +134,337 @@ nav{width:100%;justify-content:space-between}
 
 <section class="container" id="categories">
   <div class="section-title">
-    <h2>دسته‌بندی املاک</h
+    <h2>دسته‌بندی املاک</h2>
+    <span class="muted">ملک موردنظرت را انتخاب کن</span>
+  </div>
+
+  <div class="categories">
+    <div class="category" onclick="chooseCategory('آپارتمان')">
+      <div class="icon">🏢</div><strong>آپارتمان</strong><small>خرید و اجاره</small>
+    </div>
+    <div class="category" onclick="chooseCategory('خانه و ویلا')">
+      <div class="icon">🏡</div><strong>خانه و ویلا</strong><small>خرید و اجاره</small>
+    </div>
+    <div class="category" onclick="chooseCategory('زمین')">
+      <div class="icon">🌳</div><strong>زمین</strong><small>مسکونی و تجاری</small>
+    </div>
+    <div class="category" onclick="chooseCategory('مغازه')">
+      <div class="icon">🏬</div><strong>مغازه</strong><small>تجاری</small>
+    </div>
+    <div class="category" onclick="chooseCategory('دفتر کار')">
+      <div class="icon">🏢</div><strong>دفتر کار</strong><small>اداری</small>
+    </div>
+  </div>
+</section>
+
+<section class="container" id="listings">
+  <div class="section-title">
+    <h2>آگهی‌های املاک</h2>
+    <span class="muted" id="resultCount">در حال دریافت آگهی‌ها...</span>
+  </div>
+
+  <div class="filter">
+    <button class="active" onclick="setTransaction('',this)">همه</button>
+    <button onclick="setTransaction('فروش',this)">خرید و فروش</button>
+    <button onclick="setTransaction('رهن و اجاره',this)">رهن و اجاره</button>
+    <button onclick="setTransaction('رهن کامل',this)">رهن کامل</button>
+  </div>
+
+  <div class="properties" id="propertyList">
+    <div class="empty">در حال دریافت آگهی‌ها...</div>
+  </div>
+</section>
+
+<section class="container" id="about">
+  <div class="section-title"><h2>چرا املاک بجنورد؟</h2></div>
+  <div class="features">
+    <div class="feature"><h3>ثبت آگهی رایگان</h3><p>آگهی ملک خود را بدون پرداخت هزینه ثبت کنید.</p></div>
+    <div class="feature"><h3>جستجوی آسان</h3><p>آگهی‌ها را بر اساس نوع معامله و ملک پیدا کنید.</p></div>
+    <div class="feature"><h3>ارتباط مستقیم</h3><p>برای اطلاعات بیشتر با آگهی‌دهنده تماس بگیرید.</p></div>
+  </div>
+</section>
+
+<footer>
+  <h3>املاک بجنورد</h3>
+  <p>سامانه ثبت و جستجوی آگهی املاک</p>
+  <p>بجنورد، خیابان فردوسی، نبش چهارراه جمهوری</p>
+  <p>تماس: 09150841006</p>
+  <p>© املاک بجنورد</p>
+</footer>
+
+<div class="modal" id="propertyModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2>ثبت آگهی رایگان</h2>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <form id="propertyForm">
+      <div class="form-grid">
+        <div class="full">
+          <label for="title">عنوان آگهی *</label>
+          <input id="title" required maxlength="150" placeholder="مثلاً آپارتمان دوخوابه در فردوسی">
+        </div>
+
+        <div>
+          <label for="propertyType">نوع ملک *</label>
+          <select id="propertyType" required>
+            <option value="">انتخاب کنید</option>
+            <option>آپارتمان</option>
+            <option>خانه و ویلا</option>
+            <option>زمین</option>
+            <option>مغازه</option>
+            <option>دفتر کار</option>
+            <option>باغ</option>
+            <option>سایر</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="transactionType">نوع معامله *</label>
+          <select id="transactionType" required>
+            <option value="">انتخاب کنید</option>
+            <option>فروش</option>
+            <option>رهن و اجاره</option>
+            <option>رهن کامل</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="price">قیمت به تومان *</label>
+          <input id="price" type="number" min="0" required placeholder="قیمت به تومان">
+        </div>
+
+        <div>
+          <label for="area">متراژ به مترمربع</label>
+          <input id="area" type="number" min="0" step="0.01" placeholder="مثلاً 120">
+        </div>
+
+        <div>
+          <label for="bedrooms">تعداد اتاق خواب</label>
+          <select id="bedrooms">
+            <option value="">مشخص نشده</option>
+            <option value="0">بدون اتاق</option>
+            <option value="1">۱</option>
+            <option value="2">۲</option>
+            <option value="3">۳</option>
+            <option value="4">۴ یا بیشتر</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="phone">شماره تماس *</label>
+          <input id="phone" type="tel" required maxlength="20" placeholder="شماره تماس آگهی‌دهنده">
+        </div>
+
+        <div class="full">
+          <label for="address">آدرس یا محله *</label>
+          <input id="address" required maxlength="250" placeholder="مثلاً بجنورد، خیابان فردوسی">
+        </div>
+
+        <div class="full">
+          <label for="imageURL">لینک تصویر ملک (اختیاری)</label>
+          <input id="imageURL" type="url" placeholder="https://example.com/image.jpg">
+        </div>
+
+        <div class="full">
+          <label for="description">توضیحات ملک</label>
+          <textarea id="description" rows="4" maxlength="3000" placeholder="ویژگی‌ها و توضیحات ملک"></textarea>
+        </div>
+
+        <div class="full">
+          <button class="submit-btn" id="submitBtn" type="submit">ثبت آگهی</button>
+          <p class="notice" id="formMessage" role="status"></p>
+          <p class="muted">آگهی پس از بررسی و تأیید مدیر در سایت نمایش داده می‌شود.</p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://lsttrmnxauaviyuipnim.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_V3ZIfuzEZ4y7KUY88lyv_Q_wF6kQAcb';
+
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let currentTransaction = '';
+
+function openModal(){
+  document.getElementById('propertyModal').style.display='block';
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(){
+  document.getElementById('propertyModal').style.display='none';
+  document.body.style.overflow='';
+}
+
+document.getElementById('propertyModal').addEventListener('click',function(e){
+  if(e.target===this) closeModal();
+});
+
+function chooseCategory(type){
+  document.getElementById('searchType').value=type;
+  document.getElementById('listings').scrollIntoView({behavior:'smooth'});
+  loadProperties();
+}
+
+function setTransaction(type,button){
+  currentTransaction=type;
+  document.querySelectorAll('.filter button').forEach(b=>b.classList.remove('active'));
+  button.classList.add('active');
+  loadProperties();
+}
+
+function escapeHTML(value){
+  return String(value ?? '').replace(/[&<>"']/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+
+function formatPrice(value){
+  const n=Number(value);
+  return Number.isFinite(n) ? n.toLocaleString('fa-IR')+' تومان' : 'تماس بگیرید';
+}
+
+function safeImageURL(value){
+  try{
+    const u=new URL(value);
+    if(u.protocol==='https:' || u.protocol==='http:') return u.href;
+  }catch(e){}
+  return '';
+}
+
+function renderCard(p){
+  const img=safeImageURL(p.image_url);
+  const imageHTML=img
+    ? `<img src="${escapeHTML(img)}" alt="${escapeHTML(p.title)}" loading="lazy" onerror="this.style.display='none'">`
+    : `<div style="height:150px;display:grid;place-items:center;background:#eee;color:#888">تصویر ثبت نشده</div>`;
+
+  const phone=String(p.phone||'').replace(/[^\d+]/g,'');
+  const phoneLink=/^\+?\d{7,15}$/.test(phone)
+    ? `<a href="tel:${escapeHTML(phone)}">تماس با آگهی‌دهنده</a>`
+    : '';
+
+  return `
+    <article class="card">
+      ${imageHTML}
+      <div class="card-body">
+        <h3>${escapeHTML(p.title)}</h3>
+        <p>نوع ملک: ${escapeHTML(p.property_type||'مشخص نشده')}</p>
+        <p>معامله: ${escapeHTML(p.transaction_type||'مشخص نشده')}</p>
+        <p>متراژ: ${p.area ? escapeHTML(p.area)+' متر' : 'مشخص نشده'}</p>
+        <p>آدرس: ${escapeHTML(p.address||'')}</p>
+        <p>${escapeHTML(p.description||'')}</p>
+        <div class="price">${formatPrice(p.price)}</div>
+        ${phoneLink}
+      </div>
+    </article>`;
+}
+
+async function loadProperties(){
+  const list=document.getElementById('propertyList');
+  const count=document.getElementById('resultCount');
+  list.innerHTML='<div class="empty">در حال دریافت آگهی‌ها...</div>';
+
+  try{
+    let query=db.from('properties')
+      .select('id,title,property_type,transaction_type,price,area,bedrooms,address,description,phone,image_url,created_at')
+      .eq('status','approved')
+      .order('created_at',{ascending:false})
+      .limit(100);
+
+    const transaction=currentTransaction || document.getElementById('searchTransaction').value;
+    const type=document.getElementById('searchType').value;
+    const address=document.getElementById('searchAddress').value.trim();
+    const maxPrice=document.getElementById('searchMaxPrice').value;
+
+    if(transaction) query=query.eq('transaction_type',transaction);
+    if(type) query=query.eq('property_type',type);
+    if(address) query=query.ilike('address','%'+address.replace(/[%_,]/g,' ')+'%');
+    if(maxPrice && Number(maxPrice)>=0) query=query.lte('price',Number(maxPrice));
+
+    const {data,error}=await query;
+    if(error) throw error;
+
+    count.textContent=(data.length).toLocaleString('fa-IR')+' آگهی';
+
+    if(!data.length){
+      list.innerHTML='<div class="empty">آگهی تأییدشده‌ای مطابق جستجوی شما پیدا نشد.</div>';
+      return;
+    }
+
+    list.innerHTML=data.map(renderCard).join('');
+  }catch(error){
+    console.error('Supabase error:',error);
+    count.textContent='خطا در دریافت اطلاعات';
+    list.innerHTML='<div class="empty">دریافت آگهی‌ها با مشکل مواجه شد. اتصال اینترنت و تنظیمات دیتابیس را بررسی کنید.</div>';
+  }
+}
+
+document.getElementById('propertyForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+
+  const btn=document.getElementById('submitBtn');
+  const msg=document.getElementById('formMessage');
+  btn.disabled=true;
+  btn.textContent='در حال ثبت...';
+  msg.textContent='';
+
+  const price=Number(document.getElementById('price').value);
+  const areaValue=document.getElementById('area').value;
+  const bedroomValue=document.getElementById('bedrooms').value;
+  const imageValue=document.getElementById('imageURL').value.trim();
+
+  if(!Number.isFinite(price)||price<0){
+    msg.textContent='قیمت واردشده معتبر نیست.';
+    btn.disabled=false;
+    btn.textContent='ثبت آگهی';
+    return;
+  }
+
+  const imageURL=imageValue ? safeImageURL(imageValue) : '';
+  if(imageValue && !imageURL){
+    msg.textContent='لینک تصویر باید با http:// یا https:// شروع شود.';
+    btn.disabled=false;
+    btn.textContent='ثبت آگهی';
+    return;
+  }
+
+  const property={
+    title:document.getElementById('title').value.trim(),
+    property_type:document.getElementById('propertyType').value,
+    transaction_type:document.getElementById('transactionType').value,
+    price:price,
+    area:areaValue ? Number(areaValue) : null,
+    bedrooms:bedroomValue ? Number(bedroomValue) : null,
+    address:document.getElementById('address').value.trim(),
+    description:document.getElementById('description').value.trim(),
+    phone:document.getElementById('phone').value.trim(),
+    image_url:imageURL || null,
+    status:'pending'
+  };
+
+  try{
+    const {error}=await db.from('properties').insert([property]);
+    if(error) throw error;
+
+    msg.textContent='آگهی ثبت شد و پس از تأیید مدیر نمایش داده می‌شود.';
+    msg.style.color='green';
+    this.reset();
+  }catch(error){
+    console.error('Insert error:',error);
+    msg.textContent='ثبت آگهی ناموفق بود. تنظیمات دسترسی جدول Supabase را بررسی کنید.';
+    msg.style.color='red';
+  }finally{
+    btn.disabled=false;
+    btn.textContent='ثبت آگهی';
+  }
+});
+
+loadProperties();
+</script>
+
+</body>
+</html>
