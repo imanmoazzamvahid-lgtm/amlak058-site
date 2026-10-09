@@ -3,237 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>املاک بجنورد | خرید، فروش، رهن و اجاره</title>
-<meta name="description" content="سامانه رایگان ثبت و جستجوی آگهی املاک بجنورد و سراسر ایران">
+<meta name="description" content="سامانه رایگان ثبت و جستجوی آگهی املاک بجنورد">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Tahoma,Arial,sans-serif;background:#f5f5f3;color:#222;line-height:1.8}
+header{background:#151515;color:#fff;padding:15px 6%;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;position:sticky;top:0;z-index:10}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{width:45px;height:45px;border:2px solid #c9a45c;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#c9a45c;font-size:25px}
+.logo-text strong{display:block;font-size:22px}
+.logo-text span{color:#c9a45c;font-size:12px}
+nav{display:flex;gap:18px;flex-wrap:wrap}
+nav a{color:#fff;text-decoration:none;font-size:14px}
+button{font-family:inherit;cursor:pointer}
+.add-btn{background:#c9a45c;color:#111;border:0;padding:12px 18px;border-radius:9px;font-weight:bold}
+.hero{background:linear-gradient(135deg,#151515,#383126);padding:55px 6%;color:#fff;text-align:center}
+.hero h1{font-size:clamp(25px,5vw,40px);margin-bottom:12px}
+.hero h1 span{color:#d5b46a}
+.hero p{color:#ddd;margin-bottom:25px}
+.search-box{max-width:1050px;margin:auto;background:#fff;padding:12px;border-radius:15px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) auto;gap:9px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-family:inherit;font-size:13px;background:#fff}
+.search-btn{background:#c9a45c;border:0;border-radius:8px;padding:0 20px;font-weight:bold}
+.container{width:90%;max-width:1250px;margin:40px auto}
+.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.section-title h2{font-size:23px}
+.muted{color:#777;font-size:13px}
+.categories{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.category{background:#fff;border-radius:13px;padding:20px 8px;text-align:center;box-shadow:0 5px 18px #00000008;cursor:pointer}
+.category:hover{transform:translateY(-3px)}
+.category .icon{font-size:30px}
+.category strong{display:block}
+.category small{color:#777}
+.filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.filter button{border:1px solid #ddd;background:#fff;padding:9px 15px;border-radius:8px}
+.filter button.active{background:#151515;color:#fff}
+.properties{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 5px 18px #0000000a}
+.card img{width:100%;height:200px;object-fit:cover;background:#eee}
+.card-body{padding:16px}
+.card h3{font-size:17px;margin-bottom:8px}
+.card p{font-size:13px;color:#666;margin:5px 0}
+.price{color:#9a742d;font-weight:bold;font-size:17px;margin-top:12px}
+.card a{display:inline-block;background:#151515;color:#fff;text-decoration:none;padding:8px 12px;border-radius:7px;margin-top:10px;font-size:13px}
+.empty{background:white;padding:30px;border-radius:12px;text-align:center;color:#777;grid-column:1/-1}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.feature{background:#fff;padding:22px;border-radius:12px;text-align:center}
+footer{background:#151515;color:#eee;text-align:center;padding:30px 15px;margin-top:50px}
+footer p{margin:5px}
+.modal{display:none;position:fixed;inset:0;background:#000b;z-index:100;overflow:auto;padding:20px}
+.modal-box{background:#fff;max-width:650px;margin:20px auto;padding:25px;border-radius:15px}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.close{border:0;background:#eee;border-radius:8px;padding:5px 12px;font-size:20px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.full{grid-column:1/-1}
+.submit-btn{width:100%;background:#c9a45c;border:0;border-radius:8px;padding:13px;font-weight:bold}
+.notice{margin-top:12px;font-size:13px}
+@media(max-width:850px){
+.search-box{grid-template-columns:1fr 1fr}
+.properties{grid-template-columns:repeat(2,minmax(0,1fr))}
+.categories{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
+@media(max-width:560px){
+header{padding:12px 5%}
+nav{width:100%;justify-content:space-between}
+.hero{padding:40px 5%}
+.search-box{grid-template-columns:1fr}
+.search-btn{padding:12px}
+.container{width:92%;margin:30px auto}
+.properties{grid-template-columns:1fr}
+.categories{grid-template-columns:repeat(2,minmax(0,1fr))}
+.features{grid-template-columns:1fr}
+.form-grid{grid-template-columns:1fr}
+.full{grid-column:auto}
+}
+</style>
+</head>
 
-body {
-    font-family: Tahoma, Arial, sans-serif;
-    background: #f5f5f3;
-    color: #222;
-}
+<body>
 
-header {
-    background: #151515;
-    color: white;
-    padding: 15px 6%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    gap: 15px;
-}
+<header>
+  <div class="logo">
+    <div class="logo-icon">⌂</div>
+    <div class="logo-text">
+      <strong>املاک بجنورد</strong>
+      <span>سامانه رایگان آگهی املاک</span>
+    </div>
+  </div>
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
+  <nav>
+    <a href="#home">صفحه اصلی</a>
+    <a href="#categories">دسته‌بندی‌ها</a>
+    <a href="#listings">آگهی‌ها</a>
+    <a href="#about">درباره ما</a>
+  </nav>
 
-.logo-icon {
-    width: 45px;
-    height: 45px;
-    border: 2px solid #c9a45c;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #c9a45c;
-    font-size: 25px;
-}
+  <button class="add-btn" onclick="openModal()">＋ ثبت آگهی رایگان</button>
+</header>
 
-.logo-text strong {
-    display: block;
-    font-size: 22px;
-}
+<section class="hero" id="home">
+  <h1>ملک موردنظرت را در <span>بجنورد</span> پیدا کن</h1>
+  <p>ثبت رایگان آگهی خرید، فروش، رهن و اجاره ملک</p>
 
-.logo-text span {
-    color: #c9a45c;
-    font-size: 12px;
-}
+  <div class="search-box">
+    <select id="searchTransaction">
+      <option value="">همه معاملات</option>
+      <option value="فروش">خرید و فروش</option>
+      <option value="رهن و اجاره">رهن و اجاره</option>
+      <option value="رهن کامل">رهن کامل</option>
+    </select>
 
-nav {
-    display: flex;
-    gap: 22px;
-}
+    <select id="searchType">
+      <option value="">همه املاک</option>
+      <option value="آپارتمان">آپارتمان</option>
+      <option value="خانه و ویلا">خانه و ویلا</option>
+      <option value="زمین">زمین</option>
+      <option value="مغازه">مغازه</option>
+      <option value="دفتر کار">دفتر کار</option>
+    </select>
 
-nav a {
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-}
+    <input id="searchAddress" placeholder="محله یا آدرس">
 
-.add-btn {
-    background: #c9a45c;
-    color: #111;
-    border: 0;
-    padding: 12px 18px;
-    border-radius: 9px;
-    cursor: pointer;
-    font-weight: bold;
-    font-family: inherit;
-}
+    <input id="searchMaxPrice" type="number" min="0" placeholder="حداکثر قیمت (تومان)">
 
-.hero {
-    background: linear-gradient(135deg, #151515, #383126);
-    padding: 70px 6% 80px;
-    color: white;
-    text-align: center;
-}
+    <button class="search-btn" onclick="loadProperties()">جستجو</button>
+  </div>
+</section>
 
-.hero h1 {
-    font-size: 40px;
-    margin-bottom: 18px;
-}
-
-.hero h1 span {
-    color: #d5b46a;
-}
-
-.hero p {
-    color: #ddd;
-    font-size: 16px;
-    margin-bottom: 32px;
-    line-height: 2;
-}
-
-.search-box {
-    max-width: 1050px;
-    margin: auto;
-    background: white;
-    padding: 12px;
-    border-radius: 15px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1.3fr auto;
-    gap: 9px;
-}
-
-input, select, textarea {
-    width: 100%;
-    padding: 13px;
-    border: 1px solid #ddd;
-    border-radius: 9px;
-    font-family: inherit;
-    font-size: 13px;
-    background: white;
-}
-
-.search-btn {
-    background: #c9a45c;
-    border: 0;
-    border-radius: 9px;
-    padding: 0 22px;
-    font-family: inherit;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.container {
-    width: 88%;
-    max-width: 1250px;
-    margin: 45px auto;
-}
-
-.section-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 22px;
-}
-
-.section-title h2 {
-    font-size: 24px;
-}
-
-.section-title span {
-    color: #777;
-    font-size: 13px;
-}
-
-.categories {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 15px;
-}
-
-.category {
-    background: white;
-    border-radius: 14px;
-    padding: 23px 10px;
-    text-align: center;
-    box-shadow: 0 5px 18px #00000008;
-    cursor: pointer;
-    transition: .2s;
-}
-
-.category:hover {
-    transform: translateY(-4px);
-}
-
-.category .icon {
-    font-size: 32px;
-    margin-bottom: 10px;
-}
-
-.category strong {
-    display: block;
-    margin-bottom: 8px;
-}
-
-.category small {
-    color: #777;
-}
-
-.filter {
-    background: white;
-    padding: 16px;
-    border-radius: 14px;
-    margin-bottom: 23px;
-    display: flex;
-    gap: 9px;
-    flex-wrap: wrap;
-}
-
-.filter button {
-    border: 1px solid #ddd;
-    background: white;
-    padding: 10px 17px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: inherit;
-}
-
-.filter button.active {
-    background: #151515;
-    color: white;
-}
-
-.properties {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-.card {
-    background: white;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 5px 18px #0000000a;
-}
-
-.card {
-    background: white;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 5px 18px #0000000a;
-}
+<section class="container" id="categories">
+  <div class="section-title">
+    <h2>دسته‌بندی املاک</h
