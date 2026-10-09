@@ -4,936 +4,231 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>املاک 058 | خرید، فروش، رهن و اجاره ملک</title>
-
-<meta name="description" content="سامانه آگهی و جستجوی املاک در سراسر ایران">
+<title>املاک بجنورد | خرید، فروش، رهن و اجاره</title>
+<meta name="description" content="سامانه رایگان ثبت و جستجوی آگهی املاک بجنورد و سراسر ایران">
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-body{
-    font-family:Tahoma,Arial,sans-serif;
-    background:#f5f5f3;
-    color:#222;
+body {
+    font-family: Tahoma, Arial, sans-serif;
+    background: #f5f5f3;
+    color: #222;
 }
 
-header{
-    background:#151515;
-    color:white;
-    padding:16px 6%;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    position:sticky;
-    top:0;
-    z-index:100;
+header {
+    background: #151515;
+    color: white;
+    padding: 15px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    gap: 15px;
 }
 
-.logo{
-    display:flex;
-    align-items:center;
-    gap:12px;
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-.logo-icon{
-    width:45px;
-    height:45px;
-    border:2px solid #c9a45c;
-    border-radius:12px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#c9a45c;
-    font-size:23px;
+.logo-icon {
+    width: 45px;
+    height: 45px;
+    border: 2px solid #c9a45c;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c9a45c;
+    font-size: 25px;
 }
 
-.logo-text strong{
-    display:block;
-    font-size:21px;
+.logo-text strong {
+    display: block;
+    font-size: 22px;
 }
 
-.logo-text span{
-    color:#c9a45c;
-    font-size:12px;
+.logo-text span {
+    color: #c9a45c;
+    font-size: 12px;
 }
 
-nav{
-    display:flex;
-    gap:24px;
+nav {
+    display: flex;
+    gap: 22px;
 }
 
-nav a{
-    color:white;
-    text-decoration:none;
-    font-size:14px;
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
 }
 
-.add-btn{
-    background:#c9a45c;
-    color:#111;
-    border:0;
-    padding:11px 18px;
-    border-radius:9px;
-    cursor:pointer;
-    font-weight:bold;
+.add-btn {
+    background: #c9a45c;
+    color: #111;
+    border: 0;
+    padding: 12px 18px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: inherit;
 }
 
-.hero{
-    background:
-    linear-gradient(135deg,rgba(15,15,15,.96),rgba(48,43,35,.91));
-    padding:75px 6% 85px;
-    color:white;
-    text-align:center;
+.hero {
+    background: linear-gradient(135deg, #151515, #383126);
+    padding: 70px 6% 80px;
+    color: white;
+    text-align: center;
 }
 
-.hero h1{
-    font-size:42px;
-    margin-bottom:18px;
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 18px;
 }
 
-.hero h1 span{
-    color:#d5b46a;
+.hero h1 span {
+    color: #d5b46a;
 }
 
-.hero p{
-    color:#ddd;
-    font-size:17px;
-    margin-bottom:35px;
+.hero p {
+    color: #ddd;
+    font-size: 16px;
+    margin-bottom: 32px;
+    line-height: 2;
 }
 
-.search-box{
-    max-width:1050px;
-    margin:auto;
-    background:white;
-    padding:12px;
-    border-radius:15px;
-    display:grid;
-    grid-template-columns:1.2fr 1fr 1fr 1fr auto;
-    gap:9px;
+.search-box {
+    max-width: 1050px;
+    margin: auto;
+    background: white;
+    padding: 12px;
+    border-radius: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1.3fr auto;
+    gap: 9px;
 }
 
-.search-box select,
-.search-box input{
-    border:1px solid #ddd;
-    border-radius:9px;
-    padding:14px;
-    font-family:inherit;
-    outline:none;
+input, select, textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 13px;
+    background: white;
 }
 
-.search-btn{
-    background:#c9a45c;
-    border:0;
-    border-radius:9px;
-    padding:0 25px;
-    font-weight:bold;
-    cursor:pointer;
+.search-btn {
+    background: #c9a45c;
+    border: 0;
+    border-radius: 9px;
+    padding: 0 22px;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-.container{
-    width:88%;
-    max-width:1250px;
-    margin:45px auto;
+.container {
+    width: 88%;
+    max-width: 1250px;
+    margin: 45px auto;
 }
 
-.section-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:22px;
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
 }
 
-.section-title h2{
-    font-size:25px;
+.section-title h2 {
+    font-size: 24px;
 }
 
-.section-title span{
-    color:#777;
-    font-size:13px;
+.section-title span {
+    color: #777;
+    font-size: 13px;
 }
 
-.categories{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:15px;
+.categories {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
 }
 
-.category{
-    background:white;
-    border-radius:15px;
-    padding:24px 10px;
-    text-align:center;
-    box-shadow:0 5px 18px rgba(0,0,0,.05);
-    cursor:pointer;
-    transition:.2s;
+.category {
+    background: white;
+    border-radius: 14px;
+    padding: 23px 10px;
+    text-align: center;
+    box-shadow: 0 5px 18px #00000008;
+    cursor: pointer;
+    transition: .2s;
 }
 
-.category:hover{
-    transform:translateY(-4px);
+.category:hover {
+    transform: translateY(-4px);
 }
 
-.category .icon{
-    font-size:32px;
-    margin-bottom:10px;
+.category .icon {
+    font-size: 32px;
+    margin-bottom: 10px;
 }
 
-.category strong{
-    display:block;
-    margin-bottom:5px;
+.category strong {
+    display: block;
+    margin-bottom: 8px;
 }
 
-.category small{
-    color:#777;
+.category small {
+    color: #777;
 }
 
-.filter{
-    background:white;
-    padding:18px;
-    border-radius:14px;
-    margin-bottom:25px;
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
+.filter {
+    background: white;
+    padding: 16px;
+    border-radius: 14px;
+    margin-bottom: 23px;
+    display: flex;
+    gap: 9px;
+    flex-wrap: wrap;
 }
 
-.filter button{
-    border:1px solid #ddd;
-    background:#fff;
-    padding:10px 17px;
-    border-radius:8px;
-    cursor:pointer;
-    font-family:inherit;
+.filter button {
+    border: 1px solid #ddd;
+    background: white;
+    padding: 10px 17px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
 }
 
-.filter button.active{
-    background:#151515;
-    color:white;
+.filter button.active {
+    background: #151515;
+    color: white;
 }
 
-.properties{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
+.properties {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
 }
 
-.card{
-    background:white;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 5px 18px rgba(0,0,0,.06);
-    transition:.2s;
+.card {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 5px 18px #0000000a;
 }
 
-.card:hover{
-    transform:translateY(-4px);
-}
-
-.card-img{
-    height:190px;
-    background:linear-gradient(135deg,#d8d8d8,#888);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:42px;
-    color:white;
-}
-
-.card-body{
-    padding:17px;
-}
-
-.tag{
-    display:inline-block;
-    background:#f1e6cf;
-    color:#8b6b2c;
-    padding:5px 9px;
-    border-radius:5px;
-    font-size:11px;
-    margin-bottom:10px;
-}
-
-.card h3{
-    font-size:17px;
-    margin-bottom:10px;
-}
-
-.card p{
-    color:#777;
-    font-size:12px;
-    margin-bottom:7px;
-}
-
-.price{
-    margin-top:13px;
-    font-size:16px;
-    font-weight:bold;
-}
-
-.features{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.feature{
-    background:#fff;
-    padding:30px;
-    border-radius:15px;
-    text-align:center;
-}
-
-.feature-icon{
-    font-size:35px;
-    margin-bottom:12px;
-}
-
-.feature h3{
-    margin-bottom:8px;
-}
-
-.feature p{
-    color:#777;
-    font-size:13px;
-    line-height:2;
-}
-
-.cta{
-    background:#171717;
-    color:white;
-    border-radius:20px;
-    padding:45px;
-    text-align:center;
-    margin-top:50px;
-}
-
-.cta h2{
-    margin-bottom:12px;
-}
-
-.cta p{
-    color:#ccc;
-    margin-bottom:22px;
-}
-
-footer{
-    margin-top:60px;
-    background:#111;
-    color:white;
-    padding:40px 6%;
-}
-
-.footer-grid{
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr;
-   }
-
-@media(max-width:900px){
-    .search-box{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .properties{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .categories{
-        grid-template-columns:repeat(3,1fr);
-    }
-}
-
-@media(max-width:600px){
-    header{
-        padding:12px 4%;
-    }
-
-    nav{
-        display:none;
-    }
-
-    .hero{
-        padding:50px 5%;
-    }
-
-    .hero h1{
-        font-size:30px;
-    }
-
-    .hero p{
-        font-size:14px;
-    }
-
-    .search-box{
-        grid-template-columns:1fr;
-    }
-
-    .categories{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .properties{
-        grid-template-columns:1fr;
-    }
-
-    .features{
-        grid-template-columns:1fr;
-    }
-
-    .container{
-        width:92%;
-    }
-
-    .footer-grid{
-        grid-template-columns:1fr;
-    }
-}
-</style>
-</head>
-
-<body>
-
-<header>
-    <div class="logo">
-        <div class="logo-icon">⌂</div>
-        <div class="logo-text">
-            <strong>املاک 058</strong>
-            <span>مرکز مشاورین املاک ایمان</span>
-        </div>
-    </div>
-
-    <nav>
-        <a href="#properties">آگهی‌ها</a>
-        <a href="#categories">دسته‌بندی</a>
-        <a href="#about">درباره ما</a>
-    </nav>
-
-    <button class="add-btn" onclick="addProperty()">
-        ثبت آگهی
-    </button>
-</header>
-
-<section class="hero">
-
-    <h1>
-        ملک موردنظرتان را
-        <span>پیدا کنید</span>
-    </h1>
-
-    <p>
-        خرید، فروش، رهن و اجاره ملک در سراسر ایران
-    </p>
-
-    <div class="search-box">
-
-        <select id="city">
-            <option>همه شهرها</option>
-            <option>بجنورد</option>
-            <option>مشهد</option>
-            <option>تهران</option>
-            <option>گرگان</option>
-        </select>
-
-        <select id="deal">
-            <option>نوع معامله</option>
-            <option>خرید</option>
-            <option>فروش</option>
-            <option>رهن</option>
-            <option>اجاره</option>
-        </select>
-
-        <select id="type">
-            <option>نوع ملک</option>
-            <option>آپارتمان</option>
-            <option>خانه ویلایی</option>
-            <option>زمین</option>
-            <option>مغازه</option>
-        </select>
-
-        <input
-            type="text"
-            id="search"
-            placeholder="محله یا عبارت موردنظر..."
-        >
-
-        <button class="search-btn" onclick="searchProperty()">
-            جستجو
-        </button>
-
-    </div>
-</section>
-
-<section class="container" id="categories">
-
-    <div class="section-title">
-        <h2>دسته‌بندی املاک</h2>
-        <span>انتخاب سریع</span>
-    </div>
-
-    <div class="categories">
-
-        <div class="category">
-            <div class="icon">🏢</div>
-            <strong>آپارتمان</strong>
-            <small>خرید و اجاره</small>
-        </div>
-
-        <div class="category">
-            <div class="icon">🏠</div>
-            <strong>خانه ویلایی</strong>
-            <small>خرید و اجاره</small>
-        </div>
-
-        <div class="category">
-            <div class="icon">🌳</div>
-            <strong>زمین</strong>
-            <small>مسکونی و تجاری</small>
-        </div>
-
-        <div class="category">
-            <div class="icon">🏪</div>
-            <strong>تجاری</strong>
-            <small>مغازه و دفتر</small>
-        </div>
-
-        <div class="category">
-            <div class="icon">🏗️</div>
-            <strong>مشارکت</strong>
-            <small>مشارکت در ساخت</small>
-        </div>
-
-    </div>
-</section>
-
-<section class="container" id="properties">
-
-    <div class="section-title">
-        <h2>آگهی‌های تازه</h2>
-        <span>جدیدترین املاک</span>
-    </div>
-
-    <div class="filter">
-        <button class="active">همه</button>
-        <button>فروش</button>
-        <button>اجاره</button>
-        <button>رهن</button>
-        <button>زمین</button>
-        <button>تجاری</button>
-    </div>
-
-    <div class="properties">
-
-        <div class="card">
-            <div class="card-img">🏢</div>
-            <div class="card-body">
-                <span class="tag">فروش</span>
-                <h3>آپارتمان لوکس در بجنورد</h3>
-                <p>بجنورد، خیابان فردوسی</p>
-                <p>۲۳۰ متر • ۳ خواب • پارکینگ</p>
-                <div class="price">قیمت توافقی</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-img">🏢</div>
-            <div class="card-body">
-                <span class="tag">فروش</span>
-                <h3>آپارتمان مدرن مشهد</h3>
-                <p>مشهد، الهیه</p>
-                <p>۱۸۰ متر • ۳ خواب • آسانسور</p>
-                <div class="price">قیمت توافقی</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-img">🏠</div>
-            <div class="card-body">
-                <span class="tag">فروش</span>
-                <h3>خانه ویلایی</h3>
-                <p>بجنورد</p>
-                <p>۲۸۰ متر زمین • حیاط مستقل</p>
-                <div class="price">قیمت توافقی</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-img">🌳</div>
-            <div class="card-body">
-                <span class="tag">زمین</span>
-                <h3>زمین مناسب ساخت</h3>
-                <p>بجنورد</p>
-                <p>متراژ و موقعیت عالی</p>
-                <div class="price">قیمت توافقی</div>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<section class="container" id="about">
-
-    <div class="section-title">
-        <h2>چرا املاک 058؟</h2>
-    </div>
-
-    <div class="features">
-
-        <div class="feature">
-            <div class="feature-icon">🔎</div>
-            <h3>جستجوی آسان</h3>
-            <p>
-                ملک موردنظر خود را بر اساس شهر،
-                نوع ملک و نوع معامله پیدا کنید.
-            </p>
-        </div>
-
-        <div class="feature">
-            <div class="feature-icon">📍</div>
-            <h3>پوشش سراسر ایران</h3>
-            <p>
-                هدف ما ایجاد یک سامانه جامع
-                برای بازار املاک ایران است.
-            </p>
-        </div>
-
-        <div class="feature">
-            <div class="feature-icon">🏆</div>
-            <h3>تجربه و اعتبار</h3>
-            <p>
-                مرکز مشاورین املاک ایمان
-                از سال ۱۳۷۰ در حوزه املاک فعالیت دارد.
-            </p>
-        </div>
-
-    </div>
-
-    <div class="cta">
-        <h2>ملک خود را در املاک 058 معرفی کنید</h2>
-        <p>
-            آگهی ملک خود را ثبت کنید و آن را در معرض دید خریداران قرار دهید.
-        </p>
-
-        <button class="add-btn" onclick="addProperty()">
-            ثبت آگهی ملک
-        </button>
-    </div>
-
-</section>
-
-<footer>
-
-    <div class="footer-grid">
-
-        <div>
-            <h3>املاک 058</h3>
-            <p style="margin-top:12px;color:#bbb;line-height:2;">
-                مرکز مشاورین املاک ایمان
-            </p>
-            <p style="color:#bbb;">
-                تأسیس ۱۳۷۰
-            </p>
-        </div>
-
-        <div>
-            <h3>خدمات</h3>
-            <p style="margin-top:12px;color:#bbb;">خرید و فروش</p>
-            <p style="color:#bbb;">رهن و اجاره</p>
-            <p style="color:#bbb;">مشارکت در ساخت</p>
-        </div>
-
-        <div>
-            <h3>تماس</h3>
-            <p style="margin-top:12px;color:#bbb;">
-                بجنورد، خیابان فردوسی، نبش چهارراه جمهوری
-            </p>
-            <p style="color:#c9a45c;">
-                ۰۹۱۵۰۸۴۱۰۰۶
-            </p>
-        </div>
-
-    </div>
-
-</footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-}
-
-function searchProperty(){
-
-    const city = document.getElementById("city").value;
-    const deal = document.getElementById("deal").value;
-    const type = document.getElementById("type").value;
-    const search = document.getElementById("search").value;
-
-    alert(
-        "جستجو:\n" +
-        "شهر: " + city + "\n" +
-        "معامله: " + deal + "\n" +
-        "ملک: " + type + "\n" +
-        "عبارت: " + search
-    );
-}
-
-    const SUPABASE_URL = 'https://lsttrmnxauaviyuipnim.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_V3ZIfuzEZ4y7KUY88lyv_Q_wF6kQAcb';
-
-const db = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
-
-let properties = [];
-let activeFilter = '';
-
-function addProperty() {
-    const title = prompt('عنوان آگهی را وارد کنید:');
-    if (!title || !title.trim()) return;
-
-    const city = prompt('نام شهر:', 'بجنورد');
-    if (!city || !city.trim()) return;
-
-    const deal = prompt(
-        'نوع معامله را وارد کنید: فروش، اجاره، رهن، رهن و اجاره یا مشارکت در ساخت'
-    );
-    if (!deal || !deal.trim()) return;
-
-    const type = prompt(
-        'نوع ملک: آپارتمان، خانه ویلایی، زمین، مغازه، دفتر کار، باغ یا سایر'
-    );
-    if (!type || !type.trim()) return;
-
-    const priceInput = prompt('قیمت به تومان؛ برای قیمت توافقی خالی بگذارید:', '');
-    const areaInput = prompt('متراژ ملک به متر مربع:', '');
-    const bedroomsInput = prompt('تعداد خواب؛ اگر مشخص نیست خالی بگذارید:', '');
-    const phone = prompt('شماره تماس آگهی‌دهنده:');
-    if (!phone || !phone.trim()) return;
-
-    const addressInput = prompt('محله یا آدرس ملک:');
-    if (!addressInput || !addressInput.trim()) return;
-
-    const description = prompt('توضیحات ملک:', '') || '';
-
-    const price = priceInput.trim() ? Number(priceInput) : null;
-    const area = areaInput.trim() ? Number(areaInput) : null;
-    const bedrooms = bedroomsInput.trim()
-        ? Number(bedroomsInput)
-        : null;
-
-    if (price !== null && (!Number.isFinite(price) || price < 0)) {
-        alert('قیمت واردشده معتبر نیست.');
-        return;
-    }
-
-    if (area !== null && (!Number.isFinite(area) || area < 0)) {
-        alert('متراژ واردشده معتبر نیست.');
-        return;
-    }
-
-    if (bedrooms !== null &&
-        (!Number.isInteger(bedrooms) || bedrooms < 0)) {
-        alert('تعداد خواب معتبر نیست.');
-        return;
-    }
-
-    const address = addressInput.includes(city)
-        ? addressInput.trim()
-        : city.trim() + '، ' + addressInput.trim();
-
-    saveProperty({
-        title: title.trim(),
-        property_type: type.trim(),
-        transaction_type: deal.trim(),
-        price: price,
-        area: area,
-        bedrooms: bedrooms,
-        address: address,
-        description: description.trim(),
-        phone: phone.trim(),
-        status: 'pending'
-    });
-}
-
-async function saveProperty(property) {
-    try {
-        const { error } = await db
-            .from('properties')
-            .insert(property);
-
-        if (error) throw error;
-
-        alert(
-            'آگهی با موفقیت ثبت شد.\n' +
-            'پس از تأیید مدیر سایت، آگهی نمایش داده می‌شود.'
-        );
-
-    } catch (error) {
-        console.error('خطای ثبت آگهی:', error);
-
-        alert(
-            'ثبت آگهی ناموفق بود.\n' +
-            'اتصال اینترنت و تنظیمات دسترسی دیتابیس را بررسی کنید.'
-        );
-    }
-}
-
-async function loadProperties() {
-    const list = document.querySelector('.properties');
-
-    try {
-        const { data, error } = await db
-            .from('properties')
-            .select('*')
-            .eq('status', 'approved')
-            .order('created_at', { ascending: false });
-
-        if (error) throw error;
-
-        properties = data || [];
-        renderProperties();
-
-    } catch (error) {
-        console.error('خطای دریافت آگهی‌ها:', error);
-
-        list.innerHTML =
-            '<div style="padding:25px;background:white;border-radius:12px">' +
-            'دریافت آگهی‌ها با خطا روبه‌رو شد. تنظیمات دیتابیس را بررسی کنید.' +
-            '</div>';
-    }
-}
-
-function escapeHTML(value) {
-    return String(value ?? '').replace(/[&<>"']/g, function (char) {
-        return {
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#39;'
-        }[char];
-    });
-}
-
-function formatPrice(price) {
-    if (price === null || price === undefined || price === '') {
-        return 'قیمت توافقی';
-    }
-
-    const amount = Number(price);
-
-    if (!Number.isFinite(amount) || amount <= 0) {
-        return 'قیمت توافقی';
-    }
-
-    return amount.toLocaleString('fa-IR') + ' تومان';
-}
-
-function renderProperties() {
-    const list = document.querySelector('.properties');
-
-    const cityValue = document.getElementById('city').value;
-    const dealValue = document.getElementById('deal').value;
-    const typeValue = document.getElementById('type').value;
-    const query = document.getElementById('search').value
-        .trim()
-        .toLocaleLowerCase('fa');
-
-    const city = cityValue === 'همه شهرها' ? '' : cityValue;
-    const deal = dealValue === 'نوع معامله' ? '' : dealValue;
-    const type = typeValue === 'نوع ملک' ? '' : typeValue;
-
-    const filtered = properties.filter(function (p) {
-        const text = [
-            p.title,
-            p.address,
-            p.description,
-            p.property_type,
-            p.transaction_type
-        ].join(' ').toLocaleLowerCase('fa');
-
-        const dealMatch =
-            !deal ||
-            p.transaction_type === deal ||
-            (deal === 'رهن' && String(p.transaction_type).includes('رهن')) ||
-            (deal === 'اجاره' && String(p.transaction_type).includes('اجاره'));
-
-        return (
-            (!city || String(p.address || '').includes(city)) &&
-            dealMatch &&
-            (!type || p.property_type === type) &&
-            (!activeFilter ||
-                p.transaction_type === activeFilter ||
-                p.property_type === activeFilter) &&
-            (!query || text.includes(query))
-        );
-    });
-
-    if (filtered.length === 0) {
-        list.innerHTML =
-            '<div style="grid-column:1/-1;background:white;padding:30px;' +
-            'border-radius:12px;text-align:center;color:#666">' +
-            'آگهی تأییدشده‌ای پیدا نشد.' +
-            '</div>';
-        return;
-    }
-
-    list.innerHTML = filtered.map(function (p) {
-        const area = p.area
-            ? Number(p.area).toLocaleString('fa-IR') + ' متر'
-            : 'متراژ ثبت نشده';
-
-        const rooms = p.bedrooms !== null && p.bedrooms !== undefined
-            ? ' • ' + p.bedrooms.toLocaleString('fa-IR') + ' خواب'
-            : '';
-
-        return `
-            <div class="card">
-                <div class="card-img">🏠</div>
-                <div class="card-body">
-                    <span class="tag">${escapeHTML(p.transaction_type)}</span>
-                    <h3>${escapeHTML(p.title)}</h3>
-                    <p>${escapeHTML(p.address)}</p>
-                    <p>${area}${rooms}</p>
-                    <p>${escapeHTML(p.description || '')}</p>
-                    <div class="price">${formatPrice(p.price)}</div>
-                    <p style="margin-top:12px">
-                        تماس:
-                        <a href="tel:${escapeHTML(p.phone)}">
-                            ${escapeHTML(p.phone)}
-                        </a>
-                    </p>
-                </div>
-            </div>
-        `;
-    }).join('');
-}
-
-function searchProperty() {
-    activeFilter = '';
-    document.querySelectorAll('.filter button').forEach(function (button) {
-        button.classList.remove('active');
-    });
-
-    renderProperties();
-}
-
-document.querySelectorAll('.filter button').forEach(function (button) {
-    button.onclick = function () {
-        document.querySelectorAll('.filter button').forEach(function (item) {
-            item.classList.remove('active');
-        });
-
-        button.classList.add('active');
-
-        const value = button.textContent.trim();
-        activeFilter = value === 'همه' ? '' : value;
-
-        renderProperties();
-    };
-});
-
-loadProperties();
-</body>
-</html>
+.card
