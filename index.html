@@ -1,48 +1,834 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>املاک بجنورد | ثبت رایگان آگهی</title><meta name="description" content="خرید، فروش، رهن و اجاره ملک در بجنورد">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#e83946">
+<title>املاک بجنورد | ثبت رایگان آگهی</title>
+<meta name="description" content="سامانه ثبت رایگان آگهی خرید، فروش، رهن و اجاره ملک در بجنورد">
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-:root{--primary:#e83946;--dark:#c92d39;--bg:#f5f5f5;--border:#e5e5e5;--text:#252525;--muted:#777}*{box-sizing:border-box;margin:0;padding:0}body{font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.8}button,input,select,textarea{font:inherit;font-size:14px}button{cursor:pointer}a{color:inherit;text-decoration:none}.container{width:min(1200px,94%);margin:auto}header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20}.header-inner{min-height:75px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{display:flex;align-items:center;gap:10px}.brand-icon{width:43px;height:43px;background:var(--primary);color:#fff;border-radius:12px;display:grid;place-items:center;font-size:27px;overflow:hidden}.brand h1{font-size:19px}.brand small{display:block;font-size:11px;color:var(--muted)}nav{display:flex;gap:18px}nav a{font-size:13px}.btn{border:0;border-radius:8px;padding:11px 16px;font-weight:bold;display:inline-flex;align-items:center;justify-content:center;gap:6px}.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--dark)}.btn-outline{background:#fff;border:1px solid var(--border)}.btn:disabled{opacity:.6;cursor:wait}.hero{padding:35px 0 25px}.hero h2{font-size:clamp(22px,3vw,30px)}.hero p{font-size:14px;color:var(--muted);margin:5px 0 20px}.search-panel{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px;display:grid;grid-template-columns:1fr 1fr 1.5fr auto;gap:10px}input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;background:#fff;color:var(--text)}input:focus,select:focus,textarea:focus{outline:1px solid var(--primary)}.section{margin:30px auto}.section-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}.section-heading h2{font-size:20px}.muted{color:var(--muted);font-size:12px}.categories{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.category{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 8px;text-align:center;cursor:pointer}.category:hover{border-color:var(--primary)}.category-icon{font-size:27px}.category strong{display:block;font-size:14px}.category small{font-size:11px;color:var(--muted)}.listing-tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.filter-btn{background:#fff;border:1px solid var(--border);padding:8px 13px;border-radius:7px}.filter-btn.active{color:var(--primary);border-color:var(--primary);background:#fff3f3}.property-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.property-card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform .18s,box-shadow .18s}.property-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px #0000000d}.property-image{position:relative}.property-info .btn{margin-top:8px}.hero{background:linear-gradient(135deg,#fff 0%,#fff5f5 100%);border:1px solid #f0dddd;border-radius:16px;padding:30px;margin-top:22px}.search-panel{box-shadow:0 5px 18px #00000008}.category{transition:.18s}.category:hover{transform:translateY(-2px);box-shadow:0 5px 16px #0000000b}.listing-tools .filter-btn{transition:.15s}.property-price{color:var(--primary);font-size:16px}.site-note{font-size:12px;color:var(--muted);margin-top:10px}.property-description{font-size:13px;color:#555;margin:9px 0;white-space:pre-wrap;overflow-wrap:anywhere}.favorite-btn{border:1px solid var(--border);background:#fff;border-radius:7px;padding:7px 10px;margin-right:6px}.favorite-btn.saved{color:var(--primary);border-color:var(--primary);background:#fff3f3}.property-actions{display:flex;align-items:center;flex-wrap:wrap;gap:6px}.property-image{height:195px;background:#eee;display:flex;gap:5px;overflow-x:auto;align-items:center;justify-content:center;color:#888;font-size:13px}.property-image img{height:100%;min-width:100%;width:100%;object-fit:cover}.property-info{padding:14px}.property-info h3{font-size:15px;margin:5px 0}.property-address{font-size:12px;color:var(--muted);margin-bottom:8px}.property-details{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:#555;padding-bottom:10px;border-bottom:1px solid #eee}.property-price{font-weight:bold;margin:10px 0}.property-type{display:inline-block;color:var(--primary);background:#fff0f0;border-radius:5px;padding:2px 7px;font-size:11px}.empty{grid-column:1/-1;background:#fff;border:1px solid var(--border);border-radius:10px;padding:28px 15px;text-align:center;color:var(--muted)}.about{background:#fff;border:1px solid var(--border);border-radius:12px;padding:23px}footer{margin-top:40px;background:#fff;border-top:1px solid var(--border);padding:25px 0}.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}footer p{font-size:12px;color:var(--muted)}.modal{display:none;position:fixed;inset:0;z-index:100;background:#0009;overflow-y:auto;padding:15px}.modal-box{max-width:650px;background:#fff;margin:20px auto;padding:22px;border-radius:12px}.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.modal-header h2{font-size:20px}.close-btn{border:0;background:#eee;border-radius:7px;padding:3px 11px;font-size:22px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.form-field label{display:block;font-size:13px;margin-bottom:5px}.full{grid-column:1/-1}textarea{resize:vertical}.form-message{font-size:13px;margin-top:10px;overflow-wrap:anywhere}.preview-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.preview-item{width:90px;height:90px;position:relative}.preview-item img{
-width:100%;height:100%;object-fit:cover;border-radius:7px;border:1px solid var(--border)}.preview-remove{position:absolute;top:2px;left:2px;background:#b00020;color:white;border:0;border-radius:50%;width:24px;height:24px}@media(max-width:800px){.search-panel{grid-template-columns:1fr 1fr}.header-inner{flex-wrap:wrap;padding:12px 0}nav{order:3;width:100%;justify-content:space-between}.search-panel{grid-template-columns:1fr 1fr}.categories{grid-template-columns:repeat(3,minmax(0,1fr))}.property-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding:22px 15px}.property-image{height:165px}}@media(max-width:520px){.container{width:94%}.header-inner{min-height:auto}.brand h1{font-size:17px}nav{gap:10px;overflow-x:auto}nav a{font-size:12px;white-space:nowrap}.header-actions .btn{padding:8px 10px;font-size:12px}.search-panel{grid-template-columns:1fr 1fr;padding:10px}.search-panel input{min-width:0}.categories{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.category{padding:10px 4px}.category-icon{font-size:23px}.category strong{font-size:12px}.property-grid{grid-template-columns:1fr 1fr;gap:8px}.property-info{padding:10px}.property-info h3{font-size:13px}.property-image{height:135px}.property-details{gap:7px;font-size:11px}.property-price{font-size:13px}.property-actions .btn{padding:7px;font-size:11px}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.section-heading h2{font-size:17px}.hero h2{font-size:22px}.hero p{font-size:12px}.btn{padding:9px 11px}.modal{padding:5px}.modal-box{padding:15px;margin:10px auto}.footer-inner{flex-direction:column}.property-card{min-width:0;overflow:hidden}.property-address{overflow-wrap:anywhere}.advanced-filters{grid-template-columns:1fr 1fr!important}.mobile-bottom-nav{display:flex!important}}.advanced-filters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}.advanced-filters[hidden]{display:none}.mobile-bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);z-index:30;justify-content:space-around;padding:8px 0 calc(8px + env(safe-area-inset-bottom))}.mobile-bottom-nav button{border:0;background:transparent;color:#666;display:flex;flex-direction:column;align-items:center;font-size:10px;gap:3px}.mobile-bottom-nav button span{font-size:20px}.mobile-bottom-nav button.active{color:var(--primary)}body{padding-bottom:env(safe-area-inset-bottom)}@media(max-width:
-const SUPABASE_URL = "https://lsttrmnxauaviyuipnim.supabase.co";
+:root {
+  --primary: #e83946;
+  --dark: #c92d39;
+  --bg: #f5f5f5;
+  --border: #e5e5e5;
+  --text: #252525;
+  --muted: #777;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Tahoma, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  padding-bottom: 70px;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  font-size: 14px;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: min(1200px, 94%);
+  margin: auto;
+}
+
+header {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.header-inner {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.brand-icon {
+  width: 43px;
+  height: 43px;
+  background: var(--primary);
+  color: white;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  font-size: 25px;
+}
+
+.brand h1 {
+  font-size: 18px;
+}
+
+.brand small {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+nav a {
+  font-size: 13px;
+}
+
+.btn {
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--dark);
+}
+
+.btn-outline {
+  background: white;
+  border: 1px solid var(--border);
+}
+
+.hero {
+  margin-top: 22px;
+  padding: 28px;
+  background: linear-gradient(135deg, #fff, #fff3f3);
+  border: 1px solid #f0dddd;
+  border-radius: 15px;
+}
+
+.hero h2 {
+  font-size: clamp(22px, 3vw, 30px);
+}
+
+.hero p {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 5px 0 18px;
+}
+
+.search-panel {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  padding: 13px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.5fr auto;
+  gap: 9px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  color: var(--text);
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: 1px solid var(--primary);
+}
+
+.section {
+  margin: 28px auto;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.section-heading h2 {
+  font-size: 19px;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.category {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 7px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.category:hover {
+  border-color: var(--primary);
+}
+
+.category-icon {
+  font-size: 26px;
+}
+
+.category strong {
+  display: block;
+  font-size: 13px;
+}
+
+.category small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.listing-tools {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.filter-btn {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 8px 12px;
+}
+
+.filter-btn.active {
+  color: var(--primary);
+  border-color: var(--primary);
+  background: #fff1f2;
+}
+
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.property-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  overflow: hidden;
+}
+
+.property-image {
+  height: 190px;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #888;
+}
+
+.property-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.property-info {
+  padding: 13px;
+}
+
+.property-info h3 {
+  font-size: 15px;
+  margin: 5px 0;
+}
+
+.property-address {
+  font-size: 12px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.property-details {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.property-price {
+  color: var(--primary);
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.property-type {
+  display: inline-block;
+  background: #fff0f0;
+  color: var(--primary);
+  border-radius: 5px;
+  padding: 2px 7px;
+  font-size: 11px;
+}
+
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 25px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--muted);
+}
+
+.about {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  padding: 22px;
+}
+
+footer {
+  margin-top: 35px;
+  padding: 24px 0;
+  background: white;
+  border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+footer p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #0009;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.modal-box {
+  max-width: 650px;
+  background: white;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.close-btn {
+  border: 0;
+  background: #eee;
+  border-radius: 7px;
+  padding: 3px 11px;
+  font-size: 22px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-field label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.form-message {
+  font-size: 13px;
+  margin-top: 10px;
+  overflow-wrap: anywhere;
+}
+
+.mobile-bottom-nav {
+  display: none;
+}
+
+@media(max-width:800px) {
+  .search-panel {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .categories {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .property-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media(max-width:520px) {
+  .header-inner {
+    min-height: auto;
+  }
+
+  .brand h1 {
+    font-size: 15px;
+  }
+
+  nav {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+    order: 3;
+  }
+
+  nav a {
+    font-size: 11px;
+  }
+
+  .hero {
+    padding: 18px;
+  }
+
+  .hero h2 {
+    font-size: 21px;
+  }
+
+  .search-panel {
+    grid-template-columns: 1fr 1fr;
+    padding: 9px;
+  }
+
+  .categories {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .category {
+    padding: 9px 4px;
+  }
+
+  .category strong {
+    font-size: 11px;
+  }
+
+  .property-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .property-image {
+    height: 130px;
+  }
+
+  .property-info {
+    padding: 9px;
+  }
+
+  .property-info h3 {
+    font-size: 12px;
+  }
+
+  .property-price {
+    font-size: 12px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full {
+    grid-column: auto;
+  }
+
+  .modal {
+    padding: 5px;
+  }
+
+  .modal-box {
+    margin: 8px auto;
+    padding: 14px;
+  }
+
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    justify-content: space-around;
+    background: white;
+    border-top: 1px solid var(--border);
+    padding: 7px 0 calc(7px + env(safe-area-inset-bottom));
+  }
+
+  .mobile-bottom-nav button {
+    border: 0;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #666;
+    font-size: 10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a class="brand" href="#" onclick="showHome();return false">
+      <div class="brand-icon">⌂</div>
+      <div>
+        <h1>املاک بجنورد</h1>
+        <small>ثبت رایگان آگهی ملک</small>
+      </div>
+    </a>
+
+    <nav>
+      <a href="#" onclick="showHome();return false">صفحه اصلی</a>
+      <a href="#categories">دسته‌بندی‌ها</a>
+      <a href="#listings">آگهی‌های ملک</a>
+      <a href="#about">درباره ما</a>
+    </nav>
+
+    <button class="btn btn-primary" onclick="openListingModal()">
+      ＋ ثبت آگهی رایگان
+    </button>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="hero">
+    <h2>ملک موردنظرت را در بجنورد پیدا کن</h2>
+    <p>آگهی‌های خرید، فروش، رهن و اجاره ملک در شهر بجنورد</p>
+
+    <div class="search-panel">
+      <select id="searchTransaction">
+        <option value="">همه معاملات</option>
+        <option value="فروش">فروش</option>
+        <option value="رهن و اجاره">رهن و اجاره</option>
+        <option value="اجاره">اجاره</option>
+      </select>
+
+      <select id="searchType">
+        <option value="">همه انواع ملک</option>
+        <option value="آپارتمان">آپارتمان</option>
+        <option value="خانه و ویلا">خانه و ویلا</option>
+        <option value="زمین">زمین</option>
+        <option value="مغازه و تجاری">مغازه و تجاری</option>
+        <option value="دفتر کار">دفتر کار</option>
+        <option value="باغ">باغ</option>
+      </select>
+
+      <input id="searchText" type="search"
+        placeholder="جست‌وجو در عنوان و محله...">
+
+      <button class="btn btn-primary" onclick="applyFilters()">
+        جست‌وجو
+      </button>
+    </div>
+  </section>
+
+  <section class="section" id="categories">
+    <div class="section-heading">
+      <h2>دسته‌بندی ملک</h2>
+      <span class="muted">نوع ملک را انتخاب کن</span>
+    </div>
+
+    <div class="categories">
+      <button class="category" onclick="chooseCategory('آپارتمان')">
+        <span class="category-icon">🏢</span>
+        <strong>آپارتمان</strong>
+        <small>خرید و اجاره</small>
+      </button>
+
+      <button class="category" onclick="chooseCategory('خانه و ویلا')">
+        <span class="category-icon">🏡</span>
+        <strong>خانه و ویلا</strong>
+        <small>مسکونی</small>
+      </button>
+
+      <button class="category" onclick="chooseCategory('زمین')">
+        <span class="category-icon">🌳</span>
+        <strong>زمین</strong>
+        <small>زمین و کلنگی</small>
+      </button>
+
+      <button class="category" onclick="chooseCategory('مغازه و تجاری')">
+        <span class="category-icon">🏬</span>
+        <strong>مغازه و تجاری</strong>
+        <small>املاک تجاری</small>
+      </button>
+
+      <button class="category" onclick="chooseCategory('دفتر کار')">
+        <span class="category-icon">🏢</span>
+        <strong>دفتر کار</strong>
+        <small>اداری</small>
+      </button>
+    </div>
+  </section>
+
+  <section class="section" id="listings">
+    <div class="section-heading">
+      <h2 id="listingsTitle">جدیدترین آگهی‌های ملک</h2>
+      <span class="muted" id="listingCount">در حال بارگذاری...</span>
+    </div>
+
+    <div class="listing-tools">
+      <button class="filter-btn active" onclick="chooseTransaction('')">همه</button>
+      <button class="filter-btn" onclick="chooseTransaction('فروش')">فروش</button>
+      <button class="filter-btn" onclick="chooseTransaction('رهن و اجاره')">رهن و اجاره</button>
+    </div>
+
+    <div class="property-grid" id="propertyGrid">
+      <div class="empty">در حال دریافت آگهی‌ها...</div>
+    </div>
+
+    <div style="text-align:center;margin-top:18px">
+      <button id="loadMoreButton" class="btn btn-outline"
+        onclick="loadMore()" style="display:none">
+        نمایش آگهی‌های بیشتر
+      </button>
+    </div>
+  </section>
+
+  <section class="section about" id="about">
+    <h2>درباره املاک بجنورد</h2>
+    <p>
+      املاک بجنورد بستری برای مشاهده و ثبت آگهی‌های خرید، فروش،
+      رهن و اجاره ملک در بجنورد است. ثبت آگهی در این سامانه رایگان است.
+    </p>
+    <p class="muted">
+      اطلاعات هر آگهی را پیش از انجام معامله بررسی کنید.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <strong>املاک بجنورد</strong>
+      <p>سامانه ثبت رایگان آگهی ملک</p>
+    </div>
+    <p>© املاک بجنورد</p>
+  </div>
+</footer>
+
+<nav class="mobile-bottom-nav">
+  <button onclick="showHome()">
+    <span>⌂</span>خانه
+  </button>
+  <button onclick="document.getElementById('listings').scrollIntoView({behavior:'smooth'})">
+    <span>▦</span>آگهی‌ها
+  </button>
+  <button onclick="openListingModal()">
+    <span>＋</span>ثبت آگهی
+  </button>
+</nav>
+
+<div class="modal" id="listingModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>ثبت آگهی رایگان</h2>
+      <button class="close-btn" onclick="closeListingModal()">×</button>
+    </div>
+
+    <p class="muted" style="margin-bottom:12px">
+      اطلاعات ملک را وارد کن. برای انتشار آگهی باید وضعیت دسترسی
+      و تنظیمات پایگاه داده درست پیکربندی شده باشد.
+    </p>
+
+    <form id="listingForm">
+      <div class="form-grid">
+
+        <div class="form-field full">
+          <label for="listingTitle">عنوان آگهی *</label>
+          <input id="listingTitle" required maxlength="120"
+            placeholder="مثلاً آپارتمان ۱۰۰ متری در مرکز بجنورد">
+        </div>
+
+        <div class="form-field">
+          <label for="listingTransaction">نوع معامله *</label>
+          <select id="listingTransaction" required>
+            <option value="">انتخاب کن</option>
+            <option value="فروش">فروش</option>
+            <option value="رهن و اجاره">رهن و اجاره</option>
+            <option value="اجاره">اجاره</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="listingType">نوع ملک *</label>
+          <select id="listingType" required>
+            <option value="">انتخاب کن</option>
+            <option value="آپارتمان">آپارتمان</option>
+            <option value="خانه و ویلا">خانه و ویلا</option>
+            <option value="زمین">زمین</option>
+            <option value="مغازه و تجاری">مغازه و تجاری</option>
+            <option value="دفتر کار">دفتر کار</option>
+            <option value="باغ">باغ</option>
+            <option value="سایر">سایر</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="listingPrice">قیمت به تومان</label>
+          <input id="listingPrice" type="number" min="0"
+            placeholder="در صورت توافقی خالی بگذار">
+        </div>
+
+        <div class="form-field">
+          <label for="listingArea">متراژ</label>
+          <input id="listingArea" type="number" min="0"
+            placeholder="مثلاً ۱۰۰">
+        </div>
+
+        <div class="form-field">
+          <label for="listingBedrooms">تعداد اتاق</label>
+          <select id="listingBedrooms">
+            <option value="">مشخص نشده</option>
+            <option value="0">بدون اتاق</option>
+            <option value="1">۱</option>
+            <option value="2">۲</option>
+            <option value="3">۳</option>
+            <option value="4">۴ یا بیشتر</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="listingNeighborhood">محله</label>
+          <input id="listingNeighborhood" maxlength="100"
+            placeholder="مثلاً فردوسی">
+        </div>
+
+        <div class="form-field full">
+          <label for="listingAddress">نشانی یا محدوده ملک</label>
+          <input id="listingAddress" maxlength="250"
+            placeholder="محله یا محدوده ملک">
+        </div>
+
+        <div class="form-field full">
+          <label for="listingDescription">توضیحات</label>
+          <textarea id="listingDescription" maxlength="3000"
+            placeholder="ویژگی‌های ملک را بنویس..."></textarea>
+        </div>
+
+        <div class="form-field full">
+          <label for="listingPhone">شماره تماس آگهی‌دهنده *</label>
+          <input id="listingPhone" type="tel" required maxlength="20"
+            placeholder="شماره تماس">
+        </div>
+
+        <div class="form-field full">
+          <label for="listingImages">تصاویر ملک</label>
+          <input id="listingImages" type="file" accept="image/*" multiple>
+          <small class="muted">
+            بارگذاری تصاویر به تنظیمات صحیح فضای ذخیره‌سازی نیاز دارد.
+          </small>
+        </div>
+
+        <div class="form-field full">
+          <button class="btn btn-primary" id="submitListingButton"
+            type="submit" style="width:100%">
+            ثبت آگهی
+          </button>
+          <div class="form-message" id="listingMessage"></div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  const SUPABASE_URL = "https://lsttrmnxauaviyuipnim.supabase.co";
 const SUPABASE_KEY = "sb_publishable_V3ZIfuzEZ4yKUY88lyv_Q_wF6kQAcb";
 
 let supabaseClient = null;
-let currentUser = null;
 let properties = [];
 let filteredProperties = [];
 let visibleCount = 12;
 let selectedImages = [];
-let showingMyListings = false;
-
-try {
-  if (window.supabase && SUPABASE_URL && SUPABASE_KEY) {
-    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-  }
-} catch (error) {
-  console.error("Supabase initialization failed", error);
-}
 
 const $ = id => document.getElementById(id);
 
-function normalizeDigits(value) {
-  return String(value ?? "")
-    .replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
-    .replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
-}
-
-function formatPrice(value, transaction = "") {
-  const price = Number(value || 0);
-  if (!price) return "توافقی";
-  return price.toLocaleString("fa-IR") + " تومان";
-}
-
-function formatNumber(value) {
-  if (value === null || value === undefined || value === "") return "—";
-  return Number(value).toLocaleString("fa-IR");
+try {
+  if (window.supabase) {
+    supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+  }
+} catch (error) {
+  console.error("خطا در اتصال به پایگاه داده:", error);
 }
 
 function escapeHTML(value) {
@@ -55,53 +841,444 @@ function escapeHTML(value) {
   })[char]);
 }
 
-function notify(message, isError = false) {
+function normalizeDigits(value) {
+  return String(value ?? "")
+    .replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+    .replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+}
+
+function formatNumber(value) {
+  if (value === null || value === undefined || value === "") {
+    return "—";
+  }
+
+  return Number(value).toLocaleString("fa-IR");
+}
+
+function formatPrice(value) {
+  const price = Number(value || 0);
+
+  if (!price) return "توافقی";
+
+  return formatNumber(price) + " تومان";
+}
+
+function showMessage(message, isError = false) {
   alert(message);
 }
 
 function showHome() {
-  showingMyListings = false;
   $("listingsTitle").textContent = "جدیدترین آگهی‌های ملک";
   $("listings").scrollIntoView({ behavior: "smooth" });
   applyFilters();
 }
 
-function toggleAdvancedFilters() {
-  const panel = $("advancedFilters");
-  panel.hidden = !panel.hidden;
+function openListingModal() {
+  $("listingModal").style.display = "block";
+  document.body.style.overflow = "hidden";
 }
+
+function closeListingModal() {
+  $("listingModal").style.display = "none";
+  document.body.style.overflow = "";
+}
+
+$("listingModal").addEventListener("click", function(event) {
+  if (event.target === this) closeListingModal();
+});
+
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Escape") closeListingModal();
+});
 
 function chooseCategory(type) {
   $("searchType").value = type;
-  showingMyListings = false;
   applyFilters();
+
   $("listings").scrollIntoView({ behavior: "smooth" });
 }
 
 function chooseTransaction(transaction) {
   $("searchTransaction").value = transaction;
-  showingMyListings = false;
-  document.querySelectorAll(".listing-tools .filter-btn").forEach(button => {
-    button.classList.toggle(
-      "active",
-      normalizeDigits(button.textContent.trim()) === normalizeDigits(transaction || "همه")
-    );
-  });
+
+  document.querySelectorAll(".listing-tools .filter-btn")
+    .forEach(button => {
+      const selected =
+        normalizeDigits(button.textContent.trim()) ===
+        normalizeDigits(transaction || "همه");
+
+      button.classList.toggle("active", selected);
+    });
+
   applyFilters();
-  $("listings").scrollIntoView({ behavior: "smooth" });
 }
 
 function resetFilters() {
   [
-    "searchCity", "searchType", "searchText", "searchTransaction",
-    "minPrice", "maxPrice", "minArea", "maxArea",
-    "searchBedrooms", "searchNeighborhood"
-  ].forEach(id => $(id).value = "");
+    "searchTransaction",
+    "searchType",
+    "searchText"
+  ].forEach(id => {
+    $(id).value = "";
+  });
 
-  $("sortListings").value = "newest";
-  showingMyListings = false;
   applyFilters();
 }
 
 async function loadProperties() {
-  const
+  const grid = $("propertyGrid");
+
+  grid.innerHTML =
+    '<div class="empty">در حال دریافت آگهی‌ها...</div>';
+
+  if (!supabaseClient) {
+    grid.innerHTML =
+      '<div class="empty">اتصال به پایگاه داده برقرار نشد.</div>';
+
+    $("listingCount").textContent = "خطا در اتصال";
+    return;
+  }
+
+  try {
+    const { data, error } = await supabaseClient
+      .from("properties")
+      .select("*")
+      .eq("status", "approved")
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+
+    properties = data || [];
+
+    applyFilters();
+
+  } catch (error) {
+    console.error("خطا در دریافت آگهی‌ها:", error);
+
+    grid.innerHTML = `
+      <div class="empty">
+        دریافت آگهی‌ها با مشکل مواجه شد.
+        <br>
+        لطفاً تنظیمات جدول و دسترسی‌های پایگاه داده را بررسی کنید.
+      </div>
+    `;
+
+    $("listingCount").textContent = "خطا در دریافت اطلاعات";
+  }
+}
+
+function applyFilters() {
+  const transaction = $("searchTransaction").value;
+  const type = $("searchType").value;
+
+  const searchText = normalizeDigits(
+    $("searchText").value.trim().toLowerCase()
+  );
+
+  filteredProperties = properties.filter(property => {
+    const propertyTransaction =
+      property.transaction_type || "";
+
+    const propertyType =
+      property.property_type || "";
+
+    const searchableText = normalizeDigits([
+      property.title,
+      property.address,
+      property.description,
+      property.city,
+      property.property_type,
+      property.transaction_type
+    ].join(" ").toLowerCase());
+
+    const transactionMatch =
+      !transaction ||
+      propertyTransaction === transaction ||
+      (
+        transaction === "رهن و اجاره" &&
+        propertyTransaction === "اجاره"
+      );
+
+    const typeMatch =
+      !type || propertyType === type;
+
+    const textMatch =
+      !searchText || searchableText.includes(searchText);
+
+    return transactionMatch && typeMatch && textMatch;
+  });
+
+  visibleCount = 12;
+  renderProperties();
+}
+
+function renderProperties() {
+  const grid = $("propertyGrid");
+  const count = $("listingCount");
+
+  count.textContent =
+    formatNumber(filteredProperties.length) + " آگهی";
+
+  if (filteredProperties.length === 0) {
+    grid.innerHTML = `
+      <div class="empty">
+        آگهی تأییدشده‌ای با این مشخصات پیدا نشد.
+        <br>
+        عبارت جست‌وجو یا فیلترها را تغییر بده.
+      </div>
+    `;
+
+    $("loadMoreButton").style.display = "none";
+    return;
+  }
+
+  const visibleProperties =
+    filteredProperties.slice(0, visibleCount);
+
+  grid.innerHTML = visibleProperties.map(property => {
+    const imageUrl =
+      property.image_url ||
+      (
+        Array.isArray(property.image_urls) &&
+        property.image_urls.length
+          ? property.image_urls[0]
+          : ""
+      );
+
+    const imageHTML = imageUrl
+      ? `<img src="${escapeHTML(imageUrl)}"
+           alt="${escapeHTML(property.title)}"
+           loading="lazy"
+           onerror="this.style.display='none'">`
+      : `<span>🏠 تصویر ثبت نشده</span>`;
+
+    const transaction =
+      property.transaction_type || "معامله";
+
+    const area = property.area
+      ? `${formatNumber(property.area)} متر`
+      : "";
+
+    const bedrooms = property.bedrooms !== null &&
+      property.bedrooms !== undefined &&
+      property.bedrooms !== ""
+        ? `${formatNumber(property.bedrooms)} اتاق`
+        : "";
+
+    return `
+      <article class="property-card">
+        <div class="property-image">
+          ${imageHTML}
+        </div>
+
+        <div class="property-info">
+          <span class="property-type">
+            ${escapeHTML(property.property_type || "ملک")}
+          </span>
+
+          <h3>${escapeHTML(property.title)}</h3>
+
+          <div class="property-address">
+            📍 ${escapeHTML(property.address || "بجنورد")}
+          </div>
+
+          <div class="property-details">
+            ${area ? `<span>📐 ${area}</span>` : ""}
+            ${bedrooms ? `<span>🛏 ${bedrooms}</span>` : ""}
+            <span>${escapeHTML(transaction)}</span>
+          </div>
+
+          <div class="property-price">
+            ${escapeHTML(formatPrice(property.price))}
+          </div>
+
+          ${
+            property.description
+              ? `<p class="property-description">
+                  ${escapeHTML(property.description)}
+                </p>`
+              : ""
+          }
+
+          <div class="property-actions">
+            ${
+              property.phone
+                ? `<a class="btn btn-primary"
+                     href="tel:${escapeHTML(property.phone)}">
+                     تماس با آگهی‌دهنده
+                   </a>`
+                : ""
+            }
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
+
+  $("loadMoreButton").style.display =
+    visibleCount < filteredProperties.length
+      ? "inline-flex"
+      : "none";
+}
+
+function loadMore() {
+  visibleCount += 12;
+  renderProperties();
+}
+
+$("searchText").addEventListener("input", applyFilters);
+
+$("searchType").addEventListener("change", applyFilters);
+
+$("searchTransaction").addEventListener(
+  "change",
+  applyFilters
+);
+
+$("listingImages").addEventListener("change", function() {
+  const files = Array.from(this.files || []);
+
+  const maxFiles = 5;
+  const maxSize = 5 * 1024 * 1024;
+
+  if (files.length > maxFiles) {
+    showMessage("حداکثر ۵ تصویر انتخاب کن.");
+    this.value = "";
+    selectedImages = [];
+    return;
+  }
+
+  const invalidFile = files.find(file =>
+    !file.type.startsWith("image/") ||
+    file.size > maxSize
+  );
+
+  if (invalidFile) {
+    showMessage(
+      "هر تصویر باید از نوع عکس و حداکثر ۵ مگابایت باشد."
+    );
+
+    this.value = "";
+    selectedImages = [];
+    return;
+  }
+
+  selectedImages = files;
+});
+
+$("listingForm").addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  const button = $("submitListingButton");
+  const message = $("listingMessage");
+
+  if (!supabaseClient) {
+    message.textContent =
+      "اتصال به پایگاه داده برقرار نیست.";
+
+    return;
+  }
+
+  const title = $("listingTitle").value.trim();
+  const transaction = $("listingTransaction").value;
+  const type = $("listingType").value;
+  const phone = $("listingPhone").value.trim();
+
+  if (!title || !transaction || !type || !phone) {
+    message.textContent =
+      "لطفاً فیلدهای ستاره‌دار را تکمیل کن.";
+
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "در حال ثبت...";
+  message.textContent = "";
+
+  try {
+    const uploadedUrls = [];
+
+    for (const file of selectedImages) {
+      const extension =
+        file.name.split(".").pop().toLowerCase();
+
+      const safeExtension =
+        /^[a-z0-9]+$/.test(extension)
+          ? extension
+          : "jpg";
+
+      const filePath =
+        `${Date.now()}-${crypto.randomUUID()}.${safeExtension}`;
+
+      const { error: uploadError } =
+        await supabaseClient.storage
+          .from("property-images")
+          .upload(filePath, file, {
+            cacheControl: "3600",
+            upsert: false
+          });
+
+      if (uploadError) throw uploadError;
+
+      const { data: publicData } =
+        supabaseClient.storage
+          .from("property-images")
+          .getPublicUrl(filePath);
+
+      uploadedUrls.push(publicData.publicUrl);
+    }
+
+    const rawPrice = $("listingPrice").value;
+    const rawArea = $("listingArea").value;
+    const rawBedrooms = $("listingBedrooms").value;
+
+    const listingData = {
+      title,
+      transaction_type: transaction,
+      property_type: type,
+      price: rawPrice ? Number(rawPrice) : null,
+      area: rawArea ? Number(rawArea) : null,
+      bedrooms: rawBedrooms ? Number(rawBedrooms) : null,
+      address: $("listingAddress").value.trim(),
+      description: $("listingDescription").value.trim(),
+      phone,
+      city: "بجنورد",
+      image_urls: uploadedUrls,
+      image_url: uploadedUrls[0] || null,
+      status: "pending"
+    };
+
+    const { error: insertError } = await supabaseClient
+      .from("properties")
+      .insert(listingData);
+
+    if (insertError) throw insertError;
+
+    message.textContent =
+      "آگهی ثبت شد و پس از تأیید مدیر نمایش داده می‌شود.";
+
+    $("listingForm").reset();
+    selectedImages = [];
+
+    await loadProperties();
+
+    setTimeout(closeListingModal, 1800);
+
+  } catch (error) {
+    console.error("خطا در ثبت آگهی:", error);
+
+    message.textContent =
+      "ثبت آگهی انجام نشد. دسترسی‌های جدول، فضای ذخیره‌سازی و سیاست‌های امنیتی پایگاه داده باید بررسی شوند.";
+  } finally {
+    button.disabled = false;
+    button.textContent = "ثبت آگهی";
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  loadProperties();
+});
+</script>
+
+</body>
+</html>
