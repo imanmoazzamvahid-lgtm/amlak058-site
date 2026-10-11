@@ -336,11 +336,194 @@ input:focus,select:focus,textarea:focus{outline:2px solid #b69a6330;border-color
 /* مراحل ثبت آگهی و نقشه انتخاب مکان */
 .wizard-progress{height:5px;background:#eee;border-radius:20px;overflow:hidden;margin:0 0 14px}.wizard-progress>div{height:100%;width:25%;background:var(--primary);transition:width .2s}.wizard-meta{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:18px;flex-wrap:wrap}.wizard-meta strong{font-size:14px}.wizard-step{display:none}.wizard-step.active{display:block}.wizard-controls{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:20px;padding-top:14px;border-top:1px solid #eee}.wizard-controls .btn{min-width:90px}.wizard-controls #wizardNext{margin-right:auto}#propertyMap{width:100%;height:320px;border:1px solid #ddd;border-radius:10px;background:#f2f2f2;z-index:1}.map-controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.precision-choice{display:flex;gap:20px;flex-wrap:wrap;margin:12px 0}.precision-choice label,.check-grid label,.check-label{display:flex;align-items:center;gap:8px;font-size:13px}.precision-choice input,.check-grid input,.check-label input{width:auto;min-width:auto;accent-color:var(--primary)}.check-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;background:#fafafa;border:1px solid #eee;border-radius:8px;padding:13px}.price-summary{border-radius:8px;background:#faf7f3;border:1px solid #eee2d5;padding:12px;font-size:14px;font-weight:bold}.form-field[hidden],[hidden]{display:none!important}@media(max-width:560px){#propertyMap{height:280px}.check-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.wizard-meta{display:block}.wizard-meta .muted{display:block;margin-top:5px}}
  
+ 
+ 
+/* اصلاح نهایی چیدمان: فاصله روشن بین دستهها و کارتهای آگهی */
+#home.hero.container{
+  margin-top:18px!important;
+  min-height:0!important;
+  padding:34px clamp(16px,3vw,36px)!important;
+  border:1px solid #ece3d7!important;
+  border-radius:22px!important;
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  background:#fff!important;
+  background-image:none!important;
+}
+#home.hero.container::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:0;
+  bottom:0;
+  width:min(45%,470px);
+  height:92%;
+  opacity:.72;
+  pointer-events:none;
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:left bottom;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 360 320%27%3E%3Cg fill=%27none%27 stroke=%27%23b69a63%27 stroke-width=%272.5%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M42 294H318%27/%3E%3Cpath d=%27M94 294V58Q94 48 104 48H252Q262 48 262 58V294%27/%3E%3Cpath d=%27M82 48L178 18L274 48%27/%3E%3Cpath d=%27M112 74H144V101H112zM161 74H194V101H161zM210 74H242V101H210z%27/%3E%3Cpath d=%27M112 119H144V146H112zM161 119H194V146H161zM210 119H242V146H210z%27/%3E%3Cpath d=%27M112 164H144V191H112zM161 164H194V191H161zM210 164H242V191H210z%27/%3E%3Cpath d=%27M112 209H144V236H112zM210 209H242V236H210z%27/%3E%3Cpath d=%27M163 252H194V294H163z%27/%3E%3Cpath d=%27M104 48V294M252 48V294M94 108H262M94 153H262M94 198H262M94 243H262%27/%3E%3C/g%3E%3C/svg%3E");
+}
+#home.hero.container::after{content:none!important;display:none!important}
+#home.hero.container h2{
+  position:relative;z-index:1;
+  max-width:760px;
+  margin:0 0 22px auto!important;
+  font-size:clamp(22px,2.5vw,30px)!important;
+  font-weight:900!important;
+  line-height:1.5!important;
+  color:#2f2926!important;
+}
+#home .search-panel{
+  position:relative;z-index:1;
+  margin-top:0!important;
+  display:grid!important;
+  grid-template-columns:minmax(120px,1fr) minmax(120px,1fr) minmax(140px,1fr) minmax(130px,1fr) minmax(170px,1.35fr) auto!important;
+  gap:10px!important;
+  align-items:center;
+  padding:12px!important;
+  border:1px solid #e8e0d6!important;
+  border-radius:14px!important;
+  background:rgba(255,255,255,.96)!important;
+  box-shadow:0 8px 24px #30271b0a!important;
+}
+#home .search-panel select,#home .search-panel input{min-width:0;width:100%;min-height:46px;margin:0;border-radius:9px!important}
+#home .search-panel .btn{min-width:92px;min-height:46px;white-space:nowrap}
+#categories{margin-top:28px!important}
+#categories .categories{
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:16px!important;
+  border:0!important;
+  padding:0!important;
+  align-items:stretch;
+}
+#categories .category{
+  min-width:0!important;
+  min-height:132px!important;
+  margin:0!important;
+  padding:16px 10px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  border:1px solid #e8e0d6!important;
+  border-radius:15px!important;
+  background:#fff!important;
+  box-shadow:0 4px 16px #30271b08!important;
+}
+#categories .category-icon{margin:0 auto!important}
+#listings{margin-top:34px!important}
+#listings .section-heading{margin-bottom:16px!important;padding-bottom:12px!important}
+#listings .listing-tools{display:flex!important;flex-wrap:wrap!important;gap:10px!important;margin:0 0 16px!important}
+#listings .filter-btn{margin:0!important;padding:8px 15px!important;border-radius:9px!important}
+#listings .advanced-filters{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr)) minmax(150px,1fr) auto!important;gap:10px!important;margin:0 0 18px!important;padding:14px!important;border-radius:13px!important}
+#propertyList.property-grid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:18px!important;
+  border:0!important;
+  align-items:stretch;
+}
+#propertyList .property-card{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  gap:0!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:1px solid #e8e0d6!important;
+  border-radius:15px!important;
+  background:#fff!important;
+  overflow:hidden!important;
+  box-shadow:0 5px 20px #30271b0a!important;
+  transform:none!important;
+}
+#propertyList .property-card:hover{box-shadow:0 11px 26px #30271b14!important;border-color:#d8c8ac!important}
+#propertyList .property-image{
+  position:relative!important;
+  order:0!important;
+  flex:0 0 auto!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  aspect-ratio:4/3!important;
+  border-radius:0!important;
+  display:flex!important;
+  flex-direction:row!important;
+  gap:0!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  scroll-snap-type:x mandatory!important;
+  background:#f3f0ea!important;
+}
+#propertyList .property-image img{
+  flex:0 0 100%!important;
+  width:100%!important;
+  min-width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  aspect-ratio:4/3!important;
+  scroll-snap-align:start!important;
+}
+#propertyList .property-info{
+  order:0!important;
+  display:flex!important;
+  flex:1 1 auto!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  min-width:0!important;
+  padding:15px!important;
+  gap:5px!important;
+}
+#propertyList .property-info h3{font-size:15px!important;font-weight:800!important;line-height:1.7!important;margin:0 0 3px!important}
+#propertyList .property-type{align-self:flex-start;margin:0 0 3px!important}
+#propertyList .property-address,#propertyList .property-description{margin:0!important;line-height:1.8!important}
+#propertyList .property-details{display:flex!important;flex-wrap:wrap!important;gap:8px 12px!important;margin:4px 0!important;padding:0 0 8px!important;border-bottom:1px solid #f0ebe4!important}
+#propertyList .property-price{margin:3px 0!important;font-size:15px!important}
+#propertyList .property-actions{display:flex!important;flex-wrap:wrap!important;gap:7px!important;margin-top:8px!important}
+#propertyList .empty{grid-column:1/-1!important;padding:28px!important;border:1px dashed #ddd4c8!important;border-radius:14px!important}
+@media(max-width:1000px){
+  #home .search-panel{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  #home .search-panel input{grid-column:auto!important}
+  #home .search-panel button{grid-column:auto!important}
+  #propertyList.property-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
+  #categories .categories{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}
+  #listings .advanced-filters{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:600px){
+  #home.hero.container{margin-top:12px!important;padding:24px 14px!important;border-radius:16px!important}
+  #home.hero.container::before{width:78%;height:50%;opacity:.42}
+  #home.hero.container h2{font-size:22px!important;margin-bottom:16px!important}
+  #home .search-panel{grid-template-columns:1fr!important;gap:8px!important;padding:10px!important}
+  #home .search-panel select,#home .search-panel input,#home .search-panel .btn{grid-column:auto!important;width:100%;min-height:44px}
+  #categories{margin-top:24px!important}
+  #categories .categories{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+  #categories .category{min-height:112px!important;padding:10px 7px!important;border-radius:12px!important}
+  #categories .category-icon{width:55px!important;min-height:52px!important;height:52px!important}
+  #categories .category-icon svg{width:48px!important;height:48px!important}
+  #categories .category strong{font-size:12px!important;text-align:center;line-height:1.6}
+  #listings{margin-top:27px!important}
+  #listings .listing-tools{gap:7px!important}
+  #listings .advanced-filters{grid-template-columns:1fr 1fr!important;gap:8px!important;padding:10px!important}
+  #propertyList.property-grid{grid-template-columns:1fr!important;gap:13px!important}
+  #propertyList .property-image{aspect-ratio:16/10!important}
+  #propertyList .property-info{padding:12px!important}
+  #propertyList .property-info h3{font-size:14px!important}
+}
+ 
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 </head><body>
 <header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک بجنورد"><svg viewBox="0 0 48 48" role="img" aria-hidden="true" style="width:29px;height:29px;display:block"><path d="M6 22 24 7l18 15" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 20v21h24V20M20 41V28h8v13" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/></svg></div><div><h1>املاک بجنورد</h1><small>نیازمندیهای املاک بجنورد</small></div></a><nav><a href="#home">صفحه اصلی</a><a href="#categories">دستهبندیها</a><a href="#listings">آگهیها</a></nav><div style="display:flex;gap:7px;align-items:center"><button class="btn btn-outline" id="accountButton" onclick="openAuthModal()">ورود / ثبتنام</button><button class="btn btn-outline" onclick="openInbox()">پیامها</button><button class="btn btn-outline" onclick="openAdminPanel()">مدیریت</button><button class="btn btn-primary" onclick="openModal()">+ ثبت آگهی رایگان</button></div></div></header>
-<main><section class="hero container" id="home"><h2>جستجو در آگهیهای جدید املاک بجنورد</h2><p>خرید و فروش، رهن و اجاره؛ مستقیم در بجنورد</p><div class="search-panel"><select id="searchCity"><option value="">همه شهرهای خراسان شمالی</option><option>بجنورد</option><option>شیروان</option><option>اسفراین</option><option>فاروج</option><option>آشخانه</option><option>جاجرم</option><option>گرمه</option><option>راز</option><option>صفیآباد</option></select><select id="searchType"><option value="">همه انواع ملک</option><option value="آپارتمان">آپارتمان</option><option value="خانه و ویلا">خانه و ویلا</option><option value="زمین">زمین</option><option value="مغازه">مغازه</option><option value="دفتر کار">دفتر کار</option><option value="زمین و ملک کلنگی">زمین و ملک کلنگی</option><option value="مغازه و غرفه">مغازه و غرفه</option><option value="مطب">مطب</option><option value="اتاق اداری">اتاق اداری</option><option value="ویلا و باغ">ویلا و باغ</option><option value="سوئیت و آپارتمان">سوئیت و آپارتمان</option><option value="دفتر کار و فضای آموزشی">دفتر کار و فضای آموزشی</option><option value="ملک صنعتی و کشاورزی">ملک صنعتی و کشاورزی</option><option value="زمین و ملک کلنگی">زمین و ملک کلنگی</option></select><select id="searchMainCategory" aria-label="دسته اصلی"><option value="">همه دستههای اصلی</option><option>اجاره مسکونی</option><option>فروش مسکونی</option><option>فروش دفتر اداری و تجاری</option><option>اجاره دفتر اداری و تجاری</option><option>پروژههای ساختوساز</option><option>اجاره کوتاهمدت</option></select><select id="searchSubCategory" aria-label="زیردسته" disabled><option value="">همه زیردستهها</option></select><input id="searchAddress" placeholder="جستجو در محله یا آدرس"><button class="btn btn-primary" onclick="loadProperties()">جستجو</button></div></section>
+<main><section class="hero container" id="home"><h2>جستجو در املاک بجنورد</h2><div class="search-panel"><select id="searchCity"><option value="">همه شهرهای خراسان شمالی</option><option>بجنورد</option><option>شیروان</option><option>اسفراین</option><option>فاروج</option><option>آشخانه</option><option>جاجرم</option><option>گرمه</option><option>راز</option><option>صفیآباد</option></select><select id="searchType"><option value="">همه انواع ملک</option><option value="آپارتمان">آپارتمان</option><option value="خانه و ویلا">خانه و ویلا</option><option value="زمین">زمین</option><option value="مغازه">مغازه</option><option value="دفتر کار">دفتر کار</option><option value="زمین و ملک کلنگی">زمین و ملک کلنگی</option><option value="مغازه و غرفه">مغازه و غرفه</option><option value="مطب">مطب</option><option value="اتاق اداری">اتاق اداری</option><option value="ویلا و باغ">ویلا و باغ</option><option value="سوئیت و آپارتمان">سوئیت و آپارتمان</option><option value="دفتر کار و فضای آموزشی">دفتر کار و فضای آموزشی</option><option value="ملک صنعتی و کشاورزی">ملک صنعتی و کشاورزی</option><option value="زمین و ملک کلنگی">زمین و ملک کلنگی</option></select><select id="searchMainCategory" aria-label="دسته اصلی"><option value="">همه دستههای اصلی</option><option>اجاره مسکونی</option><option>فروش مسکونی</option><option>فروش دفتر اداری و تجاری</option><option>اجاره دفتر اداری و تجاری</option><option>پروژههای ساختوساز</option><option>اجاره کوتاهمدت</option></select><select id="searchSubCategory" aria-label="زیردسته" disabled><option value="">همه زیردستهها</option></select><input id="searchAddress" placeholder="جستجو در محله یا آدرس"><button class="btn btn-primary" onclick="loadProperties()">جستجو</button></div></section>
 <section class="container section" id="categories"><div class="section-heading"><h2>دستهبندیها</h2></div><div class="categories">
 <div class="category" role="button" tabindex="0" onclick="chooseCategory('آپارتمان')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();chooseCategory('آپارتمان')}"><div class="category-icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M17 55V12a3 3 0 0 1 3-3h24a3 3 0 0 1 3 3v43" fill="#f8e9e9" stroke="#a52d3a" stroke-width="2.5" stroke-linejoin="round"/><path d="M12 55h40" stroke="#a52d3a" stroke-width="2.5" stroke-linecap="round"/><path d="M24 18h6v6h-6zm11 0h6v6h-6zm-11 12h6v6h-6zm11 0h6v6h-6z" fill="#b98a4b"/><path d="M27 55V43h10v12" fill="#fff" stroke="#a52d3a" stroke-width="2"/></svg></div><strong>آپارتمان</strong><small>خرید و اجاره</small></div>
 <div class="category" role="button" tabindex="0" onclick="chooseCategory('خانه و ویلا')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();chooseCategory('خانه و ویلا')}"><div class="category-icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M7 29 31 9l26 20" fill="#f8e9e9" stroke="#a52d3a" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 27v28h36V27" fill="#fbf7ef" stroke="#a52d3a" stroke-width="2.5" stroke-linejoin="round"/><path d="M25 55V38h13v17" fill="#e8d6b8" stroke="#a52d3a" stroke-width="2"/><path d="M18 34h7v7h-7zm21 0h7v7h-7z" fill="#b98a4b"/><path d="M6 56h52" stroke="#b98a4b" stroke-width="2.5" stroke-linecap="round"/></svg></div><strong>خانه و ویلا</strong><small>مسکونی</small></div>
