@@ -703,7 +703,7 @@ header nav{gap:22px!important}
 <div class="modal" id="chatModal"><div class="modal-box"><div class="modal-header"><h2 id="chatTitle">گفتوگوی داخلی</h2><button class="close-btn" onclick="closeChatModal()" aria-label="بستن">×</button></div><div id="chatMessages" style="min-height:120px;max-height:45vh;overflow:auto;background:#fafafa;padding:10px;border-radius:8px"></div><div style="display:flex;gap:8px;margin-top:10px"><input id="chatInput" maxlength="2000" placeholder="پیام خود را بنویسید"><button class="btn btn-primary" onclick="sendChatMessage()">ارسال</button></div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px" id="chatSuggestions"><button class="filter-btn" onclick="useChatSuggestion('سلام، این ملک هنوز موجود است؟')">هنوز موجود است؟</button><button class="filter-btn" onclick="useChatSuggestion('آخرین قیمت چقدر است؟')">آخرین قیمت</button><button class="filter-btn" onclick="useChatSuggestion('امکان بازدید هست؟')">امکان بازدید</button><button class="filter-btn" onclick="useChatSuggestion('آدرس دقیق کجاست؟')">آدرس دقیق</button></div><p id="chatMessage" class="form-message" role="status"></p></div></div>
 <script>
 const SUPABASE_URL='https://lsttrmnxauaviyuipnim.supabase.co';
-const SUPABASE_KEY='sb_publishable_V3ZIfuzEZ4yKUY88lyv_Q_wF6kQAcb';
+const SUPABASE_KEY='sb_publishable_V3ZIfuzEZ4y7KUY88lyv_Q_wF6kQAcb';
 const BUCKET='property-images',MAX_IMAGES=5,MAX_IMAGE_SIZE=5*1024*1024;
 const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 let currentTransaction='',selectedImages=[],selectedVideo=null,activeConversationId=null,activeChatProperty=null,chatRefreshTimer=null;
