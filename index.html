@@ -1207,9 +1207,8 @@ $("listingForm").addEventListener("submit", async function(event) {
           ? extension
           : "jpg";
 
-      const filePath =
-        `${Date.now()}-${crypto.randomUUID()}.${safeExtension}`;
-
+     const filePath =
+  `pending/${Date.now()}-${crypto.randomUUID()}.${safeExtension}`;
       const { error: uploadError } =
         await supabaseClient.storage
           .from("property-images")
