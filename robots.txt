@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://amlak058.ir/sitemap.xml
