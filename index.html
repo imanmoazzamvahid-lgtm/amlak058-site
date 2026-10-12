@@ -640,6 +640,45 @@ header nav{gap:22px!important}
 
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+<style id="site-theme-overrides">
+/* پوسته سبز و روشن صفحه اصلی املاک بجنورد، با حفظ منطق و فرم‌های موجود */
+:root{--primary:#087f50;--dark:#066641;--bg:#f7faf8;--border:#e1e9e4;--text:#142f2a;--muted:#687c74;--gold:#c4a15a;--cream:#f1f8f3}
+body{background:#fff;color:var(--text);font-family:Vazirmatn,Tahoma,Arial,sans-serif}
+header{background:rgba(255,255,255,.97);border-bottom:1px solid #e1ebe5;box-shadow:0 3px 18px #123a2608}
+.brand h1{color:#153d32}.brand-icon{display:grid!important;background:linear-gradient(145deg,#0b9860,#08643f);box-shadow:0 4px 12px #087f5020}
+nav a:hover{color:var(--primary)}
+.btn-primary{background:linear-gradient(135deg,#0a925a,#076840);box-shadow:0 4px 12px #087f5025;color:#fff}
+.btn-primary:hover{background:#065e3b}
+.btn-outline{border-color:#c9ddd1;color:#176b49}
+.hero.container,#home.hero.container{margin-top:0!important;min-height:360px!important;padding:38px max(3%,calc((100% - 1380px)/2)) 32px!important;border:0!important;border-radius:0!important;position:relative!important;isolation:isolate;overflow:hidden;background-color:#eaf6ed!important;background-image:linear-gradient(90deg,rgba(232,247,238,.04) 0%,rgba(242,249,239,.78) 42%,rgba(250,250,235,.94) 100%)!important}
+#home.hero.container:before{content:"";position:absolute;z-index:-1;left:0;bottom:0;width:min(54%,760px);height:100%;opacity:1;background-repeat:no-repeat;background-size:contain;background-position:left bottom;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 390'%3E%3Cdefs%3E%3ClinearGradient id='sky' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop stop-color='%23d5f0e4'/%3E%3Cstop offset='1' stop-color='%23eff5df'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23sky)' d='M0 0h720v390H0z'/%3E%3Cpath fill='%23c7e3d2' d='M0 285L100 205l65 58 105-140 110 120 95-90 120 105 80-80 45 45v167H0z'/%3E%3Cg stroke='%23fff' stroke-width='4' opacity='.8'%3E%3Cpath fill='%230d7867' d='M160 105h100v245H160z'/%3E%3Cpath fill='%23f0b34e' d='M85 170h70v180H85z'/%3E%3Cpath fill='%23e86b52' d='M285 48h94v302h-94z'/%3E%3Cpath fill='%2394c8a0' d='M397 142h88v208h-88z'/%3E%3Cpath fill='%23e6a14b' d='M505 207h72v143h-72z'/%3E%3Cpath fill='%237b72a7' d='M595 177h63v173h-63z'/%3E%3C/g%3E%3Cg fill='%23f8fff9'%3E%3Cpath d='M176 124h19v13h-19zm0 29h19v13h-19zm0 29h19v13h-19zm0 29h19v13h-19zm0 29h19v13h-19zm0 29h19v13h-19zm38-145h19v13h-19zm0 29h19v13h-19zm0 29h19v13h-19zm0 29h19v13h-19zm0 29h19v13h-19zm0 29h19v13h-19zM99 188h13v12H99zm25 0h13v12h-13zm-25 26h13v12H99zm25 0h13v12h-13zm-25 26h13v12H99zm25 0h13v12h-13zM303 69h16v14h-16zm30 0h16v14h-16zm-30 30h16v14h-16zm30 0h16v14h-16zm-30 30h16v14h-16zm30 0h16v14h-16zm-30 30h16v14h-16zm30 0h16v14h-16zm-30 30h16v14h-16zm30 0h16v14h-16zm-30 30h16v14h-16zm30 0h16v14h-16zm-30 30h16v14h-16zm30 0h16v14h-16zm-30 30h16v14h-16zm30 0h16v14h-16zM415 160h15v12h-15zm28 0h15v12h-15zm-28 25h15v12h-15zm28 0h15v12h-15zm-28 25h15v12h-15zm28 0h15v12h-15zm-28 25h15v12h-15zm28 0h15v12h-15zm-28 25h15v12h-15zm28 0h15v12h-15zM521 224h13v11h-13zm25 0h13v11h-13zm-25 23h13v11h-13zm25 0h13v11h-13zm-25 23h13v11h-13zm25 0h13v11h-13z'/%3E%3C/g%3E%3Cpath fill='%23087f50' d='M0 350h720v40H0z' opacity='.2'/%3E%3C/svg%3E")}
+.hero h2{max-width:760px;font-size:clamp(27px,3.3vw,48px);font-weight:900;line-height:1.55;letter-spacing:-.5px;color:#183a30;text-align:right}
+.hero h2 span,.hero h2 em{color:#087f50}
+.hero>p{max-width:720px;font-size:15px;color:#47665a;font-weight:500;margin:6px 0 22px;text-align:right}
+.search-panel{position:relative;z-index:2;margin-top:20px;background:rgba(255,255,255,.97);border:1px solid #dce9e0;border-radius:15px;padding:10px;box-shadow:0 12px 30px #244f3515;grid-template-columns:1.15fr 1fr 1fr auto}
+.search-panel input,.search-panel select{border:1px solid #e5ece7;border-radius:10px;min-height:52px;font-size:13px;color:#35564a}
+.search-panel .btn{min-height:52px;min-width:120px;border-radius:10px}
+.section-heading h2{color:#173c30}
+.section-heading h2:after{background:#0b9460}
+#categories .category{border-color:#e2ece5;background:linear-gradient(145deg,#fff,#f5faf6);box-shadow:0 5px 18px #17412c08!important}
+#categories .category:hover{border-color:#9dcbb0;background:#f7fcf8}
+#categories .category-icon{background:#eef7f0!important}
+#categories .category strong{color:#28483a}
+.filter-btn.active{color:#087f50;border-color:#91c7a6;background:#eef8f0}
+.property-card{border-color:#e1eae4;box-shadow:0 5px 18px #193c2a0a}
+.property-card:hover{border-color:#a8d0b5;box-shadow:0 12px 26px #193c2a12}
+.property-price{color:#087f50}
+.property-type{background:#eef7f0;color:#18784d;border-color:#d8ecde}
+.favorite-btn.saved{color:#087f50;background:#eff9f1;border-color:#a7d7b5}
+.about{border-color:#e1ebe4;background:linear-gradient(140deg,#fff,#f5faf6)}
+footer{border-color:#e1ebe4;background:#f8fbf8}
+.mobile-bottom-nav{border-color:#dfeae2;background:rgba(255,255,255,.97)}
+.mobile-nav-item.active{color:#087f50}
+.mobile-nav-item.post{background:linear-gradient(135deg,#0a925a,#076840);color:#fff}
+@media(max-width:900px){.hero.container,#home.hero.container{min-height:330px!important;padding:28px 4%!important}.search-panel{grid-template-columns:1fr 1fr}.search-panel input{grid-column:1/-1}.search-panel .btn{min-width:0}}
+@media(max-width:600px){.hero.container,#home.hero.container{min-height:0!important;padding:24px 4% 20px!important;background-image:linear-gradient(90deg,rgba(234,247,238,.45),rgba(248,251,238,.9))!important}.hero.container:before,#home.hero.container:before{width:78%;height:70%;opacity:.28}.hero h2{font-size:27px;line-height:1.6}.hero>p{font-size:12px;margin-bottom:14px}.search-panel{grid-template-columns:1fr 1fr;gap:7px}.search-panel input{grid-column:1/-1}.search-panel .btn{grid-column:1/-1}.property-price{color:#087f50}}
+</style>
 </head><body>
 <header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک بجنورد"><svg viewBox="0 0 48 48" role="img" aria-hidden="true" style="width:29px;height:29px;display:block"><path d="M6 22 24 7l18 15" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 20v21h24V20M20 41V28h8v13" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/></svg></div><div><h1>املاک بجنورد</h1><small>نیازمندیهای املاک بجنورد</small></div></a><nav><a href="#home">صفحه اصلی</a><a href="#categories">دستهبندیها</a><a href="#listings">آگهیها</a></nav><div style="display:flex;gap:7px;align-items:center"><button class="btn btn-outline" id="accountButton" onclick="openAuthModal()">ورود / ثبتنام</button><button class="btn btn-outline" onclick="openInbox()">پیامها</button><button class="btn btn-outline" onclick="openAdminPanel()">مدیریت</button><button class="btn btn-primary" onclick="openModal()">+ ثبت آگهی رایگان</button></div></div></header>
 <main><section class="hero container" id="home"><h2>جستجو در املاک بجنورد</h2><div class="search-panel"><select id="searchCity"><option value="">همه شهرهای خراسان شمالی</option><option>بجنورد</option><option>شیروان</option><option>اسفراین</option><option>فاروج</option><option>آشخانه</option><option>جاجرم</option><option>گرمه</option><option>راز</option><option>صفیآباد</option></select><select id="searchType"><option value="">همه انواع ملک</option><option value="آپارتمان">آپارتمان</option><option value="خانه و ویلا">خانه و ویلا</option><option value="زمین">زمین</option><option value="مغازه">مغازه</option><option value="دفتر کار">دفتر کار</option><option value="زمین و ملک کلنگی">زمین و ملک کلنگی</option><option value="مغازه و غرفه">مغازه و غرفه</option><option value="مطب">مطب</option><option value="اتاق اداری">اتاق اداری</option><option value="ویلا و باغ">ویلا و باغ</option><option value="سوئیت و آپارتمان">سوئیت و آپارتمان</option><option value="دفتر کار و فضای آموزشی">دفتر کار و فضای آموزشی</option><option value="ملک صنعتی و کشاورزی">ملک صنعتی و کشاورزی</option><option value="زمین و ملک کلنگی">زمین و ملک کلنگی</option></select><select id="searchMainCategory" aria-label="دسته اصلی"><option value="">همه دستههای اصلی</option><option>اجاره مسکونی</option><option>فروش مسکونی</option><option>فروش دفتر اداری و تجاری</option><option>اجاره دفتر اداری و تجاری</option><option>پروژههای ساختوساز</option><option>اجاره کوتاهمدت</option></select><select id="searchSubCategory" aria-label="زیردسته" disabled><option value="">همه زیردستهها</option></select><input id="searchAddress" placeholder="جستجو در محله یا آدرس"><button class="btn btn-primary" onclick="loadProperties()">جستجو</button></div></section>
@@ -992,41 +1031,3 @@ async function setAdminPropertyStatus(id,status){try{const {error}=await db.from
 
 renderSampleListings();loadPublicSiteSettings();loadProperties();refreshAuthState();
 </script></body></html>
-
-
-/* پوسته سبز و روشن صفحه اصلی املاک بجنورد، با حفظ منطق و فرم‌های موجود */
-:root{--primary:#087f50;--dark:#066641;--bg:#f7faf8;--border:#e1e9e4;--text:#142f2a;--muted:#687c74;--gold:#c4a15a;--cream:#f1f8f3}
-body{background:#fff;color:var(--text);font-family:Vazirmatn,Tahoma,Arial,sans-serif}
-header{background:rgba(255,255,255,.97);border-bottom:1px solid #e1ebe5;box-shadow:0 3px 18px #123a2608}
-.brand h1{color:#153d32}.brand-icon{display:grid!important;background:linear-gradient(145deg,#0b9860,#08643f);box-shadow:0 4px 12px #087f5020}
-nav a:hover{color:var(--primary)}
-.btn-primary{background:linear-gradient(135deg,#0a925a,#076840);box-shadow:0 4px 12px #087f5025;color:#fff}
-.btn-primary:hover{background:#065e3b}
-.btn-outline{border-color:#c9ddd1;color:#176b49}
-.hero.container,#home.hero.container{margin-top:0!important;min-height:360px!important;padding:38px max(3%,calc((100% - 1380px)/2)) 32px!important;border:0!important;border-radius:0!important;position:relative!important;isolation:isolate;overflow:hidden;background-color:#eaf6ed!important;background-image:linear-gradient(90deg,rgba(232,247,238,.04) 0%,rgba(242,249,239,.78) 42%,rgba(250,250,235,.94) 100%)!important}
-#home.hero.container:before{content:"";position:absolute;z-index:-1;left:0;bottom:0;width:min(54%,760px);height:100%;opacity:1;background-repeat:no-repeat;background-size:contain;background-position:left bottom;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 390'%3E%3Cdefs%3E%3ClinearGradient id='sky' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop stop-color='%23d5f0e4'/%3E%3Cstop offset='1' stop-color='%23eff5df'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23sky)' d='M0 0h720v390H0z'/%3E%3Cpath fill='%23c7e3d2' d='M0 285L100 205l65 58 105-140 110 120 95-90 120 105 80-80 45 45v167H0z'/%3E%3Cg stroke='%23fff' stroke-width='4' opacity='.8'%3E%3Cpath fill='%230d7867' d='M160 105h100v245H160z'/%3E%3Cpath fill='%23f0b34e' d='M85 170h70v180H85z'/%3E%3Cpath fill='%23e86b52' d='M285 48h94v302h-94z'/%3E%3Cpath fill='%2394c8a0' d='M397 142h88v208h-88z'/%3E%3Cpath fill='%23e6a14b' d='M505 207h72v143h-72z'/%3E%3Cpath fill='%237b72a7' d='M595 177h63v173h-63z'/%3E%3C/g%3E%3Cg fill='%23f8fff9'%3E%3Cpath d='M176 124h19v13h-19zm0 29h19v13h-19zm0 29h19v13h-19zm0 29h19v13h-19zm0 29h19v13h-19zm0 29h19v13h-19zm38-145h19v13h-19zm0 29h19v13h-19zm0 29h19v13h-19zm0 29h19v13h-19zm0 29h19v13h-19zm0 29h19v13h-19zM99 188h13v12H99zm25 0h13v12h-13zm-25 26h13v12H99zm25 0h13v12h-13zm-25 26h13v12H99zm25 0h13v12h-13zM303 69h16v14h-16zm30 0h16v14h-16zm-30 30h16v14h-16zm30 0h16v14h-16zm-30 30h16v14h-16zm30 0h16v14h-16zm-30 30h16v14h-16zm30 0h16v14h-16zm-30 30h16v14h-16zm30 0h16v14h-16zm-30 30h16v14h-16zm30 0h16v14h-16zm-30 30h16v14h-16zm30 0h16v14h-16zm-30 30h16v14h-16zm30 0h16v14h-16zM415 160h15v12h-15zm28 0h15v12h-15zm-28 25h15v12h-15zm28 0h15v12h-15zm-28 25h15v12h-15zm28 0h15v12h-15zm-28 25h15v12h-15zm28 0h15v12h-15zm-28 25h15v12h-15zm28 0h15v12h-15zM521 224h13v11h-13zm25 0h13v11h-13zm-25 23h13v11h-13zm25 0h13v11h-13zm-25 23h13v11h-13zm25 0h13v11h-13z'/%3E%3C/g%3E%3Cpath fill='%23087f50' d='M0 350h720v40H0z' opacity='.2'/%3E%3C/svg%3E")}
-.hero h2{max-width:760px;font-size:clamp(27px,3.3vw,48px);font-weight:900;line-height:1.55;letter-spacing:-.5px;color:#183a30;text-align:right}
-.hero h2 span,.hero h2 em{color:#087f50}
-.hero>p{max-width:720px;font-size:15px;color:#47665a;font-weight:500;margin:6px 0 22px;text-align:right}
-.search-panel{position:relative;z-index:2;margin-top:20px;background:rgba(255,255,255,.97);border:1px solid #dce9e0;border-radius:15px;padding:10px;box-shadow:0 12px 30px #244f3515;grid-template-columns:1.15fr 1fr 1fr auto}
-.search-panel input,.search-panel select{border:1px solid #e5ece7;border-radius:10px;min-height:52px;font-size:13px;color:#35564a}
-.search-panel .btn{min-height:52px;min-width:120px;border-radius:10px}
-.section-heading h2{color:#173c30}
-.section-heading h2:after{background:#0b9460}
-#categories .category{border-color:#e2ece5;background:linear-gradient(145deg,#fff,#f5faf6);box-shadow:0 5px 18px #17412c08!important}
-#categories .category:hover{border-color:#9dcbb0;background:#f7fcf8}
-#categories .category-icon{background:#eef7f0!important}
-#categories .category strong{color:#28483a}
-.filter-btn.active{color:#087f50;border-color:#91c7a6;background:#eef8f0}
-.property-card{border-color:#e1eae4;box-shadow:0 5px 18px #193c2a0a}
-.property-card:hover{border-color:#a8d0b5;box-shadow:0 12px 26px #193c2a12}
-.property-price{color:#087f50}
-.property-type{background:#eef7f0;color:#18784d;border-color:#d8ecde}
-.favorite-btn.saved{color:#087f50;background:#eff9f1;border-color:#a7d7b5}
-.about{border-color:#e1ebe4;background:linear-gradient(140deg,#fff,#f5faf6)}
-footer{border-color:#e1ebe4;background:#f8fbf8}
-.mobile-bottom-nav{border-color:#dfeae2;background:rgba(255,255,255,.97)}
-.mobile-nav-item.active{color:#087f50}
-.mobile-nav-item.post{background:linear-gradient(135deg,#0a925a,#076840);color:#fff}
-@media(max-width:900px){.hero.container,#home.hero.container{min-height:330px!important;padding:28px 4%!important}.search-panel{grid-template-columns:1fr 1fr}.search-panel input{grid-column:1/-1}.search-panel .btn{min-width:0}}
-@media(max-width:600px){.hero.container,#home.hero.container{min-height:0!important;padding:24px 4% 20px!important;background-image:linear-gradient(90deg,rgba(234,247,238,.45),rgba(248,251,238,.9))!important}.hero.container:before,#home.hero.container:before{width:78%;height:70%;opacity:.28}.hero h2{font-size:27px;line-height:1.6}.hero>p{font-size:12px;margin-bottom:14px}.search-panel{grid-template-columns:1fr 1fr;gap:7px}.search-panel input{grid-column:1/-1}.search-panel .btn{grid-column:1/-1}.property-price{color:#087f50}}
