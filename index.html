@@ -1897,10 +1897,14 @@ async function makeSignedImage(path){
   if(!path || typeof path !== 'string') return '';
   const value=path.trim();
   if(!value) return '';
-  // Support legacy rows that stored a full URL instead of a Storage path.
-  if(/^https?:\/\//i.test(value) || /^data:image\//i.test(value)) return value;
-  // Some older rows may have the bucket name included in the saved path.
-  const objectPath=value.replace(/^\/?property-images\//,'').replace(/^\//,'');
+  if(/^data:image\//i.test(value)) return value;
+
+  // Convert legacy public/signed URLs from this private bucket back to an object path.
+  const ownStorageUrl=value.match(/^https?:\/\/[^/]+\/storage\/v1\/object\/(?:public|sign)\/property-images\/([^?#]+)/i);
+  let objectPath=ownStorageUrl ? decodeURIComponent(ownStorageUrl[1]) : value;
+  // Preserve external image URLs; only this site's property-images bucket requires signing.
+  if(!ownStorageUrl && /^https?:\/\//i.test(value)) return value;
+  objectPath=objectPath.replace(/^\/?property-images\//,'').replace(/^\//,'');
   try {
     const {data,error}=await db.storage.from(BUCKET).createSignedUrl(objectPath,3600);
     if(!error && data?.signedUrl) return data.signedUrl;
@@ -1908,7 +1912,6 @@ async function makeSignedImage(path){
   } catch(e) {
     console.warn('Signed property media URL failed:', e?.message || e);
   }
-  // property-images is private; never fall back to a public URL.
   return '';
 }
 function resetFilters(){['searchCity','searchType','searchAddress','minPrice','maxPrice','minArea','maxArea','searchMainCategory'].forEach(id=>document.getElementById(id).value='');fillSubcategorySelect(searchMainCategory,searchSubCategory);document.getElementById('sortProperties').value='newest';currentTransaction='';document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.transaction===''));loadProperties();}
