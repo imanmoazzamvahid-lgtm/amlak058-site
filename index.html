@@ -2103,6 +2103,13 @@ renderSampleListings();loadPublicSiteSettings();loadProperties();refreshAuthStat
   }
   function showStep(n) {
     n = Math.max(0, Math.min(3, Number(n) || 0));
+    /* Keep the application's real wizard state in sync with the visible step. */
+    try {
+      if (typeof currentWizardStep !== 'undefined') currentWizardStep = n;
+      if (typeof window.wizardGoTo === 'function') window.wizardGoTo(n);
+    } catch (e) {
+      console.error('Wizard step sync failed:', e);
+    }
     document.querySelectorAll('.wizard-step').forEach(function (el) {
       el.classList.toggle('active', Number(el.getAttribute('data-step')) === n);
     });
