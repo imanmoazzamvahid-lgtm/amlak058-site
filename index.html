@@ -1607,6 +1607,19 @@ header .brand h1 .brand-number{font-size:1.16em!important;font-weight:1000!impor
 @media(max-width:650px){header .header-inner{gap:8px!important}header .brand{gap:7px!important}header .brand-icon{width:38px!important;height:38px!important;min-width:38px!important}header .brand-icon svg{width:33px!important;height:33px!important}header .brand h1{font-size:17px!important;white-space:nowrap!important}header #accountButton{padding-inline:8px!important;font-size:11px!important}header .header-actions{gap:6px!important}}
 </style>
 
+
+<style id="top-navigation-brand-cleanup">
+/* حذف لینک‌های خانه و جست‌وجو از نوار بالای سایت */
+header nav a[href="#home"],
+header nav a[href="#search"]{display:none!important}
+/* نام اصلی سامانه باید «املاک ۰۵۸» و کاملاً پررنگ دیده شود */
+header .brand h1{font-size:24px!important;font-weight:1000!important;letter-spacing:-.7px!important;white-space:nowrap!important;color:#075d42!important}
+header .brand h1 .brand-number{font-size:1.18em!important;font-weight:1000!important;color:#075d42!important;letter-spacing:-.8px!important}
+@media(max-width:650px){
+ header .brand h1{font-size:19px!important;font-weight:1000!important}
+ header .brand h1 .brand-number{font-size:1.18em!important;font-weight:1000!important}
+}
+</style>
 </head><body>
 <a class="post-corner-cta" href="#" onclick="openModal();return false;" aria-label="ثبت آگهی رایگان">＋ ملک داری؟ ثبت کن</a>
 <header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک ۰۵۸"><svg viewBox="0 0 64 64" role="img" aria-hidden="true" style="width:33px;height:33px;display:block"><circle cx="32" cy="32" r="29" fill="none" stroke="#d8b46a" stroke-width="2.5"/><path d="M9 32 32 13l23 19" fill="none" stroke="#176b50" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 30v21h32V30M27 51V38h10v13" fill="none" stroke="#176b50" stroke-width="3.5" stroke-linejoin="round"/><rect x="26" y="23" width="4" height="4" fill="#d8b46a"/><rect x="34" y="23" width="4" height="4" fill="#d8b46a"/></svg></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>بازار آنلاین ملک بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
