@@ -2089,57 +2089,45 @@ openAdminPanel=async function(){await savedOpenAdminPanelForRequests();const {da
 renderSampleListings();loadPublicSiteSettings();loadProperties();refreshAuthState();
 </script>
 <script>
-/* Resilient wizard navigation: never let field validation trap the user on a step. */
+/* Direct, validation-independent navigation for the four-step listing form. */
 (function () {
-  function activeStep() {
+  var titles = [
+    ['مرحله ۱ از ۴: دسته آگهی','دسته و زیردسته را انتخاب کن.'],
+    ['مرحله ۲ از ۴: موقعیت ملک','شهر و آدرس ملک را وارد کن.'],
+    ['مرحله ۳ از ۴: ویژگیها و تصاویر','ویژگیهای ملک و تصاویر را وارد کن.'],
+    ['مرحله ۴ از ۴: قیمت و تماس','قیمت و اطلاعات تماس را بررسی کن.']
+  ];
+  function currentStep() {
     var active = document.querySelector('.wizard-step.active');
     return active ? Number(active.getAttribute('data-step') || 0) : 0;
   }
   function showStep(n) {
-    n = Math.max(0, Math.min(3, n));
-    try {
-      if (typeof wizardGoTo === 'function') {
-        wizardGoTo(n);
-        if (activeStep() === n) return;
-      }
-    } catch (e) {
-      console.error('Wizard fallback navigation:', e);
-    }
-    var steps = document.querySelectorAll('.wizard-step');
-    steps.forEach(function (el) {
+    n = Math.max(0, Math.min(3, Number(n) || 0));
+    document.querySelectorAll('.wizard-step').forEach(function (el) {
       el.classList.toggle('active', Number(el.getAttribute('data-step')) === n);
     });
-    var titles = [
-      ['مرحله ۱ از ۴: دسته آگهی','دسته و زیردسته را انتخاب کن.'],
-      ['مرحله ۲ از ۴: موقعیت ملک','شهر و آدرس ملک را وارد کن.'],
-      ['مرحله ۳ از ۴: ویژگیها و تصاویر','ویژگیهای ملک و تصاویر را وارد کن.'],
-      ['مرحله ۴ از ۴: قیمت و تماس','قیمت و اطلاعات تماس را بررسی کن.']
-    ];
-    var title = document.getElementById('wizardStepTitle');
-    var hint = document.getElementById('wizardStepHint');
-    var counter = document.getElementById('wizardCounter');
-    var fill = document.getElementById('wizardProgressFill');
-    var back = document.getElementById('wizardBack');
-    var next = document.getElementById('wizardNext');
-    var submit = document.getElementById('submitBtn');
-    if (title) title.textContent = titles[n][0];
-    if (hint) hint.textContent = titles[n][1];
-    if (counter) counter.textContent = 'مرحله ' + (n + 1) + ' از ۴';
-    if (fill) fill.style.width = ((n + 1) * 25) + '%';
-    if (back) back.disabled = n === 0;
-    if (next) next.hidden = n === 3;
-    if (submit) submit.hidden = n !== 3;
-    var message = document.getElementById('formMessage');
-    if (message) message.textContent = '';
+    var set = function(id, value) { var el=document.getElementById(id); if(el) el.textContent=value; };
+    set('wizardStepTitle', titles[n][0]);
+    set('wizardStepHint', titles[n][1]);
+    set('wizardCounter', 'مرحله ' + (n + 1) + ' از ۴');
+    var fill=document.getElementById('wizardProgressFill'); if(fill) fill.style.width=((n+1)*25)+'%';
+    var back=document.getElementById('wizardBack'); if(back) back.disabled=(n===0);
+    var next=document.getElementById('wizardNext'); if(next) next.hidden=(n===3);
+    var submit=document.getElementById('submitBtn'); if(submit) submit.hidden=(n!==3);
+    var msg=document.getElementById('formMessage'); if(msg) msg.textContent='';
+    var globalMsg=document.getElementById('publishGlobalMessage'); if(globalMsg) globalMsg.textContent='';
+    if(n===1) setTimeout(function(){ if(window.propertyMap && typeof window.propertyMap.invalidateSize==='function') window.propertyMap.invalidateSize(); },180);
   }
-  window.wizardNext = function () {
-    var n = activeStep();
-    if (n < 3) showStep(n + 1);
-  };
-  window.wizardBack = function () {
-    var n = activeStep();
-    if (n > 0) showStep(n - 1);
-  };
+  window.wizardNext = function () { showStep(currentStep()+1); };
+  window.wizardBack = function () { showStep(currentStep()-1); };
+  document.addEventListener('click', function(event) {
+    var button=event.target && event.target.closest ? event.target.closest('#wizardNext') : null;
+    if(!button) return;
+    event.preventDefault();
+    event.stopPropagation();
+    if(event.stopImmediatePropagation) event.stopImmediatePropagation();
+    showStep(currentStep()+1);
+  }, true);
 })();
 </script>
 
