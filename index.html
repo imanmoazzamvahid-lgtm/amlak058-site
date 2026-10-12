@@ -1595,16 +1595,22 @@ footer{margin-top:52px!important;border-top:1px solid #e7e9e5!important;backgrou
 header .brand h1 .brand-number{font-weight:1000!important;font-size:1.14em!important;letter-spacing:-.8px!important;color:#075d42!important;display:inline-block!important}
 </style>
 
+
+<style id="header-brand-and-spacing-fix">
+header .header-actions{display:flex!important;align-items:center!important;gap:10px!important}
+header #accountButton{white-space:nowrap!important;letter-spacing:0!important;padding-inline:13px!important}
+header .brand{gap:11px!important}
+header .brand-icon{width:44px!important;height:44px!important;min-width:44px!important;border-radius:50%!important;display:grid!important;place-items:center!important;background:#fff!important;border:1px solid #d8b46a!important;box-shadow:0 2px 8px #075d4212!important}
+header .brand-icon svg{width:38px!important;height:38px!important}
+header .brand h1{font-size:23px!important;font-weight:1000!important;letter-spacing:-.6px!important;color:#075d42!important}
+header .brand h1 .brand-number{font-size:1.16em!important;font-weight:1000!important;color:#075d42!important}
+@media(max-width:650px){header .header-inner{gap:8px!important}header .brand{gap:7px!important}header .brand-icon{width:38px!important;height:38px!important;min-width:38px!important}header .brand-icon svg{width:33px!important;height:33px!important}header .brand h1{font-size:17px!important;white-space:nowrap!important}header #accountButton{padding-inline:8px!important;font-size:11px!important}header .header-actions{gap:6px!important}}
+</style>
+
 </head><body>
 <a class="post-corner-cta" href="#" onclick="openModal();return false;" aria-label="ثبت آگهی رایگان">＋ ملک داری؟ ثبت کن</a>
 <header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک ۰۵۸"><svg viewBox="0 0 64 64" role="img" aria-hidden="true" style="width:33px;height:33px;display:block"><circle cx="32" cy="32" r="29" fill="none" stroke="#d8b46a" stroke-width="2.5"/><path d="M9 32 32 13l23 19" fill="none" stroke="#176b50" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 30v21h32V30M27 51V38h10v13" fill="none" stroke="#176b50" stroke-width="3.5" stroke-linejoin="round"/><rect x="26" y="23" width="4" height="4" fill="#d8b46a"/><rect x="34" y="23" width="4" height="4" fill="#d8b46a"/></svg></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>بازار آنلاین ملک بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
-  <details class="header-more-menu"><summary>بیشتر</summary><div class="header-more-panel">
-    <button type="button" onclick="openRoleChooser()">تغییر نقش</button>
-    <button type="button" onclick="mobileNavMyProperties()">آگهی‌های من</button>
-    <button type="button" onclick="openInbox()">پیام‌ها</button>
-    <button type="button" onclick="openAdminPanel()">مدیریت</button>
-  </div></details>
-  <button class="btn btn-outline" id="accountButton" onclick="openAuthModal()">ورود / ثبتنام</button>
+  <button class="btn btn-outline" id="accountButton" onclick="openAuthModal()">ورود / ثبت‌نام</button>
   <button class="btn btn-primary" onclick="openModal()">+ ثبت آگهی رایگان</button>
 </div></div></div></header>
 <main><section class="request-hero container" id="home">
@@ -2059,7 +2065,7 @@ let currentOtpPhone='';
 function setAuthMode(mode){const phoneMode=mode!=='email';document.getElementById('authPhonePanel').hidden=!phoneMode;document.getElementById('authEmailPanel').hidden=phoneMode;document.getElementById('authModePhone').className='btn '+(phoneMode?'btn-primary':'btn-outline');document.getElementById('authModeEmail').className='btn '+(!phoneMode?'btn-primary':'btn-outline');document.getElementById('authIntro').textContent=phoneMode?'شماره موبایل را وارد کنید تا کد یکبارمصرف پیامک شود.':'ایمیل را وارد کنید تا لینک امن ورود برایتان ارسال شود.';const message=document.getElementById('authMessage');message.textContent='';message.style.color=''}
 function openAuthModal(){document.getElementById('authModal').style.display='block';setAuthMode('phone');refreshAuthState()}
 function closeAuthModal(){document.getElementById('authModal').style.display='none'}
-async function refreshAuthState(){try{const {data:{user}}=await db.auth.getUser();const btn=document.getElementById('accountButton');if(btn)btn.textContent=user?'حساب من':'ورود / ثبتنام';if(user){const message=document.getElementById('authMessage');message.style.color='green';message.textContent='وارد شدهاید: '+(user.phone||user.email||'حساب کاربری تأییدشده')}}catch(e){console.warn('بررسی وضعیت ورود انجام نشد:',e)}}
+async function refreshAuthState(){try{const {data:{user}}=await db.auth.getUser();const btn=document.getElementById('accountButton');if(btn)btn.textContent=user?'حساب من':'ورود / ثبت‌نام';if(user){const message=document.getElementById('authMessage');message.style.color='green';message.textContent='وارد شدهاید: '+(user.phone||user.email||'حساب کاربری تأییدشده')}}catch(e){console.warn('بررسی وضعیت ورود انجام نشد:',e)}}
 function normalizeAuthPhone(value){let n=normalizeIranPhone(value).replace(/\D/g,'');if(!/^989\d{9}$/.test(n))throw new Error('شماره موبایل ایران را به شکل 09123456789 وارد کنید.');return '+'+n}
 async function sendPhoneOtp(){const message=document.getElementById('authMessage'),button=document.getElementById('authPhoneSend'),resend=document.getElementById('authPhoneResend');button.disabled=true;resend.disabled=true;try{const phone=normalizeAuthPhone(document.getElementById('authPhone').value);const {error}=await db.auth.signInWithOtp({phone,options:{channel:'sms'}});if(error)throw error;currentOtpPhone=phone;document.getElementById('authOtpPanel').hidden=false;document.getElementById('authOtp').value='';message.style.color='green';message.textContent='کد یکبارمصرف به '+phone+' پیامک شد. کد را وارد کنید تا وارد شوید.';document.getElementById('authOtp').focus()}catch(e){message.style.color='#b00020';message.textContent='ارسال کد انجام نشد: '+(e.message||'خطای نامشخص')+'. اگر تنظیم پیامک Supabase فعال نیست، ابتدا آن را پیکربندی کنید.'}finally{button.disabled=false;resend.disabled=false}}
 async function verifyPhoneOtp(){const message=document.getElementById('authMessage'),button=document.getElementById('authPhoneVerify');button.disabled=true;try{const phone=normalizeAuthPhone(document.getElementById('authPhone').value);if(!currentOtpPhone||phone!==currentOtpPhone)throw new Error('شماره تغییر کرده است؛ ابتدا برای همین شماره کد جدید بگیرید.');const token=String(document.getElementById('authOtp').value||'').replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g,d=>String(d.charCodeAt(0)-1632)).replace(/\D/g,'');if(!/^\d{4,8}$/.test(token))throw new Error('کد پیامکشده را درست وارد کنید.');const {data,error}=await db.auth.verifyOtp({phone,token,type:'sms'});if(error)throw error;message.style.color='green';message.textContent='شماره تأیید شد و ورود با موفقیت انجام شد.';currentOtpPhone='';await refreshAuthState()}catch(e){message.style.color='#b00020';message.textContent='تأیید کد انجام نشد: '+(e.message||'کد نامعتبر یا منقضی شده است')}finally{button.disabled=false}}
