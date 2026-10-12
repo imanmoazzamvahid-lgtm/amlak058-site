@@ -1590,11 +1590,14 @@ footer{margin-top:52px!important;border-top:1px solid #e7e9e5!important;backgrou
 .mobile-bottom-nav .mobile-nav-item.post{width:48px!important;min-width:48px!important;height:48px!important;min-height:48px!important;align-self:center!important;justify-self:center!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:0!important;padding:0!important;margin:0!important;border:0!important;border-radius:50%!important;background:#087653!important;color:#fff!important;box-shadow:0 4px 12px #08765330!important}
 .mobile-bottom-nav .mobile-nav-item.post .mobile-nav-icon{display:grid!important;place-items:center!important;width:100%!important;height:100%!important;margin:0!important;padding:0!important;border:0!important;border-radius:50%!important;background:transparent!important;color:#fff!important;font-size:28px!important;line-height:1!important}
 .mobile-bottom-nav .mobile-nav-item.post>span:not(.mobile-nav-icon){display:none!important}
+/* چیدمان سه‌تایی: خانه راست، ثبت آگهی وسط، آگهی‌های من چپ */
+.mobile-bottom-nav{grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:center!important}
+header .brand h1 .brand-number{font-weight:1000!important;font-size:1.14em!important;letter-spacing:-.8px!important;color:#075d42!important;display:inline-block!important}
 </style>
 
 </head><body>
 <a class="post-corner-cta" href="#" onclick="openModal();return false;" aria-label="ثبت آگهی رایگان">＋ ملک داری؟ ثبت کن</a>
-<header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک ۰۵۸"><svg viewBox="0 0 64 64" role="img" aria-hidden="true" style="width:33px;height:33px;display:block"><circle cx="32" cy="32" r="29" fill="none" stroke="#d8b46a" stroke-width="2.5"/><path d="M9 32 32 13l23 19" fill="none" stroke="#176b50" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 30v21h32V30M27 51V38h10v13" fill="none" stroke="#176b50" stroke-width="3.5" stroke-linejoin="round"/><rect x="26" y="23" width="4" height="4" fill="#d8b46a"/><rect x="34" y="23" width="4" height="4" fill="#d8b46a"/></svg></div><div><h1>املاک ۰۵۸</h1><small>بازار آنلاین ملک بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
+<header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک ۰۵۸"><svg viewBox="0 0 64 64" role="img" aria-hidden="true" style="width:33px;height:33px;display:block"><circle cx="32" cy="32" r="29" fill="none" stroke="#d8b46a" stroke-width="2.5"/><path d="M9 32 32 13l23 19" fill="none" stroke="#176b50" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 30v21h32V30M27 51V38h10v13" fill="none" stroke="#176b50" stroke-width="3.5" stroke-linejoin="round"/><rect x="26" y="23" width="4" height="4" fill="#d8b46a"/><rect x="34" y="23" width="4" height="4" fill="#d8b46a"/></svg></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>بازار آنلاین ملک بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
   <details class="header-more-menu"><summary>بیشتر</summary><div class="header-more-panel">
     <button type="button" onclick="openRoleChooser()">تغییر نقش</button>
     <button type="button" onclick="mobileNavMyProperties()">آگهی‌های من</button>
@@ -1639,9 +1642,8 @@ footer{margin-top:52px!important;border-top:1px solid #e7e9e5!important;backgrou
 
 <nav class="mobile-bottom-nav" aria-label="منوی اصلی موبایل">
  <button class="mobile-nav-item active" type="button" onclick="mobileNavHome()"><span class="mobile-nav-icon">⌂</span><span>خانه</span></button>
- <button class="mobile-nav-item" type="button" onclick="mobileNavMyProperties()"><span class="mobile-nav-icon">♙</span><span>آگهی‌های من</span></button>
  <button class="mobile-nav-item post" type="button" onclick="openModal()"><span class="mobile-nav-icon">＋</span><span>ثبت آگهی</span></button>
- <button class="mobile-nav-item" type="button" onclick="openInbox()"><span class="mobile-nav-icon">✉</span><span>پیامها</span></button>
+ <button class="mobile-nav-item" type="button" onclick="mobileNavMyProperties()"><span class="mobile-nav-icon">♙</span><span>آگهی‌های من</span></button>
 </nav>
 <div class="modal" id="locationModal"><div class="modal-box location-modal-box"><div class="modal-header"><h2>انتخاب موقعیت</h2><button class="close-btn" onclick="closeLocationModal()" aria-label="بستن">×</button></div><p class="muted" style="margin-bottom:12px">شهر را از فیلتر بالای صفحه انتخاب کن و سپس نام محله یا محدوده را وارد کن.</p><label for="locationSearch" style="display:block;font-size:13px;margin-bottom:5px">محله یا محدوده</label><input id="locationSearch" placeholder="مثلاً فردوسی، قیام، جمهوری"><p class="site-note">ترسیم واقعی محدوده روی نقشه هنوز به اتصال سرویس نقشه و مختصات آگهیها نیاز دارد.</p><div style="display:flex;gap:8px;margin-top:15px"><button class="btn btn-primary" onclick="applyLocation()">اعمال موقعیت</button><button class="btn btn-outline" onclick="clearLocation()">پاککردن</button></div></div></div>
 
@@ -2011,7 +2013,7 @@ function mobileNavHome(){loadProperties();document.getElementById('home').scroll
 async function mobileNavMyProperties(){
  const list=document.getElementById('propertyList'),count=document.getElementById('resultCount');
  document.getElementById('listings').scrollIntoView({behavior:'smooth'});
- document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===1));
+ document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===2));
  list.innerHTML='<div class="empty">در حال دریافت آگهی‌های حساب شما...</div>';
  count.textContent='آگهی‌های من'; try{
   const {data:{user},error:authError}=await db.auth.getUser();
