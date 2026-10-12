@@ -2067,4 +2067,60 @@ const savedOpenAdminPanelForRequests=openAdminPanel;
 openAdminPanel=async function(){await savedOpenAdminPanelForRequests();const {data:{user}}=await db.auth.getUser();if(user){const {data:admin}=await db.from('site_admins').select('user_id').eq('user_id',user.id).maybeSingle();if(admin)loadAdminRequests('pending')}}
 
 renderSampleListings();loadPublicSiteSettings();loadProperties();refreshAuthState();
-</script></body></html>
+</script>
+<script>
+/* Resilient wizard navigation: never let field validation trap the user on a step. */
+(function () {
+  function activeStep() {
+    var active = document.querySelector('.wizard-step.active');
+    return active ? Number(active.getAttribute('data-step') || 0) : 0;
+  }
+  function showStep(n) {
+    n = Math.max(0, Math.min(3, n));
+    try {
+      if (typeof wizardGoTo === 'function') {
+        wizardGoTo(n);
+        if (activeStep() === n) return;
+      }
+    } catch (e) {
+      console.error('Wizard fallback navigation:', e);
+    }
+    var steps = document.querySelectorAll('.wizard-step');
+    steps.forEach(function (el) {
+      el.classList.toggle('active', Number(el.getAttribute('data-step')) === n);
+    });
+    var titles = [
+      ['مرحله ۱ از ۴: دسته آگهی','دسته و زیردسته را انتخاب کن.'],
+      ['مرحله ۲ از ۴: موقعیت ملک','شهر و آدرس ملک را وارد کن.'],
+      ['مرحله ۳ از ۴: ویژگیها و تصاویر','ویژگیهای ملک و تصاویر را وارد کن.'],
+      ['مرحله ۴ از ۴: قیمت و تماس','قیمت و اطلاعات تماس را بررسی کن.']
+    ];
+    var title = document.getElementById('wizardStepTitle');
+    var hint = document.getElementById('wizardStepHint');
+    var counter = document.getElementById('wizardCounter');
+    var fill = document.getElementById('wizardProgressFill');
+    var back = document.getElementById('wizardBack');
+    var next = document.getElementById('wizardNext');
+    var submit = document.getElementById('submitBtn');
+    if (title) title.textContent = titles[n][0];
+    if (hint) hint.textContent = titles[n][1];
+    if (counter) counter.textContent = 'مرحله ' + (n + 1) + ' از ۴';
+    if (fill) fill.style.width = ((n + 1) * 25) + '%';
+    if (back) back.disabled = n === 0;
+    if (next) next.hidden = n === 3;
+    if (submit) submit.hidden = n !== 3;
+    var message = document.getElementById('formMessage');
+    if (message) message.textContent = '';
+  }
+  window.wizardNext = function () {
+    var n = activeStep();
+    if (n < 3) showStep(n + 1);
+  };
+  window.wizardBack = function () {
+    var n = activeStep();
+    if (n > 0) showStep(n - 1);
+  };
+})();
+</script>
+
+</body></html>
