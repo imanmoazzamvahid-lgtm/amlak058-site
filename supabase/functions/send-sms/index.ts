@@ -5,6 +5,11 @@ type SendSmsEvent = {
   sms?: { otp?: string };
 };
 
+type NiazpardazResult = {
+  resultCode?: number | string;
+  batchSmsId?: number | string;
+};
+
 const API_URL = "https://login.niazpardaz.ir/api/v2/RestWebApi/SendBatchSms";
 
 function json(body: Record<string, unknown>, status = 200) {
@@ -39,16 +44,39 @@ async function sendNiazpardazSms(apiKey: string, fromNumber: string, toNumber: s
   });
 
   const bodyText = await response.text();
-  let result: { resultCode?: number | string; batchSmsId?: number | string } = {};
+  const contentType = response.headers.get("content-type") ?? "(missing)";
+  let payload: Record<string, unknown>;
+
   try {
-    result = JSON.parse(bodyText);
+    payload = JSON.parse(bodyText) as Record<string, unknown>;
   } catch {
-    throw new Error("Niazpardaz returned an unreadable response");
+    // Keep the diagnostic short. Never log request credentials or the OTP.
+    const preview = bodyText.replace(/\s+/g, " ").trim().slice(0, 240) || "(empty response body)";
+    throw new Error(
+      `Niazpardaz returned non-JSON response; HTTP ${response.status}; content-type ${contentType}; body preview: ${preview}`,
+    );
   }
 
-  if (!response.ok || Number(result.resultCode) !== 0) {
-    throw new Error("Niazpardaz send failed with HTTP " + response.status + " and resultCode " + String(result.resultCode));
+  if (!response.ok) {
+    throw new Error(`Niazpardaz HTTP ${response.status}; response: ${JSON.stringify(payload).slice(0, 240)}`);
   }
+
+  // The current official SDK wraps results in { success, result, errorMessage }.
+  // Accept the direct result shape too, for compatibility with API variations.
+  if (payload.success === false) {
+    throw new Error(`Niazpardaz API error: ${String(payload.errorMessage ?? "unspecified provider error").slice(0, 200)}`);
+  }
+
+  const result = (payload.result && typeof payload.result === "object"
+    ? payload.result
+    : payload) as NiazpardazResult;
+
+  if (Number(result.resultCode) !== 0) {
+    throw new Error(
+      `Niazpardaz send failed; resultCode ${String(result.resultCode)}; response: ${JSON.stringify(payload).slice(0, 240)}`,
+    );
+  }
+
   return result;
 }
 
