@@ -1820,12 +1820,12 @@ function validateWizardStep(n){const section=document.querySelector('.wizard-ste
  if(n===2){const kind=getCategoryDetails(mainCategoryInput.value,subCategoryInput.value)?.kind||'';let must=[];if(['apartment','office','shop','commercial','shortApartment','shortOffice','project'].includes(kind))must.push('area');if(['villa','land'].includes(kind))must.push('landArea');if(kind==='villa')must.push('buildingArea');if(['apartment','villa','office','shop','commercial'].includes(kind))must.push('yearBuilt');if(['apartment','office','shop','commercial'].includes(kind))must.push('floorNumber');if(['apartment','villa'].includes(kind))must.push('bedrooms');must.push('photosOwn');for(const id of must){const el=document.getElementById(id);if(el&&!el.value){el.reportValidity();return false}}}
  return true}
 function wizardNext(){
- if(currentWizardStep===1&&!document.getElementById('locationLat').value&&!document.getElementById('locationLng').value&&!window.L){
+ if(currentWizardStep===1&&!document.getElementById('locationLat').value&&!document.getElementById('locationLng').value){
   const centers={'بجنورد':[37.475,57.329],'شیروان':[37.396,57.929],'اسفراین':[37.076,57.51],'فاروج':[37.231,58.219],'آشخانه':[37.561,56.926],'جاجرم':[36.95,56.38],'گرمه':[36.99,56.29],'راز':[37.93,57.11],'صفیآباد':[36.7,57.93]};
   const c=centers[document.getElementById('city').value]||defaultMapCenter;
   setPropertyMapPoint(c[0],c[1]);
   const approximate=document.querySelector('input[name="locationPrecision"][value="approximate"]');if(approximate)approximate.checked=true;
-  updateMapStatus('نقشه بارگذاری نشد؛ فعلاً موقعیت حدودی مرکز شهر ثبت شد. برای دقت بیشتر، در صورت فعال‌شدن نقشه نشانگر را جابه‌جا کن.');
+  updateMapStatus('برای ادامه، مرکز شهر به‌عنوان موقعیت حدودی ثبت شد؛ در صورت نیاز بعداً نشانگر را روی محل دقیق تنظیم کن.');
  }
  if(!validateWizardStep(currentWizardStep))return;
  wizardGoTo(currentWizardStep+1);
