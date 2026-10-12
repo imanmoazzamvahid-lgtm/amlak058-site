@@ -1288,57 +1288,131 @@ footer p { color: rgba(255,255,255,.67); }
 @media(max-width:650px){.role-switch-link{font-size:10px;padding:6px 3px}.request-hero{width:calc(100% - 24px);grid-template-columns:1fr;margin-top:13px;padding:23px 17px 19px;border-radius:18px;gap:10px}.request-hero h2{font-size:28px;line-height:1.6;letter-spacing:-.4px}.request-hero-copy>p{font-size:12px;line-height:2;margin-bottom:17px}.hero-eyebrow{font-size:10px;margin-bottom:13px}.request-hero-actions{display:grid;grid-template-columns:1fr;align-items:stretch}.request-hero-actions .btn{width:100%;padding:12px 10px}.hero-points{gap:8px 12px;margin-top:16px;font-size:10px}.hero-visual{max-width:340px;padding:11px 10px 17px;margin-top:0}.visual-request-card{padding:15px;border-radius:14px}.visual-floating-note{left:-2px;bottom:0}.search-section{width:calc(100% - 24px);padding:15px;margin-top:14px;border-radius:14px}.search-section-heading{align-items:start;flex-direction:column;gap:8px}.search-section-heading h2{font-size:17px}.search-section .search-panel{grid-template-columns:1fr 1fr}.search-section .search-panel button{grid-column:1/-1;width:100%}.trust-strip{width:calc(100% - 24px);grid-template-columns:1fr;gap:8px;margin-top:13px}.trust-item{padding:10px 12px}.feature-grid,.steps-grid{grid-template-columns:1fr 1fr;gap:8px}.feature-card{padding:15px 12px;border-radius:12px}.feature-icon{width:36px;height:36px;font-size:19px;margin-bottom:11px}.feature-card h3,.step-card h3{font-size:12px}.feature-card p,.step-card p{font-size:11px}.step-card{padding:15px 12px;min-height:195px}.step-number{font-size:20px;left:10px;top:8px}.step-symbol{width:37px;height:37px;font-size:19px}.comparison-heading{align-items:flex-start;flex-direction:column}.comparison-heading h2{font-size:21px}.comparison-heading .btn{width:100%}.final-cta{width:calc(100% - 24px);flex-direction:column;align-items:stretch;padding:22px 17px;margin-bottom:25px}.final-cta-actions{display:grid;grid-template-columns:1fr 1fr}.role-choice-grid{grid-template-columns:1fr}.role-choice-card{padding:16px}.request-form-grid{grid-template-columns:1fr}.request-form-grid .full{grid-column:auto}.request-modal-box .modal-header h2{font-size:18px}.request-modal-box{margin:6px auto;padding:14px}}
 
 </style>
+<style id="minimal-homepage-cleanup">
+
+/* Minimal homepage: focus on request, search, categories and real listings */
+:root{--primary:#176b5c;--dark:#104f44;--bg:#f7f8f7;--border:#e5e9e6;--text:#25332d;--muted:#78817c}
+.header-inner{min-height:68px;gap:15px}
+header{box-shadow:0 2px 10px #152b2210}
+header .brand-icon{width:39px;height:39px;border-radius:11px}
+header .brand h1{font-size:17px}
+header nav{gap:17px}
+header nav a{font-size:12px;color:#4c5d54}
+.header-actions{display:flex;align-items:center;gap:8px}
+.header-actions .btn{padding:9px 12px;font-size:12px;white-space:nowrap}
+.header-more-menu{position:relative}
+.header-more-menu summary{list-style:none;cursor:pointer;padding:9px 10px;border:1px solid #e1e7e3;border-radius:9px;background:#fff;color:#526258;font-size:12px;white-space:nowrap}
+.header-more-menu summary::-webkit-details-marker{display:none}
+.header-more-menu summary:after{content:"⌄";margin-right:6px;color:#176b5c}
+.header-more-panel{position:absolute;top:calc(100% + 7px);left:0;z-index:100;background:#fff;border:1px solid #e3e9e5;border-radius:11px;padding:6px;min-width:145px;box-shadow:0 10px 28px #152b2218;display:flex;flex-direction:column;gap:2px}
+.header-more-panel button{border:0;background:#fff;text-align:right;border-radius:7px;padding:10px;color:#35483d;font-size:12px}
+.header-more-panel button:hover{background:#f0f7f3;color:#176b5c}
+.request-hero{width:min(1120px,93%);min-height:0;display:block;margin:22px auto 0;padding:32px 36px;border-radius:18px;box-shadow:none;background:linear-gradient(115deg,#123f35,#176b5c)}
+.request-hero:before{opacity:.45}
+.request-hero-copy{max-width:760px}
+.hero-eyebrow{font-size:11px;margin-bottom:11px;padding:6px 10px}
+.request-hero h2{font-size:clamp(27px,3vw,36px);line-height:1.6;letter-spacing:0;margin-bottom:7px}
+.request-hero-copy>p{font-size:13px;line-height:2;max-width:620px;margin-bottom:17px;color:#e2eee8}
+.request-hero-actions{gap:8px}
+.request-hero-actions .btn{padding:10px 15px;font-size:12px}
+.hero-main-cta{background:#f4d38b!important;color:#173d32!important}
+.search-section{width:min(1120px,93%);margin:17px auto 0;padding:18px 20px;border-radius:14px;box-shadow:none}
+.search-section-heading{margin-bottom:12px;align-items:center}
+.search-section-heading h2{font-size:17px;margin:0 0 2px}
+.search-section-heading p{font-size:11px}
+.search-section .search-panel{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.search-section .search-panel select,.search-section .search-panel input{padding:10px;font-size:12px}
+.search-section .search-panel button{padding:10px 13px}
+.section{margin:23px auto}
+#categories .section-heading{margin-bottom:10px}
+#categories .section-heading h2{font-size:18px}
+#categories .categories{gap:9px;grid-template-columns:repeat(5,minmax(0,1fr))}
+#categories .category{padding:12px 7px;border-radius:11px;box-shadow:none}
+#categories .category-icon{height:37px}
+#categories .category-icon svg{width:37px;height:37px}
+#categories .category strong{font-size:12px}
+#categories .category small{font-size:10px}
+#listings .section-heading h2{font-size:19px}
+#listings .listing-tools{margin-bottom:10px}
+#listings .advanced-filters{margin-bottom:11px}
+#listings .property-grid{gap:12px}
+#listings .property-card{border-radius:11px;box-shadow:none}
+#listings .property-card:hover{box-shadow:0 5px 15px #1c3a2f10}
+#listings .property-image{max-height:175px}
+footer{background:#fff;color:#35483d;border-top:1px solid #e4e9e5;padding:20px 0}
+footer strong{color:#243a30}
+footer p{color:#7a867f}
+@media(max-width:980px){
+ header .header-inner{align-items:center}
+ header nav{gap:10px}
+ .header-actions .btn{padding:8px 10px}
+ .request-hero{padding:29px}
+}
+@media(max-width:720px){
+ .header-inner{gap:8px}
+ header nav{order:3;width:100%;justify-content:space-between}
+ .header-actions{gap:5px}
+ .header-actions .btn{font-size:11px;padding:8px 9px}
+ .header-more-menu summary{padding:8px;font-size:11px}
+ .brand h1{font-size:15px}
+ .request-hero{width:calc(100% - 24px);margin-top:12px;padding:22px 18px;border-radius:14px}
+ .request-hero h2{font-size:25px;line-height:1.65}
+ .request-hero-copy>p{font-size:12px;margin-bottom:13px}
+ .request-hero-actions{display:flex;flex-wrap:wrap}
+ .request-hero-actions .btn{flex:1 1 145px}
+ .search-section{width:calc(100% - 24px);padding:14px;margin-top:12px}
+ .search-section .search-panel{grid-template-columns:1fr 1fr}
+ .search-section .search-panel button{grid-column:1/-1;width:100%}
+ #categories .categories{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+ #categories .category{padding:10px 4px}
+ #listings .property-grid{gap:8px}
+ #listings .property-image{height:125px}
+ #listings .property-info{padding:9px}
+}
+@media(max-width:430px){
+ .header-actions .btn-primary{font-size:10px;padding:8px 7px}
+ .role-switch-link{font-size:10px}
+ .request-hero-actions{display:grid;grid-template-columns:1fr 1fr}
+ .request-hero-actions .btn{padding:10px 6px;font-size:11px}
+}
+</style>
 </head><body>
-<header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک بجنورد"><svg viewBox="0 0 64 64" role="img" aria-hidden="true" style="width:33px;height:33px;display:block"><circle cx="32" cy="32" r="29" fill="none" stroke="#d8b46a" stroke-width="2.5"/><path d="M9 32 32 13l23 19" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 30v21h32V30M27 51V38h10v13" fill="none" stroke="#fff" stroke-width="3.5" stroke-linejoin="round"/><rect x="26" y="23" width="4" height="4" fill="#d8b46a"/><rect x="34" y="23" width="4" height="4" fill="#d8b46a"/></svg></div><div><h1>املاک بجنورد</h1><small>نیازمندیهای املاک بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#how-it-works">مراحل کار</a><a href="#categories">دسته‌بندی ملک</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><button type="button" class="role-switch-link" id="roleSwitchButton" onclick="openRoleChooser()">تغییر نقش</button><button class="btn btn-outline" id="accountButton" onclick="openAuthModal()">ورود / ثبتنام</button><button class="btn btn-outline" onclick="openInbox()">پیامها</button><button class="btn btn-outline" onclick="openAdminPanel()">مدیریت</button><button class="btn btn-primary" onclick="openModal()">+ ثبت آگهی رایگان</button></div></div></header>
+<header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک بجنورد"><svg viewBox="0 0 64 64" role="img" aria-hidden="true" style="width:33px;height:33px;display:block"><circle cx="32" cy="32" r="29" fill="none" stroke="#d8b46a" stroke-width="2.5"/><path d="M9 32 32 13l23 19" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 30v21h32V30M27 51V38h10v13" fill="none" stroke="#fff" stroke-width="3.5" stroke-linejoin="round"/><rect x="26" y="23" width="4" height="4" fill="#d8b46a"/><rect x="34" y="23" width="4" height="4" fill="#d8b46a"/></svg></div><div><h1>املاک بجنورد</h1><small>نیازمندیهای املاک بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
+  <details class="header-more-menu"><summary>بیشتر</summary><div class="header-more-panel">
+    <button type="button" onclick="openRoleChooser()">تغییر نقش</button>
+    <button type="button" onclick="openInbox()">پیام‌ها</button>
+    <button type="button" onclick="openAdminPanel()">مدیریت</button>
+  </div></details>
+  <button class="btn btn-outline" id="accountButton" onclick="openAuthModal()">ورود / ثبتنام</button>
+  <button class="btn btn-primary" onclick="openModal()">+ ثبت آگهی رایگان</button>
+</div></div></div></header>
 <main><section class="request-hero container" id="home">
-<div class="request-hero-copy">
-<div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span> مسیر ساده‌تر انتخاب ملک در بجنورد</div>
-<h2 id="heroTitleText">خانه‌ای که می‌خواهی، از یک درخواست شروع می‌شود <span class="hero-sparkle">✦</span></h2>
-<p id="heroSubtitleText">نیازت را یک‌بار با جزئیات ثبت کن. به‌جای گشتن بین آگهی‌های نامرتبط، مسیر پیدا کردن گزینه‌های متناسب را ساده‌تر کن و با آگهی‌دهندگان ارتباط بگیر.</p>
-<div class="request-hero-actions"><button type="button" class="btn btn-primary hero-main-cta" onclick="openRequestModal()">ثبت درخواست خرید یا اجاره ←</button><button type="button" class="btn btn-light" onclick="choosePlatformRole('agent')">من مشاور املاکم</button></div>
-<div class="hero-points"><span><i>✓</i> ثبت درخواست رایگان</span><span><i>✓</i> ویژه بجنورد و خراسان شمالی</span><span><i>✓</i> امکان ارتباط مستقیم</span></div>
-</div>
-<div class="hero-visual"><div class="hero-visual-glow"></div><div class="visual-topline"><span>نمونه درخواست ملک</span><span class="visual-live-dot"></span></div>
-<div class="visual-request-card"><div class="visual-request-icon">⌂</div><div class="visual-request-title"><strong>ملک متناسب با نیاز من</strong><span>بجنورد · محله دلخواه</span></div><span class="visual-pill">خرید یا اجاره</span><div class="visual-request-divider"></div>
-<div class="visual-detail-grid"><div><small>متراژ</small><strong>طبق نیاز شما</strong></div><div><small>بودجه</small><strong>قابل تعیین</strong></div><div><small>محله</small><strong>انتخابی</strong></div><div><small>نوع ملک</small><strong>دلخواه شما</strong></div></div>
-<div class="visual-card-foot"><span class="visual-check">✓</span><span><b>معیارها را خودت مشخص کن</b><small>فقط اطلاعات موردنیاز را وارد کن</small></span></div></div>
-<div class="visual-floating-note"><span>✦</span><div><b>جست‌وجوی هدفمندتر</b><small>شروع از نیاز واقعی شما</small></div></div></div></section>
-<section class="container search-section" id="search"><div class="search-section-heading"><div><span class="section-kicker">جست‌وجوی مستقیم</span><h2>ترجیح می‌دهی خودت آگهی‌ها را ببینی؟</h2><p>شهر، نوع ملک و محدوده را مشخص کن و فایل‌های منتشرشده را بررسی کن.</p></div><a class="text-link" href="#listings">دیدن آگهی‌ها ←</a></div><div class="search-panel"><select id="searchCity"><option value="">شهرهای خراسان شمالی</option><option>بجنورد</option><option>شیروان</option><option>اسفراین</option><option>فاروج</option><option>آشخانه</option><option>جاجرم</option><option>گرمه</option><option>راز</option><option>صفیآباد</option></select><select id="searchType"><option value="">انواع ملک</option><option value="آپارتمان">آپارتمان</option><option value="خانه و ویلا">خانه و ویلا</option><option value="زمین">زمین</option><option value="مغازه">مغازه</option><option value="دفتر کار">دفتر کار</option><option value="زمین و ملک کلنگی">زمین و ملک کلنگی</option><option value="مغازه و غرفه">مغازه و غرفه</option><option value="مطب">مطب</option><option value="اتاق اداری">اتاق اداری</option><option value="ویلا و باغ">ویلا و باغ</option><option value="سوئیت و آپارتمان">سوئیت و آپارتمان</option><option value="دفتر کار و فضای آموزشی">دفتر کار و فضای آموزشی</option><option value="ملک صنعتی و کشاورزی">ملک صنعتی و کشاورزی</option><option value="زمین و ملک کلنگی">زمین و ملک کلنگی</option></select><select id="searchMainCategory" aria-label="دسته اصلی"><option value="">دسته‌های اصلی</option><option>اجاره مسکونی</option><option>فروش مسکونی</option><option>فروش دفتر اداری و تجاری</option><option>اجاره دفتر اداری و تجاری</option><option>پروژههای ساختوساز</option><option>اجاره کوتاهمدت</option></select><select id="searchSubCategory" aria-label="زیردسته" disabled><option value="">زیردسته‌ها</option></select><input id="searchAddress" placeholder="جستجو در محله یا آدرس"><button class="btn btn-primary" onclick="loadProperties()">جستجو</button></div></section>
-<section class="container trust-strip"><div class="trust-item"><span class="trust-icon">✦</span><div><strong>ثبت درخواست بدون هزینه</strong><small>برای شروع نیازی به پرداخت نیست</small></div></div><div class="trust-item"><span class="trust-icon">⌖</span><div><strong>متمرکز بر منطقه شما</strong><small>بجنورد و شهرهای خراسان شمالی</small></div></div><div class="trust-item"><span class="trust-icon">✓</span><div><strong>انتشار آگهی با بررسی</strong><small>فایل‌های ارسالی پیش از انتشار بررسی می‌شوند</small></div></div></section>
-<section class="container section request-features" id="why-request"><div class="center-heading"><span class="section-kicker">جست‌وجو با هدف مشخص</span><h2>ملک دلخواهت را دقیق‌تر دنبال کن</h2><p>به‌جای ساعت‌ها بررسی گزینه‌های نامرتبط، از نیاز واقعی خودت شروع کن.</p></div><div class="feature-grid">
-<article class="feature-card"><span class="feature-icon green">◎</span><h3>نیازت را روشن کن</h3><p>نوع ملک، محله، متراژ و بودجه را مشخص کن تا درخواستت دقیق و قابل پیگیری باشد.</p></article>
-<article class="feature-card"><span class="feature-icon gold">↗</span><h3>گزینه‌های متناسب‌تر</h3><p>جزئیات روشن‌تر کمک می‌کند ملک‌های مرتبط را بهتر بررسی کنی و انتخاب آگاهانه‌تری داشته باشی.</p></article>
-<article class="feature-card"><span class="feature-icon blue">☏</span><h3>ارتباط ساده‌تر</h3><p>پس از ورود، می‌توانی از پیام‌رسان داخلی سایت برای گفتگو درباره آگهی‌ها استفاده کنی.</p></article>
-<article class="feature-card"><span class="feature-icon purple">⌕</span><h3>فیلترهای کاربردی</h3><p>آگهی‌ها را با شهر، نوع ملک، قیمت و متراژ محدود کن و گزینه‌های موجود را بررسی کن.</p></article></div></section>
-<section class="container section how-section" id="how-it-works"><div class="center-heading"><span class="section-kicker">شروع آسان</span><h2>از درخواست تا انتخاب ملک</h2><p>چند گام روشن برای معرفی بهتر نیازت به بازار املاک.</p></div><div class="steps-grid">
-<article class="step-card"><span class="step-number">۰۱</span><div class="step-symbol">✎</div><h3>درخواستت را بنویس</h3><p>خرید یا اجاره و نوع ملک را مشخص کن.</p></article>
-<article class="step-card"><span class="step-number">۰۲</span><div class="step-symbol">⌖</div><h3>معیارها را تکمیل کن</h3><p>محله، متراژ و بودجه دلخواه را وارد کن.</p></article>
-<article class="step-card"><span class="step-number">۰۳</span><div class="step-symbol">☷</div><h3>درخواستت ذخیره می‌شود</h3><p>درخواست پس از ورود، در حساب کاربری برای پیگیری ثبت می‌شود.</p></article>
-<article class="step-card"><span class="step-number">۰۴</span><div class="step-symbol">⌂</div><h3>فایل‌ها را بررسی کن</h3><p>آگهی‌های منتشرشده را ببین و برای جزئیات با آگهی‌دهنده تماس بگیر.</p></article></div><div class="steps-action"><button type="button" class="btn btn-primary" onclick="openRequestModal()">شروع با ثبت درخواست ←</button></div></section><section class="container section" id="categories"><div class="section-heading"><h2>دستهبندیها</h2></div><div class="categories">
+  <div class="request-hero-copy">
+    <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span> املاک ۰۵۸ · بجنورد</div>
+    <h2 id="heroTitleText">ملک مناسب، از نیاز شما شروع می‌شود</h2>
+    <p id="heroSubtitleText">برای خرید یا اجاره، خواسته‌ات را ثبت کن یا آگهی‌های ملک در بجنورد را مستقیم ببین.</p>
+    <div class="request-hero-actions">
+      <button type="button" class="btn btn-primary hero-main-cta" onclick="openRequestModal()">ثبت درخواست خرید یا اجاره</button>
+      <a class="btn btn-light" href="#listings">دیدن آگهی‌ها</a>
+    </div>
+  </div>
+</section>
+<section class="container search-section" id="search"><div class="search-section-heading"><div><h2>جست‌وجوی آگهی‌ها</h2><p>شهر، نوع ملک و محدوده را انتخاب کن.</p></div></div><div class="search-panel"><select id="searchCity"><option value="">شهرهای خراسان شمالی</option><option>بجنورد</option><option>شیروان</option><option>اسفراین</option><option>فاروج</option><option>آشخانه</option><option>جاجرم</option><option>گرمه</option><option>راز</option><option>صفیآباد</option></select><select id="searchType"><option value="">انواع ملک</option><option value="آپارتمان">آپارتمان</option><option value="خانه و ویلا">خانه و ویلا</option><option value="زمین">زمین</option><option value="مغازه">مغازه</option><option value="دفتر کار">دفتر کار</option><option value="زمین و ملک کلنگی">زمین و ملک کلنگی</option><option value="مغازه و غرفه">مغازه و غرفه</option><option value="مطب">مطب</option><option value="اتاق اداری">اتاق اداری</option><option value="ویلا و باغ">ویلا و باغ</option><option value="سوئیت و آپارتمان">سوئیت و آپارتمان</option><option value="دفتر کار و فضای آموزشی">دفتر کار و فضای آموزشی</option><option value="ملک صنعتی و کشاورزی">ملک صنعتی و کشاورزی</option><option value="زمین و ملک کلنگی">زمین و ملک کلنگی</option></select><select id="searchMainCategory" aria-label="دسته اصلی"><option value="">دسته‌های اصلی</option><option>اجاره مسکونی</option><option>فروش مسکونی</option><option>فروش دفتر اداری و تجاری</option><option>اجاره دفتر اداری و تجاری</option><option>پروژههای ساختوساز</option><option>اجاره کوتاهمدت</option></select><select id="searchSubCategory" aria-label="زیردسته" disabled><option value="">زیردسته‌ها</option></select><input id="searchAddress" placeholder="جستجو در محله یا آدرس"><button class="btn btn-primary" onclick="loadProperties()">جستجو</button></div></section>
+
+
+<section class="container section" id="categories"><div class="section-heading"><h2>دستهبندیها</h2></div><div class="categories">
 <div class="category" role="button" tabindex="0" onclick="chooseCategory('آپارتمان')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();chooseCategory('آپارتمان')}"><div class="category-icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M17 55V12a3 3 0 0 1 3-3h24a3 3 0 0 1 3 3v43" fill="#f8e9e9" stroke="#a52d3a" stroke-width="2.5" stroke-linejoin="round"/><path d="M12 55h40" stroke="#a52d3a" stroke-width="2.5" stroke-linecap="round"/><path d="M24 18h6v6h-6zm11 0h6v6h-6zm-11 12h6v6h-6zm11 0h6v6h-6z" fill="#b98a4b"/><path d="M27 55V43h10v12" fill="#fff" stroke="#a52d3a" stroke-width="2"/></svg></div><strong>آپارتمان</strong><small>خرید و اجاره</small></div>
 <div class="category" role="button" tabindex="0" onclick="chooseCategory('خانه و ویلا')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();chooseCategory('خانه و ویلا')}"><div class="category-icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M7 29 31 9l26 20" fill="#f8e9e9" stroke="#a52d3a" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 27v28h36V27" fill="#fbf7ef" stroke="#a52d3a" stroke-width="2.5" stroke-linejoin="round"/><path d="M25 55V38h13v17" fill="#e8d6b8" stroke="#a52d3a" stroke-width="2"/><path d="M18 34h7v7h-7zm21 0h7v7h-7z" fill="#b98a4b"/><path d="M6 56h52" stroke="#b98a4b" stroke-width="2.5" stroke-linecap="round"/></svg></div><strong>خانه و ویلا</strong><small>مسکونی</small></div>
 <div class="category" role="button" tabindex="0" onclick="chooseCategory('زمین')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();chooseCategory('زمین')}"><div class="category-icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 46 18 20l12 15 9-22 17 33" fill="#e7efe0" stroke="#66835c" stroke-width="2.5" stroke-linejoin="round"/><path d="M9 49 55 42l3 8-46 7z" fill="#f1dfc4" stroke="#b98a4b" stroke-width="2.2" stroke-linejoin="round"/><path d="M21 43V32m0 0-6 6m6-6 6 6" stroke="#66835c" stroke-width="2.4" stroke-linecap="round"/><circle cx="21" cy="27" r="6" fill="#c7d9bd" stroke="#66835c" stroke-width="2"/></svg></div><strong>زمین</strong><small>مسکونی و تجاری</small></div>
 <div class="category" role="button" tabindex="0" onclick="chooseCategory('مغازه')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();chooseCategory('مغازه')}"><div class="category-icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M13 27h38v29H13z" fill="#fbf7ef" stroke="#a52d3a" stroke-width="2.5"/><path d="M9 24 14 10h36l5 14z" fill="#f1dddd" stroke="#a52d3a" stroke-width="2.5" stroke-linejoin="round"/><path d="M9 24h46v7H9z" fill="#a52d3a"/><path d="M20 36h12v20H20z" fill="#e8d6b8" stroke="#b98a4b" stroke-width="2"/><path d="M37 36h9v9h-9z" fill="#dce8ed" stroke="#a52d3a" stroke-width="2"/><path d="M8 57h48" stroke="#b98a4b" stroke-width="2.5" stroke-linecap="round"/></svg></div><strong>مغازه</strong><small>املاک تجاری</small></div>
 <div class="category" role="button" tabindex="0" onclick="chooseCategory('دفتر کار')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();chooseCategory('دفتر کار')}"><div class="category-icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M11 55V17l21-9 21 9v38" fill="#f8e9e9" stroke="#a52d3a" stroke-width="2.5" stroke-linejoin="round"/><path d="M20 21h7v7h-7zm17 0h7v7h-7zm-17 13h7v7h-7zm17 0h7v7h-7z" fill="#b98a4b"/><path d="M27 55V44h10v11" fill="#fff" stroke="#a52d3a" stroke-width="2"/><path d="M6 56h52" stroke="#a52d3a" stroke-width="2.5" stroke-linecap="round"/></svg></div><strong>دفتر کار</strong><small>املاک اداری</small></div>
 </div></section>
-<section class="container section sample-listings" id="sampleListings">
- <div class="section-heading"><h2>نمونه آگهیهای بازار بجنورد</h2><span class="sample-heading-tag">۸ مورد نمایشی</span></div>
- <p class="sample-notice">این کارتها برای نمایش اولیه و پر بودن ظاهر سایت هستند؛ آگهیهای ثبتشده در املاک ۰۵۸ نیستند و قیمت و موجودی آنها باید دوباره تأیید شود. عکسها تصویرسازیاند، نه عکس واقعی ملک. آگهیهای واقعی کاربران در بخش «آگهیهای جدید املاک» نمایش داده میشوند.</p>
- <div class="property-grid" id="samplePropertyList"></div>
-</section>
+
 <section class="container section" id="listings"><div class="section-heading"><h2>آگهیهای جدید املاک</h2><span class="muted" id="resultCount">در حال دریافت...</span></div><div class="listing-tools"><button class="filter-btn active" data-transaction="" onclick="setTransaction('',this)">همه</button><button class="filter-btn" data-transaction="فروش" onclick="setTransaction('فروش',this)">خرید و فروش</button><button class="filter-btn" data-transaction="رهن و اجاره" onclick="setTransaction('رهن و اجاره',this)">رهن و اجاره</button></div><div class="advanced-filters" aria-label="فیلترهای بیشتر"><input id="minPrice" type="number" min="0" placeholder="حداقل قیمت (تومان)"><input id="maxPrice" type="number" min="0" placeholder="حداکثر قیمت (تومان)"><input id="minArea" type="number" min="0" placeholder="حداقل متراژ"><input id="maxArea" type="number" min="0" placeholder="حداکثر متراژ"><select id="sortProperties" aria-label="مرتبسازی"><option value="newest">جدیدترین آگهی</option><option value="priceAsc">ارزانترین</option><option value="priceDesc">گرانترین</option><option value="areaDesc">بیشترین متراژ</option></select><button class="btn btn-outline" type="button" onclick="resetFilters()">پاککردن فیلترها</button></div><p class="site-note">آگهیهای تأییدشده نمایش داده میشوند. برای ثبت آگهی، دکمه قرمز بالای صفحه را بزنید.</p><div class="property-grid" id="propertyList"><div class="empty">در حال دریافت آگهیها...</div></div></section>
-<section class="container section"><div class="about"><h2>درباره املاک بجنورد</h2><p class="muted">املاک ۰۵۸ سامانه آنلاین جست‌وجو و ثبت رایگان آگهی املاک بجنورد است. در این سامانه می‌توانید آگهی خرید و فروش، رهن و اجاره آپارتمان، خانه و ویلا، زمین، مغازه و ملک تجاری را در بجنورد و شهرهای خراسان شمالی جست‌وجو کنید. آگهی‌ها پس از بررسی مدیر منتشر می‌شوند.</p><h2 style="margin-top:18px">ثبت رایگان آگهی خرید، فروش، رهن و اجاره در بجنورد</h2><p class="muted">برای معرفی ملک خود، گزینه «ثبت آگهی رایگان» را انتخاب کنید و نوع ملک، شهر، قیمت یا مبلغ رهن و اجاره، متراژ، نشانی حدودی و توضیحات را کامل بنویسید. انتخاب اطلاعات دقیق و تصاویر روشن به مخاطبان کمک می‌کند ملک را بهتر بررسی کنند. در املاک بجنورد، می‌توانید آگهی‌ها را براساس شهر و نوع ملک جست‌وجو کرده و گزینه‌های مرتبط با نیاز خود را پیدا کنید.</p></div></section>
-<section class="container section comparison-section" id="difference"><div class="comparison-heading"><div><span class="section-kicker">دو روش برای شروع</span><h2>از آگهی شروع کن یا از نیازت</h2><p>هر دو مسیر در املاک ۰۵۸ در دسترس‌اند.</p></div><button class="btn btn-primary" type="button" onclick="openRequestModal()">ثبت درخواست رایگان</button></div>
-<div class="comparison-table-wrap"><table class="comparison-table"><thead><tr><th>امکان</th><th>جست‌وجوی آگهی</th><th>ثبت درخواست</th></tr></thead><tbody><tr><td>شروع کار</td><td>انتخاب از بین فایل‌های منتشرشده</td><td>شروع از معیارهای شخصی</td></tr><tr><td>معیارهای ملک</td><td>شهر، نوع ملک، محدوده، قیمت و متراژ</td><td>نوع ملک، محله، بودجه و متراژ دلخواه</td></tr><tr><td>حریم خصوصی</td><td>آگهی‌های تأییدشده در صفحه عمومی قرار می‌گیرند</td><td>درخواست فقط برای صاحب حساب و مدیر مجاز قابل مشاهده است</td></tr><tr><td>هزینه</td><td>مشاهده فایل‌ها رایگان است</td><td>ثبت درخواست رایگان است</td></tr></tbody></table></div><p class="comparison-note">در نسخه فعلی، درخواست برای پیگیری ذخیره می‌شود؛ ارسال خودکار پیشنهاد از سمت مشاوران هنوز فعال نیست.</p></section>
-<section class="container section faq-section" id="faq"><div class="center-heading"><span class="section-kicker">پاسخ به پرسش‌ها</span><h2>سؤالات پرتکرار</h2><p>نکته‌های اصلی پیش از ثبت درخواست یا آگهی.</p></div><div class="faq-list">
-<details><summary>ثبت درخواست خرید یا اجاره هزینه دارد؟</summary><p>خیر؛ ثبت درخواست در سایت رایگان است. هزینه‌های احتمالی معامله یا خدمات خارج از سایت جداگانه و براساس توافق طرفین خواهد بود.</p></details>
-<details><summary>درخواست من برای همه بازدیدکنندگان نمایش داده می‌شود؟</summary><p>خیر؛ درخواست در جدول جداگانه ذخیره می‌شود و فقط صاحب درخواست و حساب‌های مدیر مجاز آن را مشاهده می‌کنند.</p></details>
-<details><summary>برای ثبت درخواست باید وارد حسابم شوم؟</summary><p>بله؛ برای مرتبط‌بودن درخواست با حساب خودتان، ابتدا با شماره موبایل یا ایمیل وارد شوید.</p></details>
-<details><summary>بعد از ثبت درخواست چه اتفاقی می‌افتد؟</summary><p>درخواست برای پیگیری ذخیره می‌شود. در این نسخه، پیشنهاددهی خودکار و هشدار لحظه‌ای هنوز فعال نیست؛ آگهی‌های موجود را هم می‌توانید در بخش جست‌وجو بررسی کنید.</p></details>
-<details><summary>چطور فایل ملک خودم را منتشر کنم؟</summary><p>از دکمه «ثبت آگهی رایگان» استفاده کنید. آگهی پس از بررسی مدیریت در فهرست عمومی نمایش داده می‌شود.</p></details>
-<details><summary>آیا سایت فقط برای بجنورد است؟</summary><p>تمرکز اصلی روی بجنورد است و فیلترها و فرم‌ها شهرهای دیگر خراسان شمالی را نیز دارند.</p></details>
-</div></section>
-<section class="container final-cta"><div><span class="section-kicker">قدم اول ساده است</span><h2>معیارهایت را مشخص کن و از همان‌جا شروع کن.</h2><p>درخواستت را رایگان ثبت کن یا آگهی‌های فعلی بازار بجنورد را ببین.</p></div><div class="final-cta-actions"><button type="button" class="btn btn-light" onclick="openRequestModal()">ثبت درخواست</button><a class="btn btn-ghost-light" href="#listings">دیدن آگهی‌ها</a></div></section></main><footer><div class="container footer-inner"><div><strong>املاک بجنورد</strong><p>سامانه ثبت و جستجوی آگهی املاک</p></div><div><p id="footerAddress">تماس با مدیریت سامانه</p><p id="footerPhone">تماس با مدیریت سایت</p></div></div></footer>
+
+
+
+</main><footer><div class="container footer-inner"><div><strong>املاک بجنورد</strong><p>سامانه ثبت و جستجوی آگهی املاک</p></div><div><p id="footerAddress">تماس با مدیریت سامانه</p><p id="footerPhone">تماس با مدیریت سایت</p></div></div></footer>
 
 <nav class="mobile-bottom-nav" aria-label="منوی اصلی موبایل">
  <button class="mobile-nav-item active" type="button" onclick="mobileNavHome()"><span class="mobile-nav-icon">⌂</span><span>خانه</span></button>
