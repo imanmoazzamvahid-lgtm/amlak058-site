@@ -1861,13 +1861,29 @@ function validateWizardStep(n){
  return true;
 }
 function wizardNext(){
+ const step=Number.isInteger(currentWizardStep)?currentWizardStep:0;
+ const globalMessage=document.getElementById('publishGlobalMessage');
+ const showError=(message)=>{
+  if(globalMessage){globalMessage.textContent=message;globalMessage.style.color='#b00020';globalMessage.scrollIntoView({block:'nearest',behavior:'smooth'});}
+  else alert(message);
+ };
  try{
-  if(!validateWizardStep(currentWizardStep))return;
-  wizardGoTo(currentWizardStep+1);
-  if(currentWizardStep===1)setTimeout(()=>{if(propertyMap)propertyMap.invalidateSize()},150);
+  // Keep category options synchronized even if a mobile browser restores the form state.
+  if(step===0 && mainCategoryInput && subCategoryInput){
+   if(mainCategoryInput.value && (!subCategoryInput.options.length || subCategoryInput.disabled)){
+    fillSubcategorySelect(mainCategoryInput,subCategoryInput,subCategoryInput.value);
+   }
+   if(!document.getElementById('title')?.value.trim()){showError('عنوان آگهی را وارد کن.');document.getElementById('title')?.focus();return;}
+   if(!mainCategoryInput.value){showError('دستهٔ آگهی را انتخاب کن.');mainCategoryInput.focus();return;}
+   if(!subCategoryInput.value){showError('زیردستهٔ آگهی را انتخاب کن.');subCategoryInput.focus();return;}
+  }
+  if(!validateWizardStep(step))return;
+  const nextStep=Math.min(3,step+1);
+  wizardGoTo(nextStep);
+  if(nextStep===1)setTimeout(()=>{if(propertyMap)propertyMap.invalidateSize()},180);
  }catch(error){
   console.error('Wizard navigation error:',error);
-  alert('رفتن به مرحله بعد با خطا روبه‌رو شد. صفحه را تازه‌سازی کن و دوباره امتحان کن.');
+  showError('مرحله بعد باز نشد. خطای فنی ثبت شد؛ صفحه را تازه‌سازی کن و دوباره امتحان کن.');
  }
 }
 function wizardBack(){wizardGoTo(currentWizardStep-1);if(currentWizardStep===1)setTimeout(()=>propertyMap?.invalidateSize(),150)}
