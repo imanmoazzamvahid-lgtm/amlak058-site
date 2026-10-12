@@ -1632,6 +1632,14 @@ header .brand h1 .brand-number{font-size:1.18em!important;font-weight:1000!impor
 #authModePhone,#authModeEmail,#authEmailPanel,#authSubmit{display:none!important}
 #authPhonePanel{display:block!important}
 </style>
+
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="/icon.svg">
+<link rel="apple-touch-icon" href="/icon.svg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="املاک ۰۵۸">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
 </head><body>
 
 <header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک ۰۵۸"><svg viewBox="0 0 64 64" role="img" aria-hidden="true" style="width:33px;height:33px;display:block"><circle cx="32" cy="32" r="29" fill="none" stroke="#d8b46a" stroke-width="2.5"/><path d="M9 32 32 13l23 19" fill="none" stroke="#176b50" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 30v21h32V30M27 51V38h10v13" fill="none" stroke="#176b50" stroke-width="3.5" stroke-linejoin="round"/><rect x="26" y="23" width="4" height="4" fill="#d8b46a"/><rect x="34" y="23" width="4" height="4" fill="#d8b46a"/></svg></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>بازار آنلاین ملک بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
@@ -2409,5 +2417,46 @@ footer{background:#f8f6ef!important}
  #home.request-hero .request-hero-actions .hero-main-cta{min-width:0!important}
 }
 </style>
+
+
+<style id="amlak058-pwa-styles">
+#amlak058-pwa-install{position:fixed;right:16px;bottom:calc(82px + env(safe-area-inset-bottom));z-index:9999;display:none;align-items:center;gap:9px;border:0;border-radius:999px;padding:12px 17px;background:#12573f;color:#fffaf0;font:700 14px Tahoma,Arial,sans-serif;box-shadow:0 8px 24px #102f2240;cursor:pointer}
+#amlak058-pwa-install svg{width:20px;height:20px;flex:none}
+#amlak058-pwa-install:focus-visible{outline:3px solid #e4c27a;outline-offset:3px}
+@media(min-width:800px){#amlak058-pwa-install{bottom:24px;right:24px}}
+</style>
+<button id="amlak058-pwa-install" type="button" aria-label="نصب اپلیکیشن املاک ۰۵۸"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5"/><path d="M5 16v4h14v-4"/></svg><span>نصب اپلیکیشن</span></button>
+<script>
+(function(){
+  if ("serviceWorker" in navigator && location.protocol === "https:") {
+    window.addEventListener("load", function(){
+      navigator.serviceWorker.register("/sw.js").catch(function(err){console.warn("امکان فعال‌سازی حالت اپ فراهم نشد",err);});
+    });
+  }
+  var installButton=document.getElementById("amlak058-pwa-install");
+  var installPrompt=null;
+  var standalone=window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone===true;
+  if(!installButton || standalone) return;
+  window.addEventListener("beforeinstallprompt",function(event){
+    event.preventDefault();
+    installPrompt=event;
+    installButton.style.display="inline-flex";
+  });
+  installButton.addEventListener("click",async function(){
+    if(!installPrompt){
+      alert("برای نصب، از منوی مرورگر گزینه «افزودن به صفحه اصلی» یا «Install app» را انتخاب کنید.");
+      return;
+    }
+    installPrompt.prompt();
+    await installPrompt.userChoice;
+    installPrompt=null;
+    installButton.style.display="none";
+  });
+  window.addEventListener("appinstalled",function(){
+    installPrompt=null;
+    installButton.style.display="none";
+  });
+})();
+</script>
 
 </body></html>
