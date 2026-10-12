@@ -1567,10 +1567,20 @@ footer{margin-top:52px!important;border-top:1px solid #e7e9e5!important;backgrou
 }
 </style>
 
+
+<style id="property-review-workflow-styles">
+.publish-global-message{margin:10px 0 14px;padding:0;border-radius:10px;font-size:13px;line-height:1.9;font-weight:700}
+.publish-global-message:not(:empty){padding:10px 12px;background:#eef7f0;border:1px solid #d2e8d7}
+.owner-status-badge{display:inline-block;width:max-content;max-width:100%;font-size:10px;font-weight:800;line-height:1.8;padding:3px 9px;border-radius:999px;margin-bottom:8px}
+.owner-status-badge.status-pending{background:#fff5d6;color:#805b05;border:1px solid #f0df9d}
+.owner-status-badge.status-approved{background:#e8f5eb;color:#176b50;border:1px solid #c9e4d0}
+.owner-status-badge.status-rejected{background:#fff0ef;color:#9a2929;border:1px solid #efd0cc}
+</style>
 </head><body>
 <header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک ۰۵۸"><svg viewBox="0 0 64 64" role="img" aria-hidden="true" style="width:33px;height:33px;display:block"><circle cx="32" cy="32" r="29" fill="none" stroke="#d8b46a" stroke-width="2.5"/><path d="M9 32 32 13l23 19" fill="none" stroke="#176b50" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 30v21h32V30M27 51V38h10v13" fill="none" stroke="#176b50" stroke-width="3.5" stroke-linejoin="round"/><rect x="26" y="23" width="4" height="4" fill="#d8b46a"/><rect x="34" y="23" width="4" height="4" fill="#d8b46a"/></svg></div><div><h1>املاک ۰۵۸</h1><small>بازار آنلاین ملک بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
   <details class="header-more-menu"><summary>بیشتر</summary><div class="header-more-panel">
     <button type="button" onclick="openRoleChooser()">تغییر نقش</button>
+    <button type="button" onclick="mobileNavMyProperties()">آگهی‌های من</button>
     <button type="button" onclick="openInbox()">پیام‌ها</button>
     <button type="button" onclick="openAdminPanel()">مدیریت</button>
   </div></details>
@@ -1612,7 +1622,7 @@ footer{margin-top:52px!important;border-top:1px solid #e7e9e5!important;backgrou
 
 <nav class="mobile-bottom-nav" aria-label="منوی اصلی موبایل">
  <button class="mobile-nav-item active" type="button" onclick="mobileNavHome()"><span class="mobile-nav-icon">⌂</span><span>خانه</span></button>
- <button class="mobile-nav-item" type="button" onclick="mobileNavMyProperties()"><span class="mobile-nav-icon">♙</span><span>املاک من</span></button>
+ <button class="mobile-nav-item" type="button" onclick="mobileNavMyProperties()"><span class="mobile-nav-icon">♙</span><span>آگهی‌های من</span></button>
  <button class="mobile-nav-item post" type="button" onclick="openModal()"><span class="mobile-nav-icon">＋</span><span>ثبت آگهی</span></button>
  <button class="mobile-nav-item" type="button" onclick="openInbox()"><span class="mobile-nav-icon">✉</span><span>پیامها</span></button>
 </nav>
@@ -1634,6 +1644,7 @@ footer{margin-top:52px!important;border-top:1px solid #e7e9e5!important;backgrou
 <div class="form-field full request-submit-area"><p class="muted">ثبت درخواست نیازمند ورود است. اطلاعات این فرم در صفحه عمومی نمایش داده نمی‌شود.</p><button type="submit" id="requestSubmitButton" class="btn btn-primary">ثبت درخواست رایگان</button><button type="button" class="btn btn-outline" onclick="openAuthForRequest()">ورود با موبایل یا ایمیل</button><p id="requestFormMessage" class="form-message" role="status" aria-live="polite"></p></div>
 </div></form></div></div><div class="modal" id="propertyModal"><div class="modal-box" style="max-width:850px"><div class="modal-header"><h2>ثبت آگهی رایگان</h2><button class="close-btn" type="button" onclick="closeModal()">×</button></div>
 <div class="wizard-progress"><div id="wizardProgressFill"></div></div><div class="wizard-meta"><strong id="wizardStepTitle">مرحله ۱ از ۴: دسته آگهی</strong><span id="wizardStepHint" class="muted">دسته را با دقت انتخاب کن؛ بعد از ثبت قابل تغییر نیست.</span></div>
+<p id="publishGlobalMessage" class="publish-global-message" role="status" aria-live="polite"></p>
 <form id="propertyForm" novalidate><section class="wizard-step active" data-step="0" id="wizardStep0"><div class="form-grid">
 <div class="form-field full"><label for="title">عنوان آگهی *</label><input id="title" maxlength="150" placeholder="مثلاً آپارتمان دوخوابه در فردوسی" required></div>
 <div class="form-field"><label for="mainCategory">دستهٔ آگهی *</label><select id="mainCategory" required><option value="">انتخاب دسته</option><option>اجاره مسکونی</option><option>فروش مسکونی</option><option>فروش دفتر اداری و تجاری</option><option>اجاره دفتر اداری و تجاری</option><option>پروژههای ساختوساز</option><option>اجاره کوتاهمدت</option></select><small class="muted">پس از ثبت، دستهٔ آگهی قابل ویرایش نیست.</small></div>
@@ -1704,8 +1715,6 @@ const SUPABASE_URL='https://lsttrmnxauaviyuipnim.supabase.co';
 const SUPABASE_KEY='sb_publishable_V3ZIfuzEZ4y7KUY88lyv_Q_wF6kQAcb';
 const BUCKET='property-images',MAX_IMAGES=5,MAX_IMAGE_SIZE=5*1024*1024;
 const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-// Upload property media with the anonymous client because Storage only permits public uploads into pending/.
-const storageDb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});
 let currentTransaction='',selectedImages=[],selectedVideo=null,activeConversationId=null,activeChatProperty=null,chatRefreshTimer=null;
 const FAVORITES_KEY='bojnurd_property_favorites_v1';
 // دستهبندیهای چندمرحلهای، همراستا با مسیر ثبت آگهی موردنیاز
@@ -1811,7 +1820,7 @@ function getFavorites(){try{return JSON.parse(localStorage.getItem(FAVORITES_KEY
 function getFavorites(){try{return JSON.parse(localStorage.getItem(FAVORITES_KEY)||'[]')}catch{return []}}
 function toggleFavorite(id,button){const fav=getFavorites();const key=String(id);const next=fav.includes(key)?fav.filter(x=>x!==key):[...fav,key];localStorage.setItem(FAVORITES_KEY,JSON.stringify(next));button.classList.toggle('saved',next.includes(key));button.textContent=next.includes(key)?'♥ ذخیره شد':'♡ ذخیره آگهی'}
 let currentWizardStep=0,propertyMap=null,propertyMapMarker=null,defaultMapCenter=[37.475,57.329];
-function openModal(){document.getElementById('propertyModal').style.display='block';wizardGoTo(0);setTimeout(()=>{initPropertyMap();if(propertyMap)propertyMap.invalidateSize()},180)}
+function openModal(){const globalMessage=document.getElementById('publishGlobalMessage');if(globalMessage){globalMessage.textContent='';globalMessage.style.color='';}document.getElementById('propertyModal').style.display='block';wizardGoTo(0);setTimeout(()=>{initPropertyMap();if(propertyMap)propertyMap.invalidateSize()},180)}
 function closeModal(){document.getElementById('propertyModal').style.display='none'}
 const wizardTitles=[['مرحله ۱ از ۴: دسته آگهی','دسته و زیردسته را با دقت انتخاب کن؛ بعد از ثبت قابل تغییر نیست.'],['مرحله ۲ از ۴: موقعیت ملک','شهر، محله و نقطه ملک را روی نقشه انتخاب کن.'],['مرحله ۳ از ۴: ویژگیها و تصاویر','فیلدها بر اساس نوع ملک نمایش داده میشوند.'],['مرحله ۴ از ۴: قیمت و تماس','مبلغها را به تومان وارد و پیش از ثبت بررسی کن.']];
 function wizardGoTo(n){currentWizardStep=Math.max(0,Math.min(3,n));document.querySelectorAll('.wizard-step').forEach((el,i)=>el.classList.toggle('active',i===currentWizardStep));document.getElementById('wizardStepTitle').textContent=wizardTitles[currentWizardStep][0];document.getElementById('wizardStepHint').textContent=wizardTitles[currentWizardStep][1];document.getElementById('wizardCounter').textContent='مرحله '+(currentWizardStep+1)+' از ۴';document.getElementById('wizardProgressFill').style.width=((currentWizardStep+1)*25)+'%';document.getElementById('wizardBack').disabled=currentWizardStep===0;document.getElementById('wizardNext').hidden=currentWizardStep===3;document.getElementById('submitBtn').hidden=currentWizardStep!==3;document.getElementById('formMessage').textContent='';}
@@ -1848,10 +1857,10 @@ function yesNoNa(v){return v===true?'دارد':v===false?'ندارد':'قابل 
 const imageInput=document.getElementById('propertyImages');
 imageInput.addEventListener('change',function(){const files=Array.from(this.files||[]),message=document.getElementById('formMessage');message.textContent='';selectedImages=[];if(files.length>MAX_IMAGES){message.style.color='red';message.textContent='حداکثر ۵ عکس میتوانید انتخاب کنید.';this.value='';showPreview();return}for(const file of files){if(!['image/jpeg','image/png','image/webp'].includes(file.type)){message.style.color='red';message.textContent='فرمت عکس باید JPG، PNG یا WebP باشد.';this.value='';showPreview();return}if(file.size>MAX_IMAGE_SIZE){message.style.color='red';message.textContent='حجم هر عکس باید حداکثر ۵ مگابایت باشد.';this.value='';showPreview();return}}selectedImages=files;showPreview()});
 function showPreview(){const box=document.getElementById('imagePreview');box.innerHTML='';selectedImages.forEach((file,index)=>{const item=document.createElement('div');item.className='preview-item';const img=document.createElement('img');img.alt='پیشنمایش عکس '+(index+1);img.src=URL.createObjectURL(file);const remove=document.createElement('button');remove.type='button';remove.className='preview-remove';remove.textContent='×';remove.setAttribute('aria-label','حذف عکس');remove.onclick=()=>{selectedImages.splice(index,1);const transfer=new DataTransfer();selectedImages.forEach(f=>transfer.items.add(f));imageInput.files=transfer.files;showPreview()};item.append(img,remove);box.appendChild(item)})}
-async function uploadImages(files){const paths=[];for(const file of files){const ext=file.type==='image/png'?'png':file.type==='image/webp'?'webp':'jpg';const path='pending/'+crypto.randomUUID()+'.'+ext;const {error}=await storageDb.storage.from(BUCKET).upload(path,file,{contentType:file.type,upsert:false});if(error)throw new Error('آپلود عکس انجام نشد: '+error.message);paths.push(path)}return paths}
+async function uploadImages(files){const paths=[];for(const file of files){const ext=file.type==='image/png'?'png':file.type==='image/webp'?'webp':'jpg';const path='pending/'+crypto.randomUUID()+'.'+ext;const {error}=await db.storage.from(BUCKET).upload(path,file,{contentType:file.type,upsert:false});if(error)throw new Error('آپلود عکس انجام نشد: '+error.message);paths.push(path)}return paths}
 const videoInput=document.getElementById('propertyVideo');
 videoInput.addEventListener('change',function(){const file=this.files&&this.files[0];selectedVideo=null;const preview=document.getElementById('videoPreview');preview.textContent='';if(!file)return;if(!['video/mp4','video/webm','video/quicktime'].includes(file.type)){this.value='';document.getElementById('formMessage').textContent='فرمت ویدیو باید MP4، WebM یا MOV باشد.';return}if(file.size>25*1024*1024){this.value='';document.getElementById('formMessage').textContent='حجم ویدیو نباید بیشتر از ۲۵ مگابایت باشد.';return}selectedVideo=file;preview.textContent='ویدیوی انتخابشده: '+file.name+' ('+(file.size/1024/1024).toFixed(1)+' مگابایت)'});
-async function uploadVideo(file){if(!file)return null;const ext=file.type==='video/webm'?'webm':file.type==='video/quicktime'?'mov':'mp4';const path='pending/'+crypto.randomUUID()+'.'+ext;const {error}=await storageDb.storage.from(BUCKET).upload(path,file,{contentType:file.type,upsert:false});if(error)throw new Error('آپلود ویدیو انجام نشد: '+error.message+'؛ سقف حجم و سیاستهای Storage را بررسی کن.');return path}
+async function uploadVideo(file){if(!file)return null;const ext=file.type==='video/webm'?'webm':file.type==='video/quicktime'?'mov':'mp4';const path='pending/'+crypto.randomUUID()+'.'+ext;const {error}=await db.storage.from(BUCKET).upload(path,file,{contentType:file.type,upsert:false});if(error)throw new Error('آپلود ویدیو انجام نشد: '+error.message+'؛ سقف حجم و سیاستهای Storage را بررسی کن.');return path}
 function booleanFieldValue(id){const v=document.getElementById(id).value;return v==='na'||v===''?null:v==='true'}
 function formatListingPrice(p){if(['اجاره مسکونی','اجاره دفتر اداری و تجاری'].includes(p.main_category)){const deposit=Number(p.deposit||0).toLocaleString('fa-IR'),rent=Number(p.monthly_rent??p.price??0).toLocaleString('fa-IR');return 'ودیعه: '+deposit+' تومان • اجارهٔ ماهانه: '+rent+' تومان'+(p.convertible?' • قابل تبدیل':'')}return formatPrice(p.price)}
 async function makeSignedImage(path){
@@ -1899,9 +1908,11 @@ function renderSampleListings(){
 async function loadProperties(){const list=document.getElementById('propertyList'),count=document.getElementById('resultCount');list.innerHTML='<div class="empty">در حال دریافت آگهیها...</div>';try{let query=db.from('properties').select('id,title,main_category,sub_category,property_type,transaction_type,price,deposit,monthly_rent,convertible,area,bedrooms,year_built,floor_number,photos_own,elevator,parking,storage,video_url,address,city,description,image_url,image_urls,details_json,land_area,building_area,location_lat,location_lng,location_precision,created_at,owner_id').eq('status','approved').limit(100);const transaction=currentTransaction||'',type=document.getElementById('searchType').value,city=document.getElementById('searchCity').value,address=document.getElementById('searchAddress').value.trim();const minPrice=document.getElementById('minPrice').value,maxPrice=document.getElementById('maxPrice').value,minArea=document.getElementById('minArea').value,maxArea=document.getElementById('maxArea').value,sort=document.getElementById('sortProperties').value;if(transaction)query=query.eq('transaction_type',transaction);if(type)query=query.eq('property_type',type);const mainCat=document.getElementById('searchMainCategory').value,subCat=document.getElementById('searchSubCategory').value;if(mainCat)query=query.eq('main_category',mainCat);if(subCat)query=query.eq('sub_category',subCat);if(city)query=query.eq('city',city);if(address)query=query.ilike('address','%'+address.replace(/[%_,]/g,' ')+'%');if(minPrice)query=query.gte('price',Number(minPrice));if(maxPrice)query=query.lte('price',Number(maxPrice));if(minArea)query=query.gte('area',Number(minArea));if(maxArea)query=query.lte('area',Number(maxArea));if(sort==='priceAsc')query=query.order('price',{ascending:true,nullsFirst:false});else if(sort==='priceDesc')query=query.order('price',{ascending:false,nullsFirst:false});else if(sort==='areaDesc')query=query.order('area',{ascending:false,nullsFirst:false});else query=query.order('created_at',{ascending:false});const {data,error}=await query;if(error)throw error;count.textContent=data.length.toLocaleString('fa-IR')+' آگهی';if(!data.length){list.innerHTML='<div class="empty">هنوز آگهی تأییدشدهای ثبت نشده است.</div>';return}list.innerHTML=(await Promise.all(data.map(renderProperty))).join('')}catch(error){console.error('خطای واقعی دریافت آگهیها:',error);count.textContent='خطا';list.innerHTML='';const box=document.createElement('div');box.className='empty';box.style.cssText='white-space:pre-wrap;direction:rtl;text-align:right;overflow-wrap:anywhere;padding:16px;border:1px solid #e2b8b8;background:#fff8f8;color:#8b1e1e';box.textContent='خطای فنی دریافت آگهی‌ها - نسخه تشخیصی:\n'+(error?.message||String(error))+'\n\nکد خطا: '+(error?.code||'ندارد')+'\nجزئیات: '+(error?.details||'ندارد')+'\nراهنما: '+(error?.hint||'ندارد');list.appendChild(box)}}
 document.getElementById('propertyForm').addEventListener('submit',async function(e){
  e.preventDefault();if(currentWizardStep!==3){return}for(let i=0;i<4;i++){if(!validateWizardStep(i)){wizardGoTo(i);return}}
- const {data:{user}}=await db.auth.getUser();if(!user){document.getElementById('formMessage').style.color='#a62626';document.getElementById('formMessage').textContent='برای ثبت آگهی ابتدا با شماره موبایل یا ایمیل وارد شوید.';openAuthModal();return}
- const button=document.getElementById('submitBtn'),message=document.getElementById('formMessage');button.disabled=true;button.textContent='در حال ثبت...';message.textContent='';let imagePaths=[],videoPath=null,videoWarning='';
+ const button=document.getElementById('submitBtn'),message=document.getElementById('formMessage'),globalMessage=document.getElementById('publishGlobalMessage');button.disabled=true;button.textContent='در حال ثبت...';message.textContent='';if(globalMessage){globalMessage.textContent='';globalMessage.style.color='';}let imagePaths=[],videoPath=null,videoWarning='';
  try{
+  const {data:{user},error:authError}=await db.auth.getUser();
+  if(authError)throw new Error('بررسی ورود ناموفق بود: '+authError.message);
+  if(!user){const loginMessage='برای ثبت آگهی ابتدا با شماره موبایل یا ایمیل وارد شوید.';message.style.color='#a62626';message.textContent=loginMessage;if(globalMessage){globalMessage.style.color='#a62626';globalMessage.textContent=loginMessage;}openAuthModal();document.getElementById('authMessage').textContent=loginMessage;return}
   if(!document.getElementById('confirmTruth').checked)throw new Error('برای ثبت، واقعی بودن اطلاعات و تصاویر را تأیید کن.');
   if(selectedImages.length>MAX_IMAGES)throw new Error('حداکثر ۵ عکس مجاز است.');
   const phoneValue=document.getElementById('phone').value.trim();if(!/^[0-9۰-۹٠-٩+()\s-]{7,20}$/.test(phoneValue))throw new Error('شماره تماس را درست وارد کن.');
@@ -1923,14 +1934,49 @@ document.getElementById('propertyForm').addEventListener('submit',async function
   const detailsJson={units_per_floor:val('unitsPerFloor'),total_floors:val('totalFloors'),building_direction:val('buildingDirection'),balcony:val('balcony'),floor_material:val('floorMaterial'),bathroom_type:val('bathroomType'),cooling:val('cooling'),heating:val('heating'),hot_water:val('hotWater'),deed_type:val('deedType'),kitchen_type:val('kitchenType'),facade:val('facade'),occupancy_status:val('occupancyStatus'),cabinet_material:val('cabinetMaterial'),bathroom_count:val('bathroomCount'),parking_count:val('parkingCount'),bath_count:val('bathCount'),property_status:val('propertyStatus'),property_direction:val('propertyDirection'),renovated:yes('renovated'),has_loan:yes('hasLoan'),exchange_allowed:yes('exchangeAllowed'),pool:yes('hasPool'),jacuzzi:yes('hasJacuzzi'),sauna:yes('hasSauna'),location_precision:document.querySelector('input[name="locationPrecision"]:checked')?.value||'approximate'};
   const property={owner_id:user.id,title:val('title'),city:val('city'),main_category:main,sub_category:sub,property_type:details.property_type||'',transaction_type:details.transaction_type||'',price:priceValue??0,deposit:rent?depositValue:null,monthly_rent:rent?monthlyRentValue:null,convertible:rent?yes('convertible'):false,area:area??(buildingArea??landArea),land_area:landArea,building_area:buildingArea,bedrooms:val('bedrooms')===''?null:Number(val('bedrooms')),year_built:val('yearBuilt')===''||Number(val('yearBuilt'))===0?null:Number(val('yearBuilt')),floor_number:val('floorNumber')||null,photos_own:val('photosOwn'),elevator:booleanFieldValue('elevator'),parking:booleanFieldValue('parking'),storage:booleanFieldValue('storage'),video_url:videoPath,address:val('address'),description:val('description'),phone:phoneValue,image_url:imagePaths[0]||null,image_urls:imagePaths,status:'pending',location_lat:Number(val('locationLat')),location_lng:Number(val('locationLng')),location_precision:detailsJson.location_precision,details_json:detailsJson};
   const {error}=await db.from('properties').insert([property]);if(error)throw error;
-  message.style.color='green';message.textContent='آگهی با موفقیت ثبت شد و پس از تأیید مدیریت نمایش داده میشود.'+videoWarning;
+  message.style.color='green';message.textContent='آگهی با موفقیت ثبت شد و پس از تأیید مدیریت نمایش داده میشود.'+videoWarning;if(globalMessage){globalMessage.style.color='green';globalMessage.textContent='آگهی ثبت شد و تا زمان تأیید مدیریت خصوصی می‌ماند.'+videoWarning;}
   this.reset();selectedImages=[];selectedVideo=null;showPreview();document.getElementById('videoPreview').textContent='';updatePriceFields();fillSubcategorySelect(mainCategoryInput,subCategoryInput);updatePropertyFields();updatePriceSummary();wizardGoTo(0);document.getElementById('locationLat').value='';document.getElementById('locationLng').value='';if(propertyMap)resetPropertyMap();
- }catch(error){console.error(error);const cleanup=[...imagePaths,...(videoPath?[videoPath]:[])];if(cleanup.length){try{await db.storage.from(BUCKET).remove(cleanup)}catch(cleanupError){console.warn('پاکسازی فایلهای موقت انجام نشد:',cleanupError)}}message.style.color='red';message.textContent='خطا: '+(error.message||'ثبت آگهی انجام نشد. اگر فیلد جدید در دیتابیس نیست، فایل SQL تکمیلی را اجرا کن.')}
+ }catch(error){console.error(error);const cleanup=[...imagePaths,...(videoPath?[videoPath]:[])];if(cleanup.length){try{await db.storage.from(BUCKET).remove(cleanup)}catch(cleanupError){console.warn('پاکسازی فایلهای موقت انجام نشد:',cleanupError)}}message.style.color='red';message.textContent='خطا: '+(error.message||'ثبت آگهی انجام نشد.');if(globalMessage){globalMessage.style.color='red';globalMessage.textContent='ثبت آگهی انجام نشد: '+(error.message||'خطای نامشخص')+'؛ اتصال دیتابیس و فضای ذخیره‌سازی را بررسی کن.'}}
  finally{button.disabled=false;button.textContent='ثبت آگهی'}
 });
 
-function mobileNavHome(){document.getElementById('home').scrollIntoView({behavior:'smooth'});document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===0))}
-function mobileNavMyProperties(){const saved=getFavorites();if(!saved.length){alert('هنوز آگهیای ذخیره نکردهاید. برای نگهداشتن آگهیها، روی «♡ ذخیره آگهی» بزنید.');return}const list=document.getElementById('propertyList');const cards=[...list.querySelectorAll('.property-card')];cards.forEach(card=>{const button=card.querySelector('.favorite-btn');card.style.display=button&&button.classList.contains('saved')?'':'none'});document.getElementById('listings').scrollIntoView({behavior:'smooth'});document.getElementById('resultCount').textContent='آگهیهای ذخیرهشده';document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===1))}
+function mobileNavHome(){loadProperties();document.getElementById('home').scrollIntoView({behavior:'smooth'});document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===0))}
+async function mobileNavMyProperties(){
+ const list=document.getElementById('propertyList'),count=document.getElementById('resultCount');
+ document.getElementById('listings').scrollIntoView({behavior:'smooth'});
+ document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===1));
+ list.innerHTML='<div class="empty">در حال دریافت آگهی‌های حساب شما...</div>';
+ count.textContent='آگهی‌های من';
+ try{
+  const {data:{user},error:authError}=await db.auth.getUser();
+  if(authError)throw authError;
+  if(!user){
+   list.innerHTML='<div class="empty">برای دیدن آگهی‌های ثبت‌شده با همان حسابی که آگهی را ثبت کرده‌ای وارد شو.<br><button type="button" class="btn btn-primary" style="margin-top:12px" onclick="openAuthModal()">ورود به حساب</button></div>';
+   openAuthModal();
+   document.getElementById('authMessage').textContent='برای مشاهده آگهی‌های خود، با حساب ثبت‌کننده وارد شوید.';
+   count.textContent='ورود لازم است';
+   return;
+  }
+  const {data,error}=await db.from('properties').select('id,title,main_category,sub_category,property_type,transaction_type,price,deposit,monthly_rent,convertible,area,bedrooms,year_built,floor_number,photos_own,elevator,parking,storage,video_url,address,city,description,image_url,image_urls,details_json,land_area,building_area,location_lat,location_lng,location_precision,created_at,owner_id,status').eq('owner_id',user.id).order('created_at',{ascending:false}).limit(100);
+  if(error)throw error;
+  if(!data||!data.length){
+   list.innerHTML='<div class="empty">هنوز آگهی‌ای با این حساب ثبت نکرده‌ای.</div>';
+   count.textContent='۰ آگهی';
+   return;
+  }
+  const labels={pending:['در انتظار تأیید','status-pending'],approved:['منتشر شده','status-approved'],rejected:['رد شده','status-rejected']};
+  list.innerHTML=(await Promise.all(data.map(async p=>{
+   const [label,cls]=labels[p.status]||['وضعیت نامشخص','status-pending'];
+   const card=await renderProperty(p);
+   return card.replace('<div class="property-info">','<div class="property-info"><div class="owner-status-badge '+cls+'">'+label+'</div>');
+  }))).join('');
+  count.textContent=data.length.toLocaleString('fa-IR')+' آگهی در حساب شما';
+ }catch(error){
+  console.error('دریافت آگهی‌های شخصی انجام نشد:',error);
+  list.innerHTML='<div class="empty">آگهی‌های شخصی فعلاً قابل دریافت نیستند. سیاست‌های امنیتی دیتابیس باید به‌روزرسانی شوند.<br><small>'+escapeHTML(error.message||'خطای دسترسی')+'</small><br><small>فایل supabase_property_review_security.sql را در SQL Editor پروژه Supabase اجرا کن.</small></div>';
+  count.textContent='خطا در دریافت آگهی‌ها';
+ }
+}
 function openLocationModal(){document.getElementById('locationModal').style.display='block';document.getElementById('locationSearch').value=document.getElementById('searchAddress').value}
 function closeLocationModal(){document.getElementById('locationModal').style.display='none'}
 function applyLocation(){document.getElementById('searchAddress').value=document.getElementById('locationSearch').value.trim();closeLocationModal();loadProperties();document.getElementById('listings').scrollIntoView({behavior:'smooth'});document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===4))}
