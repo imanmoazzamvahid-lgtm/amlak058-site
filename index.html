@@ -1897,18 +1897,19 @@ async function makeSignedImage(path){
   if(!path || typeof path !== 'string') return '';
   const value=path.trim();
   if(!value) return '';
-  // Support older rows that store a complete URL instead of a storage path.
+  // Support legacy rows that stored a full URL instead of a Storage path.
   if(/^https?:\/\//i.test(value) || /^data:image\//i.test(value)) return value;
   // Some older rows may have the bucket name included in the saved path.
   const objectPath=value.replace(/^\/?property-images\//,'').replace(/^\//,'');
   try {
     const {data,error}=await db.storage.from(BUCKET).createSignedUrl(objectPath,3600);
     if(!error && data?.signedUrl) return data.signedUrl;
-    console.warn('Could not sign image URL; trying public URL:', error?.message || 'unknown error');
-  } catch(e) { console.warn('Image signing failed; trying public URL:', e?.message || e); }
-  // The bucket configured in the setup SQL is public; use this as a fallback.
-  const {data}=db.storage.from(BUCKET).getPublicUrl(objectPath);
-  return data?.publicUrl || '';
+    console.warn('Could not create signed URL for private property media:', error?.message || 'unknown error');
+  } catch(e) {
+    console.warn('Signed property media URL failed:', e?.message || e);
+  }
+  // property-images is private; never fall back to a public URL.
+  return '';
 }
 function resetFilters(){['searchCity','searchType','searchAddress','minPrice','maxPrice','minArea','maxArea','searchMainCategory'].forEach(id=>document.getElementById(id).value='');fillSubcategorySelect(searchMainCategory,searchSubCategory);document.getElementById('sortProperties').value='newest';currentTransaction='';document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.transaction===''));loadProperties();}
 function closeDetails(){const modal=document.getElementById('detailsModal');modal.style.display='none';modal.setAttribute('aria-hidden','true')}
