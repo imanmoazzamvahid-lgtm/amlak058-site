@@ -28,6 +28,8 @@ create index if not exists property_requests_status_created_idx on public.proper
 alter table public.property_requests enable row level security;
 grant select, insert, update on table public.property_requests to authenticated;
 grant usage, select on sequence public.property_requests_id_seq to authenticated;
+-- Required because request-table RLS policies check administrator membership.
+grant select on table public.site_admins to authenticated;
 
 drop policy if exists "Users can view own property requests" on public.property_requests;
 create policy "Users can view own property requests" on public.property_requests for select to authenticated
