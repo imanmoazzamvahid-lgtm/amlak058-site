@@ -886,6 +886,29 @@ footer p{font-size:12px;color:#718078}
  .property-actions .btn,.favorite-btn{font-size:9px;padding:5px 6px}
 }
 
+
+/* فاصله‌گذاری واضح بین دسته‌بندی‌ها و آگهی‌ها */
+#categories{margin:42px auto 54px!important;padding-bottom:30px!important;border-bottom:1px solid #e5ece6}
+#categories .categories{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:18px!important;padding:8px 2px 14px!important}
+#categories .category{margin:0!important;min-height:126px!important;border:1px solid #e1eae3!important;border-radius:18px!important;padding:18px 14px!important;background:#fff!important;box-shadow:0 5px 16px rgba(21,61,43,.045)!important}
+#listings,#sampleListings{margin-top:48px!important}
+#listings .section-heading,#sampleListings .section-heading{margin-bottom:22px!important;padding-bottom:15px!important}
+.property-grid{display:grid!important;gap:22px!important;align-items:stretch!important}
+.property-card{margin:0!important;min-width:0!important;border:1px solid #e1eae4!important;border-radius:18px!important;overflow:hidden!important;background:#fff!important}
+@media(min-width:651px){
+ #categories .categories{grid-template-columns:repeat(5,minmax(0,1fr))!important}
+ .property-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+@media(max-width:650px){
+ #categories{margin:30px auto 42px!important;padding-bottom:24px!important}
+ #categories .categories{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:13px!important;padding:4px 1px 10px!important}
+ #categories .category{min-height:92px!important;padding:12px 10px!important;border-radius:15px!important}
+ #listings,#sampleListings{margin-top:36px!important}
+ #listings .section-heading,#sampleListings .section-heading{margin-bottom:16px!important}
+ .property-grid{grid-template-columns:minmax(0,1fr)!important;gap:14px!important}
+ .property-card{margin:0!important;padding:11px!important;border-radius:15px!important}
+}
+
 </style>
 </head><body>
 <header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک بجنورد"><svg viewBox="0 0 48 48" role="img" aria-hidden="true" style="width:29px;height:29px;display:block"><path d="M6 22 24 7l18 15" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 20v21h24V20M20 41V28h8v13" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/></svg></div><div><h1>املاک بجنورد</h1><small>نیازمندیهای املاک بجنورد</small></div></a><nav><a href="#home">صفحه اصلی</a><a href="#categories">دستهبندیها</a><a href="#listings">آگهیها</a></nav><div style="display:flex;gap:7px;align-items:center"><button class="btn btn-outline" id="accountButton" onclick="openAuthModal()">ورود / ثبتنام</button><button class="btn btn-outline" onclick="openInbox()">پیامها</button><button class="btn btn-outline" onclick="openAdminPanel()">مدیریت</button><button class="btn btn-primary" onclick="openModal()">+ ثبت آگهی رایگان</button></div></div></header>
