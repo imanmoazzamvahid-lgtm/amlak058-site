@@ -123,7 +123,7 @@ to authenticated
 with check (
   bucket_id = 'property-images'
   and (storage.foldername(name))[1] = 'pending'
-  and owner_id = (select auth.uid()::text)
+  and owner_id::text = (select auth.uid()::text)
 );
 
 create policy "Property media: owner and public approved read"
@@ -133,7 +133,7 @@ using (
   bucket_id = 'property-images'
   and (
     -- صاحب فایل می‌تواند فایل‌های بارگذاری‌شده با حساب خودش را ببیند.
-    owner_id = (select auth.uid()::text)
+    owner_id::text = (select auth.uid()::text)
     -- عموم فقط رسانه‌های آگهی‌های تأییدشده را می‌خوانند.
     or exists (
       select 1
@@ -141,7 +141,7 @@ using (
       where p.status = 'approved'
         and (
           p.image_url = storage.objects.name
-          or coalesce(p.image_urls, array[]::text[]) @> array[storage.objects.name]::text[]
+          or coalesce(to_jsonb(p.image_urls), '[]'::jsonb) @> jsonb_build_array(storage.objects.name)
           or p.video_url = storage.objects.name
         )
     )
@@ -160,7 +160,7 @@ to authenticated
 using (
   bucket_id = 'property-images'
   and (storage.foldername(name))[1] = 'pending'
-  and owner_id = (select auth.uid()::text)
+  and owner_id::text = (select auth.uid()::text)
 );
 
 create policy "Property media: admins delete"
