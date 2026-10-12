@@ -1824,21 +1824,51 @@ function openModal(){const globalMessage=document.getElementById('publishGlobalM
 function closeModal(){document.getElementById('propertyModal').style.display='none'}
 const wizardTitles=[['مرحله ۱ از ۴: دسته آگهی','دسته و زیردسته را با دقت انتخاب کن؛ بعد از ثبت قابل تغییر نیست.'],['مرحله ۲ از ۴: موقعیت ملک','شهر، محله و نقطه ملک را روی نقشه انتخاب کن.'],['مرحله ۳ از ۴: ویژگیها و تصاویر','فیلدها بر اساس نوع ملک نمایش داده میشوند.'],['مرحله ۴ از ۴: قیمت و تماس','مبلغها را به تومان وارد و پیش از ثبت بررسی کن.']];
 function wizardGoTo(n){currentWizardStep=Math.max(0,Math.min(3,n));document.querySelectorAll('.wizard-step').forEach((el,i)=>el.classList.toggle('active',i===currentWizardStep));document.getElementById('wizardStepTitle').textContent=wizardTitles[currentWizardStep][0];document.getElementById('wizardStepHint').textContent=wizardTitles[currentWizardStep][1];document.getElementById('wizardCounter').textContent='مرحله '+(currentWizardStep+1)+' از ۴';document.getElementById('wizardProgressFill').style.width=((currentWizardStep+1)*25)+'%';document.getElementById('wizardBack').disabled=currentWizardStep===0;document.getElementById('wizardNext').hidden=currentWizardStep===3;document.getElementById('submitBtn').hidden=currentWizardStep!==3;document.getElementById('formMessage').textContent='';}
-function validateWizardStep(n){const section=document.querySelector('.wizard-step[data-step="'+n+'"]');if(!section)return true;const fields=[...section.querySelectorAll('input,select,textarea')].filter(el=>!el.disabled&&!el.closest('[hidden]')&&el.type!=='hidden'&&!el.closest('[hidden]'));for(const field of fields){if(field.required&&!String(field.value||'').trim()){field.reportValidity();return false}}if(n===0){if(!mainCategoryInput.value||!subCategoryInput.value){alert('دسته و زیردستهٔ آگهی را انتخاب کن.');return false}if(!document.getElementById('title').value.trim()){document.getElementById('title').reportValidity();return false}}
- if(n===1){if(!document.getElementById('city').value||!document.getElementById('address').value.trim()){alert('شهر و محلهٔ آگهی را وارد کن.');return false}if(!document.getElementById('locationLat').value||!document.getElementById('locationLng').value){alert('روی نقشه محل ملک را مشخص کن یا مکان فعلی را انتخاب کن.');return false}}
- if(n===2){const kind=getCategoryDetails(mainCategoryInput.value,subCategoryInput.value)?.kind||'';let must=[];if(['apartment','office','shop','commercial','shortApartment','shortOffice','project'].includes(kind))must.push('area');if(['villa','land'].includes(kind))must.push('landArea');if(kind==='villa')must.push('buildingArea');if(['apartment','villa','office','shop','commercial'].includes(kind))must.push('yearBuilt');if(['apartment','office','shop','commercial'].includes(kind))must.push('floorNumber');if(['apartment','villa'].includes(kind))must.push('bedrooms');must.push('photosOwn');for(const id of must){const el=document.getElementById(id);if(el&&!el.value){el.reportValidity();return false}}}
- return true}
-function wizardNext(){
- if(currentWizardStep===1&&(!document.getElementById('locationLat').value||!document.getElementById('locationLng').value)){
-  const centers={'بجنورد':[37.475,57.329],'شیروان':[37.396,57.929],'اسفراین':[37.076,57.51],'فاروج':[37.231,58.219],'آشخانه':[37.561,56.926],'جاجرم':[36.95,56.38],'گرمه':[36.99,56.29],'راز':[37.93,57.11],'صفیآباد':[36.7,57.93]};
-  const c=centers[document.getElementById('city').value]||defaultMapCenter;
-  setPropertyMapPoint(c[0],c[1]);
-  const approximate=document.querySelector('input[name="locationPrecision"][value="approximate"]');if(approximate)approximate.checked=true;
-  updateMapStatus('برای ادامه، مرکز شهر به‌عنوان موقعیت حدودی ثبت شد؛ در صورت نیاز بعداً نشانگر را روی محل دقیق تنظیم کن.');
+function validateWizardStep(n){
+ const section=document.querySelector('.wizard-step[data-step="'+n+'"]');
+ if(!section)return true;
+ const fail=(message,el)=>{if(el){el.focus({preventScroll:false});if(typeof el.reportValidity==='function')el.reportValidity()}else alert(message);return false};
+ if(n===0){
+  const title=document.getElementById('title');
+  if(!title.value.trim())return fail('عنوان آگهی را وارد کن.',title);
+  if(!mainCategoryInput.value)return fail('دستهٔ آگهی را انتخاب کن.',mainCategoryInput);
+  if(!subCategoryInput.value)return fail('ابتدا دستهٔ اصلی و سپس زیردستهٔ آگهی را انتخاب کن.',subCategoryInput);
  }
- if(!validateWizardStep(currentWizardStep))return;
- wizardGoTo(currentWizardStep+1);
- if(currentWizardStep===1){setTimeout(()=>propertyMap?.invalidateSize(),150)}
+ if(n===1){
+  const city=document.getElementById('city'),address=document.getElementById('address');
+  if(!city.value)return fail('شهر محل ملک را انتخاب کن.',city);
+  if(!address.value.trim())return fail('محله یا آدرس ملک را وارد کن.',address);
+  if(!document.getElementById('locationLat').value||!document.getElementById('locationLng').value){
+   const centers={'بجنورد':[37.475,57.329],'شیروان':[37.396,57.929],'اسفراین':[37.076,57.51],'فاروج':[37.231,58.219],'آشخانه':[37.561,56.926],'جاجرم':[36.95,56.38],'گرمه':[36.99,56.29],'راز':[37.93,57.11],'صفی‌آباد':[36.7,57.93]};
+   const c=centers[city.value]||defaultMapCenter;
+   setPropertyMapPoint(c[0],c[1]);
+   const approximate=document.querySelector('input[name="locationPrecision"][value="approximate"]');if(approximate)approximate.checked=true;
+   updateMapStatus('موقعیت حدودی مرکز شهر ثبت شد. می‌توانی نشانگر را جابه‌جا کنی.');
+  }
+ }
+ if(n===2){
+  const kind=getCategoryDetails(mainCategoryInput.value,subCategoryInput.value)?.kind||'';
+  const must=[];
+  if(['apartment','office','shop','commercial','shortApartment','shortOffice','project'].includes(kind))must.push(['area','متراژ']);
+  if(['villa','land'].includes(kind))must.push(['landArea','متراژ زمین']);
+  if(kind==='villa')must.push(['buildingArea','متراژ بنا']);
+  if(['apartment','villa','office','shop','commercial'].includes(kind))must.push(['yearBuilt','سال ساخت']);
+  if(['apartment','office','shop','commercial'].includes(kind))must.push(['floorNumber','طبقه']);
+  if(['apartment','villa'].includes(kind))must.push(['bedrooms','تعداد اتاق']);
+  must.push(['photosOwn','تعلق عکس‌ها به ملک']);
+  for(const [id,label] of must){const el=document.getElementById(id);if(el&&!el.closest('[hidden]')&&!String(el.value||'').trim())return fail('لطفاً فیلد «'+label+'» را تکمیل کن.',el)}
+ }
+ return true;
+}
+function wizardNext(){
+ try{
+  if(!validateWizardStep(currentWizardStep))return;
+  wizardGoTo(currentWizardStep+1);
+  if(currentWizardStep===1)setTimeout(()=>{if(propertyMap)propertyMap.invalidateSize()},150);
+ }catch(error){
+  console.error('Wizard navigation error:',error);
+  alert('رفتن به مرحله بعد با خطا روبه‌رو شد. صفحه را تازه‌سازی کن و دوباره امتحان کن.');
+ }
 }
 function wizardBack(){wizardGoTo(currentWizardStep-1);if(currentWizardStep===1)setTimeout(()=>propertyMap?.invalidateSize(),150)}
 function updateMapStatus(text){const el=document.getElementById('mapStatus');if(el)el.textContent=text}
