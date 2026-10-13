@@ -1,4 +1,4 @@
-const CACHE_NAME = "amlak058-shell-v1";
+const CACHE_NAME = "amlak058-shell-v2";
 const APP_SHELL = ["/", "/manifest.webmanifest", "/icon.svg"];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
@@ -17,7 +17,7 @@ self.addEventListener("fetch", event => {
     }).catch(async () => (await caches.match(request)) || (await caches.match("/"))));
     return;
   }
-  if (["/manifest.webmanifest", "/icon.svg"].includes(url.pathname)) {
-    event.respondWith(caches.match(request).then(cached => cached || fetch(request)));
+  if (url.pathname === "/manifest.webmanifest" || url.pathname === "/icon.svg") {
+    event.respondWith(fetch(request).catch(() => caches.match(request)));
   }
 });
