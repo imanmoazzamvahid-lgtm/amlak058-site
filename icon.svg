@@ -1,8 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-<rect width="512" height="512" rx="112" fill="#12573f"/>
-<path d="M76 237 256 91l180 146" fill="none" stroke="#e4c27a" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M119 218v204h274V218" fill="none" stroke="#fffaf0" stroke-width="22" stroke-linejoin="round"/>
-<path d="M222 422V300h68v122" fill="none" stroke="#e4c27a" stroke-width="20" stroke-linejoin="round"/>
-<rect x="151" y="261" width="40" height="40" rx="5" fill="#fffaf0"/><rect x="321" y="261" width="40" height="40" rx="5" fill="#fffaf0"/>
-<text x="256" y="478" font-family="Tahoma,Arial,sans-serif" font-size="50" font-weight="900" text-anchor="middle" fill="#fffaf0">۰۵۸</text>
+  <rect width="512" height="512" rx="112" fill="#fff"/>
+  <text x="256" y="285" text-anchor="middle" direction="rtl" unicode-bidi="plaintext"
+    font-family="Tahoma, Arial, sans-serif" font-size="102" font-weight="800" fill="#b51227">املاک</text>
+  <text x="256" y="365" text-anchor="middle" direction="rtl" unicode-bidi="plaintext"
+    font-family="Tahoma, Arial, sans-serif" font-size="76" font-weight="800" fill="#b51227">۰۵۸</text>
 </svg>
