@@ -2,15 +2,15 @@
   "id": "/",
   "name": "املاک ۰۵۸ | آگهی ملک بجنورد",
   "short_name": "املاک ۰۵۸",
-  "description": "سامانه ثبت و جست‌وجوی آگهی ملک در بجنورد",
+  "description": "سامانه رایگان ثبت و جست‌وجوی آگهی خرید، فروش، رهن و اجاره ملک در بجنورد",
   "lang": "fa",
   "dir": "rtl",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#fbfaf6",
-  "theme_color": "#12573f",
+  "background_color": "#F7F3EA",
+  "theme_color": "#174B3A",
   "categories": [
     "business",
     "lifestyle"
