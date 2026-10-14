@@ -2060,9 +2060,22 @@ document.getElementById('propertyForm').addEventListener('submit',async function
  e.preventDefault();if(currentWizardStep!==3){const g=document.getElementById('publishGlobalMessage');if(g){g.style.color='#b00020';g.textContent='برای جلوگیری از ثبت ناقص، فرم را تا مرحله ۴ از ۴ ادامه بده و سپس ثبت آگهی را بزن.';g.scrollIntoView({block:'nearest',behavior:'smooth'});}wizardGoTo(currentWizardStep);return}for(let i=0;i<4;i++){if(!validateWizardStep(i)){wizardGoTo(i);return}}
  const button=document.getElementById('submitBtn'),message=document.getElementById('formMessage'),globalMessage=document.getElementById('publishGlobalMessage');button.disabled=true;button.textContent='در حال ثبت...';message.textContent='';if(globalMessage){globalMessage.textContent='';globalMessage.style.color='';}let imagePaths=[],videoPath=null,imageWarning='',videoWarning='';
  try{
-  const {data:{user},error:authError}=await db.auth.getUser();
-  if(authError)throw new Error('بررسی ورود ناموفق بود: '+authError.message);
-  if(!user){const loginMessage='برای ثبت آگهی ابتدا با شماره موبایل وارد شوید.';message.style.color='#a62626';message.textContent=loginMessage;if(globalMessage){globalMessage.style.color='#a62626';globalMessage.textContent=loginMessage;}openAuthModal();document.getElementById('authMessage').textContent=loginMessage;return}
+  // Read the persisted Supabase session first. getUser() can throw `Auth session missing`
+  // when no session exists, which previously masked the real sign-in state.
+  let session=null;
+  const {data:sessionData,error:sessionError}=await db.auth.getSession();
+  if(sessionError)throw new Error('بررسی نشست ورود ناموفق بود: '+sessionError.message);
+  session=sessionData?.session||null;
+  if(!session){
+    message.style.color='#a62626';
+    message.textContent='نشست ورود پیدا نشد. فرم شما پاک نمی‌شود؛ وارد حساب شوید و دوباره «ثبت آگهی» را بزنید.';
+    if(globalMessage){globalMessage.style.color='#a62626';globalMessage.textContent='برای ثبت آگهی باید وارد حساب شوید. اطلاعات فرم را نگه دارید، وارد شوید و دوباره ثبت را بزنید.';}
+    openAuthModal();
+    document.getElementById('authMessage').textContent='نشست ورود فعال نیست. با شماره موبایل وارد شوید و سپس دوباره ثبت آگهی را بزنید.';
+    return;
+  }
+  const user=session.user;
+  if(!user?.id)throw new Error('حساب کاربری نشست معتبری ندارد؛ یک بار خارج شوید و دوباره وارد شوید.');
   if(!document.getElementById('confirmTruth').checked)throw new Error('برای ثبت، واقعی بودن اطلاعات و تصاویر را تأیید کن.');
   if(selectedImages.length>MAX_IMAGES)throw new Error('حداکثر ۵ عکس مجاز است.');
   const phoneValue=document.getElementById('phone').value.trim();if(!/^[0-9۰-۹٠-٩+()\s-]{7,20}$/.test(phoneValue))throw new Error('شماره تماس را درست وارد کن.');
