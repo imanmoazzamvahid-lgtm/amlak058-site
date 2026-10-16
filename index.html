@@ -2148,7 +2148,7 @@ function resetPropertyMap(){if(!propertyMap)initPropertyMap();if(!propertyMap)re
 document.getElementById('propertyModal').addEventListener('click',e=>{if(e.target.id==='propertyModal')closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 function chooseCategory(type){document.getElementById('searchType').value=type;document.getElementById('listings').scrollIntoView({behavior:'smooth'});loadProperties()}
 function setTransaction(type,button){currentTransaction=type;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.transaction===type));loadProperties()}
-document.getElementById('searchAddress').addEventListener('keydown',e=>{if(e.key==='Enter')loadProperties()});
+document.getElementById('searchAddress').addEventListener('keydown',e=>{if(e.key==='Enter')loadProperties()});document.getElementById('searchKeyword')?.addEventListener('keydown',e=>{if(e.key==='Enter'){loadProperties();document.getElementById('listings').scrollIntoView({behavior:'smooth'})}});
 ['minPrice','maxPrice','minArea','maxArea','sortProperties','searchType','searchCity'].forEach(id=>document.getElementById(id).addEventListener('change',loadProperties));
 function escapeHTML(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function formatPrice(value){const n=Number(value);return Number.isFinite(n)?n.toLocaleString('fa-IR')+' تومان':'تماس بگیرید'}
