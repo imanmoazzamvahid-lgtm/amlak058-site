@@ -828,7 +828,7 @@ footer p{font-size:12px;color:#718078}
  header .header-inner nav{display:none}
  header .header-inner>div:last-child{gap:6px!important}
  header .header-inner>div:last-child .btn{font-size:10px;padding:8px 9px;border-radius:10px}
- header button[onclick="openInbox()"],header button[onclick="openAdminPanel()"]{display:none!important}
+ header button[onclick="openInbox()"]{display:none!important}
  header button[onclick="openModal()"]{display:none!important}
  .hero.container,#home.hero.container{min-height:0!important;padding:25px 4% 22px!important;background-image:radial-gradient(circle at 95% 12%,rgba(255,255,255,.85),transparent 28%),linear-gradient(140deg,#e3f2e8,#f7faf4 80%)!important}
  #home.hero.container:before{left:auto!important;right:0!important;width:58%!important;height:32%!important;opacity:.12!important;background-size:contain!important;background-position:right bottom!important}
@@ -1643,6 +1643,7 @@ header .brand h1 .brand-number{font-size:1.18em!important;font-weight:1000!impor
 </head><body>
 
 <header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک ۰۵۸"><svg viewBox="0 0 64 64" role="img" aria-hidden="true" style="width:35px;height:35px;display:block"><path d="M6 29 32 7 58 29" fill="none" stroke="#c59a45" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 27v29h38V27" fill="none" stroke="#f8f3e7" stroke-width="3.2" stroke-linejoin="round"/><path d="M26 56V39h12v17" fill="none" stroke="#c59a45" stroke-width="3.2" stroke-linejoin="round"/><path d="M19 33h6v6h-6zm20 0h6v6h-6z" fill="#c59a45"/></svg></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>بازار آنلاین ملک بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
+  <button class="btn btn-outline" id="adminAccessButton" onclick="openAdminPanel()">پنل مدیریت</button>
   <button class="btn btn-outline" id="accountButton" onclick="openAuthModal()">ورود / ثبت‌نام</button>
   <button class="btn btn-primary" onclick="openModal()">+ ثبت آگهی رایگان</button>
 </div></div></div></header>
@@ -2172,7 +2173,7 @@ async function loadPublicSiteSettings(){try{const {data,error}=await db.from('si
 async function openAdminPanel(){
  const modal=document.getElementById('adminModal'),msg=document.getElementById('adminMessage'),controls=document.getElementById('adminControls');
  modal.style.display='block';controls.style.display='none';msg.textContent='در حال بررسی دسترسی...';msg.style.color='';
- try{const {data:{user},error:authError}=await db.auth.getUser();if(authError)throw authError;if(!user){msg.textContent='ابتدا با ایمیل مدیر وارد شوید.';openAuthModal();return}
+ try{const {data:{user},error:authError}=await db.auth.getUser();if(authError)throw authError;if(!user){msg.textContent='ابتدا با حساب مدیر وارد شوید.';openAuthModal();return}
  const {data:admin,error}=await db.from('site_admins').select('user_id').eq('user_id',user.id).maybeSingle();if(error)throw new Error('جدول دسترسی مدیران آماده نیست. فایل SQL تنظیمات را اجرا کنید. '+error.message);if(!admin){msg.textContent='این حساب دسترسی مدیریت ندارد. شناسه حساب: '+user.id;return}
  msg.style.color='green';msg.textContent='دسترسی مدیر تأیید شد.';controls.style.display='block';await loadAdminProperties('pending');
  }catch(e){msg.style.color='#b00020';msg.textContent='خطا: '+(e.message||'بررسی دسترسی ناموفق بود')}}
