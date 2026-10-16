@@ -1790,6 +1790,47 @@ header{position:sticky;top:0;z-index:80;background:#fff!important;border-bottom:
  #requestStrip{margin:16px 12px!important;padding:16px!important}
 }
 </style>
+
+<style id="amlak058-mobile-classifieds-fix">
+/* Search-first, classifieds-style mobile layout */
+@media(max-width:700px){
+  header .header-inner{padding:8px 12px!important;min-height:58px!important}
+  #home.request-hero{padding:12px 14px!important;margin:0!important;border-radius:0!important;min-height:0!important;background:#f7f7f7!important}
+  #home .request-hero-copy{padding:0!important;margin:0!important}
+  #home #amlak058-brand-hero-v6{display:none!important}
+  #home h1{font-size:21px!important;margin:0 0 5px!important}
+  #home p{font-size:13px!important;margin:0 0 8px!important}
+  #home .request-hero-actions{margin:8px 0 0!important;gap:8px!important}
+  #home .request-hero-actions .btn{min-height:42px!important;padding:10px 14px!important}
+  #search.search-section{padding:14px 12px!important;margin:0 auto!important;scroll-margin-top:70px}
+  #search .search-section-heading{margin:0 0 10px!important}
+  #search .search-section-heading h2{font-size:20px!important;margin:0!important}
+  #search .search-section-heading p{display:none!important}
+  #search .search-panel{padding:12px!important;gap:10px!important;border-radius:16px!important}
+  #search .search-field{min-width:0!important}
+  #search input,#search select{min-height:48px!important;font-size:15px!important}
+  #categories{padding:12px!important;margin-top:0!important}
+  #listings{padding:16px 12px!important}
+  #listings h2{font-size:21px!important}
+  #installAppButton,#installAppPrompt,.install-app-banner,.pwa-install-banner{z-index:40!important}
+  body{padding-bottom:76px!important}
+}
+@media(min-width:701px){
+  #home #amlak058-brand-hero-v6{max-width:240px}
+}
+</style>
+<script id="amlak058-search-first-layout">
+(function(){
+ function rearrange(){
+  var main=document.querySelector('main'),home=document.getElementById('home'),search=document.getElementById('search');
+  if(main&&home&&search&&home.nextElementSibling!==search)main.insertBefore(search,home);
+  var install=document.getElementById('installAppButton');
+  if(install){install.style.position='fixed';install.style.right='14px';install.style.bottom='86px';install.style.zIndex='45';install.style.maxWidth='calc(100vw - 28px)'}
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',rearrange);else rearrange();
+})();
+</script>
+
 </head><body>
 
 <header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک ۰۵۸"><svg viewBox="0 0 64 64" role="img" aria-hidden="true" style="width:35px;height:35px;display:block"><path d="M6 29 32 7 58 29" fill="none" stroke="#c59a45" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 27v29h38V27" fill="none" stroke="#f8f3e7" stroke-width="3.2" stroke-linejoin="round"/><path d="M26 56V39h12v17" fill="none" stroke="#c59a45" stroke-width="3.2" stroke-linejoin="round"/><path d="M19 33h6v6h-6zm20 0h6v6h-6z" fill="#c59a45"/></svg></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>بازار آنلاین ملک بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
