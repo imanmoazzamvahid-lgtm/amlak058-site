@@ -2202,6 +2202,7 @@ async function setAdminRequestStatus(id,status){try{const {error}=await db.from(
 const savedOpenAdminPanelForRequests=openAdminPanel;
 openAdminPanel=async function(){await savedOpenAdminPanelForRequests();const {data:{user}}=await db.auth.getUser();if(user){const {data:admin}=await db.from('site_admins').select('user_id').eq('user_id',user.id).maybeSingle();if(admin)loadAdminRequests('pending')}}
 
+if(location.hash==='#admin'){openAdminPanel();}
 renderSampleListings();loadPublicSiteSettings();loadProperties();refreshAuthState();
 </script>
 <script>
