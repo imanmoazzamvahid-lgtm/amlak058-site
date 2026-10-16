@@ -2245,7 +2245,17 @@ renderSampleListings();loadPublicSiteSettings();loadProperties();refreshAuthStat
     event.preventDefault();
     event.stopPropagation();
     if(event.stopImmediatePropagation) event.stopImmediatePropagation();
-    showStep(currentStep()+1);
+    var step=currentStep();
+    /* Validate the visible step before allowing navigation. */
+    try {
+      if(typeof window.validateWizardStep === 'function' && !window.validateWizardStep(step)) return;
+    } catch (validationError) {
+      console.error('Listing step validation failed:', validationError);
+      var globalMsg=document.getElementById('publishGlobalMessage');
+      if(globalMsg){globalMsg.style.color='#b00020';globalMsg.textContent='بررسی اطلاعات این مرحله انجام نشد. موارد واردشده را بررسی و دوباره تلاش کن.';}
+      return;
+    }
+    showStep(step+1);
   }, true);
 })();
 </script>
