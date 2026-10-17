@@ -1834,6 +1834,134 @@ header{position:sticky;top:0;z-index:80;background:#fff!important;border-bottom:
 
 
 
+
+<style id="amlak058-property-detail-page-v1">
+#propertyDetailPage[hidden],#pdContent[hidden],#pdLoading[hidden],#pdSafetyPanel[hidden],#pdExtraDetails[hidden],#pdReportInfo[hidden]{display:none!important}
+#propertyDetailPage{width:min(870px,calc(100% - 28px))!important;max-width:870px!important;margin:24px auto 56px!important;color:#343a36!important;direction:rtl!important;font-family:Tahoma,Arial,sans-serif!important;line-height:1.85!important;min-height:65vh}
+.pd-page-tools{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;margin:0 0 22px!important;padding:0 0 12px!important;border-bottom:1px solid #efefef!important}
+.pd-back-button{display:inline-flex!important;align-items:center!important;gap:5px!important;border:0!important;background:transparent!important;color:#426452!important;font-size:12px!important;font-weight:700!important;cursor:pointer!important;white-space:nowrap!important;padding:4px 0!important}
+.pd-back-button span{font-size:22px!important;line-height:1!important}
+.pd-breadcrumb{display:flex!important;align-items:center!important;gap:8px!important;flex-wrap:wrap!important;font-size:10px!important;color:#9b9f9c!important}
+.pd-breadcrumb span:first-child{color:#47745b!important;font-weight:800!important}
+.pd-breadcrumb b{font-size:19px!important;color:#c0c4c0!important;font-weight:400!important}
+.pd-loading{display:flex!important;align-items:center!important;justify-content:center!important;gap:12px!important;min-height:260px!important;color:#7b847d!important;font-size:13px!important}
+.pd-loading-spinner{width:20px!important;height:20px!important;border:2px solid #dfe8e1!important;border-top-color:#187552!important;border-radius:50%!important;animation:pdspin .8s linear infinite!important}
+@keyframes pdspin{to{transform:rotate(360deg)}}
+.pd-layout{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:40px!important;align-items:start!important;direction:rtl!important}
+.pd-info-column,.pd-media-column{min-width:0!important;display:flex!important;flex-direction:column!important;gap:16px!important}
+.pd-property-heading{padding:0!important;margin:0!important}
+.pd-label-line{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;margin:0 0 7px!important}
+.pd-category-tag{display:inline-flex!important;align-items:center!important;padding:3px 8px!important;background:#f1f6f2!important;color:#326b4e!important;border:1px solid #e3eee5!important;border-radius:5px!important;font-size:10px!important;font-weight:700!important}
+.pd-muted{font-size:10px!important;color:#929993!important}
+.pd-property-heading h1{font-size:21px!important;font-weight:800!important;line-height:1.7!important;color:#252d28!important;margin:0 0 5px!important;letter-spacing:0!important}
+.pd-location-line{display:flex!important;align-items:center!important;gap:6px!important;margin:0 0 14px!important;color:#737b76!important;font-size:11px!important;line-height:1.8!important}
+.pd-location-line span{font-size:17px!important;color:#858f88!important}
+.pd-safety-link{display:flex!important;align-items:center!important;gap:8px!important;width:100%!important;border:0!important;border-top:1px solid #f0f1f0!important;border-bottom:1px solid #f0f1f0!important;background:#fff!important;padding:10px 0!important;text-align:right!important;color:#7b7064!important;font:600 11px Tahoma,Arial,sans-serif!important;cursor:pointer!important}
+.pd-safety-link>span:first-child{font-size:15px!important;color:#8b8175!important}
+.pd-safety-link .pd-chevron{margin-right:auto!important;font-size:22px!important;color:#adb2ad!important}
+.pd-safety-panel{padding:11px 12px!important;background:#fff8ec!important;border-right:3px solid #d6b16a!important;color:#73644c!important;font-size:11px!important;line-height:1.9!important;border-radius:0 6px 6px 0!important;margin-top:8px!important}
+.pd-contact-row{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;margin:12px 0 18px!important}
+.pd-contact-button{min-width:125px!important;padding:10px 15px!important;border:1px solid #176c50!important;border-radius:5px!important;background:#176c50!important;color:#fff!important;font:700 12px Tahoma,Arial,sans-serif!important;cursor:pointer!important;box-shadow:0 2px 4px #176c500c!important}
+.pd-contact-button:hover{background:#0f5b41!important}
+.pd-small-actions{display:flex!important;align-items:center!important;gap:5px!important}
+.pd-icon-action{width:33px!important;height:33px!important;display:inline-grid!important;place-items:center!important;border:1px solid #e8ece8!important;border-radius:5px!important;background:#fff!important;color:#6f7d73!important;font:22px Tahoma,Arial,sans-serif!important;cursor:pointer!important}
+.pd-icon-action.saved{color:#176c50!important;background:#edf7f0!important;border-color:#cce4d2!important}
+.pd-summary-metrics{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important;margin:0 0 2px!important;border-bottom:1px solid #e9ece9!important;padding:0 0 13px!important}
+.pd-metric{display:flex!important;flex-direction:column!important;align-items:center!important;gap:3px!important;padding:0 5px!important;border-left:1px solid #e8ebe8!important;text-align:center!important;min-width:0!important}
+.pd-metric:last-child{border-left:0!important}
+.pd-metric span{font-size:10px!important;color:#9a9f9b!important}
+.pd-metric strong{font-size:14px!important;font-weight:800!important;color:#3e4741!important;white-space:nowrap!important}
+.pd-price-table{margin:0!important;border-top:0!important}
+.pd-price-row{display:flex!important;justify-content:space-between!important;align-items:flex-start!important;gap:10px!important;padding:10px 0!important;border-bottom:1px solid #e9ece9!important;font-size:11px!important;line-height:1.8!important}
+.pd-price-row span{color:#8a918c!important;flex:0 0 auto!important}
+.pd-price-row strong{font-size:11px!important;color:#39443d!important;font-weight:700!important;text-align:left!important;overflow-wrap:anywhere!important}
+.pd-price-row.primary-price strong{font-size:13px!important;color:#176c50!important}
+.pd-features-section,.pd-description-section,.pd-questions-section{margin:0!important;padding:0!important}
+.pd-features-section h2,.pd-description-section h2,.pd-questions-section h2{font-size:14px!important;font-weight:800!important;color:#333b35!important;margin:1px 0 12px!important}
+.pd-feature-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important;border-bottom:1px solid #e8ece8!important;padding:5px 0 14px!important}
+.pd-feature-item{display:flex!important;flex-direction:column!important;align-items:center!important;gap:4px!important;padding:4px!important;text-align:center!important;border-left:1px solid #e8ece8!important;min-width:0!important}
+.pd-feature-item:nth-child(3n){border-left:0!important}
+.pd-feature-icon{width:32px!important;height:32px!important;display:grid!important;place-items:center!important;color:#626e65!important;font-size:21px!important}
+.pd-feature-item strong{font-size:10px!important;font-weight:700!important;color:#4f5b52!important}
+.pd-feature-item span{font-size:10px!important;color:#878f89!important}
+.pd-extra-details{display:grid!important;grid-template-columns:1fr 1fr!important;gap:6px!important;padding-top:10px!important}
+.pd-extra-details .detail-row{margin:0!important;border:1px solid #edf0ed!important;border-radius:5px!important;background:#fafbfa!important;font-size:10px!important;padding:7px 8px!important;line-height:1.7!important}
+.pd-expand-details{display:flex!important;align-items:center!important;justify-content:space-between!important;width:100%!important;border:0!important;border-bottom:1px solid #e9ece9!important;background:#fff!important;color:#737d75!important;padding:11px 0!important;text-align:right!important;font:600 11px Tahoma,Arial,sans-serif!important;cursor:pointer!important}
+.pd-expand-details span{font-size:18px!important}
+.pd-description-section{padding-top:1px!important}
+.pd-description-section p{font-size:11px!important;color:#5e6860!important;line-height:2.15!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;margin:0!important}
+.pd-description-footer{font-size:10px!important;color:#9ba19c!important;margin-top:12px!important;padding-top:9px!important;border-top:1px solid #eff1ef!important}
+.pd-section-caption{font-size:10px!important;color:#959c96!important;margin:-6px 0 10px!important}
+.pd-question-list{display:flex!important;flex-direction:column!important;gap:0!important}
+.pd-question-button{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;padding:11px 2px!important;border:0!important;border-bottom:1px solid #eceeec!important;background:#fff!important;color:#68736b!important;text-align:right!important;font:11px/1.8 Tahoma,Arial,sans-serif!important;cursor:pointer!important}
+.pd-question-button span:last-child{color:#aeb4af!important;font-size:18px!important}
+.pd-question-button:hover{color:#176c50!important}
+.pd-gallery{display:flex!important;flex-direction:column!important;gap:4px!important;width:100%!important;overflow:hidden!important}
+.pd-gallery-main{position:relative!important;display:block!important;width:100%!important;height:202px!important;max-height:none!important;padding:0!important;border:0!important;border-radius:0!important;overflow:hidden!important;background:#f0f2f0!important;cursor:zoom-in!important}
+.pd-gallery-main img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important}
+.pd-gallery-counter{position:absolute!important;bottom:9px!important;left:9px!important;border-radius:4px!important;background:#171a17b8!important;color:#fff!important;padding:3px 7px!important;font-size:10px!important;direction:ltr!important}
+.pd-gallery-secondary{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:4px!important}
+.pd-gallery-tile{height:110px!important;padding:0!important;border:0!important;border-radius:0!important;overflow:hidden!important;position:relative!important;background:#eef0ed!important;cursor:pointer!important;min-width:0!important}
+.pd-gallery-tile img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important}
+.pd-gallery-tile.active:after{content:"";position:absolute;inset:0;border:2px solid #176c50;pointer-events:none}
+.pd-gallery-tile.more-photos:after{content:attr(data-more)!important;position:absolute!important;inset:0!important;display:grid!important;place-items:center!important;background:#101a13a6!important;color:#fff!important;font-weight:800!important;font-size:16px!important}
+.pd-gallery-thumbs{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:7px!important;flex-wrap:wrap!important;padding:8px 0 2px!important}
+.pd-gallery-thumb{width:54px!important;height:54px!important;border:1px solid #e5e9e5!important;border-radius:4px!important;padding:0!important;background:#f5f6f5!important;overflow:hidden!important;cursor:pointer!important}
+.pd-gallery-thumb img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important}
+.pd-gallery-thumb.active{border:2px solid #176c50!important}
+.pd-gallery-empty{min-height:235px!important;display:grid!important;place-items:center!important;border:1px solid #eceeec!important;background:#f6f7f6!important;color:#8d968e!important;font-size:12px!important}
+.pd-gallery-caption{font-size:10px!important;color:#a2a6a3!important;margin:0!important;min-height:0!important}
+.pd-note-card{border:1px solid #dedfdd!important;border-radius:4px!important;background:#fff!important;padding:8px!important;margin:0!important}
+.pd-note-card label{display:block!important;font-size:11px!important;color:#5f6b62!important;font-weight:700!important;margin-bottom:4px!important}
+.pd-note-card textarea{width:100%!important;min-height:74px!important;resize:vertical!important;border:0!important;outline:0!important;box-shadow:none!important;border-radius:0!important;background:#fff!important;padding:2px!important;font:11px/1.9 Tahoma,Arial,sans-serif!important;color:#39463d!important}
+.pd-note-foot{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:6px!important;font-size:9px!important;color:#9da39e!important}
+#pdMapSection .full{margin:0!important;width:100%!important}
+#pdMapSection .full h3{font-size:13px!important;color:#434e46!important;font-weight:800!important}
+#pdMapSection .full iframe{display:block!important;width:100%!important;height:220px!important;border:1px solid #e3e8e3!important;border-radius:3px!important}
+#pdMapSection .full p{font-size:9px!important;line-height:1.7!important;color:#929a94!important}
+.pd-map-placeholder{min-height:130px!important;padding:15px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:6px!important;border:1px solid #e6eae6!important;background:#f8f9f8!important;color:#7b877e!important;text-align:center!important;font-size:11px!important}
+.pd-map-placeholder strong{font-size:13px!important;color:#59685d!important}
+.pd-agency-card{padding:14px!important;border:1px solid #e7eae7!important;border-radius:5px!important;background:#fff!important}
+.pd-agency-brand{display:flex!important;align-items:center!important;gap:10px!important}
+.pd-agency-mark{width:42px!important;height:42px!important;display:grid!important;place-items:center!important;flex:0 0 42px!important;border-radius:9px!important;background:#edf6ef!important;border:1px solid #dcebe0!important;color:#176c50!important;font-size:13px!important;font-weight:900!important}
+.pd-agency-brand h2{font-size:13px!important;font-weight:800!important;color:#333e36!important;margin:0!important}
+.pd-agency-brand p{font-size:10px!important;color:#8b948d!important;margin:3px 0 0!important}
+.pd-agency-divider{height:1px!important;background:#eceeec!important;margin:12px 0 9px!important}
+.pd-agency-bottom{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;color:#8c958e!important;font-size:10px!important}
+.pd-agency-bottom button{border:0!important;background:transparent!important;color:#4c7058!important;font:700 10px Tahoma,Arial,sans-serif!important;cursor:pointer!important}
+.pd-report-button{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;width:100%!important;padding:11px 13px!important;border:1px solid #e9ece9!important;border-radius:4px!important;background:#fff!important;color:#707a72!important;text-align:right!important;font:600 11px Tahoma,Arial,sans-serif!important;cursor:pointer!important}
+.pd-report-button span{font-size:16px!important}
+.pd-report-info{padding:10px!important;background:#fff8ed!important;border:1px solid #f0e1c3!important;border-radius:4px!important;font-size:10px!important;color:#78674e!important;line-height:1.9!important}
+.property-detail-page .pd-price-row .price-value{direction:rtl!important}
+.property-detail-page button:focus-visible{outline:2px solid #7eb99a!important;outline-offset:2px!important}
+@media(max-width:760px){
+ #propertyDetailPage{width:calc(100% - 24px)!important;margin:13px auto 42px!important}
+ .pd-page-tools{margin-bottom:12px!important;padding-bottom:9px!important}
+ .pd-breadcrumb{font-size:9px!important;gap:5px!important}
+ .pd-back-button{font-size:10px!important}
+ .pd-layout{display:flex!important;flex-direction:column!important;gap:17px!important}
+ .pd-media-column{order:0!important;width:100%!important}
+ .pd-info-column{order:1!important;width:100%!important}
+ .pd-info-column,.pd-media-column{gap:13px!important}
+ .pd-gallery-main{height:auto!important;aspect-ratio:1.72/1!important}
+ .pd-gallery-tile{height:auto!important;aspect-ratio:1.18/1!important}
+ .pd-gallery-thumbs{gap:6px!important}
+ .pd-gallery-thumb{width:46px!important;height:46px!important}
+ .pd-contact-row{margin:9px 0 13px!important}
+ .pd-property-heading h1{font-size:19px!important}
+ .pd-summary-metrics{padding-bottom:10px!important}
+ .pd-price-row{padding:9px 0!important}
+ .pd-feature-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ .pd-note-card textarea{min-height:62px!important}
+ #pdMapSection .full iframe{height:190px!important}
+}
+@media(max-width:380px){
+ .pd-gallery-main{aspect-ratio:1.45/1!important}
+ .pd-property-heading h1{font-size:17px!important}
+ .pd-price-row{font-size:10px!important}
+}
+</style>
+
 </head><body>
 
 <header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک ۰۵۸"><svg viewBox="0 0 64 64" role="img" aria-hidden="true" style="width:35px;height:35px;display:block"><path d="M6 29 32 7 58 29" fill="none" stroke="#c59a45" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 27v29h38V27" fill="none" stroke="#f8f3e7" stroke-width="3.2" stroke-linejoin="round"/><path d="M26 56V39h12v17" fill="none" stroke="#c59a45" stroke-width="3.2" stroke-linejoin="round"/><path d="M19 33h6v6h-6zm20 0h6v6h-6z" fill="#c59a45"/></svg></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>بازار آنلاین ملک بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
@@ -1957,6 +2085,73 @@ header{position:sticky;top:0;z-index:80;background:#fff!important;border-bottom:
       <section id="accountDynamicPanel" class="account-dynamic-panel" hidden>
         <div class="account-dynamic-heading"><button type="button" onclick="showAccountHome()" aria-label="بازگشت">›</button><div><h2 id="accountDynamicTitle">بخش حساب</h2><p id="accountDynamicSubtitle">اطلاعات حساب شما</p></div></div>
         <div id="accountDynamicContent" class="account-dynamic-content"></div>
+      </section>
+    </div>
+  </div>
+</section>
+
+
+<section id="propertyDetailPage" class="property-detail-page container" hidden aria-label="جزئیات آگهی ملک">
+  <div class="pd-page-tools">
+    <button type="button" class="pd-back-button" onclick="closePropertyDetailPage(true)"><span aria-hidden="true">›</span> بازگشت به آگهی‌ها</button>
+    <div class="pd-breadcrumb" id="pdBreadcrumb"><span>املاک ۰۵۸</span><b>‹</b><span>جزئیات آگهی</span></div>
+  </div>
+  <div id="pdLoading" class="pd-loading"><span class="pd-loading-spinner"></span> در حال بارگذاری جزئیات آگهی...</div>
+  <div id="pdContent" hidden>
+    <div class="pd-layout">
+      <section class="pd-info-column">
+        <div class="pd-property-heading">
+          <div class="pd-label-line"><span id="pdCategoryTag" class="pd-category-tag">آگهی ملک</span><span id="pdTimeAgo" class="pd-muted"></span></div>
+          <h1 id="pdTitle"></h1>
+          <p id="pdLocationLine" class="pd-location-line"><span aria-hidden="true">⌖</span></p>
+          <button type="button" class="pd-safety-link" onclick="pdToggleSafety()"><span aria-hidden="true">⚠</span> زنگ خطرهای قبل از معامله <span class="pd-chevron">‹</span></button>
+          <div id="pdSafetyPanel" class="pd-safety-panel" hidden>
+            پیش از پرداخت وجه، ملک و مدارک مالکیت را حضوری بررسی کن. برای بازدید و دریافت اطلاعات، از اطلاعات تماس همین آگهی استفاده کن و پیش از احراز هویت، بیعانه واریز نکن.
+          </div>
+          <div class="pd-contact-row">
+            <button type="button" class="pd-contact-button" id="pdContactButton">اطلاعات تماس</button>
+            <div class="pd-small-actions">
+              <button type="button" class="pd-icon-action" title="اشتراک‌گذاری آگهی" aria-label="اشتراک‌گذاری آگهی" onclick="pdShareListing()">⌯</button>
+              <button type="button" class="pd-icon-action" id="pdFavoriteButton" title="ذخیره آگهی" aria-label="ذخیره آگهی" onclick="pdToggleFavorite()">♡</button>
+            </div>
+          </div>
+        </div>
+        <div class="pd-summary-metrics" id="pdSummaryMetrics"></div>
+        <div class="pd-price-table" id="pdPriceTable"></div>
+        <section class="pd-features-section">
+          <h2>ویژگی‌ها و امکانات</h2>
+          <div class="pd-feature-grid" id="pdFeatureGrid"></div>
+          <div id="pdExtraDetails" class="pd-extra-details"></div>
+          <button class="pd-expand-details" type="button" onclick="pdToggleExtraDetails()">سایر ویژگی‌ها و امکانات <span>⌄</span></button>
+        </section>
+        <section class="pd-description-section">
+          <h2>توضیحات</h2>
+          <p id="pdDescription"></p>
+          <div class="pd-description-footer" id="pdDescriptionFooter"></div>
+        </section>
+        <section class="pd-questions-section" id="pdQuestionsSection">
+          <h2>سؤالی درباره این ملک داری؟</h2>
+          <p class="pd-section-caption">برای شروع گفت‌وگو یکی از موضوع‌ها را انتخاب کن.</p>
+          <div class="pd-question-list" id="pdQuestionList"></div>
+        </section>
+      </section>
+
+      <section class="pd-media-column">
+        <div class="pd-gallery" id="pdGallery"></div>
+        <div class="pd-gallery-caption" id="pdGalleryCaption"></div>
+        <section class="pd-note-card">
+          <label for="pdPersonalNote">یادداشت شخصی شما</label>
+          <textarea id="pdPersonalNote" rows="3" maxlength="1500" placeholder="یادداشت شما..."></textarea>
+          <div class="pd-note-foot"><span>این یادداشت فقط روی همین مرورگر ذخیره می‌شود.</span><span id="pdNoteStatus"></span></div>
+        </section>
+        <div class="pd-map-section" id="pdMapSection"></div>
+        <section class="pd-agency-card">
+          <div class="pd-agency-brand"><div class="pd-agency-mark" aria-hidden="true">۰۵۸</div><div><h2>املاک ۰۵۸</h2><p>بازار آنلاین ملک بجنورد</p></div></div>
+          <div class="pd-agency-divider"></div>
+          <div class="pd-agency-bottom"><span>ثبت و جست‌وجوی آگهی ملک</span><button type="button" onclick="closePropertyDetailPage(true)">همه آگهی‌ها <span>‹</span></button></div>
+        </section>
+        <button type="button" class="pd-report-button" onclick="pdShowReportInfo()"><span aria-hidden="true">ⓘ</span> گزارش آگهی</button>
+        <div id="pdReportInfo" class="pd-report-info" hidden>اگر اطلاعات ملک نادرست یا مشکوک است، پیش از هر پرداخت، مدارک و هویت آگهی‌دهنده را بررسی کن. ارسال گزارش آنلاین هنوز در سایت فعال نشده است.</div>
       </section>
     </div>
   </div>
@@ -2296,10 +2491,10 @@ async function makeSignedImage(path){
   return '';
 }
 function resetFilters(){['searchCity','searchType','searchAddress','minPrice','maxPrice','minArea','maxArea','searchMainCategory'].forEach(id=>document.getElementById(id).value='');fillSubcategorySelect(searchMainCategory,searchSubCategory);document.getElementById('sortProperties').value='newest';currentTransaction='';document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.transaction===''));loadProperties();}
-function closeDetails(){const modal=document.getElementById('detailsModal');modal.style.display='none';modal.setAttribute('aria-hidden','true')}
+function closeDetails(){closePropertyDetailPage(true)}
 function renderPropertyMap(p){let lat=Number(p.location_lat),lng=Number(p.location_lng);if(!Number.isFinite(lat)||!Number.isFinite(lng)||!lat||!lng)return '';const exact=p.location_precision==='exact';if(!exact){lat=Math.round(lat*100)/100;lng=Math.round(lng*100)/100}const west=(lng-0.012).toFixed(5),east=(lng+0.012).toFixed(5),south=(lat-0.008).toFixed(5),north=(lat+0.008).toFixed(5),src='https://www.openstreetmap.org/export/embed.html?bbox='+west+'%2C'+south+'%2C'+east+'%2C'+north+'&layer=mapnik&marker='+lat.toFixed(5)+'%2C'+lng.toFixed(5);return '<div class="full" style="margin:16px 0"><h3 style="font-size:15px;margin-bottom:8px">موقعیت ملک • '+(exact?'موقعیت دقیق':'موقعیت حدودی')+'</h3><iframe title="نقشه موقعیت ملک" src="'+src+'" style="width:100%;height:260px;border:1px solid #ddd;border-radius:10px" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><p class="muted">'+(exact?'موقعیت انتخابشده توسط آگهیدهنده':'برای حفظ حریم خصوصی، موقعیت تقریبی نمایش داده میشود')+' • © OpenStreetMap</p></div>'}
 function renderAdditionalDetails(details){if(!details||typeof details!=='object')return '';const labels={units_per_floor:'تعداد واحد در طبقه',total_floors:'تعداد کل طبقات',building_direction:'جهت ساختمان',balcony:'بالکن',floor_material:'جنس کف',bathroom_type:'سرویس بهداشتی',cooling:'سرمایش',heating:'گرمایش',hot_water:'تأمین آب گرم',deed_type:'سند',kitchen_type:'نوع آشپزخانه',facade:'نمای ساختمان',occupancy_status:'وضعیت سکونت',cabinet_material:'جنس کابینت',bathroom_count:'تعداد سرویس بهداشتی',parking_count:'تعداد پارکینگ',bath_count:'تعداد حمام',property_status:'وضعیت فعلی ملک',property_direction:'موقعیت ملک',renovated:'بازسازی شده است',has_loan:'وام دارد',exchange_allowed:'قابل معاوضه',pool:'استخر',jacuzzi:'جکوزی',sauna:'سونا'};return Object.entries(labels).filter(([k])=>details[k]!==undefined&&details[k]!==null&&details[k]!==''&&details[k]!==false).map(([k,label])=>'<div class="detail-row">'+escapeHTML(label)+': '+escapeHTML(details[k]===true?'بله':details[k]===false?'خیر':details[k])+'</div>').join('')}
-async function openDetails(id){const p=propertyCache.get(String(id));if(!p)return;const modal=document.getElementById('detailsModal'),box=document.getElementById('detailsContent');document.getElementById('detailsTitle').textContent=p.title||'جزئیات آگهی';box.innerHTML='<p>در حال بارگذاری تصاویر...</p>';modal.style.display='block';modal.setAttribute('aria-hidden','false');let paths=Array.isArray(p.image_urls)?p.image_urls:[];if(!paths.length&&p.image_url)paths=[p.image_url];const urls=(await Promise.all(paths.slice(0,MAX_IMAGES).map(makeSignedImage))).filter(Boolean);const gallery=urls.length?'<div class="details-gallery">'+urls.map(u=>'<img src="'+escapeHTML(u)+'" alt="'+escapeHTML(p.title)+'">').join('')+'</div>':'<div class="empty">برای این آگهی عکسی ثبت نشده است.</div>';const videoUrl=p.video_url?await makeSignedImage(p.video_url):'';const videoHtml=videoUrl?'<div class="details-video"><h3>ویدیوی ملک</h3><video controls preload="metadata" style="width:100%;max-height:420px;border-radius:14px"><source src="'+escapeHTML(videoUrl)+'"></video></div>':'';box.innerHTML=gallery+videoHtml+renderPropertyMap(p)+'<div class="details-content"><div class="detail-row">دسته اصلی: '+escapeHTML(p.main_category||p.transaction_type||'مشخص نیست')+'</div><div class="detail-row">زیردسته: '+escapeHTML(p.sub_category||p.property_type||'مشخص نیست')+'</div><div class="detail-row">نوع ملک: '+escapeHTML(p.property_type||'مشخص نیست')+'</div><div class="detail-row">نوع معامله: '+escapeHTML(p.transaction_type||'مشخص نیست')+'</div><div class="detail-row">مبلغ: '+formatListingPrice(p)+'</div><div class="detail-row">متراژ: '+(p.area?escapeHTML(p.area)+' متر':'مشخص نشده')+'</div><div class="detail-row">متراژ زمین: '+(p.land_area?escapeHTML(p.land_area)+' متر مربع':'ثبت نشده')+'</div><div class="detail-row">متراژ بنا: '+(p.building_area?escapeHTML(p.building_area)+' متر مربع':'ثبت نشده')+'</div><div class="detail-row">اتاق: '+(p.bedrooms!==null&&p.bedrooms!==undefined&&p.bedrooms>=0?escapeHTML(p.bedrooms):'قابل اعمال نیست')+'</div><div class="detail-row">سال ساخت: '+(p.year_built?escapeHTML(p.year_built):'نامشخص')+'</div><div class="detail-row">طبقه: '+escapeHTML(p.floor_number||'مشخص نشده')+'</div><div class="detail-row">آسانسور: '+yesNoNa(p.elevator)+'</div><div class="detail-row">پارکینگ: '+yesNoNa(p.parking)+'</div><div class="detail-row">انباری: '+yesNoNa(p.storage)+'</div><div class="detail-row">عکس متعلق به خود ملک: '+escapeHTML(p.photos_own||'مشخص نشده')+'</div><div class="detail-row">محله / آدرس: '+escapeHTML(p.address||'مشخص نشده')+'</div>'+renderAdditionalDetails(p.details_json)+'</div><p class="details-description">'+escapeHTML(p.description||'توضیحاتی برای این آگهی ثبت نشده است.')+'</p><div class="detail-contact-actions"><button class="btn btn-primary" onclick="revealPropertyPhone(\''+escapeHTML(p.id)+'\',this)">☎ مشاهده شماره تماس</button><button class="btn btn-chat" onclick="openInternalChat(\''+escapeHTML(p.id)+'\')">✉ گفتوگوی داخلی</button></div>'; }
+function openDetails(id){return openPropertyDetailPage(id,true)}
 document.getElementById('detailsModal').addEventListener('click',e=>{if(e.target.id==='detailsModal')closeDetails()});
 
 async function renderProperty(p){propertyCache.set(String(p.id),p);let paths=Array.isArray(p.image_urls)?p.image_urls:[];if(!paths.length&&p.image_url)paths=[p.image_url];const urls=await Promise.all(paths.slice(0,MAX_IMAGES).map(makeSignedImage));const validUrls=urls.filter(Boolean);const imagesHTML=validUrls.length?validUrls.map(url=>`<img src="${escapeHTML(url)}" alt="${escapeHTML(p.title)}" loading="lazy" role="button" tabindex="0" onclick="openDetails(\'${escapeHTML(p.id)}\')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();openDetails(\'${escapeHTML(p.id)}\')}" title="برای مشاهده تصاویر و جزئیات کلیک کنید">`).join(''):'<span>تصویر ملک</span>';const contactHTML=`<button type="button" class="btn btn-outline" onclick="revealPropertyPhone('`+escapeHTML(p.id)+`',this)">مشاهده شماره</button>`;const saved=getFavorites().includes(String(p.id));const description=p.description?`<p class="property-description">${escapeHTML(p.description.length>150?p.description.slice(0,150)+'…':p.description)}</p>`:'';return `<article class="property-card"><div class="property-image">${imagesHTML}</div><div class="property-info"><span class="property-type">${escapeHTML(p.property_type||'ملک')}</span><button type="button" class="card-open" onclick="openDetails('${escapeHTML(p.id)}')"><h3>${escapeHTML(p.title)}</h3></button><p class="property-address">⌖ ${escapeHTML(p.address||'')}</p><div class="property-details"><span>${(p.area||p.building_area||p.land_area)?escapeHTML(p.area||p.building_area||p.land_area)+' متر':'متراژ نامشخص'}</span><span>${escapeHTML(p.transaction_type||'')}</span>${p.bedrooms!==null&&p.bedrooms!==undefined?`<span>${escapeHTML(p.bedrooms)} اتاق</span>`:''}</div><div class="property-price">${escapeHTML(formatListingPrice(p))}</div>${description}<div class="property-actions">${contactHTML}<button type="button" class="btn btn-outline" onclick="openDetails('${escapeHTML(p.id)}')">جزئیات آگهی</button><button type="button" class="favorite-btn ${saved?'saved':''}" onclick="toggleFavorite('${escapeHTML(p.id)}',this)">${saved?'♥ ذخیره شد':'♡ ذخیره آگهی'}</button></div></div></article>`}
@@ -3630,6 +3825,237 @@ if(typeof window.openDetails==='function'&&!window.openDetails.__accountRecentWr
   };
   accountRecentWrapper.__accountRecentWrapped=true;
   window.openDetails=accountRecentWrapper;
+}
+</script>
+
+
+<script id="amlak058-property-detail-page-script">
+var pdPageIsOpen=false,pdIsExpandingDetails=false,pdCurrentProperty=null,pdCurrentImages=[],pdCurrentImageIndex=0,pdPreviousMainState=[],pdPreviousHash='#listings',pdPreviousScroll=0,pdDetailHistoryPushed=false,pdNoteTimer=null;
+
+function pdEsc(v){return typeof escapeHTML==='function'?escapeHTML(String(v==null?'':v)):String(v==null?'':v).replace(/[&<>"']/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]})}
+function pdRelativeDate(value){
+ if(!value)return 'تاریخ ثبت مشخص نیست';
+ var date=new Date(value);if(isNaN(date.getTime()))return 'تاریخ ثبت مشخص نیست';
+ var days=Math.max(0,Math.floor((Date.now()-date.getTime())/86400000));
+ if(days===0)return 'امروز';
+ if(days===1)return 'دیروز';
+ if(days<7)return days.toLocaleString('fa-IR')+' روز پیش';
+ if(days<30)return Math.floor(days/7).toLocaleString('fa-IR')+' هفته پیش';
+ if(days<365)return Math.floor(days/30).toLocaleString('fa-IR')+' ماه پیش';
+ return Math.floor(days/365).toLocaleString('fa-IR')+' سال پیش';
+}
+function pdSelectedText(v,fallback){
+ if(v===true)return 'دارد';if(v===false)return 'ندارد';
+ if(v===null||v===undefined||v==='')return fallback||'ثبت نشده';
+ return String(v);
+}
+function pdGetAdUrl(id){return location.origin+location.pathname+location.search+'#ad-'+encodeURIComponent(String(id))}
+async function pdResolveProperty(id){
+ var key=String(id),cached=propertyCache.get(key);
+ if(cached)return cached;
+ var columns='id,title,main_category,sub_category,property_type,transaction_type,price,deposit,monthly_rent,convertible,area,bedrooms,year_built,floor_number,photos_own,elevator,parking,storage,video_url,address,city,description,image_url,image_urls,details_json,land_area,building_area,location_lat,location_lng,location_precision,created_at,owner_id,status';
+ var result=await db.from('properties').select(columns).eq('id',Number(id)).maybeSingle();
+ if(result.error)throw result.error;
+ if(!result.data)return null;
+ propertyCache.set(key,result.data);
+ return result.data;
+}
+async function openPropertyDetailPage(id,pushHistory){
+ var key=String(id||'').trim();if(!/^\d+$/.test(key))return;
+ var page=document.getElementById('propertyDetailPage');
+ var loader=document.getElementById('pdLoading'),content=document.getElementById('pdContent');
+ try{
+  var p=await pdResolveProperty(key);
+  if(!p){alert('این آگهی پیدا نشد یا دیگر در دسترس نیست.');return}
+  if(!pdPageIsOpen){
+   pdPreviousHash=location.hash&&location.hash.indexOf('#ad-')!==0?location.hash:'#listings';
+   pdPreviousScroll=window.scrollY||window.pageYOffset||0;
+   var main=document.querySelector('main');
+   pdPreviousMainState=[];
+   if(main)Array.from(main.children).forEach(function(el){if(el===page)return;pdPreviousMainState.push({el:el,hidden:el.hidden});el.hidden=true;});
+   pdPageIsOpen=true;pdCurrentProperty=p;
+  }else{pdCurrentProperty=p}
+  if(pushHistory&&location.hash!=='#ad-'+encodeURIComponent(key)){
+   pdDetailHistoryPushed=true;
+   history.pushState({amlak058PropertyId:key},'', '#ad-'+encodeURIComponent(key));
+  }else if(!pushHistory){pdDetailHistoryPushed=false}
+  page.hidden=false;loader.hidden=false;content.hidden=true;
+  loader.textContent='در حال بارگذاری تصاویر و جزئیات آگهی...';
+  pdCurrentProperty=p;
+  document.getElementById('pdTitle').textContent=p.title||'جزئیات آگهی ملک';
+  document.getElementById('pdCategoryTag').textContent=p.main_category||p.transaction_type||'آگهی ملک';
+  document.getElementById('pdTimeAgo').textContent=pdRelativeDate(p.created_at);
+  document.getElementById('pdLocationLine').innerHTML='<span aria-hidden="true">⌖</span>'+pdEsc([p.city||'بجنورد',p.address].filter(Boolean).join('، ')||'موقعیت ملک مشخص نشده');
+  var category=p.main_category||p.transaction_type||'ملک';
+  document.getElementById('pdBreadcrumb').innerHTML='<span>املاک ۰۵۸</span><b>‹</b><span>'+pdEsc(category)+'</span><b>‹</b><span>'+pdEsc(p.sub_category||p.property_type||'جزئیات آگهی')+'</span>';
+  var paths=Array.isArray(p.image_urls)?p.image_urls:[];
+  if(!paths.length&&p.image_url)paths=[p.image_url];
+  var urls=(await Promise.all(paths.slice(0,MAX_IMAGES).map(makeSignedImage))).filter(Boolean);
+  pdCurrentImages=urls;pdCurrentImageIndex=0;
+  document.getElementById('pdGallery').innerHTML=pdBuildGallery(urls,p.title||'تصویر ملک');
+  var videoUrl=p.video_url?await makeSignedImage(p.video_url):'';
+  var videoHtml=videoUrl?'<div class="pd-video-wrap"><video controls preload="metadata" style="display:block;width:100%;max-height:280px;border-radius:4px;margin-top:8px"><source src="'+pdEsc(videoUrl)+'"></video></div>':'';
+  document.getElementById('pdGalleryCaption').innerHTML=videoHtml;
+  var note=document.getElementById('pdPersonalNote');
+  try{note.value=localStorage.getItem('amlak058_property_note_'+key)||''}catch(e){note.value=''}
+  document.getElementById('pdNoteStatus').textContent='';
+  document.getElementById('pdNoteStatus').dataset.propertyId=key;
+  document.getElementById('pdNoteStatus').textContent='';
+  var mapHtml=typeof renderPropertyMap==='function'?renderPropertyMap(p):'';
+  document.getElementById('pdMapSection').innerHTML=mapHtml||'<div class="pd-map-placeholder"><strong>موقعیت ملک</strong><span>نقشه برای این آگهی ثبت نشده است.</span><span>برای دریافت نشانی دقیق، اطلاعات تماس را ببین.</span></div>';
+  var isRent=String(p.main_category||p.transaction_type||'').includes('اجاره')||String(p.transaction_type||'').includes('رهن');
+  var metrics=[
+   {label:'متراژ',value:p.area?p.area.toLocaleString('fa-IR')+' متر':'ثبت نشده'},
+   {label:'ساخت',value:p.year_built?Number(p.year_built).toLocaleString('fa-IR'):'ثبت نشده'},
+   {label:'اتاق',value:p.bedrooms!==null&&p.bedrooms!==undefined&&Number(p.bedrooms)>=0?Number(p.bedrooms).toLocaleString('fa-IR'):'—'}
+  ];
+  document.getElementById('pdSummaryMetrics').innerHTML=metrics.map(function(m){return '<div class="pd-metric"><span>'+pdEsc(m.label)+'</span><strong>'+pdEsc(m.value)+'</strong></div>'}).join('');
+  var prices=[];
+  if(isRent){
+   if(p.deposit!==null&&p.deposit!==undefined)prices.push(['ودیعه',Number(p.deposit).toLocaleString('fa-IR')+' تومان',true]);
+   if(p.monthly_rent!==null&&p.monthly_rent!==undefined)prices.push(['اجاره ماهانه',Number(p.monthly_rent).toLocaleString('fa-IR')+' تومان',true]);
+   if(p.convertible)prices.push(['شرایط رهن و اجاره','قابل تبدیل',false]);
+  }else{
+   prices.push(['قیمت کل',formatListingPrice(p),true]);
+   if(Number(p.area)>0&&Number(p.price)>0)prices.push(['قیمت هر متر',Math.round(Number(p.price)/Number(p.area)).toLocaleString('fa-IR')+' تومان',false]);
+  }
+  prices.push(['طبقه',pdSelectedText(p.floor_number,'ثبت نشده'),false]);
+  if(p.land_area)prices.push(['متراژ زمین',Number(p.land_area).toLocaleString('fa-IR')+' متر مربع',false]);
+  if(p.building_area)prices.push(['متراژ بنا',Number(p.building_area).toLocaleString('fa-IR')+' متر مربع',false]);
+  document.getElementById('pdPriceTable').innerHTML=prices.map(function(r){return '<div class="pd-price-row '+(r[2]?'primary-price':'')+'"><span>'+pdEsc(r[0])+'</span><strong>'+pdEsc(r[1])+'</strong></div>'}).join('');
+  var featureDefs=[
+   ['elevator','آسانسور','▣'],['parking','پارکینگ','▤'],['storage','انباری','▥']
+  ];
+  var featureItems=featureDefs.filter(function(f){return p[f[0]]!==null&&p[f[0]]!==undefined}).map(function(f){return '<div class="pd-feature-item"><span class="pd-feature-icon" aria-hidden="true">'+f[2]+'</span><strong>'+f[1]+'</strong><span>'+pdSelectedText(p[f[0]],'قابل اعمال نیست')+'</span></div>'});
+  if(p.photos_own)featureItems.push('<div class="pd-feature-item"><span class="pd-feature-icon" aria-hidden="true">▧</span><strong>عکس‌ها</strong><span>'+pdEsc(p.photos_own)+'</span></div>');
+  document.getElementById('pdFeatureGrid').innerHTML=featureItems.length?featureItems.join(''):'<div class="pd-view-empty">امکانات اختصاصی برای این آگهی ثبت نشده است.</div>';
+  var extra=typeof renderAdditionalDetails==='function'?renderAdditionalDetails(p.details_json):'';
+  document.getElementById('pdExtraDetails').innerHTML=extra;
+  document.getElementById('pdExtraDetails').hidden=true;
+  pdIsExpandingDetails=false;
+  document.getElementById('pdDescription').textContent=p.description||'توضیحاتی برای این آگهی ثبت نشده است.';
+  document.getElementById('pdDescriptionFooter').textContent='ثبت آگهی: '+new Date(p.created_at||Date.now()).toLocaleDateString('fa-IR')+' · املاک ۰۵۸';
+  var fav=[];try{fav=getFavorites().map(String)}catch(e){}
+  var fb=document.getElementById('pdFavoriteButton');fb.classList.toggle('saved',fav.includes(key));fb.textContent=fav.includes(key)?'♥':'♡';
+  document.getElementById('pdContactButton').onclick=function(){revealPropertyPhone(key,this)};
+  document.getElementById('pdQuestionList').innerHTML=[
+    'امکان تخفیف در قیمت وجود دارد؟',
+    'این ملک هنوز در دسترس است؟',
+    'امکان بازدید از ملک چه زمانی است؟',
+    'قیمت نهایی و شرایط معامله چیست؟'
+  ].map(function(q){return '<button type="button" class="pd-question-button" onclick="pdAskSeller('+Number(key)+',\\''+pdEsc(q).replace(/'/g,"&#39;")+'\\')"><span>'+pdEsc(q)+'</span><span>‹</span></button>'}).join('');
+  document.getElementById('pdQuestionsSection').hidden=!p.owner_id;
+  loader.hidden=true;content.hidden=false;
+  window.scrollTo({top:0,behavior:'instant'});
+ }catch(e){
+  console.error('نمایش جزئیات آگهی انجام نشد:',e);
+  loader.hidden=false;content.hidden=true;
+  loader.textContent='جزئیات این آگهی بارگذاری نشد. صفحه را تازه‌سازی کن و دوباره تلاش کن.';
+ }
+}
+function pdBuildGallery(urls,title){
+ if(!urls||!urls.length)return '<div class="pd-gallery-empty">برای این آگهی عکسی ثبت نشده است.</div>';
+ var html='<button type="button" class="pd-gallery-main" onclick="pdOpenImageAt('+pdCurrentImageIndex+')" aria-label="نمایش عکس بزرگ"><img id="pdGalleryMainImage" src="'+pdEsc(urls[0])+'" alt="'+pdEsc(title)+'" loading="eager"><span class="pd-gallery-counter" id="pdGalleryCounter">1 / '+urls.length+'</span></button>';
+ var rest=urls.slice(1,4);
+ if(rest.length)html+='<div class="pd-gallery-secondary">'+rest.map(function(url,i){var idx=i+1;return '<button type="button" class="pd-gallery-tile" id="pdGalleryTile'+idx+'" onclick="pdSelectGalleryImage('+idx+')" aria-label="نمایش تصویر '+(idx+1)+'"><img src="'+pdEsc(url)+'" alt="'+pdEsc(title)+' '+(idx+1)+'" loading="lazy"></button>'}).join('')+'</div>';
+ if(urls.length>1)html+='<div class="pd-gallery-thumbs">'+urls.map(function(url,i){return '<button type="button" class="pd-gallery-thumb '+(i===0?'active':'')+'" id="pdGalleryThumb'+i+'" onclick="pdSelectGalleryImage('+i+')" aria-label="انتخاب تصویر '+(i+1)+'"><img src="'+pdEsc(url)+'" alt="" loading="lazy"></button>'}).join('')+'</div>';
+ return html;
+}
+function pdSelectGalleryImage(index){
+ if(index<0||index>=pdCurrentImages.length)return;
+ pdCurrentImageIndex=index;
+ var main=document.getElementById('pdGalleryMainImage');if(main)main.src=pdCurrentImages[index];
+ var count=document.getElementById('pdGalleryCounter');if(count)count.textContent=(index+1).toLocaleString('fa-IR')+' / '+pdCurrentImages.length.toLocaleString('fa-IR');
+ document.querySelectorAll('.pd-gallery-thumb').forEach(function(el){el.classList.toggle('active',el.id==='pdGalleryThumb'+index)});
+ document.querySelectorAll('.pd-gallery-tile').forEach(function(el){el.classList.toggle('active',el.id==='pdGalleryTile'+index)});
+}
+function pdOpenImageAt(index){
+ if(!pdCurrentImages.length)return;
+ var selected=pdCurrentImages[index]||pdCurrentImages[0];
+ var win=window.open(selected,'_blank','noopener,noreferrer');
+ if(!win){var main=document.getElementById('pdGalleryMainImage');if(main)main.src=selected}
+}
+function pdToggleFavorite(){
+ if(!pdCurrentProperty)return;
+ var id=String(pdCurrentProperty.id),button=document.getElementById('pdFavoriteButton');
+ if(typeof toggleFavorite==='function')toggleFavorite(id,button);
+}
+async function pdShareListing(){
+ if(!pdCurrentProperty)return;
+ var url=pdGetAdUrl(pdCurrentProperty.id),title=pdCurrentProperty.title||'آگهی ملک املاک ۰۵۸';
+ try{
+  if(navigator.share){await navigator.share({title:title,text:'مشاهده آگهی در املاک ۰۵۸',url:url});return;}
+  if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(url);alert('پیوند آگهی کپی شد.');return;}
+ }catch(e){if(e&&e.name==='AbortError')return;}
+ prompt('پیوند این آگهی را کپی کن:',url);
+}
+function pdToggleSafety(){
+ var el=document.getElementById('pdSafetyPanel');el.hidden=!el.hidden;
+}
+function pdToggleExtraDetails(){
+ var el=document.getElementById('pdExtraDetails');
+ if(!el.innerHTML.trim())return;
+ el.hidden=!el.hidden;
+}
+function pdShowReportInfo(){var el=document.getElementById('pdReportInfo');el.hidden=!el.hidden;}
+function pdAskSeller(id,question){
+ db.auth.getUser().then(function(result){
+  var user=result&&result.data?result.data.user:null;
+  if(!user){openAuthModal();document.getElementById('authMessage').textContent='برای پرسیدن سؤال درباره ملک، ابتدا وارد شوید.';return;}
+  openInternalChat(id);
+  window.setTimeout(function(){
+   var modal=document.getElementById('chatModal'),input=document.getElementById('chatInput');
+   if(modal&&modal.style.display==='block'&&input){input.value=question;input.focus();}
+  },180);
+ }).catch(function(){openAuthModal();});
+}
+function pdSavePersonalNote(){
+ if(!pdCurrentProperty)return;
+ var id=String(pdCurrentProperty.id),note=document.getElementById('pdPersonalNote'),status=document.getElementById('pdNoteStatus');
+ try{
+  localStorage.setItem('amlak058_property_note_'+id,note.value);
+  status.textContent='ذخیره شد';
+ }catch(e){status.textContent='ذخیره در این مرورگر ممکن نیست';}
+ if(pdNoteTimer)clearTimeout(pdNoteTimer);
+ pdNoteTimer=setTimeout(function(){var s=document.getElementById('pdNoteStatus');if(s)s.textContent='';},1800);
+}
+function closePropertyDetailPage(fromButton){
+ var page=document.getElementById('propertyDetailPage');
+ if(!page||!pdPageIsOpen){if(page)page.hidden=true;return;}
+ if(fromButton&&location.hash.indexOf('#ad-')===0&&pdDetailHistoryPushed){
+  var activeHash=location.hash;
+  history.back();
+  window.setTimeout(function(){
+   if(pdPageIsOpen&&location.hash===activeHash){
+    history.replaceState(history.state,'',location.pathname+location.search+(pdPreviousHash||'#listings'));
+    pdRestorePage();
+   }
+  },450);
+  return;
+ }
+ if(fromButton&&location.hash.indexOf('#ad-')===0&&!pdDetailHistoryPushed){
+  history.replaceState(history.state,'',location.pathname+location.search+(pdPreviousHash&&pdPreviousHash.indexOf('#ad-')!==0?pdPreviousHash:'#listings'));
+ }
+ pdRestorePage();
+}
+function pdRestorePage(){
+ var page=document.getElementById('propertyDetailPage');
+ if(page)page.hidden=true;
+ pdPreviousMainState.forEach(function(item){if(item&&item.el)item.el.hidden=item.hidden});
+ pdPreviousMainState=[];
+ pdPageIsOpen=false;pdDetailHistoryPushed=false;pdCurrentProperty=null;
+ window.scrollTo({top:pdPreviousScroll||0,behavior:'instant'});
+}
+window.addEventListener('popstate',function(){
+ if(location.hash.indexOf('#ad-')===0){
+  var id;try{id=decodeURIComponent(location.hash.slice(4))}catch(e){id=location.hash.slice(4)}
+  openPropertyDetailPage(id,false);
+ }else if(pdPageIsOpen){pdRestorePage();}
+});
+document.getElementById('pdPersonalNote').addEventListener('input',pdSavePersonalNote);
+if(location.hash.indexOf('#ad-')===0){
+ var initialAdId;try{initialAdId=decodeURIComponent(location.hash.slice(4))}catch(e){initialAdId=location.hash.slice(4)}
+ window.setTimeout(function(){openPropertyDetailPage(initialAdId,false)},350);
 }
 </script>
 
