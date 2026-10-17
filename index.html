@@ -3932,6 +3932,7 @@ async function openPropertyDetailPage(id,pushHistory){
   var extra=typeof renderAdditionalDetails==='function'?renderAdditionalDetails(p.details_json):'';
   document.getElementById('pdExtraDetails').innerHTML=extra;
   document.getElementById('pdExtraDetails').hidden=true;
+  document.querySelector('.pd-expand-details').hidden=!String(extra||'').trim();
   pdIsExpandingDetails=false;
   document.getElementById('pdDescription').textContent=p.description||'توضیحاتی برای این آگهی ثبت نشده است.';
   document.getElementById('pdDescriptionFooter').textContent='ثبت آگهی: '+new Date(p.created_at||Date.now()).toLocaleDateString('fa-IR')+' · املاک ۰۵۸';
@@ -3943,10 +3944,11 @@ async function openPropertyDetailPage(id,pushHistory){
     'این ملک هنوز در دسترس است؟',
     'امکان بازدید از ملک چه زمانی است؟',
     'قیمت نهایی و شرایط معامله چیست؟'
-  ].map(function(q){return '<button type="button" class="pd-question-button" onclick="pdAskSeller('+Number(key)+',\\''+pdEsc(q).replace(/'/g,"&#39;")+'\\')"><span>'+pdEsc(q)+'</span><span>‹</span></button>'}).join('');
+  ].map(function(q){return '<button type="button" class="pd-question-button" data-pd-question="'+pdEsc(q)+'"><span>'+pdEsc(q)+'</span><span>‹</span></button>'}).join('');
+  document.querySelectorAll('#pdQuestionList [data-pd-question]').forEach(function(button){button.addEventListener('click',function(){pdAskSeller(Number(key),button.getAttribute('data-pd-question')||'')})});
   document.getElementById('pdQuestionsSection').hidden=!p.owner_id;
   loader.hidden=true;content.hidden=false;
-  window.scrollTo({top:0,behavior:'instant'});
+  window.scrollTo(0,0);
  }catch(e){
   console.error('نمایش جزئیات آگهی انجام نشد:',e);
   loader.hidden=false;content.hidden=true;
@@ -3979,6 +3981,7 @@ function pdToggleFavorite(){
  if(!pdCurrentProperty)return;
  var id=String(pdCurrentProperty.id),button=document.getElementById('pdFavoriteButton');
  if(typeof toggleFavorite==='function')toggleFavorite(id,button);
+ var saved=false;try{saved=getFavorites().map(String).includes(id)}catch(e){}button.textContent=saved?'♥':'♡';button.classList.toggle('saved',saved);
 }
 async function pdShareListing(){
  if(!pdCurrentProperty)return;
@@ -4044,7 +4047,7 @@ function pdRestorePage(){
  pdPreviousMainState.forEach(function(item){if(item&&item.el)item.el.hidden=item.hidden});
  pdPreviousMainState=[];
  pdPageIsOpen=false;pdDetailHistoryPushed=false;pdCurrentProperty=null;
- window.scrollTo({top:pdPreviousScroll||0,behavior:'instant'});
+ window.scrollTo(0,pdPreviousScroll||0);
 }
 window.addEventListener('popstate',function(){
  if(location.hash.indexOf('#ad-')===0){
