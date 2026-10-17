@@ -1894,6 +1894,73 @@ header{position:sticky;top:0;z-index:80;background:#fff!important;border-bottom:
   <div><h2>ملک دلخواهت را پیدا نکردی؟</h2><p>نیازت را ثبت کن تا مسیر پیدا کردن ملک مناسب ساده‌تر شود.</p></div>
   <button type="button" class="btn btn-primary" onclick="openRequestModal()">ثبت درخواست خرید یا اجاره ←</button>
 </section>
+
+<section id="accountDashboard" class="container account-dashboard" hidden aria-label="حساب کاربری">
+  <div class="account-dashboard-top">
+    <div class="account-breadcrumb"><span>املاک ۰۵۸</span><span class="account-breadcrumb-slash">/</span><strong id="accountBreadcrumbTitle">حساب من</strong></div>
+    <button type="button" class="account-return-button" onclick="closeAccountDashboard()">بازگشت به سایت <span aria-hidden="true">↗</span></button>
+  </div>
+  <div class="account-dashboard-layout">
+    <aside class="account-sidebar">
+      <section class="account-profile-card">
+        <span class="account-profile-back" aria-hidden="true">‹</span>
+        <div class="account-avatar" id="accountAvatar">۰۵۸</div>
+        <h2 id="accountUserName">حساب من</h2>
+        <p class="account-profile-phone" id="accountUserPhone">در حال دریافت شماره...</p>
+        <div class="account-verified" id="accountVerifiedBadge"><span aria-hidden="true">✓</span> حساب کاربری</div>
+        <p class="account-member-label">حساب کاربری املاک ۰۵۸</p>
+      </section>
+      <nav class="account-menu" aria-label="منوی حساب کاربری">
+        <button type="button" class="account-menu-item active" data-account-action="listings"><span class="account-menu-icon">▤</span><span>مدیریت آگهی‌ها</span><small id="accountAdsCount">—</small><b>‹</b></button>
+        <button type="button" class="account-menu-item" data-account-action="requests"><span class="account-menu-icon">⌂</span><span>درخواست‌های من</span><b>‹</b></button>
+        <button type="button" class="account-menu-item" data-account-action="messages"><span class="account-menu-icon">▱</span><span>پیام‌ها و گفت‌وگوها</span><b>‹</b></button>
+        <button type="button" class="account-menu-item" data-account-action="saved"><span class="account-menu-icon">♡</span><span>آگهی‌های ذخیره‌شده</span><small id="accountSavedCount">۰</small><b>‹</b></button>
+        <button type="button" class="account-menu-item" data-account-action="recent"><span class="account-menu-icon">◷</span><span>بازدیدهای اخیر</span><b>‹</b></button>
+        <button type="button" class="account-menu-item" data-account-action="activity"><span class="account-menu-icon">▥</span><span>گزارش فعالیت</span><b>‹</b></button>
+        <button type="button" class="account-menu-item" data-account-action="settings"><span class="account-menu-icon">⚙</span><span>تنظیمات حساب</span><b>‹</b></button>
+        <button type="button" class="account-menu-item" data-account-action="help"><span class="account-menu-icon">ⓘ</span><span>راهنما و پشتیبانی</span><b>‹</b></button>
+        <button type="button" class="account-menu-item account-logout-item" data-account-action="logout"><span class="account-menu-icon">⇥</span><span>خروج از حساب</span><b>‹</b></button>
+      </nav>
+      <div class="account-sidebar-foot">املاک ۰۵۸ · بازار آنلاین ملک بجنورد</div>
+    </aside>
+
+    <div class="account-main-column">
+      <div id="accountHomePanel">
+        <section class="account-brand-card">
+          <div class="account-brand-top">
+            <div class="account-brand-mark" aria-hidden="true"><span>۰۵۸</span><svg viewBox="0 0 64 64"><path d="M6 29 32 7 58 29M13 27v29h38V27M26 56V39h12v17" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 34h6v6h-6m12-6h6v6h-6m12-6h-2" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></div>
+            <div class="account-brand-heading"><h2>املاک ۰۵۸</h2><p>بازار آنلاین ملک بجنورد</p></div>
+          </div>
+          <div class="account-brand-divider"></div>
+          <div class="account-brand-footer"><span><span class="account-status-dot"></span> سامانه ثبت و جست‌وجوی آگهی ملک</span><button type="button" onclick="accountDashboardAction('home')">صفحه اصلی <span aria-hidden="true">‹</span></button></div>
+        </section>
+
+        <section class="account-overview-card">
+          <div class="account-panel-heading"><div><h2>نمای کلی حساب</h2><p>وضعیت آگهی‌ها و فعالیت‌های شما</p></div><span class="account-panel-heading-icon">▦</span></div>
+          <div class="account-stat-grid">
+            <button type="button" class="account-stat" onclick="accountDashboardAction('listings')"><span>کل آگهی‌ها</span><strong id="accountStatAll">—</strong><small>مدیریت آگهی‌ها ‹</small></button>
+            <button type="button" class="account-stat" onclick="accountDashboardAction('listings')"><span>منتشرشده</span><strong id="accountStatApproved">—</strong><small>نمایش عمومی ‹</small></button>
+            <button type="button" class="account-stat" onclick="accountDashboardAction('listings')"><span>در انتظار تأیید</span><strong id="accountStatPending">—</strong><small>وضعیت بررسی ‹</small></button>
+          </div>
+        </section>
+
+        <section class="account-shortcuts-card">
+          <div class="account-panel-heading"><div><h2>دسترسی سریع</h2><p>کارهای پرکاربرد در یک نگاه</p></div></div>
+          <button type="button" class="account-shortcut-row" onclick="accountDashboardAction('listings')"><span class="account-shortcut-icon">▤</span><span><strong>مدیریت آگهی‌ها</strong><small>مشاهده وضعیت و آگهی‌های ثبت‌شده</small></span><b>‹</b></button>
+          <button type="button" class="account-shortcut-row" onclick="accountDashboardAction('new')"><span class="account-shortcut-icon account-shortcut-green">＋</span><span><strong>ثبت آگهی رایگان</strong><small>ملک خود را برای بررسی ثبت کنید</small></span><b>‹</b></button>
+          <button type="button" class="account-shortcut-row" onclick="accountDashboardAction('requests')"><span class="account-shortcut-icon">⌂</span><span><strong>درخواست‌های خرید و اجاره</strong><small>پیگیری نیازهای ثبت‌شده</small></span><b>‹</b></button>
+          <button type="button" class="account-shortcut-row" onclick="accountDashboardAction('messages')"><span class="account-shortcut-icon">▱</span><span><strong>پیام‌ها و گفت‌وگوها</strong><small>پیگیری ارتباط‌های داخل سایت</small></span><b>‹</b></button>
+        </section>
+      </div>
+
+      <section id="accountDynamicPanel" class="account-dynamic-panel" hidden>
+        <div class="account-dynamic-heading"><button type="button" onclick="showAccountHome()" aria-label="بازگشت">›</button><div><h2 id="accountDynamicTitle">بخش حساب</h2><p id="accountDynamicSubtitle">اطلاعات حساب شما</p></div></div>
+        <div id="accountDynamicContent" class="account-dynamic-content"></div>
+      </section>
+    </div>
+  </div>
+</section>
+
 </main><footer><div class="container footer-inner"><div><strong>املاک ۰۵۸</strong><p>بازار آنلاین ملک بجنورد</p></div><div><p id="footerAddress">تماس با مدیریت سامانه</p><p id="footerPhone">تماس با مدیریت سایت</p></div></div></footer>
 
 <section id="install-guide" class="container" aria-labelledby="install-guide-title" style="margin:28px auto;padding:0 16px">
@@ -2301,8 +2368,8 @@ document.getElementById('propertyForm').addEventListener('submit',async function
  finally{button.disabled=false;button.textContent='ثبت آگهی'}
 });
 
-function mobileNavHome(){loadProperties();document.getElementById('home').scrollIntoView({behavior:'smooth'});document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===0))}
-async function mobileNavMyProperties(){
+function mobileNavHome(){closeAccountDashboard();loadProperties();document.getElementById('home').scrollIntoView({behavior:'smooth'});document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===0))}
+async function mobileNavMyProperties(){closeAccountDashboard();
  const list=document.getElementById('propertyList'),count=document.getElementById('resultCount');
  document.getElementById('listings').scrollIntoView({behavior:'smooth'});
  document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===2));
@@ -2350,26 +2417,21 @@ function normalizeIranPhone(value){let n=String(value||'').replace(/[۰-۹]/g,d=
 let currentOtpPhone='';
 function setAuthMode(mode){const phonePanel=document.getElementById('authPhonePanel'),intro=document.getElementById('authIntro'),message=document.getElementById('authMessage');if(phonePanel)phonePanel.hidden=false;if(intro)intro.textContent='شماره موبایل را وارد کنید تا کد یکبارمصرف پیامک شود.';if(message){message.textContent='';message.style.color=''}}
 async function handleAccountButton(){
-  try {
-    const {data:{user},error}=await db.auth.getUser();
-    if(error) throw error;
-    if(user){
-      closeAuthModal();
-      await mobileNavMyProperties();
-      return;
-    }
-  } catch(error) {
-    console.warn('بررسی حساب کاربری انجام نشد:', error);
-  }
-  openAuthModal();
+ try{
+  const {data:{user},error}=await db.auth.getUser();
+  if(error)throw error;
+  if(user){closeAuthModal();await openAccountDashboard();return;}
+ }catch(error){console.warn('بررسی حساب کاربری انجام نشد:',error);}
+ accountLoginPending=true;
+ openAuthModal();
 } function openAuthModal(){document.getElementById('authModal').style.display='block';setAuthMode('phone');refreshAuthState()}
 function closeAuthModal(){document.getElementById('authModal').style.display='none'}
 async function refreshAuthState(){try{const {data:{user}}=await db.auth.getUser();const btn=document.getElementById('accountButton');if(btn)btn.textContent=user?'حساب من':'ورود / ثبت‌نام';if(user){const message=document.getElementById('authMessage');message.style.color='green';message.textContent='وارد شدهاید: '+(user.phone||user.email||'حساب کاربری تأییدشده')}}catch(e){console.warn('بررسی وضعیت ورود انجام نشد:',e)}}
 function normalizeAuthPhone(value){let n=normalizeIranPhone(value).replace(/\D/g,'');if(!/^989\d{9}$/.test(n))throw new Error('شماره موبایل ایران را به شکل 09123456789 وارد کنید.');return '+'+n}
 async function sendPhoneOtp(){const message=document.getElementById('authMessage'),button=document.getElementById('authPhoneSend'),resend=document.getElementById('authPhoneResend');button.disabled=true;resend.disabled=true;try{const phone=normalizeAuthPhone(document.getElementById('authPhone').value);const {error}=await db.auth.signInWithOtp({phone,options:{channel:'sms'}});if(error)throw error;currentOtpPhone=phone;document.getElementById('authOtpPanel').hidden=false;document.getElementById('authOtp').value='';message.style.color='green';message.textContent='کد یکبارمصرف به '+phone+' پیامک شد. کد را وارد کنید تا وارد شوید.';document.getElementById('authOtp').focus()}catch(e){message.style.color='#b00020';message.textContent='ارسال کد انجام نشد: '+(e.message||'خطای نامشخص')+'. اگر تنظیم پیامک Supabase فعال نیست، ابتدا آن را پیکربندی کنید.'}finally{button.disabled=false;resend.disabled=false}}
-async function verifyPhoneOtp(){const message=document.getElementById('authMessage'),button=document.getElementById('authPhoneVerify');button.disabled=true;try{const phone=normalizeAuthPhone(document.getElementById('authPhone').value);if(!currentOtpPhone||phone!==currentOtpPhone)throw new Error('شماره تغییر کرده است؛ ابتدا برای همین شماره کد جدید بگیرید.');const token=String(document.getElementById('authOtp').value||'').replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g,d=>String(d.charCodeAt(0)-1632)).replace(/\D/g,'');if(!/^\d{4,8}$/.test(token))throw new Error('کد پیامکشده را درست وارد کنید.');const {data,error}=await db.auth.verifyOtp({phone,token,type:'sms'});if(error)throw error;message.style.color='green';message.textContent='ورود موفق بود؛ در حال بازگشت به سایت.';currentOtpPhone='';await refreshAuthState();closeAuthModal()}catch(e){message.style.color='#b00020';message.textContent='تأیید کد انجام نشد: '+(e.message||'کد نامعتبر یا منقضی شده است')}finally{button.disabled=false}}
+async function verifyPhoneOtp(){const message=document.getElementById('authMessage'),button=document.getElementById('authPhoneVerify');button.disabled=true;try{const phone=normalizeAuthPhone(document.getElementById('authPhone').value);if(!currentOtpPhone||phone!==currentOtpPhone)throw new Error('شماره تغییر کرده است؛ ابتدا برای همین شماره کد جدید بگیرید.');const token=String(document.getElementById('authOtp').value||'').replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g,d=>String(d.charCodeAt(0)-1632)).replace(/\D/g,'');if(!/^\d{4,8}$/.test(token))throw new Error('کد پیامکشده را درست وارد کنید.');const {data,error}=await db.auth.verifyOtp({phone,token,type:'sms'});if(error)throw error;message.style.color='green';message.textContent='ورود موفق بود.';currentOtpPhone='';await refreshAuthState();closeAuthModal();if(accountLoginPending){accountLoginPending=false;await openAccountDashboard()}}catch(e){message.style.color='#b00020';message.textContent='تأیید کد انجام نشد: '+(e.message||'کد نامعتبر یا منقضی شده است')}finally{button.disabled=false}}
 async function submitEmailAuth(){const message=document.getElementById('authMessage'),button=document.getElementById('authSubmit');button.disabled=true;try{const email=document.getElementById('authEmail').value.trim();if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))throw new Error('آدرس ایمیل را درست وارد کنید.');const {error}=await db.auth.signInWithOtp({email,options:{emailRedirectTo:window.location.origin}});if(error)throw error;message.style.color='green';message.textContent='لینک ورود به ایمیل شما ارسال شد. صندوق ورودی و پوشه هرزنامه را بررسی کنید.'}catch(e){message.style.color='#b00020';message.textContent='خطا: '+(e.message||'ارسال لینک انجام نشد')}finally{button.disabled=false}}
-async function signOutUser(){const {error}=await db.auth.signOut();const message=document.getElementById('authMessage');if(error){message.style.color='#b00020';message.textContent='خروج انجام نشد: '+error.message;return}currentOtpPhone='';message.style.color='';message.textContent='از حساب خارج شدید.';document.getElementById('authOtpPanel').hidden=true;refreshAuthState()}
+async function signOutUser(){const {error}=await db.auth.signOut();const message=document.getElementById('authMessage');if(error){message.style.color='#b00020';message.textContent='خروج انجام نشد: '+error.message;return}currentOtpPhone='';message.style.color='';message.textContent='از حساب خارج شدید.';document.getElementById('authOtpPanel').hidden=true;refreshAuthState();closeAccountDashboard()}
 function closeChatModal(){document.getElementById('chatModal').style.display='none';activeConversationId=null;activeChatProperty=null;if(chatRefreshTimer)clearInterval(chatRefreshTimer);chatRefreshTimer=null}
 async function openInbox(){const {data:{user}}=await db.auth.getUser();if(!user){openAuthModal();document.getElementById('authMessage').textContent='برای دیدن پیامها ابتدا وارد شوید.';return}const modal=document.getElementById('inboxModal'),box=document.getElementById('inboxList');modal.style.display='block';box.innerHTML='<p class="muted">در حال دریافت گفتوگوها...</p>';const {data:rows,error}=await db.from('conversations').select('id,property_id,buyer_id,seller_id,last_message_at,properties(title)').or('buyer_id.eq.'+user.id+',seller_id.eq.'+user.id).order('last_message_at',{ascending:false});if(error){box.innerHTML='<p class="form-message">خطا در دریافت پیامها: '+escapeHTML(error.message)+'</p>';return}if(!rows?.length){box.innerHTML='<div class="empty">هنوز گفتوگویی ندارید.</div>';return}box.innerHTML=rows.map(c=>'<button class="btn btn-outline" style="display:flex;width:100%;justify-content:space-between;margin:7px 0;text-align:right" onclick="openExistingChat(\''+c.id+'\',\''+escapeHTML(c.property_id)+'\')"><span>'+escapeHTML(c.properties?.title||'آگهی ملک')+'</span><small class="muted">'+new Date(c.last_message_at).toLocaleDateString('fa-IR')+'</small></button>').join('')}
 async function openExistingChat(conversationId,propertyId){const {data:{user}}=await db.auth.getUser();const {data:c,error}=await db.from('conversations').select('id,property_id,buyer_id,seller_id,properties(title)').eq('id',conversationId).single();if(error||!c){alert('گفتوگو در دسترس نیست.');return}activeConversationId=c.id;activeChatProperty={id:c.property_id,title:c.properties?.title||'آگهی ملک'};document.getElementById('inboxModal').style.display='none';document.getElementById('chatTitle').textContent='گفتوگو: '+activeChatProperty.title;document.getElementById('chatModal').style.display='block';await loadChatMessages();if(chatRefreshTimer)clearInterval(chatRefreshTimer);chatRefreshTimer=setInterval(loadChatMessages,5000)}
@@ -3103,5 +3165,430 @@ input,select,textarea{font-family:Vazirmatn,Tahoma,Arial,sans-serif!important}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
 </style>
+
+
+<style id="amlak058-account-dashboard-v1">
+#accountDashboard[hidden],#accountDynamicPanel[hidden]{display:none!important}
+#accountDashboard{width:min(1240px,94%)!important;margin:28px auto 38px!important;color:#252a32;direction:rtl}
+.account-dashboard-top{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #ededed;padding:0 0 15px;margin:0 0 22px}
+.account-breadcrumb{display:flex;align-items:center;gap:9px;font-size:12px;color:#858b89}
+.account-breadcrumb span:first-child{font-weight:800;color:#176b5c}
+.account-breadcrumb-slash{color:#c6cbc7}
+.account-breadcrumb strong{font-size:13px;color:#26362e}
+.account-return-button{display:inline-flex;align-items:center;gap:7px;border:1px solid #e4e9e5;border-radius:9px;padding:9px 12px;background:#fff;color:#30624e;font:700 12px inherit;cursor:pointer}
+.account-dashboard-layout{display:flex;direction:rtl;align-items:flex-start;gap:24px;min-height:540px}
+.account-sidebar{flex:0 0 266px;width:266px;display:flex;flex-direction:column;gap:12px}
+.account-profile-card,.account-menu,.account-brand-card,.account-overview-card,.account-shortcuts-card,.account-dynamic-panel{background:#fff;border:1px solid #e8ece9;border-radius:15px;box-shadow:0 3px 15px rgba(22,55,38,.035);overflow:hidden}
+.account-profile-card{position:relative;background:#f8f9f8;text-align:center;padding:24px 16px 17px}
+.account-profile-back{position:absolute;top:14px;left:15px;font-size:25px;line-height:1;color:#a8aeaa}
+.account-avatar{width:47px;height:47px;margin:0 auto 9px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(145deg,#0e815b,#175844);color:#fff;font-size:13px;font-weight:900;box-shadow:0 3px 10px #146a4e24}
+.account-profile-card h2{font-size:16px;line-height:1.7;font-weight:900;color:#252f29;margin:0}
+.account-profile-phone{font-size:12px;direction:ltr;color:#707a74;margin:4px 0 8px}
+.account-verified{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border:1px solid #dcece1;border-radius:20px;background:#edf7f0;color:#30724d;font-size:10px;font-weight:800}
+.account-member-label{font-size:11px;color:#8b938e;margin:9px 0 0}
+.account-menu{padding:5px 12px;background:#f8f9f8}
+.account-menu-item{display:flex;align-items:center;gap:10px;width:100%;min-height:44px;padding:9px 2px;border:0;border-bottom:1px solid #e9ece9;background:transparent;color:#535e57;text-align:right;font:500 12px inherit;cursor:pointer}
+.account-menu-item:last-child{border-bottom:0}
+.account-menu-item>span:nth-of-type(2){flex:1}
+.account-menu-icon{flex:0 0 22px;width:22px;height:22px;display:grid;place-items:center;border-radius:6px;color:#6f7a73;font-size:17px}
+.account-menu-item small{font-size:10px;color:#88928b;min-width:14px;text-align:center}
+.account-menu-item b{font-size:22px;font-weight:400;line-height:1;color:#a4aaa6}
+.account-menu-item:hover,.account-menu-item.active{color:#176b5c}
+.account-menu-item:hover .account-menu-icon,.account-menu-item.active .account-menu-icon{background:#e8f4ec;color:#0b7b53}
+.account-logout-item{color:#a74c4a}
+.account-logout-item .account-menu-icon{color:#bd5a58}
+.account-sidebar-foot{text-align:center;font-size:10px;color:#a0a7a1;line-height:1.9;padding:3px 8px}
+.account-main-column{flex:0 0 430px;width:430px;max-width:100%;display:flex;flex-direction:column;gap:12px}
+.account-brand-card{padding:20px 18px;background:#f8f9f8}
+.account-brand-top{display:flex;align-items:center;gap:13px}
+.account-brand-mark{width:54px;height:54px;position:relative;flex:0 0 54px;display:grid;place-items:center;border-radius:14px;background:#e9f4ec;color:#247553}
+.account-brand-mark svg{width:33px;height:33px;opacity:.85}
+.account-brand-mark span{position:absolute;bottom:1px;right:0;left:0;text-align:center;font-weight:900;font-size:10px;color:#0f6848}
+.account-brand-heading h2{font-size:17px;font-weight:900;color:#29352e;margin:0 0 2px}
+.account-brand-heading p{font-size:11px;color:#828b85;margin:0}
+.account-brand-divider{height:1px;background:#e7ebe7;margin:16px 0 11px}
+.account-brand-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11px;color:#6d786f}
+.account-brand-footer>span{display:flex;align-items:center;gap:6px}
+.account-status-dot{width:7px;height:7px;background:#21a366;border-radius:50%;display:inline-block}
+.account-brand-footer button{border:0;background:transparent;color:#4b6d59;font:700 11px inherit;white-space:nowrap;cursor:pointer}
+.account-brand-footer button span{font-size:19px;vertical-align:-1px}
+.account-overview-card,.account-shortcuts-card{padding:17px 18px}
+.account-panel-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 14px}
+.account-panel-heading h2{font-size:15px;font-weight:900;color:#2b352f;margin:0}
+.account-panel-heading p{font-size:11px;color:#8a928d;margin:3px 0 0}
+.account-panel-heading-icon{width:33px;height:33px;display:grid;place-items:center;border-radius:10px;background:#edf6ef;color:#217750;font-size:19px}
+.account-stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.account-stat{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:12px 10px;border:1px solid #e7ede8;border-radius:10px;background:#fbfcfb;text-align:right;cursor:pointer;min-width:0}
+.account-stat span{font-size:10px;color:#78847b;white-space:nowrap}
+.account-stat strong{font-size:24px;line-height:1.2;color:#18684b;font-weight:900}
+.account-stat small{font-size:9px;color:#859088;line-height:1.6}
+.account-stat:hover{border-color:#b8d9c2;background:#f5fbf6}
+.account-shortcuts-card{padding-bottom:5px}
+.account-shortcuts-card .account-panel-heading{margin-bottom:7px}
+.account-shortcut-row{display:flex;align-items:center;gap:11px;width:100%;padding:11px 0;border:0;border-top:1px solid #edf0ed;background:transparent;text-align:right;cursor:pointer}
+.account-shortcut-icon{flex:0 0 34px;width:34px;height:34px;display:grid;place-items:center;border:1px solid #e6ece7;border-radius:9px;background:#f7faf7;color:#5c7564;font-size:18px}
+.account-shortcut-green{background:#0b7952;color:#fff;border-color:#0b7952}
+.account-shortcut-row>span:nth-child(2){flex:1;display:flex;flex-direction:column;gap:2px}
+.account-shortcut-row strong{font-size:12px;color:#38453c;font-weight:800}
+.account-shortcut-row small{font-size:10px;color:#8a938d}
+.account-shortcut-row>b{font-size:22px;font-weight:400;color:#abb1ac}
+.account-shortcut-row:hover strong,.account-shortcut-row:hover>b{color:#087653}
+.account-dynamic-panel{padding:18px}
+.account-dynamic-heading{display:flex;align-items:center;gap:10px;padding:0 0 13px;margin-bottom:14px;border-bottom:1px solid #edf0ed}
+.account-dynamic-heading>button{width:32px;height:32px;border:1px solid #e5ebe6;border-radius:9px;background:#f9fbf9;font-size:25px;color:#607466;cursor:pointer}
+.account-dynamic-heading h2{font-size:16px;font-weight:900;color:#27372e;margin:0}
+.account-dynamic-heading p{font-size:11px;color:#818d85;margin:3px 0 0}
+.account-dynamic-content{font-size:12px;color:#4c5b51;line-height:1.9;overflow-wrap:anywhere}
+.account-view-empty{padding:22px 13px;text-align:center;border:1px dashed #dfe8e1;border-radius:12px;background:#fafcfa;color:#77837a}
+.account-view-empty strong{display:block;font-size:13px;color:#3e5345;margin-bottom:6px}
+.account-view-empty p{margin:0 0 13px;color:#7e8981}
+.account-view-button{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:9px 12px;border:1px solid #d7e6da;border-radius:9px;background:#fff;color:#126849;font:700 11px inherit;cursor:pointer}
+.account-view-button.primary{background:#087653;color:#fff;border-color:#087653}
+.account-view-button.danger{color:#a54b48;border-color:#efdada}
+.account-view-notice{padding:10px 12px;border:1px solid #e4ece5;border-radius:9px;background:#f8fbf8;color:#6d7d70;font-size:11px;margin-bottom:12px}
+.account-listing-results{display:grid!important;grid-template-columns:1fr!important;gap:10px!important}
+.account-listing-results .property-card{border:1px solid #e4ebe5!important;border-radius:11px!important;overflow:hidden!important;box-shadow:none!important}
+.account-listing-results .property-image{height:130px!important;min-height:130px!important;aspect-ratio:16/9!important}
+.account-listing-results .property-info{padding:10px!important}
+.account-listing-results .property-info h3{font-size:13px!important}
+.account-owner-status{display:inline-flex;align-self:flex-start;padding:3px 7px;border-radius:6px;font-size:10px;margin-bottom:5px;background:#f5f0e3;color:#886729}
+.account-owner-status.approved{background:#eaf6ee;color:#14724b}
+.account-owner-status.rejected{background:#fff0ef;color:#ac4541}
+.account-request-card,.account-activity-card{border:1px solid #e6ece7;border-radius:11px;padding:12px;margin:0 0 9px;background:#fff}
+.account-request-card h3{font-size:13px;font-weight:800;color:#2d4033;margin:0 0 5px}
+.account-request-card p{font-size:11px;color:#718076;margin:2px 0}
+.account-request-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;padding-top:8px;border-top:1px solid #eff2ef;color:#7c877f;font-size:10px}
+.account-settings-form{display:grid;gap:11px}
+.account-settings-form label{font-size:11px;color:#65736a;font-weight:700}
+.account-settings-form input{display:block;width:100%;margin-top:5px;min-height:42px;padding:9px 10px;border:1px solid #dfe8e1;border-radius:8px;background:#fff;color:#304d3a}
+.account-settings-actions{display:flex;flex-wrap:wrap;gap:8px;padding-top:8px}
+.account-help-item{padding:12px 0;border-bottom:1px solid #edf0ed}
+.account-help-item:last-child{border-bottom:0}
+.account-help-item strong{display:block;color:#334a39;font-size:12px;margin-bottom:4px}
+.account-help-item p{color:#7b887e;font-size:11px;margin:0}
+.account-dashboard-active #install-guide{display:none!important}
+@media(max-width:1000px){
+ #accountDashboard{width:calc(100% - 28px)!important;margin-top:19px!important}
+ .account-dashboard-layout{gap:16px}
+ .account-sidebar{flex-basis:245px;width:245px}
+ .account-main-column{flex-basis:410px;width:410px}
+}
+@media(max-width:700px){
+ #accountDashboard{width:calc(100% - 22px)!important;margin:12px auto 100px!important}
+ .account-dashboard-top{padding-bottom:10px;margin-bottom:12px}
+ .account-return-button{padding:8px 9px;font-size:11px}
+ .account-dashboard-layout{display:flex;flex-direction:column;gap:12px;min-height:0}
+ .account-sidebar,.account-main-column{flex:0 0 auto;width:100%;max-width:100%}
+ .account-profile-card{padding:17px 12px 13px}
+ .account-avatar{width:42px;height:42px}
+ .account-profile-card h2{font-size:15px}
+ .account-menu{padding:4px 11px}
+ .account-menu-item{min-height:42px}
+ .account-sidebar-foot{display:none}
+ .account-brand-card{padding:15px}
+ .account-overview-card,.account-shortcuts-card,.account-dynamic-panel{padding:13px}
+ .account-stat{padding:10px 7px}
+ .account-stat span{white-space:normal;line-height:1.5}
+ .account-stat strong{font-size:21px}
+ .account-stat small{font-size:9px}
+ .account-shortcut-row{gap:9px}
+ .account-shortcut-row small{line-height:1.5}
+ .account-listing-results .property-card{flex-direction:column!important}
+ .account-listing-results .property-image{width:100%!important;min-width:0!important;height:140px!important}
+}
+</style>
+
+
+<script id="amlak058-account-dashboard-script">
+var accountLoginPending = false;
+var accountDashboardIsOpen = false;
+var accountDashboardHiddenState = [];
+var accountFooterHiddenState = null;
+var accountInstallHiddenState = null;
+
+function accountSafeEscape(value){
+  if(typeof escapeHTML==='function') return escapeHTML(String(value==null?'':value));
+  return String(value==null?'':value).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]});
+}
+function accountFormatPhone(value){
+  var n=String(value||'').replace(/\D/g,'');
+  if(n.indexOf('0098')===0)n=n.slice(2);
+  if(n.indexOf('98')===0)n='0'+n.slice(2);
+  if(n.length===10&&n.charAt(0)==='9')n='0'+n;
+  return n||String(value||'شماره در دسترس نیست');
+}
+function accountSetActiveMenu(action){
+  document.querySelectorAll('#accountDashboard .account-menu-item').forEach(function(btn){
+    btn.classList.toggle('active',btn.getAttribute('data-account-action')===action);
+  });
+}
+function accountSaveHiddenState(el){
+  if(!el)return null;
+  return {el:el,hidden:el.hidden,display:el.style.display};
+}
+function accountHideOutsidePage(){
+  var dash=document.getElementById('accountDashboard');
+  var main=document.querySelector('main');
+  accountDashboardHiddenState=[];
+  if(main){
+    Array.from(main.children).forEach(function(el){
+      if(el===dash)return;
+      accountDashboardHiddenState.push(accountSaveHiddenState(el));
+      el.hidden=true;
+    });
+  }
+  var footer=document.querySelector('footer');
+  var install=document.getElementById('install-guide');
+  accountFooterHiddenState=accountSaveHiddenState(footer);
+  accountInstallHiddenState=accountSaveHiddenState(install);
+  if(footer)footer.hidden=true;
+  if(install)install.hidden=true;
+}
+function accountRestoreOutsidePage(){
+  accountDashboardHiddenState.forEach(function(item){
+    if(item&&item.el){item.el.hidden=item.hidden;item.el.style.display=item.display;}
+  });
+  accountDashboardHiddenState=[];
+  [accountFooterHiddenState,accountInstallHiddenState].forEach(function(item){
+    if(item&&item.el){item.el.hidden=item.hidden;item.el.style.display=item.display;}
+  });
+  accountFooterHiddenState=null;accountInstallHiddenState=null;
+}
+function closeAccountDashboard(){
+  var dash=document.getElementById('accountDashboard');
+  if(!dash)return;
+  dash.hidden=true;
+  if(accountDashboardIsOpen)accountRestoreOutsidePage();
+  accountDashboardIsOpen=false;
+  document.body.classList.remove('account-dashboard-active');
+}
+async function openAccountDashboard(){
+  var response=await db.auth.getUser();
+  var user=response&&response.data?response.data.user:null;
+  if(!user){
+    accountLoginPending=true;
+    openAuthModal();
+    var msg=document.getElementById('authMessage');
+    if(msg)msg.textContent='برای مشاهده حساب، ابتدا با شماره موبایل وارد شوید.';
+    return;
+  }
+  accountLoginPending=false;
+  var dash=document.getElementById('accountDashboard');
+  if(!dash)return;
+  if(!accountDashboardIsOpen)accountHideOutsidePage();
+  dash.hidden=false;accountDashboardIsOpen=true;
+  document.body.classList.add('account-dashboard-active');
+  showAccountHome();
+  var meta=user.user_metadata||{};
+  var name=meta.full_name||meta.name||meta.display_name||'حساب من';
+  var phone=accountFormatPhone(user.phone||'');
+  var first=String(name).trim().split(/\s+/).filter(Boolean)[0]||'۰۵۸';
+  document.getElementById('accountUserName').textContent=name;
+  document.getElementById('accountAvatar').textContent=first.slice(0,2);
+  document.getElementById('accountUserPhone').textContent=phone;
+  var verified=!!(user.phone_confirmed_at||user.confirmed_at);
+  document.getElementById('accountVerifiedBadge').innerHTML=verified?'<span aria-hidden="true">✓</span> شماره تأیید شده':'<span aria-hidden="true">✓</span> حساب کاربری';
+  var btn=document.getElementById('accountButton');if(btn)btn.textContent='حساب من';
+  var savedCount=0;try{savedCount=typeof getFavorites==='function'?getFavorites().length:0}catch(e){}
+  document.getElementById('accountSavedCount').textContent=Number(savedCount).toLocaleString('fa-IR');
+  await refreshAccountOverview(user);
+  document.getElementById('accountDashboard').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function showAccountHome(){
+  var home=document.getElementById('accountHomePanel'),panel=document.getElementById('accountDynamicPanel');
+  if(home)home.hidden=false;
+  if(panel)panel.hidden=true;
+  document.getElementById('accountBreadcrumbTitle').textContent='حساب من';
+  accountSetActiveMenu('');
+}
+function showAccountView(title,subtitle,html,activeAction){
+  document.getElementById('accountHomePanel').hidden=true;
+  document.getElementById('accountDynamicPanel').hidden=false;
+  document.getElementById('accountDynamicTitle').textContent=title;
+  document.getElementById('accountDynamicSubtitle').textContent=subtitle||'اطلاعات حساب شما';
+  document.getElementById('accountDynamicContent').innerHTML=html;
+  document.getElementById('accountBreadcrumbTitle').textContent=title;
+  accountSetActiveMenu(activeAction||'');
+}
+function accountEmpty(title,description,buttonText,action){
+  var btn=buttonText?'<button type="button" class="account-view-button primary" onclick="accountDashboardAction(\''+action+'\')">'+accountSafeEscape(buttonText)+'</button>':'';
+  return '<div class="account-view-empty"><strong>'+accountSafeEscape(title)+'</strong><p>'+accountSafeEscape(description)+'</p>'+btn+'</div>';
+}
+async function refreshAccountOverview(user){
+  try{
+    var p=await db.from('properties').select('id,status').eq('owner_id',user.id).limit(1000);
+    if(p.error)throw p.error;
+    var rows=p.data||[],approved=rows.filter(function(x){return x.status==='approved'}).length,pending=rows.filter(function(x){return x.status==='pending'}).length;
+    document.getElementById('accountAdsCount').textContent=rows.length.toLocaleString('fa-IR');
+    document.getElementById('accountStatAll').textContent=rows.length.toLocaleString('fa-IR');
+    document.getElementById('accountStatApproved').textContent=approved.toLocaleString('fa-IR');
+    document.getElementById('accountStatPending').textContent=pending.toLocaleString('fa-IR');
+  }catch(e){
+    console.warn('Account overview: properties unavailable',e);
+    ['accountAdsCount','accountStatAll','accountStatApproved','accountStatPending'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent='—'});
+  }
+}
+async function accountDashboardAction(action){
+  var current=await db.auth.getUser(),user=current&&current.data?current.data.user:null;
+  if(action==='logout'){await signOutUser();return;}
+  if(action==='home'){closeAccountDashboard();mobileNavHome();return;}
+  if(action==='new'){closeAccountDashboard();openModal();return;}
+  if(action==='messages'){closeAccountDashboard();await openInbox();return;}
+  if(!user){accountLoginPending=true;openAuthModal();return;}
+  if(action==='listings'){await renderAccountListings(user);return;}
+  if(action==='saved'){await renderAccountSaved(user);return;}
+  if(action==='recent'){await renderAccountRecent(user);return;}
+  if(action==='requests'){await renderAccountRequests(user);return;}
+  if(action==='activity'){await renderAccountActivity(user);return;}
+  if(action==='settings'){renderAccountSettings(user);return;}
+  if(action==='help'){renderAccountHelp();return;}
+  if(action==='payments'){
+    showAccountView('کیف پول و پرداخت‌ها','وضعیت خدمات پرداخت',accountEmpty('کیف پول هنوز فعال نیست','املاک ۰۵۸ در حال حاضر برای ثبت آگهی عمومی از کیف پول داخلی استفاده نمی‌کند. هیچ پرداختی از این بخش انجام نمی‌شود.','',''),'payments');
+    return;
+  }
+}
+async function renderAccountListings(user){
+  showAccountView('مدیریت آگهی‌ها','آگهی‌های ثبت‌شده با این حساب و وضعیت بررسی آن‌ها','<div class="account-view-notice">آگهی‌های جدید پس از ثبت در انتظار بررسی مدیریت می‌مانند.</div><div id="accountListingsResults" class="account-listing-results"><div class="account-view-empty">در حال دریافت آگهی‌ها...</div></div><div style="margin-top:12px"><button class="account-view-button primary" onclick="accountDashboardAction(\'new\')">＋ ثبت آگهی رایگان</button></div>','listings');
+  var box=document.getElementById('accountListingsResults');
+  try{
+    var result=await db.from('properties').select('id,title,main_category,sub_category,property_type,transaction_type,price,deposit,monthly_rent,convertible,area,bedrooms,year_built,floor_number,photos_own,elevator,parking,storage,video_url,address,city,description,image_url,image_urls,details_json,land_area,building_area,location_lat,location_lng,location_precision,created_at,owner_id,status').eq('owner_id',user.id).order('created_at',{ascending:false}).limit(100);
+    if(result.error)throw result.error;
+    var data=result.data||[];
+    if(!data.length){box.innerHTML=accountEmpty('هنوز آگهی‌ای ثبت نکرده‌ای','بعد از ثبت آگهی، وضعیت بررسی و نتیجه آن را همین‌جا می‌بینی.','ثبت آگهی رایگان','new');return;}
+    var labels={pending:['در انتظار تأیید','pending'],approved:['منتشر شده','approved'],rejected:['رد شده','rejected']};
+    var html=[];
+    for(var i=0;i<data.length;i++){
+      var p=data[i],lab=labels[p.status]||['وضعیت نامشخص','pending'],card=await renderProperty(p);
+      card=card.replace('<div class="property-info">','<div class="property-info"><span class="account-owner-status '+lab[1]+'">'+lab[0]+'</span>');
+      html.push(card);
+    }
+    box.innerHTML=html.join('');
+  }catch(e){
+    box.innerHTML=accountEmpty('آگهی‌ها بارگذاری نشدند',e.message||'خطای دریافت اطلاعات','','');
+  }
+}
+async function accountRenderIds(user,ids,emptyTitle,emptyText,action,active){
+  if(!ids.length){showAccountView(active==='saved'?'آگهی‌های ذخیره‌شده':'بازدیدهای اخیر','فهرست ملک‌های انتخاب‌شده',accountEmpty(emptyTitle,emptyText,'رفتن به آگهی‌ها','home'),active);return;}
+  showAccountView(active==='saved'?'آگهی‌های ذخیره‌شده':'بازدیدهای اخیر','فهرست ملک‌های انتخاب‌شده','<div id="accountIdResults" class="account-listing-results"><div class="account-view-empty">در حال دریافت ملک‌ها...</div></div>',''+active);
+  var box=document.getElementById('accountIdResults');
+  try{
+    var result=await db.from('properties').select('id,title,main_category,sub_category,property_type,transaction_type,price,deposit,monthly_rent,convertible,area,bedrooms,year_built,floor_number,photos_own,elevator,parking,storage,video_url,address,city,description,image_url,image_urls,details_json,land_area,building_area,location_lat,location_lng,location_precision,created_at,owner_id,status').in('id',ids).order('created_at',{ascending:false}).limit(100);
+    if(result.error)throw result.error;
+    var data=result.data||[];
+    data.sort(function(a,b){return ids.indexOf(String(a.id))-ids.indexOf(String(b.id));});
+    if(!data.length){box.innerHTML=accountEmpty(emptyTitle,emptyText,'رفتن به آگهی‌ها','home');return;}
+    var html=[];
+    for(var i=0;i<data.length;i++)html.push(await renderProperty(data[i]));
+    box.innerHTML=html.join('');
+  }catch(e){box.innerHTML=accountEmpty('این فهرست فعلاً در دسترس نیست',e.message||'خطای دریافت اطلاعات','','');}
+}
+async function renderAccountSaved(user){
+  var ids=[];try{ids=(typeof getFavorites==='function'?getFavorites():[]).map(String);}catch(e){}
+  ids=ids.slice(0,100);
+  await accountRenderIds(user,ids,'هنوز آگهی‌ای ذخیره نکرده‌ای','برای دسترسی سریع، روی نشان ذخیرهٔ آگهی‌ها بزن و ملک‌های دلخواهت را نگه دار.','saved','saved');
+}
+async function renderAccountRecent(user){
+  var ids=[];
+  try{ids=JSON.parse(localStorage.getItem('amlak058_recent_properties_v1')||'[]').map(String).slice(0,12);}catch(e){}
+  await accountRenderIds(user,ids,'هنوز بازدیدی ثبت نشده','وقتی جزئیات یک آگهی را باز کنی، آن ملک در بازدیدهای اخیر ظاهر می‌شود.','recent','recent');
+}
+async function renderAccountRequests(user){
+  showAccountView('درخواست‌های من','درخواست‌های خرید، اجاره و اجاره کوتاه‌مدت ثبت‌شده با این حساب','<div id="accountRequestsResults"><div class="account-view-empty">در حال دریافت درخواست‌ها...</div></div><div style="margin-top:12px"><button class="account-view-button primary" onclick="accountDashboardAction(\'newRequest\')">＋ ثبت درخواست خرید یا اجاره</button></div>','requests');
+  var box=document.getElementById('accountRequestsResults');
+  try{
+    var result=await db.from('property_requests').select('id,request_type,property_type,city,neighborhoods,min_budget,max_budget,min_area,max_area,bedrooms,description,status,created_at').eq('user_id',user.id).order('created_at',{ascending:false}).limit(100);
+    if(result.error)throw result.error;
+    var rows=result.data||[];
+    if(!rows.length){box.innerHTML=accountEmpty('درخواستی ثبت نکرده‌ای','نیاز خود به خرید یا اجاره را ثبت کن تا در حساب ذخیره شود.','ثبت درخواست خرید یا اجاره','newRequest');return;}
+    var statusLabels={pending:'در انتظار بررسی',reviewed:'بررسی‌شده',contacted:'پیگیری‌شده',closed:'بسته‌شده'};
+    box.innerHTML=rows.map(function(r){
+      var type=r.request_type==='buy'?'خرید':r.request_type==='rent'?'رهن و اجاره':'اجاره کوتاه‌مدت';
+      var neighborhoods=Array.isArray(r.neighborhoods)?r.neighborhoods.join('، '):'';
+      var budget=(r.min_budget||r.max_budget)?Number(r.min_budget||0).toLocaleString('fa-IR')+' تا '+Number(r.max_budget||0).toLocaleString('fa-IR')+' تومان':'بودجه تعیین نشده';
+      var area=(r.min_area||r.max_area)?Number(r.min_area||0).toLocaleString('fa-IR')+' تا '+Number(r.max_area||0).toLocaleString('fa-IR')+' متر':'متراژ تعیین نشده';
+      return '<article class="account-request-card"><h3>'+accountSafeEscape(type+' · '+(r.property_type||'ملک'))+'</h3><p>'+accountSafeEscape((r.city||'بجنورد')+(neighborhoods?' · '+neighborhoods:''))+'</p><p>'+accountSafeEscape(budget)+' · '+accountSafeEscape(area)+'</p><p>'+accountSafeEscape(r.description||'بدون توضیح اضافه')+'</p><div class="account-request-meta"><span>'+accountSafeEscape(statusLabels[r.status]||'ثبت‌شده')+'</span><span>'+new Date(r.created_at).toLocaleDateString('fa-IR')+'</span></div></article>';
+    }).join('');
+  }catch(e){box.innerHTML=accountEmpty('درخواست‌ها در دسترس نیستند',e.message||'خطای دریافت اطلاعات','','');}
+}
+async function renderAccountActivity(user){
+  showAccountView('گزارش فعالیت','خلاصه‌ای از اطلاعات ثبت‌شده در حساب','<div class="account-view-empty">در حال محاسبه آمار...</div>','activity');
+  var box=document.getElementById('accountDynamicContent');
+  try{
+    var props=await db.from('properties').select('id,status,created_at').eq('owner_id',user.id).limit(1000);
+    if(props.error)throw props.error;
+    var requests=await db.from('property_requests').select('id',{count:'exact',head:true}).eq('user_id',user.id);
+    var conversations=await db.from('conversations').select('id',{count:'exact',head:true}).or('buyer_id.eq.'+user.id+',seller_id.eq.'+user.id);
+    var rows=props.data||[];
+    var approved=rows.filter(function(x){return x.status==='approved'}).length;
+    var pending=rows.filter(function(x){return x.status==='pending'}).length;
+    var rejected=rows.filter(function(x){return x.status==='rejected'}).length;
+    var html='<div class="account-stat-grid account-activity-grid">'+
+      '<div class="account-stat"><span>کل آگهی‌ها</span><strong>'+rows.length.toLocaleString('fa-IR')+'</strong><small>ثبت‌شده با این حساب</small></div>'+
+      '<div class="account-stat"><span>منتشرشده</span><strong>'+approved.toLocaleString('fa-IR')+'</strong><small>در سایت قابل مشاهده</small></div>'+
+      '<div class="account-stat"><span>در انتظار تأیید</span><strong>'+pending.toLocaleString('fa-IR')+'</strong><small>در صف بررسی</small></div></div>'+
+      '<div class="account-activity-card"><strong>آگهی‌های ردشده</strong><div>'+rejected.toLocaleString('fa-IR')+'</div></div>'+
+      '<div class="account-activity-card"><strong>درخواست‌های ملک</strong><div>'+Number(requests.count||0).toLocaleString('fa-IR')+'</div></div>'+
+      '<div class="account-activity-card"><strong>گفت‌وگوها</strong><div>'+Number(conversations.count||0).toLocaleString('fa-IR')+'</div></div>'+
+      '<p class="account-view-notice">این آمار از اطلاعات فعلی حساب محاسبه شده و تعداد بازدید عمومی آگهی‌ها را نشان نمی‌دهد.</p>';
+    box.innerHTML=html;
+  }catch(e){box.innerHTML=accountEmpty('گزارش فعالیت بارگذاری نشد',e.message||'خطای دریافت اطلاعات','','');}
+}
+function renderAccountSettings(user){
+  var meta=user.user_metadata||{},name=meta.full_name||meta.name||meta.display_name||'';
+  var phone=accountFormatPhone(user.phone||'');
+  var html='<form class="account-settings-form" onsubmit="saveAccountSettings(event)">'+
+    '<label for="accountDisplayName">نام نمایشی<input id="accountDisplayName" value="'+accountSafeEscape(name)+'" maxlength="80" placeholder="نامی که در حساب نمایش داده شود"></label>'+
+    '<label for="accountPhoneReadOnly">شماره موبایل تأییدشده<input id="accountPhoneReadOnly" value="'+accountSafeEscape(phone)+'" readonly></label>'+
+    '<p class="account-view-notice">تغییر شماره موبایل نیازمند دریافت و تأیید کد جدید است؛ اینجا فقط نام نمایشی ذخیره می‌شود.</p>'+
+    '<div class="account-settings-actions"><button type="submit" class="account-view-button primary">ذخیره تغییرات</button><button type="button" class="account-view-button danger" onclick="accountDashboardAction(\'logout\')">خروج از حساب</button></div>'+
+    '<p id="accountSettingsMessage" role="status"></p></form>';
+  showAccountView('تنظیمات حساب','مدیریت اطلاعات پایه حساب کاربری',html,'settings');
+}
+async function saveAccountSettings(event){
+  event.preventDefault();
+  var message=document.getElementById('accountSettingsMessage'),button=event.submitter;
+  var name=String(document.getElementById('accountDisplayName').value||'').trim();
+  if(name.length>80){message.textContent='نام نمایشی باید کمتر از ۸۰ نویسه باشد.';return;}
+  if(button)button.disabled=true;
+  try{
+    var result=await db.auth.updateUser({data:{full_name:name}});
+    if(result.error)throw result.error;
+    message.style.color='#16724c';message.textContent='تغییرات ذخیره شد.';
+    var title=document.getElementById('accountUserName');if(title)title.textContent=name||'حساب من';
+    var avatar=document.getElementById('accountAvatar');if(avatar)avatar.textContent=(name||'۰۵۸').trim().split(/\s+/)[0].slice(0,2);
+  }catch(e){message.style.color='#b00020';message.textContent='ذخیره تغییرات انجام نشد: '+(e.message||'خطای نامشخص');}
+  finally{if(button)button.disabled=false;}
+}
+function renderAccountHelp(){
+  var html='<div class="account-help-item"><strong>ثبت آگهی</strong><p>آگهی را از دکمه «ثبت آگهی رایگان» ارسال کن. تا زمان تأیید مدیریت، در فهرست عمومی دیده نمی‌شود.</p></div>'+
+  '<div class="account-help-item"><strong>وضعیت آگهی</strong><p>از بخش مدیریت آگهی‌ها می‌توانی وضعیت بررسی هر فایل را ببینی.</p></div>'+
+  '<div class="account-help-item"><strong>پیام‌ها و گفت‌وگوها</strong><p>گفت‌وگوهای مربوط به ملک را از صندوق پیام‌ها دنبال کن.</p></div>'+
+  '<div class="account-help-item"><strong>مشکل در حساب</strong><p>اگر آگهی‌ها نمایش داده نمی‌شوند، مطمئن شو با همان شماره‌ای وارد شده‌ای که آگهی را ثبت کرده بودی.</p></div>'+
+  '<div class="account-settings-actions"><button class="account-view-button primary" onclick="accountDashboardAction(\'messages\')">باز کردن پیام‌ها</button><button class="account-view-button" onclick="accountDashboardAction(\'listings\')">مدیریت آگهی‌ها</button></div>';
+  showAccountView('راهنما و پشتیبانی','راهنمای استفاده از املاک ۰۵۸',html,'help');
+}
+document.querySelectorAll('#accountDashboard [data-account-action]').forEach(function(btn){
+  btn.addEventListener('click',function(){accountDashboardAction(btn.getAttribute('data-account-action'));});
+});
+document.getElementById('accountDashboard').addEventListener('click',function(event){
+  if(event.target===this)closeAccountDashboard();
+});
+document.querySelectorAll('header .brand,header nav a[href^="#"]').forEach(function(link){
+  link.addEventListener('click',function(){if(accountDashboardIsOpen)closeAccountDashboard();});
+});
+if(typeof window.openDetails==='function'&&!window.openDetails.__accountRecentWrapped){
+  var accountOriginalOpenDetails=window.openDetails;
+  var accountRecentWrapper=function(propertyId){
+    try{
+      var ids=JSON.parse(localStorage.getItem('amlak058_recent_properties_v1')||'[]').map(String);
+      ids=[String(propertyId)].concat(ids.filter(function(id){return id!==String(propertyId);})).slice(0,12);
+      localStorage.setItem('amlak058_recent_properties_v1',JSON.stringify(ids));
+    }catch(e){}
+    return accountOriginalOpenDetails.apply(this,arguments);
+  };
+  accountRecentWrapper.__accountRecentWrapped=true;
+  window.openDetails=accountRecentWrapper;
+}
+</script>
 
 </body></html>
