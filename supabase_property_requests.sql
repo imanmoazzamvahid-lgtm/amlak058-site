@@ -18,13 +18,41 @@ create table if not exists public.property_requests (
   status text not null default 'pending'
     check (status in ('pending', 'reviewed', 'contacted', 'closed')),
   created_at timestamptz not null default now(),
+  expires_at timestamptz not null default (now() + interval '30 days'),
   constraint property_requests_budget_range check (min_budget is null or max_budget is null or min_budget <= max_budget),
   constraint property_requests_area_range check (min_area is null or max_area is null or min_area <= max_area),
   constraint property_requests_bedrooms_nonnegative check (bedrooms is null or bedrooms >= 0)
 );
 
+-- Add/backfill expiry on databases where the table already existed.
+alter table public.property_requests add column if not exists expires_at timestamptz;
+update public.property_requests set expires_at = created_at + interval '30 days' where expires_at is null;
+alter table public.property_requests alter column expires_at set default (now() + interval '30 days');
+alter table public.property_requests alter column expires_at set not null;
+
 create index if not exists property_requests_user_created_idx on public.property_requests(user_id, created_at desc);
 create index if not exists property_requests_status_created_idx on public.property_requests(status, created_at desc);
+create index if not exists property_requests_expires_at_idx on public.property_requests(expires_at);
+
+create or replace function public.enforce_property_request_expiry()
+returns trigger
+language plpgsql
+set search_path = ''
+as $function$
+begin
+  if tg_op = 'INSERT' then
+    new.expires_at := now() + interval '30 days';
+  else
+    new.expires_at := old.expires_at;
+  end if;
+  return new;
+end;
+$function$;
+
+drop trigger if exists property_requests_expiry_guard on public.property_requests;
+create trigger property_requests_expiry_guard
+before insert or update on public.property_requests
+for each row execute function public.enforce_property_request_expiry();
 alter table public.property_requests enable row level security;
 grant select, insert, update on table public.property_requests to authenticated;
 grant usage, select on sequence public.property_requests_id_seq to authenticated;
