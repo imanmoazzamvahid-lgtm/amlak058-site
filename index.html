@@ -1914,6 +1914,7 @@ header{position:sticky;top:0;z-index:80;background:#fff!important;border-bottom:
         <button type="button" class="account-menu-item active" data-account-action="listings"><span class="account-menu-icon">▤</span><span>مدیریت آگهی‌ها</span><small id="accountAdsCount">—</small><b>‹</b></button>
         <button type="button" class="account-menu-item" data-account-action="requests"><span class="account-menu-icon">⌂</span><span>درخواست‌های من</span><b>‹</b></button>
         <button type="button" class="account-menu-item" data-account-action="messages"><span class="account-menu-icon">▱</span><span>پیام‌ها و گفت‌وگوها</span><b>‹</b></button>
+        <button type="button" class="account-menu-item" data-account-action="payments"><span class="account-menu-icon">▣</span><span>کیف پول و پرداخت‌ها</span><small>غیرفعال</small><b>‹</b></button>
         <button type="button" class="account-menu-item" data-account-action="saved"><span class="account-menu-icon">♡</span><span>آگهی‌های ذخیره‌شده</span><small id="accountSavedCount">۰</small><b>‹</b></button>
         <button type="button" class="account-menu-item" data-account-action="recent"><span class="account-menu-icon">◷</span><span>بازدیدهای اخیر</span><b>‹</b></button>
         <button type="button" class="account-menu-item" data-account-action="activity"><span class="account-menu-icon">▥</span><span>گزارش فعالیت</span><b>‹</b></button>
@@ -3433,6 +3434,7 @@ async function accountDashboardAction(action){
   if(action==='logout'){await signOutUser();return;}
   if(action==='home'){closeAccountDashboard();mobileNavHome();return;}
   if(action==='new'){closeAccountDashboard();openModal();return;}
+  if(action==='newRequest'){closeAccountDashboard();openRequestModal();return;}
   if(action==='messages'){closeAccountDashboard();await openInbox();return;}
   if(!user){accountLoginPending=true;openAuthModal();return;}
   if(action==='listings'){await renderAccountListings(user);return;}
