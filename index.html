@@ -2062,6 +2062,70 @@ button, input, select, textarea {
   #propertyDetailPage #pdMapSection .full iframe { height:230px!important; }
 }
 </style>
+
+<style id="divar-style-property-detail">
+/* صفحه جزئیات آگهی در موبایل، با الگوی تصویری آگهی‌های نیازمندی */
+#propertyDetailPage{width:100%;max-width:none;margin:0;padding:0;background:#fff}
+#propertyDetailPage .pd-page-tools{padding:12px max(3%,calc((100% - 1180px)/2));background:#fff;border-bottom:1px solid #eee}
+#propertyDetailPage .pd-layout{max-width:1180px;margin:20px auto;padding:0 18px;display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.9fr);gap:24px;align-items:start}
+#propertyDetailPage .pd-info-column,#propertyDetailPage .pd-media-column{min-width:0}
+#propertyDetailPage .pd-property-heading{background:#fff}
+#propertyDetailPage .pd-title{overflow-wrap:anywhere}
+#propertyDetailPage .pd-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;overflow:hidden;border-radius:10px}
+#propertyDetailPage .pd-gallery img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#f1f1f1}
+#propertyDetailPage .pd-gallery img:first-child{grid-column:1/-1;aspect-ratio:16/10}
+#propertyDetailPage .pd-summary-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid #eee;border-bottom:1px solid #eee;margin:16px 0}
+#propertyDetailPage .pd-metric{text-align:center;padding:12px 6px;border-left:1px solid #eee}
+#propertyDetailPage .pd-metric:last-child{border-left:0}
+#propertyDetailPage .pd-price-table{border-bottom:1px solid #eee}
+#propertyDetailPage .pd-contact-button{background:#c52b32;color:#fff;border:1px solid #c52b32;border-radius:10px;font-weight:800}
+#propertyDetailPage .pd-contact-row{display:flex;gap:10px;align-items:center}
+#propertyDetailPage .pd-contact-row .pd-contact-button{flex:1;min-height:48px}
+#propertyDetailPage .pd-small-actions{display:flex;gap:8px}
+#propertyDetailPage .pd-icon-action{width:46px;height:46px;border:1px solid #ddd;border-radius:10px;background:#fff}
+#propertyDetailPage .pd-features-section,#propertyDetailPage .pd-description-section,#propertyDetailPage .pd-questions-section{padding:18px 0;border-bottom:7px solid #f5f5f5}
+@media(max-width:700px){
+ #propertyDetailPage{padding:0 0 calc(94px + env(safe-area-inset-bottom));background:#fff}
+ #propertyDetailPage .pd-page-tools{display:none}
+ #propertyDetailPage .pd-layout{display:flex;flex-direction:column;gap:0;width:100%;margin:0;padding:0}
+ #propertyDetailPage .pd-media-column{order:-1;width:100%;display:flex;flex-direction:column}
+ #propertyDetailPage .pd-info-column{order:1;width:100%;display:flex;flex-direction:column}
+ #propertyDetailPage .pd-gallery{display:flex;flex-direction:row;gap:5px;width:100%;border-radius:0;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+ #propertyDetailPage .pd-gallery::-webkit-scrollbar{display:none}
+ #propertyDetailPage .pd-gallery img,
+ #propertyDetailPage .pd-gallery img:first-child{flex:0 0 100%;width:100%;min-width:100%;height:auto;max-height:390px;aspect-ratio:4/3;object-fit:cover;scroll-snap-align:start;border-radius:0}
+ #propertyDetailPage .pd-gallery-caption{padding:0 14px}
+ #propertyDetailPage .pd-info-column{padding:0 16px}
+ #propertyDetailPage .pd-property-heading{padding:18px 0 12px;border-bottom:1px solid #eee}
+ #propertyDetailPage .pd-label-line{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:#777}
+ #propertyDetailPage #pdTitle{font-size:21px;line-height:1.8;font-weight:900;margin:8px 0;overflow-wrap:anywhere}
+ #propertyDetailPage .pd-location-line{font-size:13px;color:#777;margin:4px 0 12px}
+ #propertyDetailPage .pd-safety-link{display:flex;align-items:center;gap:8px;width:100%;text-align:right;padding:12px 0;border:0;border-top:1px solid #eee;background:#fff;font-size:14px;font-weight:700}
+ #propertyDetailPage .pd-safety-link .pd-chevron{margin-right:auto;font-size:22px}
+ #propertyDetailPage .pd-contact-row{position:fixed;z-index:180;left:0;right:0;bottom:0;display:flex;gap:10px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(255,255,255,.98);border-top:1px solid #e7e7e7;box-shadow:0 -4px 18px #0000000a}
+ #propertyDetailPage .pd-contact-row .pd-contact-button{flex:1;min-height:52px;border-radius:12px;font-size:15px}
+ #propertyDetailPage .pd-small-actions{gap:8px}
+ #propertyDetailPage .pd-icon-action{width:48px;height:48px;border-radius:12px}
+ #propertyDetailPage .pd-summary-metrics{margin:0;border-top:0;padding:5px 0}
+ #propertyDetailPage .pd-metric{padding:12px 4px;font-size:12px}
+ #propertyDetailPage .pd-price-table{padding:4px 0 12px}
+ #propertyDetailPage .pd-features-section,#propertyDetailPage .pd-description-section,#propertyDetailPage .pd-questions-section{padding:18px 0;border-bottom:7px solid #f5f5f5}
+ #propertyDetailPage .pd-features-section h2,#propertyDetailPage .pd-description-section h2,#propertyDetailPage .pd-questions-section h2{font-size:19px;font-weight:900;margin-bottom:12px}
+ #propertyDetailPage .pd-feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+ #propertyDetailPage .pd-feature-item{min-width:0;padding:10px 5px;border:1px solid #eee;border-radius:9px;text-align:center;font-size:11px}
+ #propertyDetailPage .pd-description-section p{font-size:14px;line-height:2;overflow-wrap:anywhere}
+ #propertyDetailPage .pd-media-column>.pd-note-card,
+ #propertyDetailPage .pd-media-column>.pd-map-section,
+ #propertyDetailPage .pd-media-column>.pd-agency-card,
+ #propertyDetailPage .pd-media-column>.pd-report-button,
+ #propertyDetailPage .pd-media-column>.pd-report-info{margin:14px 16px}
+ #propertyDetailPage .pd-media-column>.pd-note-card{order:3}
+ #propertyDetailPage .pd-media-column>.pd-map-section{order:2}
+ #propertyDetailPage .pd-media-column>.pd-agency-card{order:4}
+ #propertyDetailPage .pd-media-column>.pd-report-button{order:5}
+ #propertyDetailPage .pd-contact-row .pd-small-actions{display:none}
+}
+</style>
 </head><body>
 
 <header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک ۰۵۸"><svg viewBox="0 0 64 64" role="img" aria-hidden="true" style="width:35px;height:35px;display:block"><path d="M6 29 32 7 58 29" fill="none" stroke="#c59a45" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 27v29h38V27" fill="none" stroke="#f8f3e7" stroke-width="3.2" stroke-linejoin="round"/><path d="M26 56V39h12v17" fill="none" stroke="#c59a45" stroke-width="3.2" stroke-linejoin="round"/><path d="M19 33h6v6h-6zm20 0h6v6h-6z" fill="#c59a45"/></svg></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>بازار آنلاین ملک بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
