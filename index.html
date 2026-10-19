@@ -2858,20 +2858,20 @@ main{max-width:1200px;margin:0 auto}
    <button type="button" class="commission-tab" data-kind="rent" onclick="setCommissionKind('rent')">رهن و اجاره</button>
   </div>
   <div id="commission-sale-fields" class="commission-fields">
-   <label>قیمت کل معامله (تومان)<input id="commission-sale-price" type="number" min="0" inputmode="numeric" placeholder="مثلاً ۵۰۰۰۰۰۰۰۰۰"></label>
-   <label>درصد کمیسیون هر طرف<input id="commission-sale-rate" type="number" min="0" max="10" step="0.01" value="0.25" inputmode="decimal"></label>
+   <label>نوع قرارداد<select id="commission-sale-type"><option value="sale">خرید و فروش</option><option value="presale">پیش‌فروش</option></select></label>
+   <label>قیمت کل قرارداد (تومان)<input id="commission-sale-price" type="number" min="0" inputmode="numeric" placeholder="مثلاً ۵۰۰۰۰۰۰۰۰۰"></label>
+   <p class="commission-note" style="grid-column:1/-1">خریدوفروش طبق پله‌های نرخ‌نامه: تا ۵ میلیارد، ۰٫۲۵٪؛ مازاد ۵ تا ۱۰ میلیارد، ۰٫۳۷٪؛ مازاد ۱۰ میلیارد، ۰٫۲۵٪ از هر طرف. پیش‌فروش: ۰٫۶۰٪ از هر طرف.</p>
   </div>
   <div id="commission-rent-fields" class="commission-fields" hidden>
-   <label>مبلغ ودیعه (تومان)<input id="commission-deposit" type="number" min="0" inputmode="numeric" placeholder="مبلغ رهن"></label>
+   <label>مبلغ ودیعه / رهن (تومان)<input id="commission-deposit" type="number" min="0" inputmode="numeric" placeholder="مبلغ رهن"></label>
    <label>اجاره ماهانه (تومان)<input id="commission-monthly-rent" type="number" min="0" inputmode="numeric" placeholder="اجاره ماهانه"></label>
-   <label>هر ۱ میلیون تومان ودیعه معادل چند تومان اجاره ماهانه است؟<input id="commission-conversion" type="number" min="1" value="30000" inputmode="numeric"></label>
-   <label>درصد کمیسیون هر طرف<input id="commission-rent-rate" type="number" min="0" max="100" step="0.1" value="25" inputmode="decimal"></label>
+   <p class="commission-note" style="grid-column:1/-1">طبق خوانش نرخ‌نامه: هر ۱ میلیون تومان رهن معادل ۴۰ هزار تومان اجاره ماهانه محاسبه می‌شود و کمیسیون برابر ۷ روز اجاره معادل برای هر طرف است.</p>
   </div>
   <label class="commission-vat"><input id="commission-vat-on" type="checkbox" checked> محاسبه مالیات بر ارزش افزوده روی کمیسیون</label>
   <div class="commission-vat-rate-row"><label>درصد مالیات<input id="commission-vat-rate" type="number" min="0" max="100" step="1" value="10" inputmode="numeric"></label></div>
   <button type="button" class="btn btn-primary commission-calc-btn" onclick="calculateCommission()">محاسبه کمیسیون</button>
   <div id="commission-result" class="commission-result" aria-live="polite">مبلغ معامله را وارد کنید تا برآورد کمیسیون نمایش داده شود.</div>
-  <p class="commission-note">این محاسبه‌گر صرفاً برآوردی است. نرخ قطعی به تعرفه مصوب اتحادیه محل، نوع قرارداد و مقررات مالیاتی روز بستگی دارد؛ پیش از پرداخت، مبلغ را با دفتر املاک یا اتحادیه مربوط بررسی کنید.</p>
+  <p class="commission-note">محاسبه بر اساس نرخ‌نامه تصویری ارسالی شما و تفسیر اعداد خوانا انجام می‌شود. به دلیل قدیمی/کم‌وضوح بودن تصویر، پیش از استفاده رسمی، نرخ‌ها را با نسخه معتبر و جاری اتحادیه تطبیق دهید. مالیات بر ارزش افزوده جداگانه محاسبه می‌شود.</p>
  </div>
 </section>
 <style id="commission-calculator-styles">
@@ -2907,16 +2907,24 @@ main{max-width:1200px;margin:0 auto}
   const vatRate=vatOn?val('commission-vat-rate')/100:0;
   let base=0,details='';
   if(commissionKind==='sale'){
-   const price=val('commission-sale-price'),rate=val('commission-sale-rate')/100;
-   if(!price){document.getElementById('commission-result').textContent='لطفاً قیمت کل معامله را وارد کنید.';return;}
-   base=price*rate;
-   details='نرخ واردشده برای هر طرف: '+(rate*100).toLocaleString('fa-IR')+'٪';
+   const price=val('commission-sale-price'),type=document.getElementById('commission-sale-type').value;
+   if(!price){document.getElementById('commission-result').textContent='لطفاً قیمت کل قرارداد را وارد کنید.';return;}
+   if(type==='presale'){
+    base=price*0.006;
+    details='پیش‌فروش: نرخ ۰٫۶۰٪ از کل قرارداد برای هر طرف';
+   }else{
+    const first=Math.min(price,5000000000)*0.0025;
+    const second=Math.min(Math.max(price-5000000000,0),5000000000)*0.0037;
+    const third=Math.max(price-10000000000,0)*0.0025;
+    base=first+second+third;
+    details='محاسبه پلکانی نرخ‌نامه برای هر طرف: ۰٫۲۵٪ تا ۵ میلیارد، ۰٫۳۷٪ برای پله ۵ تا ۱۰ میلیارد و ۰٫۲۵٪ از مازاد ۱۰ میلیارد';
+   }
   }else{
-   const deposit=val('commission-deposit'),rent=val('commission-monthly-rent'),conversion=val('commission-conversion'),rate=val('commission-rent-rate')/100;
-   if(!conversion||(!deposit&&!rent)){document.getElementById('commission-result').textContent='مبلغ ودیعه یا اجاره ماهانه را وارد کنید و ضریب تبدیل را بررسی کنید.';return;}
-   const monthlyEquivalent=rent+(deposit/1000000)*conversion;
-   base=monthlyEquivalent*rate;
-   details='اجاره معادل ماهانه: '+Math.round(monthlyEquivalent).toLocaleString('fa-IR')+' تومان | نرخ واردشده برای هر طرف: '+(rate*100).toLocaleString('fa-IR')+'٪';
+   const deposit=val('commission-deposit'),rent=val('commission-monthly-rent');
+   if(!deposit&&!rent){document.getElementById('commission-result').textContent='مبلغ ودیعه یا اجاره ماهانه را وارد کنید.';return;}
+   const monthlyEquivalent=rent+(deposit/1000000)*40000;
+   base=monthlyEquivalent*7/30;
+   details='اجاره معادل ماهانه: '+Math.round(monthlyEquivalent).toLocaleString('fa-IR')+' تومان | کمیسیون ۷ روز اجاره معادل برای هر طرف';
   }
   const vat=base*vatRate,total=base+vat;
   const money=n=>Math.round(n).toLocaleString('fa-IR')+' تومان';
