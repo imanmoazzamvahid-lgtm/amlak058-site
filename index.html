@@ -1633,9 +1633,9 @@ header .brand h1 .brand-number{font-size:1.18em!important;font-weight:1000!impor
 #authPhonePanel{display:block!important}
 </style>
 
-<link rel="manifest" href="/manifest.webmanifest?v=13">
-<link rel="icon" type="image/svg+xml" href="/icon.svg?v=13">
-<link rel="apple-touch-icon" href="/icon.svg?v=13">
+<link rel="manifest" href="/manifest.webmanifest?v=15">
+<link rel="icon" type="image/svg+xml" href="/icon.svg?v=15">
+<link rel="apple-touch-icon" href="/icon.svg?v=15">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="املاک ۰۵۸">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -2650,7 +2650,7 @@ main{max-width:1200px;margin:0 auto}
 
 </head><body>
 
-<header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="لوگوی املاک ۰۵۸"><svg viewBox="0 0 72 72" role="img" aria-hidden="true" style="width:44px;height:44px;display:block"><path d="M8 30 36 7 64 30" fill="none" stroke="#c62828" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 28V62H57V28" fill="#fff" stroke="#c62828" stroke-width="4.5" stroke-linejoin="round"/><rect x="22" y="35" width="10" height="10" rx="1.5" fill="#c62828"/><rect x="40" y="35" width="10" height="10" rx="1.5" fill="#c62828"/><rect x="22" y="49" width="10" height="10" rx="1.5" fill="#c62828"/><rect x="40" y="49" width="10" height="10" rx="1.5" fill="#c62828"/><path d="M33 62V48H39V62" fill="#fff" stroke="#c62828" stroke-width="1.7"/></svg></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>آگهی رایگان ملک در بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
+<header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="لوگوی املاک ۰۵۸"><svg class="amlak058-logo-mark" viewBox="0 0 72 72" role="img" aria-label="نشان املاک ۰۵۸" style="width:44px;height:44px;display:block"><rect class="tile" x="1" y="1" width="70" height="70" rx="18" fill="#c62828"/><path class="pin" d="M36 7.5C24 7.5 15.5 16.4 15.5 28c0 13.7 20.5 36.2 20.5 36.2S56.5 41.7 56.5 28C56.5 16.4 48 7.5 36 7.5Z" fill="#fff"/><path class="house" d="M22 33.5 36 22.5 50 33.5V46H22Z" fill="#c62828"/><path class="window" d="M27 34h6v6h-6zM39 34h6v6h-6zM33 41h6v5h-6z" fill="#fff"/></svg></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>آگهی رایگان ملک در بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
   <!-- پنل مدیریت از سربرگ عمومی مخفی شد؛ دسترسی مدیر از مسیر مستقیم و احراز هویت محفوظ است. -->
   <button class="btn btn-outline" id="accountButton" onclick="handleAccountButton()">ورود / ثبت‌نام</button>
   <button class="btn btn-primary" onclick="openModal()">+ ثبت آگهی رایگان</button>
@@ -3908,7 +3908,7 @@ footer{background:#f8f6ef!important}
 (function(){
   if ("serviceWorker" in navigator && location.protocol === "https:") {
     window.addEventListener("load", function(){
-      navigator.serviceWorker.register("/sw.js?v=14").catch(function(err){console.warn("امکان فعال‌سازی حالت اپ فراهم نشد",err);});
+      navigator.serviceWorker.register("/sw.js?v=15").catch(function(err){console.warn("امکان فعال‌سازی حالت اپ فراهم نشد",err);});
     });
   }
   var installButton=document.getElementById("amlak058-pwa-install");
@@ -5727,4 +5727,26 @@ header .brand h1 .brand-number{color:#c62828!important}
   footer{padding:18px 13px!important}
 }
 @media(min-width:651px){#mobile-map-chip{display:none!important}}
+</style>
+
+
+<style id="amlak058-new-logo-v24">
+/* نشان جدید اختصاصی املاک ۰۵۸: پین مکان با خانه، قرمز و سفید */
+header #brandIcon.amlak058-logo-host,
+header .brand-icon#brandIcon{
+  background:transparent!important;background-color:transparent!important;
+  border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;
+}
+header #brandIcon svg.amlak058-logo-mark{
+  width:44px!important;height:44px!important;display:block!important;overflow:visible!important;
+}
+header #brandIcon svg.amlak058-logo-mark .tile{fill:#c62828!important;stroke:none!important}
+header #brandIcon svg.amlak058-logo-mark .pin{fill:#fff!important;stroke:none!important}
+header #brandIcon svg.amlak058-logo-mark .house{fill:#c62828!important;stroke:none!important}
+header #brandIcon svg.amlak058-logo-mark .window{fill:#fff!important;stroke:none!important}
+@media(max-width:650px){
+  header #brandIcon svg.amlak058-logo-mark{width:42px!important;height:42px!important}
+  header .brand h1{font-size:19px!important;font-weight:900!important;color:#20252b!important}
+  header .brand-number{color:#c62828!important}
+}
 </style>
