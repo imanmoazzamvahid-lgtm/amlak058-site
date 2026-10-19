@@ -2849,6 +2849,14 @@ main{max-width:1200px;margin:0 auto}
 </section>
 
 
+<button type="button" id="mobile-map-chip" aria-label="نمایش آگهی‌ها روی نقشه" onclick="openMobileListingsMap()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 3v15m6-12v15" stroke="currentColor" stroke-width="2"/></svg><span>نقشه</span></button>
+<div class="modal" id="mobileListingsMapModal" role="dialog" aria-modal="true" aria-label="نقشه آگهی‌ها" style="display:none">
+ <div class="modal-box mobile-listings-map-box">
+  <div class="modal-header"><h2>آگهی‌ها روی نقشه</h2><button type="button" class="close-btn" onclick="closeMobileListingsMap()" aria-label="بستن">×</button></div>
+  <p id="mobileMapMessage" class="muted" style="font-size:12px;padding:7px 0">در حال دریافت موقعیت آگهی‌ها…</p>
+  <div id="mobileListingsMap" aria-label="نقشه آگهی‌های ثبت‌شده" style="width:100%;height:68vh;min-height:330px;border-radius:10px;background:#f5f5f5"></div>
+ </div>
+</div>
 <nav class="mobile-bottom-nav" aria-label="منوی اصلی موبایل">
  <button class="mobile-nav-item active" type="button" onclick="mobileNavHome()" aria-label="آگهی‌ها"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5M5.5 9.5V21h13V9.5M9.5 21v-7h5v7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>آگهی‌ها</span></button>
  <button class="mobile-nav-item" type="button" onclick="mobileNavSaved()" aria-label="نشان‌ها"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12v17l-6-4-6 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span><span>نشان‌ها</span></button>
@@ -3236,6 +3244,44 @@ document.getElementById('propertyForm').addEventListener('submit',async function
  finally{button.disabled=false;button.textContent='ثبت آگهی'}
 });
 
+var mobileListingsMapInstance=null,mobileListingsMapFetched=false;
+async function openMobileListingsMap(){
+ var modal=document.getElementById('mobileListingsMapModal'),message=document.getElementById('mobileMapMessage');
+ if(!modal)return;
+ modal.style.display='block';
+ setTimeout(async function(){
+  if(!window.L){message.textContent='نقشه بارگذاری نشد؛ اتصال اینترنت را بررسی کن.';return;}
+  if(!mobileListingsMapInstance){
+   mobileListingsMapInstance=L.map('mobileListingsMap',{zoomControl:true}).setView([37.475,57.329],12);
+   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(mobileListingsMapInstance);
+  }
+  mobileListingsMapInstance.invalidateSize();
+  if(mobileListingsMapFetched)return;
+  message.textContent='در حال دریافت موقعیت آگهی‌ها…';
+  try{
+   var result=await db.from('properties').select('id,title,price,deposit,monthly_rent,address,city,location_lat,location_lng,status').eq('status','approved').limit(300);
+   if(result.error)throw result.error;
+   var rows=result.data||[],count=0,bounds=[];
+   rows.forEach(function(p){
+    var lat=Number(p.location_lat),lng=Number(p.location_lng);
+    if(!Number.isFinite(lat)||!Number.isFinite(lng)||!lat||!lng)return;
+    var marker=L.circleMarker([lat,lng],{radius:8,color:'#c62828',weight:2,fillColor:'#c62828',fillOpacity:.9}).addTo(mobileListingsMapInstance);
+    var title=typeof escapeHTML==='function'?escapeHTML(p.title||'آگهی ملک'):String(p.title||'آگهی ملک');
+    var address=typeof escapeHTML==='function'?escapeHTML(p.address||p.city||'بجنورد'):String(p.address||p.city||'بجنورد');
+    var price=typeof formatListingPrice==='function'?formatListingPrice(p):'';
+    var safePrice=typeof escapeHTML==='function'?escapeHTML(price):String(price);
+    var id=String(p.id||'').replace(/[^a-zA-Z0-9_-]/g,'');
+    marker.bindPopup('<div dir="rtl" style="min-width:150px;font-family:Vazirmatn,Tahoma,sans-serif"><strong>'+title+'</strong><div style="font-size:12px;color:#777">'+address+'</div><div style="color:#c62828;font-weight:700;font-size:12px;margin:4px 0">'+safePrice+'</div><button type="button" data-map-ad="'+id+'" style="border:0;border-radius:6px;background:#c62828;color:#fff;padding:6px 10px;font:12px Tahoma">مشاهده آگهی</button></div>');
+    marker.on('popupopen',function(e){var btn=e.popup.getElement().querySelector('[data-map-ad]');if(btn)btn.onclick=function(){closeMobileListingsMap();openPropertyDetailPage(id,true);};});
+    bounds.push([lat,lng]);count++;
+   });
+   if(bounds.length)mobileListingsMapInstance.fitBounds(bounds,{padding:[25,25],maxZoom:14});
+   message.textContent=count?('موقعیت '+count.toLocaleString('fa-IR')+' آگهی نمایش داده شده است.'):'هنوز آگهی تأییدشده‌ای با مختصات نقشه ثبت نشده است.';
+   mobileListingsMapFetched=true;
+  }catch(e){message.textContent='دریافت موقعیت آگهی‌ها ممکن نشد. بعداً دوباره تلاش کن.';}
+ },180);
+}
+function closeMobileListingsMap(){var modal=document.getElementById('mobileListingsMapModal');if(modal)modal.style.display='none';}
 function openMobileFilter(field){var details=document.querySelector('.advanced-filter-details');if(details){details.classList.add('user-open');details.open=true;}if(field==='neighborhood'){var modal=document.getElementById('locationModal');if(modal)modal.style.display='block';return;}var target=field==='type'?document.getElementById('searchMainCategory'):field==='price'?document.getElementById('minPrice'):document.getElementById('searchMainCategory');if(details)details.scrollIntoView({behavior:'smooth',block:'center'});if(target)setTimeout(function(){target.focus();},120);}
 function mobileNavHome(){closeAccountDashboard();loadProperties();document.getElementById('home').scrollIntoView({behavior:'smooth'});document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===0))}
 async function mobileNavSaved(){document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===1));await openAccountDashboard();var saved=document.querySelector('[data-account-action="saved"]');if(saved&&document.getElementById('accountDashboard')&&!document.getElementById('accountDashboard').hidden)saved.click()}
@@ -5158,4 +5204,16 @@ a{color:inherit}
 .filter-btn.active,.account-menu-item.active,.mobile-nav-item.active{color:#c62828!important;border-color:#c62828!important}
 .property-price,.favorite-btn.saved,.pd-price,.account-verified{color:#c62828!important}
 #chatMessages,.account-dashboard,.account-profile-card,.account-overview-card{background:#fff!important}
+</style><style id="amlak058-final-correctives-v19">
+.mobile-nav-item.post{background:transparent!important;border-color:transparent!important;color:#777!important}
+.mobile-nav-item.post .mobile-nav-icon{background:#c62828!important;color:#fff!important}
+#mobile-map-chip{display:none}
+@media(max-width:650px){
+ #mobile-map-chip{position:fixed!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;left:18px!important;bottom:94px!important;z-index:998!important;min-width:112px!important;height:48px!important;padding:0 17px!important;border:0!important;border-radius:28px!important;background:#c62828!important;color:#fff!important;font:700 14px Vazirmatn,Tahoma,Arial,sans-serif!important;box-shadow:0 5px 16px #00000020!important}
+ #mobile-map-chip svg{width:23px!important;height:23px!important;flex:none!important}
+ #mobile-map-chip span{color:#fff!important}
+ #mobileListingsMapModal{z-index:1200!important;position:fixed!important;inset:0!important;background:#0008!important;overflow:auto!important;padding:12px!important;box-sizing:border-box!important}
+ #mobileListingsMapModal .mobile-listings-map-box{width:100%!important;max-width:640px!important;margin:4vh auto!important;padding:14px!important;border-radius:14px!important;background:#fff!important;box-sizing:border-box!important}
+ #mobileListingsMapModal .modal-header{display:flex!important;align-items:center!important;justify-content:space-between!important}
+}
 </style></body></html>
