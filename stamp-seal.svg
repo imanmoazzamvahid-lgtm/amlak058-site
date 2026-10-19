@@ -16,7 +16,7 @@
  <path d="M241 220v-27h30v27" fill="none" stroke="url(#red)" stroke-width="6"/>
 </g>
 <text x="256" y="285" text-anchor="middle" font-family="Tahoma,Arial,sans-serif" font-size="49" font-weight="900" fill="url(#red)" stroke="#fff" stroke-width="1.1" paint-order="stroke">املاک ۰۵۸</text>
-<text x="256" y="324" text-anchor="middle" font-family="Tahoma,Arial,sans-serif" font-size="20" font-weight="700" fill="#b51d27">آگهی رایگان ملک در بجنورد</text>
+<text x="256" y="324" text-anchor="middle" font-family="Tahoma,Arial,sans-serif" font-size="22" font-weight="700" fill="#b51d27">آگهی رایگان ملک</text>
 <path d="M112 355H203M309 355H400" stroke="url(#red)" stroke-width="4" stroke-linecap="round"/>
 <g transform="translate(256 355)" fill="url(#red)" filter="url(#emboss)"><path d="M-25 -3 0 -24 25 -3V22H-25Z"/><path d="M-9 7h7v8h-7zM3 7h7v8H3z" fill="#fff"/></g>
 </svg>
