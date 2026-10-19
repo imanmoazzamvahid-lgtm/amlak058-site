@@ -2650,7 +2650,7 @@ main{max-width:1200px;margin:0 auto}
 
 </head><body>
 
-<header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="لوگوی املاک ۰۵۸"><svg class="amlak058-logo-mark" viewBox="0 0 72 72" role="img" aria-label="نشان املاک ۰۵۸" style="width:44px;height:44px;display:block"><rect class="tile" x="1" y="1" width="70" height="70" rx="18" fill="#c62828"/><path class="pin" d="M36 7.5C24 7.5 15.5 16.4 15.5 28c0 13.7 20.5 36.2 20.5 36.2S56.5 41.7 56.5 28C56.5 16.4 48 7.5 36 7.5Z" fill="#fff"/><path class="house" d="M22 33.5 36 22.5 50 33.5V46H22Z" fill="#c62828"/><path class="window" d="M27 34h6v6h-6zM39 34h6v6h-6zM33 41h6v5h-6z" fill="#fff"/></svg></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>آگهی رایگان ملک در بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
+<header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="لوگوی املاک ۰۵۸"><img class="amlak058-seal-mark" src="/stamp-seal.svg?v=1" alt="مهر املاک ۰۵۸" width="48" height="48" style="width:48px;height:48px;object-fit:contain;display:block"/></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>آگهی رایگان ملک در بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
   <!-- پنل مدیریت از سربرگ عمومی مخفی شد؛ دسترسی مدیر از مسیر مستقیم و احراز هویت محفوظ است. -->
   <button class="btn btn-outline" id="accountButton" onclick="handleAccountButton()">ورود / ثبت‌نام</button>
   <button class="btn btn-primary" onclick="openModal()">+ ثبت آگهی رایگان</button>
@@ -3908,7 +3908,7 @@ footer{background:#f8f6ef!important}
 (function(){
   if ("serviceWorker" in navigator && location.protocol === "https:") {
     window.addEventListener("load", function(){
-      navigator.serviceWorker.register("/sw.js?v=15").catch(function(err){console.warn("امکان فعال‌سازی حالت اپ فراهم نشد",err);});
+      navigator.serviceWorker.register("/sw.js?v=16").catch(function(err){console.warn("امکان فعال‌سازی حالت اپ فراهم نشد",err);});
     });
   }
   var installButton=document.getElementById("amlak058-pwa-install");
@@ -5802,4 +5802,10 @@ header #brandIcon svg.amlak058-logo-mark .window{fill:#fff!important;stroke:none
    min-width:42px!important;min-height:42px!important;border-radius:9px!important;
  }
 }
+</style>
+
+<style id="amlak058-seal-header-v26">
+header #brandIcon{background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;width:48px!important;height:48px!important;min-width:48px!important;flex:0 0 48px!important;display:grid!important;place-items:center!important}
+header #brandIcon .amlak058-seal-mark{width:48px!important;height:48px!important;object-fit:contain!important;display:block!important}
+@media(max-width:650px){header #brandIcon,header #brandIcon .amlak058-seal-mark{width:42px!important;height:42px!important;min-width:42px!important;flex-basis:42px!important}}
 </style>
