@@ -2922,72 +2922,7 @@ function printCommissionReceipt(){
  const printWindow=window.open('','_blank');
  if(printWindow){
   printWindow.document.open();
-  printWindow.document.write('<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>رسید کمیسیون املاک ۰۵۸</title><style>@page{size:A4 portrait;margin:9mm}*{box-sizing:border-box}html,body{margin:0!important;padding:0!important;background:#fff!important;color:#222;font-family:Tahoma,Arial,sans-serif;font-size:10pt;line-height:1.45}#commission-print-sheet{display:block!important;position:relative!important;width:100%!important;height:279mm!important;min-height:0!important;max-height:279mm!important;overflow:hidden!important;margin:0!important;padding:0!important;direction:rtl}#commission-print-sheet:before{content:"amlak058.ir";position:absolute;top:48%;left:50%;transform:translate(-50%,-50%) rotate(-24deg);font-family:Arial,sans-serif;font-size:38pt;font-weight:900;letter-spacing:2px;color:rgba(23,75,58,.075);white-space:nowrap;z-index:0;pointer-events:none}#commission-print-sheet>*{position:relative;z-index:1}.cp-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #174b3a;padding-bottom:5px;margin-bottom:8px}.cp-brand{font-size:18pt;font-weight:900;color:#174b3a}.cp-sub{font-size:8.5pt;line-height:1.4;color:#555}.cp-stamp{width:76px!important;height:76px!important;flex:0 0 76px!important;object-fit:contain!important;display:block!important}.cp-title{text-align:center;font-weight:800;font-size:13pt;margin:7px 0}.cp-table{width:100%;border-collapse:collapse;margin:7px 0 9px}.cp-table th,.cp-table td{border:1px solid #ddd;padding:4px 6px;text-align:right;vertical-align:top;line-height:1.4}.cp-table th{background:#f4f6f4;width:38%}.cp-result{border:1px solid #cbd8d0;border-radius:5px;padding:7px;margin-top:7px;line-height:1.45}.cp-foot{display:flex;justify-content:space-between;border-top:1px solid #ddd;margin-top:10px;padding-top:5px;font-size:9pt;color:#555}tr,.cp-head,.cp-result{break-inside:avoid;page-break-inside:avoid}@media screen{body{padding:12px!important}#commission-print-sheet{height:auto!important;max-height:none!important;min-height:0!important;overflow:visible!important;max-width:190mm;margin:0 auto!important}}</style></head><body>'+sheet.outerHTML+'<style id="amlak058-divar-chat-layout-v1">
-#chatModal{position:fixed!important;inset:0!important;z-index:10050!important;padding:0!important;background:rgba(0,0,0,.24)!important;overflow:auto!important}
-#chatModal .modal-box{box-sizing:border-box!important;width:min(1160px,calc(100vw - 36px))!important;max-width:1160px!important;height:min(820px,calc(100dvh - 44px))!important;min-height:500px!important;margin:22px auto!important;padding:0!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;border:1px solid #e5e5e5!important;border-radius:8px!important;background:#fff!important;box-shadow:0 12px 45px #0002!important}
-#chatModal .modal-header{display:flex!important;align-items:center!important;gap:12px!important;min-height:58px!important;box-sizing:border-box!important;padding:10px 16px!important;margin:0!important;border-bottom:1px solid #e6e6e6!important;background:#fff!important;flex-shrink:0!important}
-#chatModal .modal-header h2{font-size:16px!important;font-weight:700!important;margin:0!important;flex:1!important;min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
-#chatModal .chat-back-button,#chatModal .chat-exit-button{border:1px solid #e0e0e0!important;border-radius:5px!important;background:#fff!important;color:#444!important;padding:8px 12px!important;min-height:36px!important;font:inherit!important;cursor:pointer!important;white-space:nowrap!important}
-#chatModal .chat-exit-button{color:#a62626!important;border-color:#ead0d0!important}
-#chatMessages{flex:1 1 auto!important;min-height:0!important;max-height:none!important;margin:0 16px!important;border:1px solid #eee!important;border-radius:5px!important;padding:16px!important;background:#f7f7f7!important;overflow:auto!important}
-#chatModal #chatInput{flex:1!important;min-width:0!important;margin:0!important;min-height:44px!important;box-sizing:border-box!important}
-#chatModal .chat-compose{display:flex!important;align-items:center!important;gap:8px!important;padding:12px 16px 6px!important;flex-shrink:0!important}
-#chatModal #chatSuggestions{padding:6px 16px 0!important;margin:0!important;flex-shrink:0!important}
-#chatModal #chatMessage{padding:0 16px 8px!important;margin:4px 0 0!important;flex-shrink:0!important}
-@media(max-width:700px){
- #chatModal{background:#fff!important;overflow:hidden!important}
- #chatModal .modal-box{width:100%!important;max-width:none!important;height:100dvh!important;min-height:0!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding-bottom:env(safe-area-inset-bottom)!important}
- #chatModal .modal-header{min-height:58px!important;padding:8px 10px!important;gap:7px!important}
- #chatModal .modal-header h2{font-size:14px!important}
- #chatModal .chat-back-button,#chatModal .chat-exit-button{padding:7px 9px!important;font-size:12px!important}
- #chatMessages{margin:0 8px!important;padding:10px!important}
- #chatModal .chat-compose{padding:10px 8px 4px!important}
- #chatModal #chatSuggestions{gap:5px!important;padding:6px 8px 0!important;overflow-x:auto!important;flex-wrap:nowrap!important}
- #chatModal #chatSuggestions button{flex:0 0 auto!important;font-size:11px!important;padding:7px 9px!important}
- #chatModal #chatMessage{padding:0 8px 6px!important}
-}
-</style>
-<script id="amlak058-divar-chat-controls-v1">
-(function(){
- const chatModal=document.getElementById('chatModal');
- if(!chatModal)return;
- const header=chatModal.querySelector('.modal-header');
- const originalClose=header&&header.querySelector('.close-btn');
- if(header&&!header.querySelector('.chat-back-button')){
-  const back=document.createElement('button');
-  back.type='button';back.className='chat-back-button';back.textContent='‹ پیام‌ها';
-  back.setAttribute('aria-label','بازگشت به فهرست پیام‌ها');
-  back.addEventListener('click',function(){
-   closeChatModal();
-   const inbox=document.getElementById('inboxModal');
-   if(inbox&&inbox.style.display==='block'){inbox.style.display='block';}
-   else{openInbox();}
-  });
-  header.insertBefore(back,header.firstChild);
- }
- if(header&&!header.querySelector('.chat-exit-button')){
-  const exit=document.createElement('button');
-  exit.type='button';exit.className='chat-exit-button';exit.textContent='خروج ×';
-  exit.setAttribute('aria-label','بستن گفت‌وگو و بازگشت به آگهی‌ها');
-  exit.addEventListener('click',function(){
-   closeChatModal();
-   const inbox=document.getElementById('inboxModal');if(inbox)inbox.style.display='none';
-   const detail=document.getElementById('propertyDetailPage');
-   if(detail&&!detail.hidden){return;}
-   const listings=document.getElementById('listings');
-   if(listings)listings.scrollIntoView({behavior:'smooth',block:'start'});
-  });
-  if(originalClose)originalClose.style.display='none';
-  header.appendChild(exit);
- }
- const compose=chatModal.querySelector('#chatInput');
- if(compose&&!compose.parentElement.classList.contains('chat-compose')){
-  compose.parentElement.classList.add('chat-compose');
-  compose.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChatMessage();}});
- }
-})();
-</script>
-</body></html>');
+  printWindow.document.write('<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>رسید کمیسیون املاک ۰۵۸</title><style>@page{size:A4 portrait;margin:12mm}*{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff;color:#222;font-family:Tahoma,Arial,sans-serif;font-size:11pt;line-height:1.7}body{padding:10mm}#commission-print-sheet{display:block!important;width:100%;direction:rtl}.cp-head{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #174b3a;padding-bottom:12px;margin-bottom:18px}.cp-brand{font-size:20pt;font-weight:900;color:#174b3a}.cp-sub{font-size:9pt;color:#555}.cp-stamp{width:78px;height:78px;object-fit:contain}.cp-title{text-align:center;font-weight:800;font-size:15pt;margin:12px 0}.cp-table{width:100%;border-collapse:collapse;margin:14px 0}.cp-table th,.cp-table td{border:1px solid #ddd;padding:8px;text-align:right}.cp-table th{background:#f4f6f4;width:38%}.cp-result{border:1px solid #cbd8d0;border-radius:8px;padding:12px;margin-top:12px}.cp-foot{display:flex;justify-content:space-between;border-top:1px solid #ddd;margin-top:20px;padding-top:8px;font-size:9pt;color:#555}@media screen{body{max-width:190mm;margin:0 auto}}</style></head><body>'+sheet.outerHTML+'</body></html>');
   printWindow.document.close();
   printWindow.onload=function(){printWindow.focus();setTimeout(function(){printWindow.print();},300);};
  }else{
