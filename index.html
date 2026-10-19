@@ -5625,3 +5625,30 @@ header .brand h1 .brand-number{color:#c62828!important}
   body.commission-print-mode #commission-print-sheet .cp-result { break-inside:avoid!important; page-break-inside:avoid!important; }
 }
 </style>
+
+
+<style id="commission-mobile-print-isolation">
+@media print {
+  html:has(body.commission-print-mode),
+  body.commission-print-mode {
+    width:100%!important; height:auto!important; min-height:0!important;
+    margin:0!important; padding:0!important; overflow:visible!important;
+    background:#fff!important;
+  }
+  body.commission-print-mode > *:not(#commission-print-sheet) {
+    display:none!important; visibility:hidden!important;
+  }
+  body.commission-print-mode #commission-print-sheet {
+    display:block!important; visibility:visible!important;
+    position:relative!important; inset:auto!important; float:none!important;
+    width:100%!important; height:279mm!important; min-height:0!important;
+    max-height:279mm!important; margin:0!important; padding:0!important;
+    box-sizing:border-box!important; overflow:hidden!important;
+    page-break-before:avoid!important; page-break-after:avoid!important;
+    break-before:avoid-page!important; break-after:avoid-page!important;
+  }
+  body.commission-print-mode #commission-print-sheet * {
+    visibility:visible!important;
+  }
+}
+</style>
