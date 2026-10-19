@@ -2647,74 +2647,7 @@ main{max-width:1200px;margin:0 auto}
  .mobile-bottom-nav{grid-template-columns:repeat(4,minmax(0,1fr))!important}
 }
 </style>
-<style id="amlak058-mobile-cleanup-v23">
-/* موبایل مرتب و یکدست؛ منطق فرم‌ها و محاسبه‌گر بدون تغییر */
-@media(max-width:650px){
-  html{scroll-padding-top:68px}
-  body{background:#fff!important;color:#242424!important;overflow-x:hidden;padding-bottom:calc(78px + env(safe-area-inset-bottom))!important}
-  header{position:sticky!important;top:0!important;z-index:100!important;background:#fff!important;border-bottom:1px solid #eceef1!important}
-  header .header-inner{min-height:64px!important;padding:8px 14px!important;gap:10px!important}
-  header .brand{gap:9px!important;min-width:0!important}
-  header .brand-icon{width:42px!important;height:42px!important;min-width:42px!important;flex:0 0 42px!important;display:grid!important;place-items:center!important;background:#fff1f2!important;border:1px solid #ffe0e3!important;border-radius:12px!important;box-shadow:0 3px 9px #c6282810!important;overflow:hidden!important}
-  header .brand-icon svg{width:32px!important;height:32px!important;max-width:100%!important}
-  header .brand h1{font-family:Vazirmatn,Tahoma,sans-serif!important;font-size:19px!important;line-height:1.4!important;font-weight:900!important;letter-spacing:-.4px!important;white-space:nowrap!important;color:#20252b!important}
-  header .brand-number{color:#c62828!important}
-  header .brand small{display:block!important;font-size:10px!important;line-height:1.4!important;color:#737b86!important;margin-top:1px!important}
-  header .header-actions{display:flex!important;align-items:center!important;gap:5px!important}
-  header #accountButton{font-size:10px!important;padding:7px 8px!important;min-height:34px!important;border-radius:8px!important;white-space:nowrap!important}
-  header .header-actions>.btn-primary{display:none!important}
-  .mobile-reference-top{display:block!important;padding:14px 13px 12px!important;background:#fff!important;border-bottom:7px solid #f5f6f7!important}
-  .mobile-reference-search{display:flex!important;align-items:center!important;gap:8px!important;padding:5px!important;border:1px solid #e2e5e9!important;border-radius:12px!important;background:#f8f9fa!important;box-shadow:0 2px 8px #10182806!important;min-height:48px!important}
-  .mobile-reference-search input{border:0!important;outline:0!important;background:transparent!important;min-width:0!important;flex:1!important;padding:7px 5px!important;font-size:12px!important}
-  .mobile-reference-search button{width:36px!important;height:36px!important;flex:0 0 36px!important;border:0!important;border-radius:9px!important;background:#c62828!important;color:#fff!important;font-size:20px!important}
-  .mobile-reference-search .search-mark{font-size:23px!important;color:#737b86!important;padding:0 4px!important}
-  .mobile-reference-location{display:flex!important;align-items:center!important;gap:6px!important;margin:11px 2px 9px!important;font-size:11px!important;color:#737b86!important}
-  .mobile-reference-location strong{color:#303841!important;font-weight:800!important}
-  .mobile-reference-location .location-line{height:1px!important;flex:1!important;background:#eceef1!important;margin-right:5px!important}
-  .mobile-reference-filters{display:flex!important;gap:7px!important;overflow-x:auto!important;scrollbar-width:none!important;padding:1px 0 3px!important}
-  .mobile-reference-filters::-webkit-scrollbar{display:none!important}
-  .mobile-reference-filters button{flex:0 0 auto!important;min-height:34px!important;padding:5px 11px!important;border:1px solid #e1e4e8!important;border-radius:9px!important;background:#fff!important;color:#414952!important;font-size:11px!important;white-space:nowrap!important}
-  #search.search-section{padding:16px 13px!important;margin:0!important;border:0!important;border-radius:0!important;background:#fff!important}
-  #search .search-section-heading{margin-bottom:11px!important}
-  #search .search-section-heading h2{font-size:16px!important;font-weight:900!important;color:#20252b!important}
-  #search .search-section-heading p{font-size:11px!important;color:#7a8390!important;margin-top:2px!important}
-  #search .search-panel{display:grid!important;grid-template-columns:1fr 1fr!important;gap:9px!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
-  #search .search-field{min-width:0!important}
-  #search .search-field label{display:block!important;font-size:11px!important;color:#4b5560!important;margin:0 0 4px!important;font-weight:700!important}
-  #search .search-field input,#search .search-field select{height:43px!important;min-width:0!important;width:100%!important;padding:8px!important;font-size:11px!important;border:1px solid #e1e4e8!important;border-radius:9px!important;background:#fff!important}
-  #search .search-field-wide{grid-column:1/-1!important}
-  #search .search-panel>.btn{grid-column:1/-1!important;min-height:44px!important;border-radius:10px!important;font-size:13px!important;font-weight:800!important}
-  #categories.section{padding:15px 13px!important;border-top:7px solid #f5f6f7!important;border-bottom:7px solid #f5f6f7!important}
-  #categories .section-heading h2,#listings .section-heading h2{font-size:16px!important;font-weight:900!important}
-  #categories .section-heading .muted{font-size:10px!important}
-  #categories .categories{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
-  #categories .category{min-width:0!important;min-height:104px!important;padding:10px 5px!important;border:1px solid #eceef1!important;border-radius:12px!important;box-shadow:0 2px 7px #10182804!important}
-  #categories .category-icon{width:39px!important;height:39px!important;margin:0 auto 5px!important;display:grid!important;place-items:center!important;border-radius:11px!important}
-  #categories .category-icon svg{width:31px!important;height:31px!important}
-  #categories .category strong{font-size:11px!important;line-height:1.5!important}
-  #categories .category small{font-size:9px!important;line-height:1.4!important}
-  #listings.section{padding:15px 13px 20px!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important}
-  #listings .section-heading{align-items:flex-start!important}
-  #listings .property-grid{display:grid!important;grid-template-columns:1fr!important;gap:10px!important}
-  #listings .property-card{display:flex!important;gap:10px!important;padding:9px!important;border:1px solid #eceef1!important;border-radius:12px!important;box-shadow:none!important;min-width:0!important}
-  #listings .property-image{width:112px!important;min-width:112px!important;height:104px!important;border-radius:9px!important;overflow:hidden!important}
-  #listings .property-image img{width:100%!important;height:100%!important;object-fit:cover!important}
-  #listings .property-info{min-width:0!important;flex:1!important}
-  #listings .property-info h3{font-size:12px!important;line-height:1.65!important}
-  #listings .property-info p,#listings .property-info .muted{font-size:10px!important}
-  #listings .property-price{font-size:12px!important;font-weight:900!important}
-  #listings .property-actions{display:flex!important;flex-wrap:wrap!important;gap:5px!important}
-  #listings .property-actions .btn{font-size:10px!important;padding:6px 8px!important;min-height:30px!important}
-  .mobile-bottom-nav{padding-bottom:calc(7px + env(safe-area-inset-bottom))!important;background:#fff!important;border-top:1px solid #e5e7eb!important}
-  .mobile-nav-item{font-size:10px!important}
-  #mobile-map-chip{display:none!important}
-  body.mobile-search-performed #mobile-map-chip{display:flex!important}
-  #mobile-map-chip{bottom:88px!important;left:13px!important;min-width:100px!important;height:43px!important;padding:0 13px!important;border-radius:24px!important;box-shadow:0 5px 16px #10182822!important}
-  #mobileListingsMapModal .mobile-listings-map-box{margin:3vh auto!important;padding:13px!important;border-radius:14px!important}
-  footer{padding:18px 13px!important}
-}
-@media(min-width:651px){#mobile-map-chip{display:none!important}}
-</style>
+
 </head><body>
 
 <header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="لوگوی املاک ۰۵۸"><svg viewBox="0 0 72 72" role="img" aria-hidden="true" style="width:44px;height:44px;display:block"><path d="M8 30 36 7 64 30" fill="none" stroke="#c62828" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 28V62H57V28" fill="#fff" stroke="#c62828" stroke-width="4.5" stroke-linejoin="round"/><rect x="22" y="35" width="10" height="10" rx="1.5" fill="#c62828"/><rect x="40" y="35" width="10" height="10" rx="1.5" fill="#c62828"/><rect x="22" y="49" width="10" height="10" rx="1.5" fill="#c62828"/><rect x="40" y="49" width="10" height="10" rx="1.5" fill="#c62828"/><path d="M33 62V48H39V62" fill="#fff" stroke="#c62828" stroke-width="1.7"/></svg></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>آگهی رایگان ملک در بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
@@ -5725,4 +5658,73 @@ header .brand h1 .brand-number{color:#c62828!important}
     visibility:visible!important;
   }
 }
+</style>
+
+<style id="amlak058-mobile-cleanup-v23">
+/* موبایل مرتب و یکدست؛ منطق فرم‌ها و محاسبه‌گر بدون تغییر */
+@media(max-width:650px){
+  html{scroll-padding-top:68px}
+  body{background:#fff!important;color:#242424!important;overflow-x:hidden;padding-bottom:calc(78px + env(safe-area-inset-bottom))!important}
+  header{position:sticky!important;top:0!important;z-index:100!important;background:#fff!important;border-bottom:1px solid #eceef1!important}
+  header .header-inner{min-height:64px!important;padding:8px 14px!important;gap:10px!important}
+  header .brand{gap:9px!important;min-width:0!important}
+  header .brand-icon{width:42px!important;height:42px!important;min-width:42px!important;flex:0 0 42px!important;display:grid!important;place-items:center!important;background:#fff1f2!important;border:1px solid #ffe0e3!important;border-radius:12px!important;box-shadow:0 3px 9px #c6282810!important;overflow:hidden!important}
+  header .brand-icon svg{width:32px!important;height:32px!important;max-width:100%!important}
+  header .brand h1{font-family:Vazirmatn,Tahoma,sans-serif!important;font-size:19px!important;line-height:1.4!important;font-weight:900!important;letter-spacing:-.4px!important;white-space:nowrap!important;color:#20252b!important}
+  header .brand-number{color:#c62828!important}
+  header .brand small{display:block!important;font-size:10px!important;line-height:1.4!important;color:#737b86!important;margin-top:1px!important}
+  header .header-actions{display:flex!important;align-items:center!important;gap:5px!important}
+  header #accountButton{font-size:10px!important;padding:7px 8px!important;min-height:34px!important;border-radius:8px!important;white-space:nowrap!important}
+  header .header-actions>.btn-primary{display:none!important}
+  .mobile-reference-top{display:block!important;padding:14px 13px 12px!important;background:#fff!important;border-bottom:7px solid #f5f6f7!important}
+  .mobile-reference-search{display:flex!important;align-items:center!important;gap:8px!important;padding:5px!important;border:1px solid #e2e5e9!important;border-radius:12px!important;background:#f8f9fa!important;box-shadow:0 2px 8px #10182806!important;min-height:48px!important}
+  .mobile-reference-search input{border:0!important;outline:0!important;background:transparent!important;min-width:0!important;flex:1!important;padding:7px 5px!important;font-size:12px!important}
+  .mobile-reference-search button{width:36px!important;height:36px!important;flex:0 0 36px!important;border:0!important;border-radius:9px!important;background:#c62828!important;color:#fff!important;font-size:20px!important}
+  .mobile-reference-search .search-mark{font-size:23px!important;color:#737b86!important;padding:0 4px!important}
+  .mobile-reference-location{display:flex!important;align-items:center!important;gap:6px!important;margin:11px 2px 9px!important;font-size:11px!important;color:#737b86!important}
+  .mobile-reference-location strong{color:#303841!important;font-weight:800!important}
+  .mobile-reference-location .location-line{height:1px!important;flex:1!important;background:#eceef1!important;margin-right:5px!important}
+  .mobile-reference-filters{display:flex!important;gap:7px!important;overflow-x:auto!important;scrollbar-width:none!important;padding:1px 0 3px!important}
+  .mobile-reference-filters::-webkit-scrollbar{display:none!important}
+  .mobile-reference-filters button{flex:0 0 auto!important;min-height:34px!important;padding:5px 11px!important;border:1px solid #e1e4e8!important;border-radius:9px!important;background:#fff!important;color:#414952!important;font-size:11px!important;white-space:nowrap!important}
+  #search.search-section{padding:16px 13px!important;margin:0!important;border:0!important;border-radius:0!important;background:#fff!important}
+  #search .search-section-heading{margin-bottom:11px!important}
+  #search .search-section-heading h2{font-size:16px!important;font-weight:900!important;color:#20252b!important}
+  #search .search-section-heading p{font-size:11px!important;color:#7a8390!important;margin-top:2px!important}
+  #search .search-panel{display:grid!important;grid-template-columns:1fr 1fr!important;gap:9px!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+  #search .search-field{min-width:0!important}
+  #search .search-field label{display:block!important;font-size:11px!important;color:#4b5560!important;margin:0 0 4px!important;font-weight:700!important}
+  #search .search-field input,#search .search-field select{height:43px!important;min-width:0!important;width:100%!important;padding:8px!important;font-size:11px!important;border:1px solid #e1e4e8!important;border-radius:9px!important;background:#fff!important}
+  #search .search-field-wide{grid-column:1/-1!important}
+  #search .search-panel>.btn{grid-column:1/-1!important;min-height:44px!important;border-radius:10px!important;font-size:13px!important;font-weight:800!important}
+  #categories.section{padding:15px 13px!important;border-top:7px solid #f5f6f7!important;border-bottom:7px solid #f5f6f7!important}
+  #categories .section-heading h2,#listings .section-heading h2{font-size:16px!important;font-weight:900!important}
+  #categories .section-heading .muted{font-size:10px!important}
+  #categories .categories{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
+  #categories .category{min-width:0!important;min-height:104px!important;padding:10px 5px!important;border:1px solid #eceef1!important;border-radius:12px!important;box-shadow:0 2px 7px #10182804!important}
+  #categories .category-icon{width:39px!important;height:39px!important;margin:0 auto 5px!important;display:grid!important;place-items:center!important;border-radius:11px!important}
+  #categories .category-icon svg{width:31px!important;height:31px!important}
+  #categories .category strong{font-size:11px!important;line-height:1.5!important}
+  #categories .category small{font-size:9px!important;line-height:1.4!important}
+  #listings.section{padding:15px 13px 20px!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+  #listings .section-heading{align-items:flex-start!important}
+  #listings .property-grid{display:grid!important;grid-template-columns:1fr!important;gap:10px!important}
+  #listings .property-card{display:flex!important;gap:10px!important;padding:9px!important;border:1px solid #eceef1!important;border-radius:12px!important;box-shadow:none!important;min-width:0!important}
+  #listings .property-image{width:112px!important;min-width:112px!important;height:104px!important;border-radius:9px!important;overflow:hidden!important}
+  #listings .property-image img{width:100%!important;height:100%!important;object-fit:cover!important}
+  #listings .property-info{min-width:0!important;flex:1!important}
+  #listings .property-info h3{font-size:12px!important;line-height:1.65!important}
+  #listings .property-info p,#listings .property-info .muted{font-size:10px!important}
+  #listings .property-price{font-size:12px!important;font-weight:900!important}
+  #listings .property-actions{display:flex!important;flex-wrap:wrap!important;gap:5px!important}
+  #listings .property-actions .btn{font-size:10px!important;padding:6px 8px!important;min-height:30px!important}
+  .mobile-bottom-nav{padding-bottom:calc(7px + env(safe-area-inset-bottom))!important;background:#fff!important;border-top:1px solid #e5e7eb!important}
+  .mobile-nav-item{font-size:10px!important}
+  #mobile-map-chip{display:none!important}
+  body.mobile-search-performed #mobile-map-chip{display:flex!important}
+  #mobile-map-chip{bottom:88px!important;left:13px!important;min-width:100px!important;height:43px!important;padding:0 13px!important;border-radius:24px!important;box-shadow:0 5px 16px #10182822!important}
+  #mobileListingsMapModal .mobile-listings-map-box{margin:3vh auto!important;padding:13px!important;border-radius:14px!important}
+  footer{padding:18px 13px!important}
+}
+@media(min-width:651px){#mobile-map-chip{display:none!important}}
 </style>
