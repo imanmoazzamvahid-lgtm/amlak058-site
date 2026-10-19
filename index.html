@@ -3391,29 +3391,19 @@ function openDetails(id){return openPropertyDetailPage(id,true)}
 document.getElementById('detailsModal').addEventListener('click',e=>{if(e.target.id==='detailsModal')closeDetails()});
 
 function getIllustrativeImageHTML(p){
-  const textValue=[p.property_type,p.main_category,p.sub_category,p.title,p.transaction_type].filter(Boolean).join(' ');
-  const commercial=/تجار|مغازه|ادار|دفتر|کارگاه/.test(textValue);
-  const villa=/ویلا|خانه|باغ/.test(textValue);
-  const photos=commercial?[
-    'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=82',
-    'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=82',
-    'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=82'
-  ]:villa?[
-    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=82',
-    'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=82',
-    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=82'
-  ]:[
-    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=82',
-    'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=82',
-    'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=82',
-    'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=82'
+  const textValue=[p.property_type,p.main_category,p.sub_category,p.title,p.transaction_type,p.description].filter(Boolean).join(' ').toLowerCase();
+  const pick=(items,key)=>{let hash=0;for(let i=0;i<key.length;i++)hash=(hash*31+key.charCodeAt(i))>>>0;return items[hash%items.length];};
+  const groups=[
+    {match:/زمین|کلنگی|قطعه زمین|باغچه/,images:['https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=85']},
+    {match:/مغازه|تجاری|سرقفلی|پاساژ/,images:['https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=85','https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85']},
+    {match:/اداری|دفتر|شرکت|کارگاه/,images:['https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85','https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=85']},
+    {match:/ویلا|خانه|باغ/,images:['https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=85','https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1000&q=85','https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85']},
+    {match:/آپارتمان|مسکونی|سوئیت|واحد/,images:['https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85','https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85','https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=85','https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1000&q=85']}
   ];
-  const key=String(p.id||p.title||'amlak058');
-  let hash=0;for(let i=0;i<key.length;i++)hash=(hash*31+key.charCodeAt(i))>>>0;
-  const url=photos[hash%photos.length];
+  const key=String(p.id||p.title||'amlak058'), group=groups.find(item=>item.match.test(textValue))||groups[4], url=pick(group.images,key);
   return '<div style="position:relative;flex:0 0 100%;width:100%;min-width:100%;height:100%;overflow:hidden;background:linear-gradient(135deg,#e9eee8,#f6eee3)">'+
-    '<img src="'+url+'" alt="تصویر نمونه برای نمایش ظاهری ملک" loading="lazy" style="position:absolute;inset:0;width:100%;min-width:100%;height:100%;object-fit:cover" onerror="this.style.display=\'none\';this.parentElement.style.background=\'linear-gradient(135deg,#dce9df,#f3e7d5)\'">'+
-    '<span style="position:absolute;right:8px;bottom:8px;background:#fffdf2eF;color:#765f3f;border:1px solid #eadcc5;border-radius:7px;padding:3px 7px;font-size:10px;font-weight:800;box-shadow:0 2px 8px #0002">تصویر نمونه</span></div>';
+    '<img src="'+url+'" alt="تصویر نمونه، نه عکس واقعی همین ملک" loading="lazy" referrerpolicy="no-referrer" style="position:absolute;inset:0;width:100%;min-width:100%;height:100%;object-fit:cover" onerror="this.style.display=\'none\';this.parentElement.style.background=\'linear-gradient(135deg,#dce9df,#f3e7d5)\'">'+
+    '<span style="position:absolute;right:8px;bottom:8px;background:#fffdf2;color:#765f3f;border:1px solid #eadcc5;border-radius:7px;padding:4px 8px;font-size:10px;font-weight:800;box-shadow:0 2px 8px #0002">تصویر نمونه</span></div>';
 }
 async function renderProperty(p){propertyCache.set(String(p.id),p);let paths=Array.isArray(p.image_urls)?p.image_urls:[];if(!paths.length&&p.image_url)paths=[p.image_url];const urls=await Promise.all(paths.slice(0,MAX_IMAGES).map(makeSignedImage));const validUrls=urls.filter(Boolean);const imagesHTML=validUrls.length?validUrls.map(url=>`<img src="${escapeHTML(url)}" alt="${escapeHTML(p.title)}" loading="lazy" role="button" tabindex="0" onclick="openDetails(\'${escapeHTML(p.id)}\')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();openDetails(\'${escapeHTML(p.id)}\')}" title="برای مشاهده تصاویر و جزئیات کلیک کنید">`).join(''):getIllustrativeImageHTML(p);const contactHTML=`<button type="button" class="btn btn-outline" onclick="revealPropertyPhone('`+escapeHTML(p.id)+`',this)">مشاهده شماره</button>`;const saved=getFavorites().includes(String(p.id));const description=p.description?`<p class="property-description">${escapeHTML(p.description.length>150?p.description.slice(0,150)+'…':p.description)}</p>`:'';return `<article class="property-card"><div class="property-image">${imagesHTML}</div><div class="property-info"><span class="property-type">${escapeHTML(p.property_type||'ملک')}</span><button type="button" class="card-open" onclick="openDetails('${escapeHTML(p.id)}')"><h3>${escapeHTML(p.title)}</h3></button><p class="property-address">⌖ ${escapeHTML(p.address||'')}</p><div class="property-details"><span>${(p.area||p.building_area||p.land_area)?escapeHTML(p.area||p.building_area||p.land_area)+' متر':'متراژ نامشخص'}</span><span>${escapeHTML(p.transaction_type||'')}</span>${p.bedrooms!==null&&p.bedrooms!==undefined?`<span>${escapeHTML(p.bedrooms)} اتاق</span>`:''}</div><div class="property-price">${escapeHTML(formatListingPrice(p))}</div>${description}<div class="property-actions">${contactHTML}<button type="button" class="btn btn-outline" onclick="openDetails('${escapeHTML(p.id)}')">جزئیات آگهی</button><button type="button" class="favorite-btn ${saved?'saved':''}" onclick="toggleFavorite('${escapeHTML(p.id)}',this)">${saved?'♥ ذخیره شد':'♡ ذخیره آگهی'}</button></div></div></article>`}
 
