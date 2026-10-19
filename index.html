@@ -2867,8 +2867,8 @@ main{max-width:1200px;margin:0 auto}
   </div>
   <div id="commission-rent-fields" class="commission-fields" hidden>
    <label>نوع قرارداد اجاره<select id="commission-rent-type"><option value="rent">اجاره جدید</option><option value="renewal">تمدید اجاره</option></select></label>
-   <label>مبلغ ودیعه / رهن (تومان)<input id="commission-deposit" type="number" min="0" inputmode="numeric" placeholder="مبلغ رهن"></label>
-   <label>اجاره ماهانه (تومان)<input id="commission-monthly-rent" type="number" min="0" inputmode="numeric" placeholder="اجاره ماهانه"></label>
+   <label>مبلغ ودیعه / رهن (تومان)<input id="commission-deposit" type="number" min="0" inputmode="numeric" placeholder="مبلغ رهن"><small id="commission-deposit-words" class="commission-price-words" aria-live="polite">مبلغ به حروف: صفر تومان</small></label>
+   <label>اجاره ماهانه (تومان)<input id="commission-monthly-rent" type="number" min="0" inputmode="numeric" placeholder="اجاره ماهانه"><small id="commission-monthly-rent-words" class="commission-price-words" aria-live="polite">مبلغ به حروف: صفر تومان</small></label>
    <p class="commission-note" style="grid-column:1/-1">هر یک میلیون تومان رهن معادل ۴۰ هزار تومان اجاره ماهانه محاسبه می‌شود. اجاره جدید: ۷ روز اجاره معادل؛ تمدید: ۳ روز اجاره معادل، برای هر طرف.</p>
   </div>
   <label class="commission-vat"><input id="commission-vat-on" type="checkbox" checked> محاسبه مالیات بر ارزش افزوده روی کمیسیون</label>
@@ -2965,6 +2965,47 @@ main{max-width:1200px;margin:0 auto}
   const money=n=>Math.round(n).toLocaleString('fa-IR')+' تومان';
   document.getElementById('commission-result').innerHTML='<div>'+details+'</div><div>کمیسیون هر طرف پیش از مالیات: <strong>'+money(base)+'</strong></div><div>مالیات بر ارزش افزوده: <strong>'+money(vat)+'</strong></div><div>جمع قابل پرداخت هر طرف: <strong>'+money(total)+'</strong></div><div>جمع تقریبی دو طرف: <strong>'+money(total*2)+'</strong></div>';
  };
+})();
+</script>
+
+<script id="commission-rent-words-script">
+(function(){
+ const digits=value=>String(value||'').replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+ const ones=['','یک','دو','سه','چهار','پنج','شش','هفت','هشت','نه'];
+ const teens=['ده','یازده','دوازده','سیزده','چهارده','پانزده','شانزده','هفده','هجده','نوزده'];
+ const tens=['','','بیست','سی','چهل','پنجاه','شصت','هفتاد','هشتاد','نود'];
+ const hundreds=['','یکصد','دویست','سیصد','چهارصد','پانصد','ششصد','هفتصد','هشتصد','نهصد'];
+ const scales=['','هزار','میلیون','میلیارد','تریلیون'];
+ function chunkWords(n){
+  const out=[];
+  if(n>=100){out.push(hundreds[Math.floor(n/100)]);n%=100;}
+  if(n>=10&&n<20)out.push(teens[n-10]);
+  else{if(n>=20){out.push(tens[Math.floor(n/10)]);n%=10;}if(n>0)out.push(ones[n]);}
+  return out;
+ }
+ function numberToPersianWords(value){
+  let n=Number(digits(value).replace(/[^0-9]/g,''))||0;
+  if(!n)return 'صفر';
+  const result=[];let i=0;
+  while(n>0&&i<scales.length){
+   const chunk=n%1000;
+   if(chunk){const part=chunkWords(chunk);if(scales[i])part.push(scales[i]);result.unshift(part.join(' و '));}
+   n=Math.floor(n/1000);i++;
+  }
+  return result.join(' و ');
+ }
+ function updateWords(inputId,outputId){
+  const input=document.getElementById(inputId),output=document.getElementById(outputId);
+  if(!input||!output)return;
+  const raw=digits(input.value).replace(/[^0-9]/g,'');
+  output.textContent='مبلغ به حروف: '+numberToPersianWords(raw)+' تومان';
+ }
+ [['commission-deposit','commission-deposit-words'],['commission-monthly-rent','commission-monthly-rent-words']].forEach(function(pair){
+  const input=document.getElementById(pair[0]);
+  if(!input)return;
+  ['input','change','blur'].forEach(function(eventName){input.addEventListener(eventName,function(){updateWords(pair[0],pair[1]);});});
+  updateWords(pair[0],pair[1]);
+ });
 })();
 </script>
 
