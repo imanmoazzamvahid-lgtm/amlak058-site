@@ -5750,3 +5750,56 @@ header #brandIcon svg.amlak058-logo-mark .window{fill:#fff!important;stroke:none
   header .brand-number{color:#c62828!important}
 }
 </style>
+
+
+<style id="amlak058-property-contact-fix-v25">
+/* Fix mobile property detail contact/chat buttons: stacked full-width actions */
+@media(max-width:650px){
+ #propertyDetailPage .pd-contact-row{
+   display:grid!important;
+   grid-template-columns:minmax(0,1fr)!important;
+   gap:10px!important;
+   align-items:stretch!important;
+   width:100%!important;
+ }
+ #propertyDetailPage #pdContactButton,
+ #propertyDetailPage #pdChatButton{
+   display:flex!important;
+   width:100%!important;
+   min-width:0!important;
+   max-width:100%!important;
+   min-height:54px!important;
+   height:auto!important;
+   box-sizing:border-box!important;
+   justify-content:center!important;
+   align-items:center!important;
+   gap:9px!important;
+   padding:13px 16px!important;
+   margin:0!important;
+   border-radius:10px!important;
+   font-family:Tahoma,Arial,sans-serif!important;
+   font-size:16px!important;
+   font-weight:800!important;
+   line-height:1.5!important;
+   white-space:normal!important;
+   overflow-wrap:anywhere!important;
+   text-align:center!important;
+   position:static!important;
+   transform:none!important;
+   writing-mode:horizontal-tb!important;
+ }
+ #propertyDetailPage #pdContactButton{
+   color:#fff!important;background:#a62626!important;border:1px solid #a62626!important;
+ }
+ #propertyDetailPage #pdChatButton{
+   color:#a62626!important;background:#fff!important;border:1px solid #a62626!important;
+ }
+ #propertyDetailPage .pd-small-actions{
+   display:flex!important;justify-content:flex-end!important;gap:8px!important;
+   width:100%!important;position:static!important;transform:none!important;
+ }
+ #propertyDetailPage .pd-small-actions .pd-icon-action{
+   min-width:42px!important;min-height:42px!important;border-radius:9px!important;
+ }
+}
+</style>
