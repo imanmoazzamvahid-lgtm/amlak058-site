@@ -1633,9 +1633,9 @@ header .brand h1 .brand-number{font-size:1.18em!important;font-weight:1000!impor
 #authPhonePanel{display:block!important}
 </style>
 
-<link rel="manifest" href="/manifest.webmanifest?v=15">
-<link rel="icon" type="image/svg+xml" href="/icon.svg?v=15">
-<link rel="apple-touch-icon" href="/icon.svg?v=15">
+<link rel="manifest" href="/manifest.webmanifest?v=17">
+<link rel="icon" type="image/svg+xml" href="/icon.svg?v=17">
+<link rel="apple-touch-icon" href="/icon.svg?v=17">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="املاک ۰۵۸">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -2650,7 +2650,7 @@ main{max-width:1200px;margin:0 auto}
 
 </head><body>
 
-<header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="لوگوی املاک ۰۵۸"><img class="amlak058-seal-mark" src="/stamp-seal.svg?v=1" alt="مهر املاک ۰۵۸" width="48" height="48" style="width:48px;height:48px;object-fit:contain;display:block"/></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>آگهی رایگان ملک در بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
+<header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="لوگوی املاک ۰۵۸"><img class="amlak058-brand-mark" src="/logo-mark.svg?v=17" alt="لوگوی املاک ۰۵۸" width="104" height="104" style="width:104px;height:104px;object-fit:contain;display:block"/></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>آگهی رایگان ملک در بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
   <!-- پنل مدیریت از سربرگ عمومی مخفی شد؛ دسترسی مدیر از مسیر مستقیم و احراز هویت محفوظ است. -->
   <button class="btn btn-outline" id="accountButton" onclick="handleAccountButton()">ورود / ثبت‌نام</button>
   <button class="btn btn-primary" onclick="openModal()">+ ثبت آگهی رایگان</button>
@@ -3908,7 +3908,7 @@ footer{background:#f8f6ef!important}
 (function(){
   if ("serviceWorker" in navigator && location.protocol === "https:") {
     window.addEventListener("load", function(){
-      navigator.serviceWorker.register("/sw.js?v=16").catch(function(err){console.warn("امکان فعال‌سازی حالت اپ فراهم نشد",err);});
+      navigator.serviceWorker.register("/sw.js?v=17").catch(function(err){console.warn("امکان فعال‌سازی حالت اپ فراهم نشد",err);});
     });
   }
   var installButton=document.getElementById("amlak058-pwa-install");
@@ -5846,5 +5846,28 @@ header .brand h1{font-size:clamp(25px,5vw,34px)!important;font-weight:900!import
   header #brandIcon .amlak058-seal-mark{width:96px!important;height:96px!important}
   header .brand{gap:10px!important;min-height:104px!important}
   header .brand h1{font-size:27px!important;line-height:1.4!important}
+}
+</style>
+
+
+<style id="amlak058-new-modern-logo-v29">
+/* سربرگ از مهر چاپ جداست: لوگوی مدرن خانه و پین */
+header #brandIcon{
+ width:112px!important;height:112px!important;min-width:112px!important;flex:0 0 112px!important;
+ display:grid!important;place-items:center!important;overflow:visible!important;
+ background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+}
+header #brandIcon .amlak058-brand-mark{
+ width:104px!important;height:104px!important;max-width:none!important;max-height:none!important;
+ display:block!important;object-fit:contain!important;
+}
+header .brand{align-items:center!important;gap:12px!important}
+header .brand h1{font-size:clamp(25px,4.8vw,33px)!important;font-weight:900!important;line-height:1.35!important;color:#242424!important}
+header .brand-number{color:#c62828!important}
+@media(max-width:650px){
+ header #brandIcon{width:96px!important;height:96px!important;min-width:96px!important;flex-basis:96px!important}
+ header #brandIcon .amlak058-brand-mark{width:88px!important;height:88px!important}
+ header .brand{gap:8px!important}
+ header .brand h1{font-size:26px!important;line-height:1.4!important}
 }
 </style>
