@@ -3648,7 +3648,7 @@ footer{background:#f8f6ef!important}
 (function(){
   if ("serviceWorker" in navigator && location.protocol === "https:") {
     window.addEventListener("load", function(){
-      navigator.serviceWorker.register("/sw.js").catch(function(err){console.warn("امکان فعال‌سازی حالت اپ فراهم نشد",err);});
+      navigator.serviceWorker.register("/sw.js?v=5").catch(function(err){console.warn("امکان فعال‌سازی حالت اپ فراهم نشد",err);});
     });
   }
   var installButton=document.getElementById("amlak058-pwa-install");
@@ -5151,4 +5151,11 @@ a{color:inherit}
  .mobile-nav-item.post .mobile-nav-icon{width:32px!important;height:32px!important;min-height:32px!important;border-radius:50%!important;background:#c62828!important;color:#fff!important}
  #propertyDetailPage{width:100%!important;max-width:100%!important;box-sizing:border-box!important;overflow-x:hidden!important}
 }
+</style><style id="amlak058-all-pages-red-v18">
+:root{--primary:#c62828!important;--dark:#a91f24!important;--gold:#c62828!important;--cream:#f7f7f7!important}
+.btn-primary,.pd-contact-button,.account-view-button.primary,.mobile-nav-item.post{background:#c62828!important;background-image:none!important;border-color:#c62828!important}
+.btn-outline,.pd-chat-button{border-color:#ddd!important;color:#c62828!important;background:#fff!important}
+.filter-btn.active,.account-menu-item.active,.mobile-nav-item.active{color:#c62828!important;border-color:#c62828!important}
+.property-price,.favorite-btn.saved,.pd-price,.account-verified{color:#c62828!important}
+#chatMessages,.account-dashboard,.account-profile-card,.account-overview-card{background:#fff!important}
 </style></body></html>
