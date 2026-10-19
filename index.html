@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><meta name="description" content="آگهی‌های خرید، فروش، رهن و اجاره ملک در بجنورد را جست‌وجو کنید. ثبت آگهی رایگان است.">
 <link rel="canonical" href="https://amlak058.ir/">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#c92d39">
+<meta name="theme-color" content="#ffffff">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fa_IR">
 <meta property="og:site_name" content="املاک ۰۵۸">
@@ -1633,9 +1633,9 @@ header .brand h1 .brand-number{font-size:1.18em!important;font-weight:1000!impor
 #authPhonePanel{display:block!important}
 </style>
 
-<link rel="manifest" href="/manifest.webmanifest?v=4">
-<link rel="icon" type="image/svg+xml" href="/icon.svg?v=4">
-<link rel="apple-touch-icon" href="/icon.svg?v=4">
+<link rel="manifest" href="/manifest.webmanifest?v=5">
+<link rel="icon" type="image/svg+xml" href="/icon.svg?v=5">
+<link rel="apple-touch-icon" href="/icon.svg?v=5">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="املاک ۰۵۸">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -2657,7 +2657,7 @@ main{max-width:1200px;margin:0 auto}
 <main><section class="mobile-reference-top" id="home" aria-label="جست‌وجوی آگهی ملک">
 <div class="mobile-reference-search"><span class="search-mark" aria-hidden="true">⌕</span><input id="mobileQuickSearch" type="search" placeholder="مثلاً فروش آپارتمان، خانه، زمین" aria-label="جست‌وجوی آگهی" onkeydown="if(event.key==='Enter'){const x=document.getElementById('searchKeyword');if(x)x.value=this.value;loadProperties();document.getElementById('listings').scrollIntoView({behavior:'smooth'});}"><button type="button" aria-label="جست‌وجو" onclick="const x=document.getElementById('searchKeyword');if(x)x.value=document.getElementById('mobileQuickSearch').value;loadProperties();document.getElementById('listings').scrollIntoView({behavior:'smooth'});">➜</button></div>
 <div class="mobile-reference-location"><span>⌖</span><span>موقعیت:</span><strong>بجنورد</strong><span class="location-line"></span></div>
-<div class="mobile-reference-filters"><button type="button" onclick="document.getElementById('searchType').focus()">☷ نوع ملک</button><button type="button" onclick="document.getElementById('searchAddress').focus()">محله</button><button type="button" onclick="document.getElementById('searchMinPrice').focus()">قیمت</button><button type="button" onclick="document.querySelector('.advanced-filter-details').open=true;document.querySelector('.advanced-filter-details').scrollIntoView({behavior:'smooth',block:'center'})">☷ فیلترها</button></div>
+<div class="mobile-reference-filters"><button type="button" onclick="openMobileFilter('all')">☷ فیلترها</button><button type="button" onclick="openMobileFilter('type')">نوع ملک</button><button type="button" onclick="openMobileFilter('neighborhood')">محله</button><button type="button" onclick="openMobileFilter('price')">قیمت</button></div>
 </section>
 <section class="container search-section" id="search"><div class="search-section-heading"><div><h2>جست‌وجوی آگهی‌ها</h2><p>شهر، نوع ملک و محدوده را انتخاب کن.</p></div></div><div class="search-panel"><div class="search-field"><label for="searchCity">شهر</label><select id="searchCity"><option value="">شهرهای خراسان شمالی</option><option>بجنورد</option><option>شیروان</option><option>اسفراین</option><option>فاروج</option><option>آشخانه</option><option>جاجرم</option><option>گرمه</option><option>راز</option><option>صفیآباد</option></select></div><div class="search-field"><label for="searchType">نوع ملک</label><select id="searchType">
 <option value="">انواع ملک</option>
@@ -2850,10 +2850,11 @@ main{max-width:1200px;margin:0 auto}
 
 
 <nav class="mobile-bottom-nav" aria-label="منوی اصلی موبایل">
- <button class="mobile-nav-item active" type="button" onclick="mobileNavHome()"><span class="mobile-nav-icon">⌂</span><span>خانه</span></button>
- <button class="mobile-nav-item post" type="button" onclick="openModal()"><span class="mobile-nav-icon">＋</span><span>ثبت آگهی</span></button>
- <button class="mobile-nav-item" type="button" onclick="openInbox()"><span class="mobile-nav-icon">▱</span><span>پیام‌ها</span></button>
- <button class="mobile-nav-item" type="button" onclick="mobileNavMyProperties()"><span class="mobile-nav-icon">♙</span><span>آگهی‌های من</span></button>
+ <button class="mobile-nav-item active" type="button" onclick="mobileNavHome()" aria-label="آگهی‌ها"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5M5.5 9.5V21h13V9.5M9.5 21v-7h5v7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>آگهی‌ها</span></button>
+ <button class="mobile-nav-item" type="button" onclick="mobileNavSaved()" aria-label="نشان‌ها"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12v17l-6-4-6 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span><span>نشان‌ها</span></button>
+ <button class="mobile-nav-item post" type="button" onclick="openModal()" aria-label="ثبت آگهی"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/></svg></span><span>ثبت آگهی</span></button>
+ <button class="mobile-nav-item" type="button" onclick="openInbox()" aria-label="چت و تماس"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-8 7.5 8.6 8.6 0 0 1-3.7-.8L4 20l1.4-3.5A7.2 7.2 0 0 1 4 11.5 7.5 7.5 0 0 1 12 4a7.5 7.5 0 0 1 8 7.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span><span>چت و تماس</span></button>
+ <button class="mobile-nav-item" type="button" onclick="mobileNavMyProperties()" aria-label="حساب من"><span class="mobile-nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7.5" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 21v-2a8 8 0 0 1 16 0v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span>حساب من</span></button>
 </nav>
 <div class="modal" id="locationModal"><div class="modal-box location-modal-box"><div class="modal-header"><h2>انتخاب موقعیت</h2><button class="close-btn" onclick="closeLocationModal()" aria-label="بستن">×</button></div><p class="muted" style="margin-bottom:12px">شهر را از فیلتر بالای صفحه انتخاب کن و سپس نام محله یا محدوده را وارد کن.</p><label for="locationSearch" style="display:block;font-size:13px;margin-bottom:5px">محله یا محدوده</label><input id="locationSearch" placeholder="مثلاً فردوسی، قیام، جمهوری"><p class="site-note">ترسیم واقعی محدوده روی نقشه هنوز به اتصال سرویس نقشه و مختصات آگهیها نیاز دارد.</p><div style="display:flex;gap:8px;margin-top:15px"><button class="btn btn-primary" onclick="applyLocation()">اعمال موقعیت</button><button class="btn btn-outline" onclick="clearLocation()">پاککردن</button></div></div></div>
 
@@ -3235,11 +3236,13 @@ document.getElementById('propertyForm').addEventListener('submit',async function
  finally{button.disabled=false;button.textContent='ثبت آگهی'}
 });
 
+function openMobileFilter(field){var details=document.querySelector('.advanced-filter-details');if(details){details.classList.add('user-open');details.open=true;}if(field==='neighborhood'){var modal=document.getElementById('locationModal');if(modal)modal.style.display='block';return;}var target=field==='type'?document.getElementById('searchMainCategory'):field==='price'?document.getElementById('minPrice'):document.getElementById('searchMainCategory');if(details)details.scrollIntoView({behavior:'smooth',block:'center'});if(target)setTimeout(function(){target.focus();},120);}
 function mobileNavHome(){closeAccountDashboard();loadProperties();document.getElementById('home').scrollIntoView({behavior:'smooth'});document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===0))}
+async function mobileNavSaved(){document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===1));await openAccountDashboard();var saved=document.querySelector('[data-account-action="saved"]');if(saved&&document.getElementById('accountDashboard')&&!document.getElementById('accountDashboard').hidden)saved.click()}
 async function mobileNavMyProperties(){closeAccountDashboard();
  const list=document.getElementById('propertyList'),count=document.getElementById('resultCount');
  document.getElementById('listings').scrollIntoView({behavior:'smooth'});
- document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===2));
+ document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===4));
  list.innerHTML='<div class="empty">در حال دریافت آگهی‌های حساب شما...</div>';
  count.textContent='آگهی‌های من'; try{
   const {data:{user},error:authError}=await db.auth.getUser();
@@ -5045,5 +5048,107 @@ header .brand-number{color:#c62828!important}
  .mobile-nav-item.active{color:#c62828!important}
  .mobile-nav-item.post{background:transparent!important;color:#777!important}
  .mobile-nav-item.post .mobile-nav-icon{background:#c62828!important;color:#fff!important;border-radius:50%!important;width:30px!important;height:30px!important}
+}
+</style><style id="amlak058-reference-finish-v17">
+/* Single final mobile theme: clean white, Divar-inspired red, no green/teal/gold */
+:root{
+ --primary:#c62828!important;--dark:#a91f24!important;--bg:#f5f5f5!important;
+ --border:#e5e5e5!important;--text:#242424!important;--muted:#777!important;
+ --gold:#c62828!important;--cream:#f7f7f7!important;--surface:#fff!important;
+}
+html,body{background:#fff!important;color:#242424!important}
+body{font-family:Vazirmatn,Tahoma,Arial,sans-serif!important}
+header,header .header-inner,.brand,.mobile-bottom-nav{background:#fff!important}
+header:before{content:none!important;display:none!important}
+header{border-bottom:1px solid #eee!important;box-shadow:none!important;backdrop-filter:none!important}
+header .brand h1{color:#222!important;font-weight:900!important}
+header .brand-number{color:#c62828!important}
+header .brand-icon{background:#fff!important;border:0!important;box-shadow:none!important;color:#c62828!important}
+header .brand-icon svg path{stroke:#c62828!important}
+header .brand-icon svg rect{fill:#c62828!important}
+.btn-primary,button.btn-primary{background:#c62828!important;background-image:none!important;border-color:#c62828!important;box-shadow:none!important;color:#fff!important}
+.btn-primary:hover{background:#a91f24!important}
+.btn-outline{background:#fff!important;border-color:#ddd!important;color:#444!important}
+.section-heading h2{color:#222!important}
+.section-heading h2:after{background:#c62828!important}
+.property-price,.favorite-btn.saved{color:#c62828!important}
+a{color:inherit}
+@media(max-width:650px){
+ body{width:100%!important;max-width:100%!important;overflow-x:hidden!important;padding-bottom:79px!important}
+ header{position:relative!important;top:auto!important}
+ header .header-inner{position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;flex-wrap:nowrap!important;gap:0!important;width:100%!important;max-width:none!important;min-height:54px!important;margin:0!important;padding:7px 12px!important;box-sizing:border-box!important}
+ header .brand{position:absolute!important;left:50%!important;right:auto!important;top:50%!important;transform:translate(-50%,-50%)!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;min-width:0!important;flex:0 0 auto!important;white-space:nowrap!important}
+ header .brand-icon{width:29px!important;height:29px!important;min-width:29px!important;flex:0 0 29px!important;border:0!important;border-radius:0!important}
+ header .brand-icon svg{width:29px!important;height:29px!important;display:block!important}
+ header .brand h1{font-size:17px!important;line-height:1.35!important;white-space:nowrap!important;letter-spacing:-.3px!important}
+ header .brand small{display:none!important}
+ header nav{display:none!important}
+ header .header-actions{position:absolute!important;left:12px!important;right:auto!important;top:50%!important;transform:translateY(-50%)!important;display:flex!important;gap:0!important}
+ header .header-actions #accountButton{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:34px!important;height:34px!important;padding:0!important;overflow:hidden!important;font-size:0!important;color:transparent!important;background:#fff!important;border:0!important;box-shadow:none!important}
+ header .header-actions #accountButton:before{content:"♙";display:block!important;color:#666!important;font-size:23px!important;line-height:1!important}
+ header .header-actions .btn-primary{display:none!important}
+ .request-hero{display:none!important}
+ .mobile-reference-top{display:block!important;background:#fff!important;padding:7px 12px 9px!important}
+ .mobile-reference-search{display:flex!important;align-items:center!important;gap:8px!important;height:47px!important;border:1.5px solid #aaa!important;border-radius:12px!important;padding:0 10px!important;box-sizing:border-box!important;background:#fff!important}
+ .mobile-reference-search .search-mark{font-size:24px!important;color:#777!important;line-height:1!important}
+ .mobile-reference-search input{flex:1 1 auto!important;min-width:0!important;width:100%!important;border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important;font:14px Vazirmatn,Tahoma,Arial,sans-serif!important;color:#222!important;text-align:right!important}
+ .mobile-reference-search input::placeholder{color:#7a7a7a!important;opacity:1!important}
+ .mobile-reference-search button{border:0!important;background:transparent!important;color:#777!important;font-size:25px!important;padding:0 2px!important;box-shadow:none!important}
+ .mobile-reference-location{display:flex!important;align-items:center!important;gap:7px!important;margin:12px 0 12px!important;font-size:13px!important;color:#555!important}
+ .mobile-reference-location>span:first-child{font-size:22px!important;color:#777!important}
+ .mobile-reference-location strong{color:#c62828!important;font-weight:800!important}
+ .mobile-reference-location .location-line{height:1px!important;background:#ccc!important;flex:1 1 auto!important;margin-right:7px!important}
+ .mobile-reference-filters{display:flex!important;flex-wrap:nowrap!important;gap:7px!important;overflow-x:auto!important;padding:0 0 2px!important;scrollbar-width:none!important}
+ .mobile-reference-filters::-webkit-scrollbar{display:none!important}
+ .mobile-reference-filters button{flex:0 0 auto!important;min-height:38px!important;padding:5px 12px!important;border:1px solid #aaa!important;border-radius:10px!important;background:#fff!important;color:#777!important;font-size:12px!important;white-space:nowrap!important;box-shadow:none!important}
+ .mobile-reference-filters button:first-child{border:1.5px solid #c62828!important;color:#c62828!important}
+ #search.search-section{display:none!important}
+ #categories.section{width:100%!important;max-width:none!important;box-sizing:border-box!important;margin:0!important;padding:12px 12px 10px!important;border-top:6px solid #f5f5f5!important;border-bottom:1px solid #eee!important;background:#fff!important}
+ #categories .section-heading{display:flex!important;align-items:center!important;justify-content:center!important;margin:0 0 10px!important;padding:0 0 10px!important;border-bottom:1px solid #eee!important}
+ #categories .section-heading h2{font-size:15px!important;color:#222!important;text-align:center!important}
+ #categories .section-heading h2:after{width:48px!important;height:4px!important;bottom:-11px!important;right:calc(50% - 24px)!important;background:#c62828!important}
+ #categories .section-heading .muted{display:none!important}
+ #categories .categories{display:flex!important;flex-wrap:nowrap!important;gap:8px!important;overflow-x:auto!important;scrollbar-width:none!important;padding:2px 0 4px!important}
+ #categories .categories::-webkit-scrollbar{display:none!important}
+ #categories .category{flex:0 0 84px!important;min-width:84px!important;max-width:84px!important;min-height:132px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;gap:4px!important;padding:10px 4px!important;border:1px solid #e1e1e1!important;border-radius:11px!important;background:#fff!important;box-shadow:none!important}
+ #categories .category-icon{display:flex!important;align-items:center!important;justify-content:center!important;width:48px!important;height:48px!important;min-height:48px!important;margin:1px auto 4px!important;border:1px solid #e1e1e1!important;border-radius:13px!important;background:#f7f7f7!important;box-shadow:none!important}
+ #categories .category-icon svg{width:38px!important;height:38px!important}
+ #categories .category-icon svg path,#categories .category-icon svg line,#categories .category-icon svg polyline,#categories .category-icon svg polygon{stroke:#454545!important}
+ #categories .category-icon svg [fill]:not([fill="none"]){fill:#f4f4f4!important}
+ #categories .category-icon svg [stroke]{stroke:#454545!important}
+ #categories .category strong{font-size:10px!important;line-height:1.7!important;color:#333!important;text-align:center!important}
+ #categories .category small{display:none!important}
+ #listings.section{width:100%!important;max-width:none!important;box-sizing:border-box!important;margin:0!important;padding:9px 0 16px!important;background:#fff!important;border:0!important}
+ #listings>.section-heading{display:flex!important;align-items:flex-start!important;justify-content:space-between!important;gap:8px!important;margin:0!important;padding:9px 13px 10px!important;border-bottom:1px solid #eee!important}
+ #listings>.section-heading h2{font-size:16px!important;font-weight:800!important;color:#222!important;margin:0!important}
+ #listings>.section-heading h2:after{display:none!important}
+ #listings>.section-heading .muted{font-size:10px!important;color:#888!important}
+ #resultCount{font-size:10px!important;color:#888!important;white-space:nowrap!important}
+ #listings .advanced-filter-details{display:none!important;margin:0 12px 8px!important;border:1px solid #ddd!important;border-radius:9px!important;background:#fff!important}
+ #listings .advanced-filter-details.user-open{display:block!important}
+ #listings .advanced-filter-details>summary{display:block!important;border:0!important;color:#c62828!important;padding:10px 12px!important}
+ #listings .advanced-filter-details .advanced-filters{padding:0 10px 10px!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important}
+ #listings .advanced-filter-details .advanced-filters input,#listings .advanced-filter-details .advanced-filters select{min-width:0!important;width:100%!important;font-size:12px!important}
+ #listings .property-grid{display:block!important;width:100%!important;box-sizing:border-box!important;padding:0 13px!important}
+ #listings .property-card{display:flex!important;flex-direction:row!important;direction:ltr!important;align-items:stretch!important;gap:12px!important;width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box!important;margin:0!important;padding:12px 0!important;border:0!important;border-bottom:1px solid #e3e3e3!important;border-radius:0!important;background:#fff!important;box-shadow:none!important;min-height:0!important}
+ #listings .property-card .property-image{order:0!important;direction:ltr!important;flex:0 0 36%!important;width:36%!important;max-width:36%!important;height:132px!important;min-height:132px!important;min-width:0!important;border-radius:9px!important;overflow:hidden!important;background:#f2f2f2!important}
+ #listings .property-card .property-image img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important}
+ #listings .property-card .property-info{order:1!important;direction:rtl!important;display:flex!important;flex:1 1 0!important;flex-direction:column!important;align-items:stretch!important;gap:4px!important;width:auto!important;min-width:0!important;padding:0!important;overflow:hidden!important}
+ #listings .property-card .property-type{display:none!important}
+ #listings .property-card .card-open{text-align:right!important;padding:0!important;margin:0!important;border:0!important;background:transparent!important;color:#222!important}
+ #listings .property-card .property-info h3{font-size:14px!important;line-height:1.8!important;font-weight:800!important;margin:0!important;color:#222!important;display:-webkit-box!important;-webkit-line-clamp:3!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+ #listings .property-card .property-address{font-size:11px!important;line-height:1.6!important;color:#777!important;margin-top:auto!important}
+ #listings .property-card .property-details{display:flex!important;flex-wrap:wrap!important;gap:3px 7px!important;font-size:10px!important;color:#777!important}
+ #listings .property-card .property-price{font-size:13px!important;font-weight:600!important;color:#555!important;line-height:1.7!important;margin-top:auto!important}
+ #listings .property-card .property-actions{display:none!important}
+ #requestStrip,#install-guide{display:none!important}
+ .mobile-bottom-nav{position:fixed!important;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;align-items:center!important;left:0!important;right:0!important;bottom:0!important;width:100%!important;box-sizing:border-box!important;z-index:999!important;background:#fff!important;border-top:1px solid #ddd!important;padding:5px 3px calc(5px + env(safe-area-inset-bottom))!important;box-shadow:none!important}
+ .mobile-nav-item{display:flex!important;align-items:center!important;justify-content:center!important;min-width:0!important;gap:2px!important;font-size:10px!important;line-height:1.55!important;color:#777!important;background:transparent!important;padding:2px 0!important}
+ .mobile-nav-icon{display:flex!important;align-items:center!important;justify-content:center!important;min-height:26px!important;font-size:22px!important;line-height:1!important;color:currentColor!important}
+ .mobile-nav-icon svg{display:block!important;width:24px!important;height:24px!important}
+ .mobile-nav-item.active{color:#c62828!important;font-weight:800!important}
+ .mobile-nav-item.post{background:transparent!important;color:#777!important;box-shadow:none!important}
+ .mobile-nav-item.post .mobile-nav-icon{width:32px!important;height:32px!important;min-height:32px!important;border-radius:50%!important;background:#c62828!important;color:#fff!important}
+ #propertyDetailPage{width:100%!important;max-width:100%!important;box-sizing:border-box!important;overflow-x:hidden!important}
 }
 </style></body></html>
