@@ -2849,6 +2849,82 @@ main{max-width:1200px;margin:0 auto}
 </section>
 
 
+
+<section class="container section" id="commission-calculator" aria-labelledby="commission-title">
+ <div class="section-heading"><h2 id="commission-title">محاسبه آنلاین کمیسیون</h2><span class="muted">برآورد سریع هزینه معامله ملک</span></div>
+ <div class="commission-box">
+  <div class="commission-tabs" role="group" aria-label="نوع معامله">
+   <button type="button" class="commission-tab active" data-kind="sale" onclick="setCommissionKind('sale')">خرید و فروش</button>
+   <button type="button" class="commission-tab" data-kind="rent" onclick="setCommissionKind('rent')">رهن و اجاره</button>
+  </div>
+  <div id="commission-sale-fields" class="commission-fields">
+   <label>قیمت کل معامله (تومان)<input id="commission-sale-price" type="number" min="0" inputmode="numeric" placeholder="مثلاً ۵۰۰۰۰۰۰۰۰۰"></label>
+   <label>درصد کمیسیون هر طرف<input id="commission-sale-rate" type="number" min="0" max="10" step="0.01" value="0.25" inputmode="decimal"></label>
+  </div>
+  <div id="commission-rent-fields" class="commission-fields" hidden>
+   <label>مبلغ ودیعه (تومان)<input id="commission-deposit" type="number" min="0" inputmode="numeric" placeholder="مبلغ رهن"></label>
+   <label>اجاره ماهانه (تومان)<input id="commission-monthly-rent" type="number" min="0" inputmode="numeric" placeholder="اجاره ماهانه"></label>
+   <label>هر ۱ میلیون تومان ودیعه معادل چند تومان اجاره ماهانه است؟<input id="commission-conversion" type="number" min="1" value="30000" inputmode="numeric"></label>
+   <label>درصد کمیسیون هر طرف<input id="commission-rent-rate" type="number" min="0" max="100" step="0.1" value="25" inputmode="decimal"></label>
+  </div>
+  <label class="commission-vat"><input id="commission-vat-on" type="checkbox" checked> محاسبه مالیات بر ارزش افزوده روی کمیسیون</label>
+  <div class="commission-vat-rate-row"><label>درصد مالیات<input id="commission-vat-rate" type="number" min="0" max="100" step="1" value="10" inputmode="numeric"></label></div>
+  <button type="button" class="btn btn-primary commission-calc-btn" onclick="calculateCommission()">محاسبه کمیسیون</button>
+  <div id="commission-result" class="commission-result" aria-live="polite">مبلغ معامله را وارد کنید تا برآورد کمیسیون نمایش داده شود.</div>
+  <p class="commission-note">این محاسبه‌گر صرفاً برآوردی است. نرخ قطعی به تعرفه مصوب اتحادیه محل، نوع قرارداد و مقررات مالیاتی روز بستگی دارد؛ پیش از پرداخت، مبلغ را با دفتر املاک یا اتحادیه مربوط بررسی کنید.</p>
+ </div>
+</section>
+<style id="commission-calculator-styles">
+#commission-calculator .commission-box{max-width:720px;margin:0 auto;padding:18px;border:1px solid #e6e6e6;border-radius:18px;background:#fff;box-shadow:0 4px 18px #00000008}
+#commission-calculator .commission-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+#commission-calculator .commission-tab{padding:11px;border:1px solid #ddd;border-radius:10px;background:#fff;color:#444;font:inherit}
+#commission-calculator .commission-tab.active{border-color:#c62828;color:#c62828;background:#fff7f7;font-weight:700}
+#commission-calculator .commission-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#commission-calculator label{display:flex;flex-direction:column;gap:7px;font-size:13px;color:#444}
+#commission-calculator input:not([type=checkbox]){box-sizing:border-box;width:100%;min-width:0;padding:12px;border:1px solid #ddd;border-radius:10px;background:#fff;font:inherit}
+#commission-calculator .commission-vat{flex-direction:row;align-items:center;margin:14px 0}
+#commission-calculator .commission-vat input{width:18px;height:18px;accent-color:#c62828}
+#commission-calculator .commission-vat-rate-row{max-width:180px}
+#commission-calculator .commission-calc-btn{width:100%;margin-top:15px;padding:13px}
+#commission-calculator .commission-result{margin-top:14px;padding:15px;border-radius:12px;background:#f8f8f8;line-height:1.9;color:#242424}
+#commission-calculator .commission-result strong{color:#c62828}
+#commission-calculator .commission-note{font-size:11px;line-height:1.9;color:#777;margin:12px 0 0}
+@media(max-width:520px){#commission-calculator .commission-box{padding:13px}#commission-calculator .commission-fields{grid-template-columns:1fr}#commission-calculator .commission-result{font-size:13px}}
+</style>
+<script id="commission-calculator-script">
+(function(){
+ let commissionKind='sale';
+ window.setCommissionKind=function(kind){
+  commissionKind=kind;
+  document.querySelectorAll('#commission-calculator .commission-tab').forEach(b=>b.classList.toggle('active',b.dataset.kind===kind));
+  document.getElementById('commission-sale-fields').hidden=kind!=='sale';
+  document.getElementById('commission-rent-fields').hidden=kind!=='rent';
+  document.getElementById('commission-result').textContent='اطلاعات معامله را وارد کنید و محاسبه را بزنید.';
+ };
+ window.calculateCommission=function(){
+  const val=id=>Math.max(0,Number(document.getElementById(id).value)||0);
+  const vatOn=document.getElementById('commission-vat-on').checked;
+  const vatRate=vatOn?val('commission-vat-rate')/100:0;
+  let base=0,details='';
+  if(commissionKind==='sale'){
+   const price=val('commission-sale-price'),rate=val('commission-sale-rate')/100;
+   if(!price){document.getElementById('commission-result').textContent='لطفاً قیمت کل معامله را وارد کنید.';return;}
+   base=price*rate;
+   details='نرخ واردشده برای هر طرف: '+(rate*100).toLocaleString('fa-IR')+'٪';
+  }else{
+   const deposit=val('commission-deposit'),rent=val('commission-monthly-rent'),conversion=val('commission-conversion'),rate=val('commission-rent-rate')/100;
+   if(!conversion||(!deposit&&!rent)){document.getElementById('commission-result').textContent='مبلغ ودیعه یا اجاره ماهانه را وارد کنید و ضریب تبدیل را بررسی کنید.';return;}
+   const monthlyEquivalent=rent+(deposit/1000000)*conversion;
+   base=monthlyEquivalent*rate;
+   details='اجاره معادل ماهانه: '+Math.round(monthlyEquivalent).toLocaleString('fa-IR')+' تومان | نرخ واردشده برای هر طرف: '+(rate*100).toLocaleString('fa-IR')+'٪';
+  }
+  const vat=base*vatRate,total=base+vat;
+  const money=n=>Math.round(n).toLocaleString('fa-IR')+' تومان';
+  document.getElementById('commission-result').innerHTML='<div>'+details+'</div><div>کمیسیون هر طرف پیش از مالیات: <strong>'+money(base)+'</strong></div><div>مالیات بر ارزش افزوده: <strong>'+money(vat)+'</strong></div><div>جمع قابل پرداخت هر طرف: <strong>'+money(total)+'</strong></div><div>جمع تقریبی دو طرف: <strong>'+money(total*2)+'</strong></div>';
+ };
+})();
+</script>
+
 <button type="button" id="mobile-map-chip" aria-label="نمایش آگهی‌ها روی نقشه" onclick="openMobileListingsMap()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 3v15m6-12v15" stroke="currentColor" stroke-width="2"/></svg><span>نقشه</span></button>
 <div class="modal" id="mobileListingsMapModal" role="dialog" aria-modal="true" aria-label="نقشه آگهی‌ها" style="display:none">
  <div class="modal-box mobile-listings-map-box">
