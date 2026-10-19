@@ -2875,8 +2875,53 @@ main{max-width:1200px;margin:0 auto}
   <div class="commission-vat-rate-row"><label>درصد مالیات<input id="commission-vat-rate" type="number" min="0" max="100" step="1" value="10" inputmode="numeric"></label></div>
   <button type="button" class="btn btn-primary commission-calc-btn" onclick="calculateCommission()">محاسبه کمیسیون</button>
   <div id="commission-result" class="commission-result" aria-live="polite">مبلغ معامله را وارد کنید تا برآورد کمیسیون نمایش داده شود.</div>
+  <button type="button" class="btn commission-print-btn" onclick="printCommissionReceipt()">چاپ رسید کمیسیون</button>
  </div>
 </section>
+<div id="commission-print-sheet" aria-hidden="true"></div>
+<style id="commission-print-styles">
+#commission-calculator .commission-print-btn{width:100%;margin-top:10px;padding:12px;background:#fff;color:#174b3a;border:1px solid #174b3a;border-radius:10px;font:inherit;font-weight:700;cursor:pointer}
+#commission-print-sheet{display:none}
+@media print{
+ @page{size:A4;margin:14mm}
+ body.commission-print-mode *{visibility:hidden!important}
+ body.commission-print-mode #commission-print-sheet,body.commission-print-mode #commission-print-sheet *{visibility:visible!important}
+ body.commission-print-mode #commission-print-sheet{display:block!important;position:absolute;inset:0 auto auto 0;width:100%;direction:rtl;background:#fff;color:#222;font-family:Vazirmatn,Tahoma,sans-serif;font-size:12pt;line-height:1.9}
+ body.commission-print-mode #commission-print-sheet .cp-head{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #174b3a;padding-bottom:12px;margin-bottom:18px}
+ body.commission-print-mode #commission-print-sheet .cp-brand{font-size:22pt;font-weight:900;color:#174b3a}
+ body.commission-print-mode #commission-print-sheet .cp-sub{font-size:10pt;color:#555}
+ body.commission-print-mode #commission-print-sheet .cp-title{text-align:center;font-weight:800;font-size:16pt;margin:14px 0}
+ body.commission-print-mode #commission-print-sheet .cp-table{width:100%;border-collapse:collapse;margin:12px 0 18px}
+ body.commission-print-mode #commission-print-sheet .cp-table th,body.commission-print-mode #commission-print-sheet .cp-table td{border:1px solid #ddd;padding:8px;text-align:right;vertical-align:top}
+ body.commission-print-mode #commission-print-sheet .cp-table th{background:#f4f6f4;width:38%}
+ body.commission-print-mode #commission-print-sheet .cp-result{border:1px solid #cbd8d0;border-radius:8px;padding:12px;margin-top:12px}
+ body.commission-print-mode #commission-print-sheet .cp-stamp{width:112px;height:112px;flex:0 0 112px;color:#1646b8}
+ body.commission-print-mode #commission-print-sheet .cp-foot{display:flex;justify-content:space-between;border-top:1px solid #ddd;margin-top:24px;padding-top:8px;font-size:9pt;color:#555}
+}
+</style>
+<script id="commission-print-script">
+function printCommissionReceipt(){
+ const root=document.getElementById('commission-calculator'),sheet=document.getElementById('commission-print-sheet'),result=document.getElementById('commission-result');
+ if(!root||!sheet||!result)return;
+ const kind=root.querySelector('.commission-tab.active')?.dataset.kind||'sale';
+ const labels={'commission-sale-type':'نوع قرارداد','commission-sale-price':'قیمت کل قرارداد','commission-deposit':'مبلغ ودیعه','commission-monthly-rent':'اجاره ماهانه','commission-rent-type':'نوع اجاره','commission-vat-rate':'نرخ مالیات بر ارزش افزوده'};
+ const rows=[];
+ root.querySelectorAll('.commission-fields:not([hidden]) input:not([type=checkbox]),.commission-fields:not([hidden]) select').forEach(function(el){
+  const label=labels[el.id]||el.closest('label')?.childNodes[0]?.textContent?.trim()||el.id;
+  let value=el.value;
+  if(el.tagName==='SELECT')value=el.options[el.selectedIndex]?.text||value;
+  if(value)rows.push('<tr><th>'+label+'</th><td>'+value+((el.id.includes('price')||el.id.includes('deposit')||el.id.includes('rent'))?' تومان':'')+'</td></tr>');
+ });
+ const stamp='<svg class="cp-stamp" viewBox="0 0 120 120" role="img" aria-label="مهر املاک ۰۵۸ و amlak058.ir"><circle cx="60" cy="60" r="55" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="60" cy="60" r="49" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M28 43 60 20 92 43M37 41V52H83V41M49 52V42H57V52M63 52V42H71V52" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><text x="60" y="72" text-anchor="middle" font-size="15" font-weight="900" fill="currentColor">املاک ۰۵۸</text><path d="M25 80H95" stroke="currentColor" stroke-width="1.5"/><text x="60" y="92" text-anchor="middle" font-size="8" font-weight="700" fill="currentColor">amlak058.ir</text></svg>';
+ const date=new Intl.DateTimeFormat('fa-IR',{year:'numeric',month:'long',day:'numeric'}).format(new Date());
+ sheet.innerHTML='<header class="cp-head"><div><div class="cp-brand">املاک ۰۵۸</div><div class="cp-sub">محاسبه آنلاین کمیسیون املاک</div><div class="cp-sub">amlak058.ir</div></div>'+stamp+'</header><div class="cp-title">رسید محاسبه کمیسیون '+(kind==='rent'?'رهن و اجاره':'خرید و فروش')+'</div><div>تاریخ چاپ: '+date+'</div><table class="cp-table"><tbody>'+(rows.length?rows.join(''):'<tr><td>اطلاعات معامله ثبت نشده است.</td></tr>')+'</tbody></table><div class="cp-result">'+result.innerHTML+'</div><footer class="cp-foot"><span>املاک ۰۵۸</span><span>amlak058.ir</span></footer>';
+ document.body.classList.add('commission-print-mode');
+ const cleanup=function(){document.body.classList.remove('commission-print-mode');window.removeEventListener('afterprint',cleanup);};
+ window.addEventListener('afterprint',cleanup);
+ window.print();
+ setTimeout(cleanup,1200);
+}
+</script>
 <style id="commission-calculator-styles">
 #commission-calculator .commission-box{max-width:720px;margin:0 auto;padding:18px;border:1px solid #e6e6e6;border-radius:18px;background:#fff;box-shadow:0 4px 18px #00000008}
 #commission-calculator .commission-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
