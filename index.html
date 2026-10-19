@@ -638,7 +638,7 @@ header nav{gap:22px!important}
 }
 
 
-</style>
+ #commission-calculator .commission-price-words{display:block;color:#c62828;font-size:12px;line-height:1.8;margin-top:5px}\n</style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 
 <style id="site-theme-overrides">
@@ -2859,7 +2859,10 @@ main{max-width:1200px;margin:0 auto}
   </div>
   <div id="commission-sale-fields" class="commission-fields">
    <label>نوع قرارداد<select id="commission-sale-type"><option value="sale">خرید و فروش</option><option value="presale">پیش‌فروش</option></select></label>
-   <label>قیمت کل قرارداد (تومان)<input id="commission-sale-price" type="number" min="0" inputmode="numeric" placeholder="مثلاً ۵۰۰۰۰۰۰۰۰۰"></label>
+   <label>قیمت کل قرارداد (تومان)
+    <input id="commission-sale-price" type="text" inputmode="numeric" autocomplete="off" placeholder="مثلاً ۵,۰۰۰,۰۰۰,۰۰۰">
+    <small id="commission-sale-price-words" class="commission-price-words" aria-live="polite">مبلغ به حروف: صفر تومان</small>
+   </label>
    <p class="commission-note" style="grid-column:1/-1">طبق تصویر نرخ‌نامه: تا ۵ میلیارد تومان، ۰٫۴۵٪؛ نسبت به مازاد ۵ تا ۱۰ میلیارد تومان، ۰٫۳۷٪؛ نسبت به مازاد ۱۰ میلیارد تومان، ۰٫۲۵٪ از هر طرف. پیش‌فروش: ۰٫۶۰٪ از هر طرف. درصدها به‌صورت پلکانی محاسبه می‌شوند.</p>
   </div>
   <div id="commission-rent-fields" class="commission-fields" hidden>
@@ -2894,6 +2897,36 @@ main{max-width:1200px;margin:0 auto}
 <script id="commission-calculator-script">
 (function(){
  let commissionKind='sale';
+ const priceInput=document.getElementById('commission-sale-price');
+ const wordsOutput=document.getElementById('commission-sale-price-words');
+ const faDigits=s=>String(s).replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+ function toWords(n){
+  if(!n)return 'صفر';
+  const ones=['','یک','دو','سه','چهار','پنج','شش','هفت','هشت','نه'];
+  const teens=['ده','یازده','دوازده','سیزده','چهارده','پانزده','شانزده','هفده','هجده','نوزده'];
+  const tens=['','','بیست','سی','چهل','پنجاه','شصت','هفتاد','هشتاد','نود'];
+  const hundreds=['','یکصد','دویست','سیصد','چهارصد','پانصد','ششصد','هفتصد','هشتصد','نهصد'];
+  const scales=['','هزار','میلیون','میلیارد','تریلیون'];
+  function under1000(x){
+   let a=[];
+   if(x>=100){a.push(hundreds[Math.floor(x/100)]);x%=100;}
+   if(x>=10&&x<20)a.push(teens[x-10]);
+   else {if(x>=20){a.push(tens[Math.floor(x/10)]);x%=10;}if(x>0)a.push(ones[x]);}
+   return a;
+  }
+  let parts=[],i=0;
+  while(n>0&&i<scales.length){let chunk=n%1000;if(chunk){let w=under1000(chunk);if(scales[i])w.push(scales[i]);parts.unshift(w.join(' و '));}n=Math.floor(n/1000);i++;}
+  return parts.join(' و ');
+ }
+ function updatePriceWords(){
+  const raw=faDigits(priceInput.value).replace(/[^0-9]/g,'');
+  const n=Number(raw);
+  if(!raw){wordsOutput.textContent='مبلغ به حروف: صفر تومان';return;}
+  priceInput.value=Number(raw).toLocaleString('en-US');
+  wordsOutput.textContent='مبلغ به حروف: '+toWords(n)+' تومان';
+ }
+ priceInput.addEventListener('input',updatePriceWords);
+ priceInput.addEventListener('blur',updatePriceWords);
  window.setCommissionKind=function(kind){
   commissionKind=kind;
   document.querySelectorAll('#commission-calculator .commission-tab').forEach(b=>b.classList.toggle('active',b.dataset.kind===kind));
@@ -2907,7 +2940,7 @@ main{max-width:1200px;margin:0 auto}
   const vatRate=vatOn?val('commission-vat-rate')/100:0;
   let base=0,details='';
   if(commissionKind==='sale'){
-   const price=val('commission-sale-price'),type=document.getElementById('commission-sale-type').value;
+   const price=Number(faDigits(document.getElementById('commission-sale-price').value).replace(/[^0-9]/g,''))||0,type=document.getElementById('commission-sale-type').value;
    if(!price){document.getElementById('commission-result').textContent='لطفاً قیمت کل قرارداد را وارد کنید.';return;}
    if(type==='presale'){
     base=price*0.006;
