@@ -1,7 +1,7 @@
 {
   "id": "/",
-  "name": "املاک بجنورد | آگهی ملک",
-  "short_name": "املاک بجنورد",
+  "name": "املاک ۰۵۸ | آگهی ملک بجنورد",
+  "short_name": "املاک ۰۵۸",
   "description": "سامانه رایگان ثبت و جست‌وجوی آگهی خرید، فروش، رهن و اجاره ملک در بجنورد",
   "lang": "fa",
   "dir": "rtl",
@@ -17,7 +17,7 @@
   ],
   "icons": [
     {
-      "src": "/icon.svg?v=12",
+      "src": "/icon.svg?v=13",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
