@@ -1633,8 +1633,8 @@ header .brand h1 .brand-number{font-size:1.18em!important;font-weight:1000!impor
 #authPhonePanel{display:block!important}
 </style>
 
-<link rel="manifest" href="/manifest.webmanifest?v=8">
-<link rel="icon" type="image/svg+xml" href="/icon.svg?v=8">
+<link rel="manifest" href="/manifest.webmanifest?v=9">
+<link rel="icon" type="image/svg+xml" href="/icon.svg?v=9">
 <link rel="apple-touch-icon" href="/icon.svg?v=6">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="املاک ۰۵۸">
@@ -2649,7 +2649,7 @@ main{max-width:1200px;margin:0 auto}
 </style>
 </head><body>
 
-<header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک ۰۵۸"><svg viewBox="0 0 64 64" role="img" aria-hidden="true" style="width:35px;height:35px;display:block"><path d="M4 28 32 4 60 28 55 33 32 13 9 33Z" fill="#c62828"/><path d="M12 29 32 12 52 29V57H12Z" fill="#c62828"/><rect x="19" y="32" width="9" height="9" rx="1.5" fill="#fff"/><rect x="36" y="32" width="9" height="9" rx="1.5" fill="#fff"/><rect x="19" y="45" width="9" height="9" rx="1.5" fill="#fff"/><rect x="36" y="45" width="9" height="9" rx="1.5" fill="#fff"/><rect x="29" y="43" width="6" height="14" rx="1" fill="#fff"/></svg></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>بازار آنلاین ملک بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
+<header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="لوگوی املاک ۰۵۸"><svg viewBox="0 0 72 72" role="img" aria-hidden="true" style="width:44px;height:44px;display:block"><path d="M8 30 36 7 64 30" fill="none" stroke="#c62828" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 28V62H57V28" fill="#fff" stroke="#c62828" stroke-width="4.5" stroke-linejoin="round"/><rect x="22" y="35" width="10" height="10" rx="1.5" fill="#c62828"/><rect x="40" y="35" width="10" height="10" rx="1.5" fill="#c62828"/><rect x="22" y="49" width="10" height="10" rx="1.5" fill="#c62828"/><rect x="40" y="49" width="10" height="10" rx="1.5" fill="#c62828"/><path d="M33 62V48H39V62" fill="#fff" stroke="#c62828" stroke-width="1.7"/></svg></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>بازار آنلاین ملک بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
   <!-- پنل مدیریت از سربرگ عمومی مخفی شد؛ دسترسی مدیر از مسیر مستقیم و احراز هویت محفوظ است. -->
   <button class="btn btn-outline" id="accountButton" onclick="handleAccountButton()">ورود / ثبت‌نام</button>
   <button class="btn btn-primary" onclick="openModal()">+ ثبت آگهی رایگان</button>
@@ -3694,7 +3694,7 @@ footer{background:#f8f6ef!important}
 (function(){
   if ("serviceWorker" in navigator && location.protocol === "https:") {
     window.addEventListener("load", function(){
-      navigator.serviceWorker.register("/sw.js?v=8").catch(function(err){console.warn("امکان فعال‌سازی حالت اپ فراهم نشد",err);});
+      navigator.serviceWorker.register("/sw.js?v=9").catch(function(err){console.warn("امکان فعال‌سازی حالت اپ فراهم نشد",err);});
     });
   }
   var installButton=document.getElementById("amlak058-pwa-install");
@@ -5299,4 +5299,11 @@ footer strong,footer h2{color:#242424!important}
  #listings .property-card{border:0!important;border-bottom:1px solid #e5e7eb!important;border-radius:0!important;padding:12px 0!important}
  footer{background:#fff!important}
 }
+</style><style id="amlak058-logo-wordmark-v23">
+header .brand{display:flex!important;align-items:center!important;gap:9px!important}
+header .brand-icon{width:46px!important;height:46px!important;min-width:46px!important;display:flex!important;align-items:center!important;justify-content:center!important;background:#fff!important;border:0!important;box-shadow:none!important}
+header .brand-icon svg{width:44px!important;height:44px!important}
+header .brand h1{font-size:23px!important;line-height:1.25!important;font-weight:900!important;color:#242424!important;letter-spacing:0!important}
+header .brand-number{color:#c62828!important}
+@media(max-width:650px){header .brand-icon,header .brand-icon svg{width:38px!important;height:38px!important;min-width:38px!important}header .brand h1{font-size:18px!important}}
 </style></body></html>
