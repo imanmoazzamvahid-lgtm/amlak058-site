@@ -2322,6 +2322,21 @@ input:focus,select:focus,textarea:focus{border-color:#c92d39!important;outline-c
 }
 </style>
 
+
+<style id="amlak058-gallery-swipe-fix">
+#propertyDetailPage .pd-gallery-dots{display:flex;align-items:center;justify-content:center;gap:7px;padding:8px 0}
+#propertyDetailPage .pd-gallery-dot{width:8px;height:8px;min-width:8px;padding:0;border:0;border-radius:50%;background:#c9c9c9}
+#propertyDetailPage .pd-gallery-dot.active{background:#c92d39;width:10px;height:10px}
+@media(max-width:700px){
+ #propertyDetailPage #pdGallery{position:relative!important}
+ #propertyDetailPage #pdGallery .pd-gallery-main{touch-action:pan-y!important}
+ #propertyDetailPage .pd-gallery-dots{position:absolute!important;z-index:3;bottom:10px;left:0;right:0;padding:0;pointer-events:auto}
+ #propertyDetailPage .pd-gallery-dot{background:#ffffffb8!important;width:7px!important;height:7px!important;min-width:7px!important}
+ #propertyDetailPage .pd-gallery-dot.active{background:#c92d39!important;width:9px!important;height:9px!important}
+ #propertyDetailPage .pd-gallery-secondary,#propertyDetailPage .pd-gallery-thumbs{display:none!important}
+}
+</style>
+
 </head><body>
 
 <header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک ۰۵۸"><svg viewBox="0 0 64 64" role="img" aria-hidden="true" style="width:35px;height:35px;display:block"><path d="M6 29 32 7 58 29" fill="none" stroke="#c59a45" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 27v29h38V27" fill="none" stroke="#f8f3e7" stroke-width="3.2" stroke-linejoin="round"/><path d="M26 56V39h12v17" fill="none" stroke="#c59a45" stroke-width="3.2" stroke-linejoin="round"/><path d="M19 33h6v6h-6zm20 0h6v6h-6z" fill="#c59a45"/></svg></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>بازار آنلاین ملک بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
@@ -4252,7 +4267,7 @@ async function openPropertyDetailPage(id,pushHistory){
   if(!paths.length&&p.image_url)paths=[p.image_url];
   var urls=(await Promise.all(paths.slice(0,MAX_IMAGES).map(makeSignedImage))).filter(Boolean);
   pdCurrentImages=urls;pdCurrentImageIndex=0;
-  document.getElementById('pdGallery').innerHTML=pdBuildGallery(urls,p.title||'تصویر ملک');
+  document.getElementById('pdGallery').innerHTML=pdBuildGallery(urls,p.title||'تصویر ملک');pdEnableGallerySwipe();
   var videoUrl=p.video_url?await makeSignedImage(p.video_url):'';
   var videoHtml=videoUrl?'<div class="pd-video-wrap"><video controls preload="metadata" style="display:block;width:100%;max-height:280px;border-radius:4px;margin-top:8px"><source src="'+pdEsc(videoUrl)+'"></video></div>':'';
   document.getElementById('pdGalleryCaption').innerHTML=videoHtml;
@@ -4317,11 +4332,24 @@ async function openPropertyDetailPage(id,pushHistory){
 }
 function pdBuildGallery(urls,title){
  if(!urls||!urls.length)return '<div class="pd-gallery-empty">برای این آگهی عکسی ثبت نشده است.</div>';
- var html='<button type="button" class="pd-gallery-main" onclick="pdOpenImageAt('+pdCurrentImageIndex+')" aria-label="نمایش عکس بزرگ"><img id="pdGalleryMainImage" src="'+pdEsc(urls[0])+'" alt="'+pdEsc(title)+'" loading="eager"><span class="pd-gallery-counter" id="pdGalleryCounter">1 / '+urls.length+'</span></button>';
+ var html='<button type="button" class="pd-gallery-main" onclick="pdOpenImageAt('+pdCurrentImageIndex+')" aria-label="نمایش عکس بزرگ"><img id="pdGalleryMainImage" src="'+pdEsc(urls[0])+'" alt="'+pdEsc(title)+'" loading="eager"><span class="pd-gallery-counter" id="pdGalleryCounter">'+(1).toLocaleString('fa-IR')+' / '+urls.length.toLocaleString('fa-IR')+'</span></button>';
+ if(urls.length>1)html+='<div class="pd-gallery-dots" id="pdGalleryDots" aria-label="انتخاب تصویر">'+urls.map(function(url,i){return '<button type="button" class="pd-gallery-dot '+(i===0?'active':'')+'" onclick="pdSelectGalleryImage('+i+')" aria-label="تصویر '+(i+1)+'"></button>'}).join('')+'</div>';
  var rest=urls.slice(1,4);
  if(rest.length)html+='<div class="pd-gallery-secondary">'+rest.map(function(url,i){var idx=i+1;return '<button type="button" class="pd-gallery-tile" id="pdGalleryTile'+idx+'" onclick="pdSelectGalleryImage('+idx+')" aria-label="نمایش تصویر '+(idx+1)+'"><img src="'+pdEsc(url)+'" alt="'+pdEsc(title)+' '+(idx+1)+'" loading="lazy"></button>'}).join('')+'</div>';
  if(urls.length>1)html+='<div class="pd-gallery-thumbs">'+urls.map(function(url,i){return '<button type="button" class="pd-gallery-thumb '+(i===0?'active':'')+'" id="pdGalleryThumb'+i+'" onclick="pdSelectGalleryImage('+i+')" aria-label="انتخاب تصویر '+(i+1)+'"><img src="'+pdEsc(url)+'" alt="" loading="lazy"></button>'}).join('')+'</div>';
  return html;
+}
+function pdEnableGallerySwipe(){
+ var gallery=document.getElementById('pdGallery'),main=document.getElementById('pdGalleryMainImage');
+ if(!gallery||!main||gallery.dataset.swipeReady==='1')return;
+ gallery.dataset.swipeReady='1';
+ var startX=0,startY=0;
+ main.addEventListener('touchstart',function(e){if(!e.touches||!e.touches.length)return;startX=e.touches[0].clientX;startY=e.touches[0].clientY;},{passive:true});
+ main.addEventListener('touchend',function(e){
+  if(!e.changedTouches||!e.changedTouches.length||pdCurrentImages.length<2)return;
+  var dx=e.changedTouches[0].clientX-startX,dy=e.changedTouches[0].clientY-startY;
+  if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)){var next=pdCurrentImageIndex+(dx<0?1:-1);if(next<0)next=pdCurrentImages.length-1;if(next>=pdCurrentImages.length)next=0;pdSelectGalleryImage(next);}
+ },{passive:true});
 }
 function pdSelectGalleryImage(index){
  if(index<0||index>=pdCurrentImages.length)return;
@@ -4330,6 +4358,7 @@ function pdSelectGalleryImage(index){
  var count=document.getElementById('pdGalleryCounter');if(count)count.textContent=(index+1).toLocaleString('fa-IR')+' / '+pdCurrentImages.length.toLocaleString('fa-IR');
  document.querySelectorAll('.pd-gallery-thumb').forEach(function(el){el.classList.toggle('active',el.id==='pdGalleryThumb'+index)});
  document.querySelectorAll('.pd-gallery-tile').forEach(function(el){el.classList.toggle('active',el.id==='pdGalleryTile'+index)});
+ document.querySelectorAll('.pd-gallery-dot').forEach(function(el,i){el.classList.toggle('active',i===index)});
 }
 function pdOpenImageAt(index){
  if(!pdCurrentImages.length)return;
