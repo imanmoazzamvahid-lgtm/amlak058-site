@@ -1633,9 +1633,9 @@ header .brand h1 .brand-number{font-size:1.18em!important;font-weight:1000!impor
 #authPhonePanel{display:block!important}
 </style>
 
-<link rel="manifest" href="/manifest.webmanifest?v=5">
-<link rel="icon" type="image/svg+xml" href="/icon.svg?v=5">
-<link rel="apple-touch-icon" href="/icon.svg?v=5">
+<link rel="manifest" href="/manifest.webmanifest?v=6">
+<link rel="icon" type="image/svg+xml" href="/icon.svg?v=6">
+<link rel="apple-touch-icon" href="/icon.svg?v=6">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="املاک ۰۵۸">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -2649,7 +2649,7 @@ main{max-width:1200px;margin:0 auto}
 </style>
 </head><body>
 
-<header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک ۰۵۸"><svg viewBox="0 0 64 64" role="img" aria-hidden="true" style="width:35px;height:35px;display:block"><path d="M7 29 32 7 57 29" fill="none" stroke="#c62828" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 27v29h36V27" fill="none" stroke="#c62828" stroke-width="4.5" stroke-linejoin="round"/><rect x="23" y="32" width="7" height="7" rx="1.5" fill="#c62828"/><rect x="34" y="32" width="7" height="7" rx="1.5" fill="#c62828"/><rect x="23" y="43" width="7" height="7" rx="1.5" fill="#c62828"/><rect x="34" y="43" width="7" height="7" rx="1.5" fill="#c62828"/></svg></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>بازار آنلاین ملک بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
+<header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک ۰۵۸"><svg viewBox="0 0 64 64" role="img" aria-hidden="true" style="width:35px;height:35px;display:block"><path d="M5.5 28.5 32 6.5 58.5 28.5" fill="none" stroke="#c62828" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 26.5V56h38V26.5" fill="#fff" stroke="#c62828" stroke-width="4.2" stroke-linejoin="round"/><rect x="21" y="32" width="7" height="7" rx="1" fill="#c62828"/><rect x="36" y="32" width="7" height="7" rx="1" fill="#c62828"/><rect x="21" y="43" width="7" height="7" rx="1" fill="#c62828"/><rect x="36" y="43" width="7" height="7" rx="1" fill="#c62828"/><path d="M30 56V44h4v12" fill="#fff" stroke="#c62828" stroke-width="1.6"/></svg></div><div><h1>املاک <span class="brand-number">۰۵۸</span></h1><small>بازار آنلاین ملک بجنورد</small></div></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
   <!-- پنل مدیریت از سربرگ عمومی مخفی شد؛ دسترسی مدیر از مسیر مستقیم و احراز هویت محفوظ است. -->
   <button class="btn btn-outline" id="accountButton" onclick="handleAccountButton()">ورود / ثبت‌نام</button>
   <button class="btn btn-primary" onclick="openModal()">+ ثبت آگهی رایگان</button>
@@ -3694,7 +3694,7 @@ footer{background:#f8f6ef!important}
 (function(){
   if ("serviceWorker" in navigator && location.protocol === "https:") {
     window.addEventListener("load", function(){
-      navigator.serviceWorker.register("/sw.js?v=5").catch(function(err){console.warn("امکان فعال‌سازی حالت اپ فراهم نشد",err);});
+      navigator.serviceWorker.register("/sw.js?v=6").catch(function(err){console.warn("امکان فعال‌سازی حالت اپ فراهم نشد",err);});
     });
   }
   var installButton=document.getElementById("amlak058-pwa-install");
@@ -5216,4 +5216,14 @@ a{color:inherit}
  #mobileListingsMapModal .mobile-listings-map-box{width:100%!important;max-width:640px!important;margin:4vh auto!important;padding:14px!important;border-radius:14px!important;background:#fff!important;box-sizing:border-box!important}
  #mobileListingsMapModal .modal-header{display:flex!important;align-items:center!important;justify-content:space-between!important}
 }
+</style><style id="amlak058-logo-correction-v20">
+header .brand{gap:7px!important}
+header .brand-icon{display:grid!important;place-items:center!important;background:#fff!important;border:0!important;box-shadow:none!important;overflow:visible!important}
+header .brand-icon svg{display:block!important;width:35px!important;height:35px!important;overflow:visible!important}
+header .brand-icon svg path{stroke:#c62828!important}
+header .brand-icon svg rect{fill:#c62828!important}
+header .brand-icon svg path:last-child{fill:#fff!important;stroke:#c62828!important}
+header .brand h1{color:#242424!important}
+header .brand-number{color:#c62828!important}
+@media(max-width:650px){header .brand-icon,header .brand-icon svg{width:31px!important;height:31px!important;min-width:31px!important;flex-basis:31px!important}header .brand h1{font-size:17px!important;font-weight:900!important}}
 </style></body></html>
