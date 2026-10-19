@@ -2860,7 +2860,7 @@ main{max-width:1200px;margin:0 auto}
   <div id="commission-sale-fields" class="commission-fields">
    <label>نوع قرارداد<select id="commission-sale-type"><option value="sale">خرید و فروش</option><option value="presale">پیش‌فروش</option></select></label>
    <label>قیمت کل قرارداد (تومان)<input id="commission-sale-price" type="number" min="0" inputmode="numeric" placeholder="مثلاً ۵۰۰۰۰۰۰۰۰۰"></label>
-   <p class="commission-note" style="grid-column:1/-1">خریدوفروش طبق پله‌های نرخ‌نامه: تا ۵ میلیارد، ۰٫۲۵٪؛ مازاد ۵ تا ۱۰ میلیارد، ۰٫۳۷٪؛ مازاد ۱۰ میلیارد، ۰٫۲۵٪ از هر طرف. پیش‌فروش: ۰٫۶۰٪ از هر طرف.</p>
+   <p class="commission-note" style="grid-column:1/-1">طبق تصویر نرخ‌نامه: تا ۵ میلیارد تومان، ۰٫۲۵٪؛ نسبت به مازاد ۵ تا ۱۰ میلیارد تومان، ۰٫۳۷٪؛ نسبت به مازاد ۱۰ میلیارد تومان، ۰٫۲۵٪ از هر طرف. پیش‌فروش: ۰٫۶۰٪ از هر طرف. درصدها به‌صورت پلکانی محاسبه می‌شوند.</p>
   </div>
   <div id="commission-rent-fields" class="commission-fields" hidden>
    <label>مبلغ ودیعه / رهن (تومان)<input id="commission-deposit" type="number" min="0" inputmode="numeric" placeholder="مبلغ رهن"></label>
@@ -2917,7 +2917,7 @@ main{max-width:1200px;margin:0 auto}
     const second=Math.min(Math.max(price-5000000000,0),5000000000)*0.0037;
     const third=Math.max(price-10000000000,0)*0.0025;
     base=first+second+third;
-    details='محاسبه پلکانی نرخ‌نامه برای هر طرف: ۰٫۲۵٪ تا ۵ میلیارد، ۰٫۳۷٪ برای پله ۵ تا ۱۰ میلیارد و ۰٫۲۵٪ از مازاد ۱۰ میلیارد';
+    details='محاسبه پلکانی بر اساس نرخ‌نامه تصویری، برای هر طرف: ۰٫۲۵٪ بخش اول تا ۵ میلیارد، ۰٫۳۷٪ بخش ۵ تا ۱۰ میلیارد و ۰٫۲۵٪ بخش بالاتر از ۱۰ میلیارد تومان';
    }
   }else{
    const deposit=val('commission-deposit'),rent=val('commission-monthly-rent');
