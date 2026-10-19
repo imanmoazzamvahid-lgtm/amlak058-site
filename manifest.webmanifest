@@ -9,15 +9,15 @@
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#F7F3EA",
-  "theme_color": "#174B3A",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF",
   "categories": [
     "business",
     "lifestyle"
   ],
   "icons": [
     {
-      "src": "/icon.svg?v=4",
+      "src": "/icon.svg?v=5",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
