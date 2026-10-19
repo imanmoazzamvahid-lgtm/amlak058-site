@@ -2866,9 +2866,10 @@ main{max-width:1200px;margin:0 auto}
    <p class="commission-note" style="grid-column:1/-1">طبق تصویر نرخ‌نامه: تا ۵ میلیارد تومان، ۰٫۴۵٪؛ نسبت به مازاد ۵ تا ۱۰ میلیارد تومان، ۰٫۳۷٪؛ نسبت به مازاد ۱۰ میلیارد تومان، ۰٫۲۵٪ از هر طرف. پیش‌فروش: ۰٫۶۰٪ از هر طرف. درصدها به‌صورت پلکانی محاسبه می‌شوند.</p>
   </div>
   <div id="commission-rent-fields" class="commission-fields" hidden>
+   <label>نوع قرارداد اجاره<select id="commission-rent-type"><option value="rent">اجاره جدید</option><option value="renewal">تمدید اجاره</option></select></label>
    <label>مبلغ ودیعه / رهن (تومان)<input id="commission-deposit" type="number" min="0" inputmode="numeric" placeholder="مبلغ رهن"></label>
    <label>اجاره ماهانه (تومان)<input id="commission-monthly-rent" type="number" min="0" inputmode="numeric" placeholder="اجاره ماهانه"></label>
-   <p class="commission-note" style="grid-column:1/-1">طبق خوانش نرخ‌نامه: هر ۱ میلیون تومان رهن معادل ۴۰ هزار تومان اجاره ماهانه محاسبه می‌شود و کمیسیون برابر ۷ روز اجاره معادل برای هر طرف است.</p>
+   <p class="commission-note" style="grid-column:1/-1">هر یک میلیون تومان رهن معادل ۴۰ هزار تومان اجاره ماهانه محاسبه می‌شود. اجاره جدید: ۷ روز اجاره معادل؛ تمدید: ۳ روز اجاره معادل، برای هر طرف.</p>
   </div>
   <label class="commission-vat"><input id="commission-vat-on" type="checkbox" checked> محاسبه مالیات بر ارزش افزوده روی کمیسیون</label>
   <div class="commission-vat-rate-row"><label>درصد مالیات<input id="commission-vat-rate" type="number" min="0" max="100" step="1" value="10" inputmode="numeric"></label></div>
@@ -2955,8 +2956,10 @@ main{max-width:1200px;margin:0 auto}
    const deposit=val('commission-deposit'),rent=val('commission-monthly-rent');
    if(!deposit&&!rent){document.getElementById('commission-result').textContent='مبلغ ودیعه یا اجاره ماهانه را وارد کنید.';return;}
    const monthlyEquivalent=rent+(deposit/1000000)*40000;
-   base=monthlyEquivalent*7/30;
-   details='اجاره معادل ماهانه: '+Math.round(monthlyEquivalent).toLocaleString('fa-IR')+' تومان | کمیسیون ۷ روز اجاره معادل برای هر طرف';
+   const renewal=document.getElementById('commission-rent-type').value==='renewal';
+   const days=renewal?3:7;
+   base=monthlyEquivalent*days/30;
+   details='اجاره معادل ماهانه: '+Math.round(monthlyEquivalent).toLocaleString('fa-IR')+' تومان | '+(renewal?'کمیسیون تمدید، ۳ روز':'کمیسیون اجاره جدید، ۷ روز')+' اجاره معادل برای هر طرف';
   }
   const vat=base*vatRate,total=base+vat;
   const money=n=>Math.round(n).toLocaleString('fa-IR')+' تومان';
