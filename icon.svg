@@ -1,8 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-<rect width="512" height="512" rx="88" fill="#fff"/>
-<path d="M75 217 256 65 437 217" fill="none" stroke="#c62828" stroke-width="25" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M120 205V390H392V205" fill="#fff" stroke="#c62828" stroke-width="22" stroke-linejoin="round"/>
-<g fill="#c62828"><rect x="163" y="235" width="65" height="65" rx="7"/><rect x="284" y="235" width="65" height="65" rx="7"/><rect x="163" y="319" width="65" height="52" rx="7"/><rect x="284" y="319" width="65" height="52" rx="7"/></g>
-<path d="M240 390V315H272V390" fill="#fff" stroke="#c62828" stroke-width="8"/>
-<text x="256" y="468" text-anchor="middle" direction="rtl" unicode-bidi="plaintext" font-family="Tahoma,Arial,sans-serif" font-size="48" font-weight="bold" fill="#242424">املاک ۰۵۸</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">
+  <rect class="tile" x="1" y="1" width="70" height="70" rx="18" fill="#c62828"/>
+  <path class="pin" d="M36 7.5C24 7.5 15.5 16.4 15.5 28c0 13.7 20.5 36.2 20.5 36.2S56.5 41.7 56.5 28C56.5 16.4 48 7.5 36 7.5Z" fill="#fff"/>
+  <path class="house" d="M22 33.5 36 22.5 50 33.5V46H22Z" fill="#c62828"/>
+  <path class="window" d="M27 34h6v6h-6zM39 34h6v6h-6zM33 41h6v5h-6z" fill="#fff"/>
 </svg>
