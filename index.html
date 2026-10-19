@@ -2655,7 +2655,7 @@ main{max-width:1200px;margin:0 auto}
   <button class="btn btn-primary" onclick="openModal()">+ ثبت آگهی رایگان</button>
 </div></div></div></header>
 <main><section class="mobile-reference-top" id="home" aria-label="جست‌وجوی آگهی ملک">
-<div class="mobile-reference-search"><span class="search-mark" aria-hidden="true">⌕</span><input id="mobileQuickSearch" type="search" placeholder="مثلاً فروش آپارتمان، خانه، زمین" aria-label="جست‌وجوی آگهی" onkeydown="if(event.key==='Enter'){const x=document.getElementById('searchKeyword');if(x)x.value=this.value;loadProperties();document.getElementById('listings').scrollIntoView({behavior:'smooth'});}"><button type="button" aria-label="جست‌وجو" onclick="const x=document.getElementById('searchKeyword');if(x)x.value=document.getElementById('mobileQuickSearch').value;loadProperties();document.getElementById('listings').scrollIntoView({behavior:'smooth'});">➜</button></div>
+<div class="mobile-reference-search"><span class="search-mark" aria-hidden="true">⌕</span><input id="mobileQuickSearch" type="search" placeholder="مثلاً فروش آپارتمان، خانه، زمین" aria-label="جست‌وجوی آگهی" onkeydown="if(event.key==='Enter'){const x=document.getElementById('searchKeyword');if(x)x.value=this.value;markMobileSearchAndLoad();document.getElementById('listings').scrollIntoView({behavior:'smooth'});}"><button type="button" aria-label="جست‌وجو" onclick="const x=document.getElementById('searchKeyword');if(x)x.value=document.getElementById('mobileQuickSearch').value;markMobileSearchAndLoad();document.getElementById('listings').scrollIntoView({behavior:'smooth'});">➜</button></div>
 <div class="mobile-reference-location"><span>⌖</span><span>موقعیت:</span><strong>بجنورد</strong><span class="location-line"></span></div>
 <div class="mobile-reference-filters"><button type="button" onclick="openMobileFilter('all')">☷ فیلترها</button><button type="button" onclick="openMobileFilter('type')">نوع ملک</button><button type="button" onclick="openMobileFilter('neighborhood')">محله</button><button type="button" onclick="openMobileFilter('price')">قیمت</button></div>
 </section>
@@ -2671,7 +2671,7 @@ main{max-width:1200px;margin:0 auto}
 <option value="سوئیت و آپارتمان">سوئیت و آپارتمان (اجاره کوتاه‌مدت)</option>
 <option value="ویلا و باغ">ویلا و باغ (اجاره کوتاه‌مدت)</option>
 <option value="دفتر کار و فضای آموزشی">دفتر کار و فضای آموزشی (اجاره کوتاه‌مدت)</option>
-</select></div><div class="search-field search-field-wide"><label for="searchKeyword">جست‌وجوی ملک</label><input id="searchKeyword" placeholder="مثلاً آپارتمان دوخوابه، پارکینگ‌دار"></div><div class="search-field search-field-wide"><label for="searchAddress">محله یا آدرس</label><input id="searchAddress" placeholder="مثلاً فردوسی، قیام، جمهوری"></div><button class="btn btn-primary" onclick="loadProperties()">جست‌وجو</button></div></section>
+</select></div><div class="search-field search-field-wide"><label for="searchKeyword">جست‌وجوی ملک</label><input id="searchKeyword" placeholder="مثلاً آپارتمان دوخوابه، پارکینگ‌دار"></div><div class="search-field search-field-wide"><label for="searchAddress">محله یا آدرس</label><input id="searchAddress" placeholder="مثلاً فردوسی، قیام، جمهوری"></div><button class="btn btn-primary" onclick="markMobileSearchAndLoad()">جست‌وجو</button></div></section>
 
 
 <section class="container section" id="categories"><div class="section-heading"><h2>دنبال چه ملکی هستی؟</h2><span class="muted">از دسته‌بندی دلخواهت سریع‌تر شروع کن</span></div><div class="categories">
@@ -2921,7 +2921,76 @@ function printCommissionReceipt(){
  const printWindow=window.open('','_blank');
  if(printWindow){
   printWindow.document.open();
-  printWindow.document.write('<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>رسید کمیسیون املاک ۰۵۸</title><style>@page{size:A4 portrait;margin:9mm}*{box-sizing:border-box}html,body{margin:0!important;padding:0!important;background:#fff!important;color:#222;font-family:Tahoma,Arial,sans-serif;font-size:10pt;line-height:1.45}#commission-print-sheet{display:block!important;position:relative!important;width:100%!important;height:279mm!important;min-height:0!important;max-height:279mm!important;overflow:hidden!important;margin:0!important;padding:0!important;direction:rtl}#commission-print-sheet:before{content:"amlak058.ir";position:absolute;top:48%;left:50%;transform:translate(-50%,-50%) rotate(-24deg);font-family:Arial,sans-serif;font-size:38pt;font-weight:900;letter-spacing:2px;color:rgba(23,75,58,.075);white-space:nowrap;z-index:0;pointer-events:none}#commission-print-sheet>*{position:relative;z-index:1}.cp-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #174b3a;padding-bottom:5px;margin-bottom:8px}.cp-brand{font-size:18pt;font-weight:900;color:#174b3a}.cp-sub{font-size:8.5pt;line-height:1.4;color:#555}.cp-stamp{width:66px!important;height:66px!important;flex:0 0 66px!important}.cp-title{text-align:center;font-weight:800;font-size:13pt;margin:7px 0}.cp-table{width:100%;border-collapse:collapse;margin:7px 0 9px}.cp-table th,.cp-table td{border:1px solid #ddd;padding:4px 6px;text-align:right;vertical-align:top;line-height:1.4}.cp-table th{background:#f4f6f4;width:38%}.cp-result{border:1px solid #cbd8d0;border-radius:5px;padding:7px;margin-top:7px;line-height:1.45}.cp-foot{display:flex;justify-content:space-between;border-top:1px solid #ddd;margin-top:10px;padding-top:5px;font-size:9pt;color:#555}tr,.cp-head,.cp-result{break-inside:avoid;page-break-inside:avoid}@media screen{body{padding:12px!important}#commission-print-sheet{height:auto!important;max-height:none!important;min-height:0!important;overflow:visible!important;max-width:190mm;margin:0 auto!important}}</style></head><body>'+sheet.outerHTML+'</body></html>');
+  printWindow.document.write('<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>رسید کمیسیون املاک ۰۵۸</title><style>@page{size:A4 portrait;margin:9mm}*{box-sizing:border-box}html,body{margin:0!important;padding:0!important;background:#fff!important;color:#222;font-family:Tahoma,Arial,sans-serif;font-size:10pt;line-height:1.45}#commission-print-sheet{display:block!important;position:relative!important;width:100%!important;height:279mm!important;min-height:0!important;max-height:279mm!important;overflow:hidden!important;margin:0!important;padding:0!important;direction:rtl}#commission-print-sheet:before{content:"amlak058.ir";position:absolute;top:48%;left:50%;transform:translate(-50%,-50%) rotate(-24deg);font-family:Arial,sans-serif;font-size:38pt;font-weight:900;letter-spacing:2px;color:rgba(23,75,58,.075);white-space:nowrap;z-index:0;pointer-events:none}#commission-print-sheet>*{position:relative;z-index:1}.cp-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #174b3a;padding-bottom:5px;margin-bottom:8px}.cp-brand{font-size:18pt;font-weight:900;color:#174b3a}.cp-sub{font-size:8.5pt;line-height:1.4;color:#555}.cp-stamp{width:66px!important;height:66px!important;flex:0 0 66px!important}.cp-title{text-align:center;font-weight:800;font-size:13pt;margin:7px 0}.cp-table{width:100%;border-collapse:collapse;margin:7px 0 9px}.cp-table th,.cp-table td{border:1px solid #ddd;padding:4px 6px;text-align:right;vertical-align:top;line-height:1.4}.cp-table th{background:#f4f6f4;width:38%}.cp-result{border:1px solid #cbd8d0;border-radius:5px;padding:7px;margin-top:7px;line-height:1.45}.cp-foot{display:flex;justify-content:space-between;border-top:1px solid #ddd;margin-top:10px;padding-top:5px;font-size:9pt;color:#555}tr,.cp-head,.cp-result{break-inside:avoid;page-break-inside:avoid}@media screen{body{padding:12px!important}#commission-print-sheet{height:auto!important;max-height:none!important;min-height:0!important;overflow:visible!important;max-width:190mm;margin:0 auto!important}}</style>
+<style id="amlak058-mobile-cleanup-v23">
+/* موبایل مرتب و یکدست؛ منطق فرم‌ها و محاسبه‌گر بدون تغییر */
+@media(max-width:650px){
+  html{scroll-padding-top:68px}
+  body{background:#fff!important;color:#242424!important;overflow-x:hidden;padding-bottom:calc(78px + env(safe-area-inset-bottom))!important}
+  header{position:sticky!important;top:0!important;z-index:100!important;background:#fff!important;border-bottom:1px solid #eceef1!important}
+  header .header-inner{min-height:64px!important;padding:8px 14px!important;gap:10px!important}
+  header .brand{gap:9px!important;min-width:0!important}
+  header .brand-icon{width:42px!important;height:42px!important;min-width:42px!important;flex:0 0 42px!important;display:grid!important;place-items:center!important;background:#fff1f2!important;border:1px solid #ffe0e3!important;border-radius:12px!important;box-shadow:0 3px 9px #c6282810!important;overflow:hidden!important}
+  header .brand-icon svg{width:32px!important;height:32px!important;max-width:100%!important}
+  header .brand h1{font-family:Vazirmatn,Tahoma,sans-serif!important;font-size:19px!important;line-height:1.4!important;font-weight:900!important;letter-spacing:-.4px!important;white-space:nowrap!important;color:#20252b!important}
+  header .brand-number{color:#c62828!important}
+  header .brand small{display:block!important;font-size:10px!important;line-height:1.4!important;color:#737b86!important;margin-top:1px!important}
+  header .header-actions{display:flex!important;align-items:center!important;gap:5px!important}
+  header #accountButton{font-size:10px!important;padding:7px 8px!important;min-height:34px!important;border-radius:8px!important;white-space:nowrap!important}
+  header .header-actions>.btn-primary{display:none!important}
+  .mobile-reference-top{display:block!important;padding:14px 13px 12px!important;background:#fff!important;border-bottom:7px solid #f5f6f7!important}
+  .mobile-reference-search{display:flex!important;align-items:center!important;gap:8px!important;padding:5px!important;border:1px solid #e2e5e9!important;border-radius:12px!important;background:#f8f9fa!important;box-shadow:0 2px 8px #10182806!important;min-height:48px!important}
+  .mobile-reference-search input{border:0!important;outline:0!important;background:transparent!important;min-width:0!important;flex:1!important;padding:7px 5px!important;font-size:12px!important}
+  .mobile-reference-search button{width:36px!important;height:36px!important;flex:0 0 36px!important;border:0!important;border-radius:9px!important;background:#c62828!important;color:#fff!important;font-size:20px!important}
+  .mobile-reference-search .search-mark{font-size:23px!important;color:#737b86!important;padding:0 4px!important}
+  .mobile-reference-location{display:flex!important;align-items:center!important;gap:6px!important;margin:11px 2px 9px!important;font-size:11px!important;color:#737b86!important}
+  .mobile-reference-location strong{color:#303841!important;font-weight:800!important}
+  .mobile-reference-location .location-line{height:1px!important;flex:1!important;background:#eceef1!important;margin-right:5px!important}
+  .mobile-reference-filters{display:flex!important;gap:7px!important;overflow-x:auto!important;scrollbar-width:none!important;padding:1px 0 3px!important}
+  .mobile-reference-filters::-webkit-scrollbar{display:none!important}
+  .mobile-reference-filters button{flex:0 0 auto!important;min-height:34px!important;padding:5px 11px!important;border:1px solid #e1e4e8!important;border-radius:9px!important;background:#fff!important;color:#414952!important;font-size:11px!important;white-space:nowrap!important}
+  #search.search-section{padding:16px 13px!important;margin:0!important;border:0!important;border-radius:0!important;background:#fff!important}
+  #search .search-section-heading{margin-bottom:11px!important}
+  #search .search-section-heading h2{font-size:16px!important;font-weight:900!important;color:#20252b!important}
+  #search .search-section-heading p{font-size:11px!important;color:#7a8390!important;margin-top:2px!important}
+  #search .search-panel{display:grid!important;grid-template-columns:1fr 1fr!important;gap:9px!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+  #search .search-field{min-width:0!important}
+  #search .search-field label{display:block!important;font-size:11px!important;color:#4b5560!important;margin:0 0 4px!important;font-weight:700!important}
+  #search .search-field input,#search .search-field select{height:43px!important;min-width:0!important;width:100%!important;padding:8px!important;font-size:11px!important;border:1px solid #e1e4e8!important;border-radius:9px!important;background:#fff!important}
+  #search .search-field-wide{grid-column:1/-1!important}
+  #search .search-panel>.btn{grid-column:1/-1!important;min-height:44px!important;border-radius:10px!important;font-size:13px!important;font-weight:800!important}
+  #categories.section{padding:15px 13px!important;border-top:7px solid #f5f6f7!important;border-bottom:7px solid #f5f6f7!important}
+  #categories .section-heading h2,#listings .section-heading h2{font-size:16px!important;font-weight:900!important}
+  #categories .section-heading .muted{font-size:10px!important}
+  #categories .categories{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
+  #categories .category{min-width:0!important;min-height:104px!important;padding:10px 5px!important;border:1px solid #eceef1!important;border-radius:12px!important;box-shadow:0 2px 7px #10182804!important}
+  #categories .category-icon{width:39px!important;height:39px!important;margin:0 auto 5px!important;display:grid!important;place-items:center!important;border-radius:11px!important}
+  #categories .category-icon svg{width:31px!important;height:31px!important}
+  #categories .category strong{font-size:11px!important;line-height:1.5!important}
+  #categories .category small{font-size:9px!important;line-height:1.4!important}
+  #listings.section{padding:15px 13px 20px!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+  #listings .section-heading{align-items:flex-start!important}
+  #listings .property-grid{display:grid!important;grid-template-columns:1fr!important;gap:10px!important}
+  #listings .property-card{display:flex!important;gap:10px!important;padding:9px!important;border:1px solid #eceef1!important;border-radius:12px!important;box-shadow:none!important;min-width:0!important}
+  #listings .property-image{width:112px!important;min-width:112px!important;height:104px!important;border-radius:9px!important;overflow:hidden!important}
+  #listings .property-image img{width:100%!important;height:100%!important;object-fit:cover!important}
+  #listings .property-info{min-width:0!important;flex:1!important}
+  #listings .property-info h3{font-size:12px!important;line-height:1.65!important}
+  #listings .property-info p,#listings .property-info .muted{font-size:10px!important}
+  #listings .property-price{font-size:12px!important;font-weight:900!important}
+  #listings .property-actions{display:flex!important;flex-wrap:wrap!important;gap:5px!important}
+  #listings .property-actions .btn{font-size:10px!important;padding:6px 8px!important;min-height:30px!important}
+  .mobile-bottom-nav{padding-bottom:calc(7px + env(safe-area-inset-bottom))!important;background:#fff!important;border-top:1px solid #e5e7eb!important}
+  .mobile-nav-item{font-size:10px!important}
+  #mobile-map-chip{display:none!important}
+  body.mobile-search-performed #mobile-map-chip{display:flex!important}
+  #mobile-map-chip{bottom:88px!important;left:13px!important;min-width:100px!important;height:43px!important;padding:0 13px!important;border-radius:24px!important;box-shadow:0 5px 16px #10182822!important}
+  #mobileListingsMapModal .mobile-listings-map-box{margin:3vh auto!important;padding:13px!important;border-radius:14px!important}
+  footer{padding:18px 13px!important}
+}
+@media(min-width:651px){#mobile-map-chip{display:none!important}}
+</style>
+</head><body>'+sheet.outerHTML+'</body></html>');
   printWindow.document.close();
   printWindow.onload=function(){printWindow.focus();setTimeout(function(){printWindow.print();},300);};
  }else{
@@ -3408,6 +3477,7 @@ function renderSampleListings(){
  target.innerHTML=samples.map(x=>`<article class="property-card demo-property-card"><div class="property-image demo-thumb">${art(x.style)}<span class="demo-badge">نمونه نمایشی</span></div><div class="property-info"><span class="property-type">${x.type}</span><h3>${x.title}</h3><p class="property-address">⌖ ${x.address}</p><div class="property-details"><span>${x.area} متر</span><span>${x.rooms}</span></div><div class="property-price demo-price">${x.price}</div><button type="button" class="btn btn-outline demo-action" onclick="openModal()">ثبت آگهی مشابه</button></div></article>`).join('');
 }
 
+function markMobileSearchAndLoad(){document.body.classList.add('mobile-search-performed');loadProperties();}
 async function loadProperties(){const list=document.getElementById('propertyList'),count=document.getElementById('resultCount');list.innerHTML='<div class="empty">در حال دریافت آگهیها...</div>';try{let query=db.from('properties').select('id,title,main_category,sub_category,property_type,transaction_type,price,deposit,monthly_rent,convertible,area,bedrooms,year_built,floor_number,photos_own,elevator,parking,storage,video_url,address,city,description,image_url,image_urls,details_json,land_area,building_area,location_lat,location_lng,location_precision,created_at,owner_id').eq('status','approved').limit(100);const transaction=currentTransaction||'',type=document.getElementById('searchType').value,city=document.getElementById('searchCity').value,address=document.getElementById('searchAddress').value.trim(),keyword=(document.getElementById('searchKeyword')?.value||'').trim();const minPrice=document.getElementById('minPrice').value,maxPrice=document.getElementById('maxPrice').value,minArea=document.getElementById('minArea').value,maxArea=document.getElementById('maxArea').value,sort=document.getElementById('sortProperties').value;if(transaction)query=query.eq('transaction_type',transaction);if(type)query=query.eq('property_type',type);const mainCat=document.getElementById('searchMainCategory').value,subCat=document.getElementById('searchSubCategory').value;if(mainCat)query=query.eq('main_category',mainCat);if(subCat)query=query.eq('sub_category',subCat);if(city)query=query.eq('city',city);if(address)query=query.ilike('address','%'+address.replace(/[%_,]/g,' ')+'%');if(keyword){const safeKeyword=keyword.replace(/[%,()]/g,' ').trim();if(safeKeyword)query=query.or('title.ilike.%'+safeKeyword+'%,description.ilike.%'+safeKeyword+'%,property_type.ilike.%'+safeKeyword+'%');}if(minPrice)query=query.gte('price',Number(minPrice));if(maxPrice)query=query.lte('price',Number(maxPrice));if(minArea)query=query.gte('area',Number(minArea));if(maxArea)query=query.lte('area',Number(maxArea));if(sort==='priceAsc')query=query.order('price',{ascending:true,nullsFirst:false});else if(sort==='priceDesc')query=query.order('price',{ascending:false,nullsFirst:false});else if(sort==='areaDesc')query=query.order('area',{ascending:false,nullsFirst:false});else query=query.order('created_at',{ascending:false});const {data,error}=await query;if(error)throw error;count.textContent=data.length.toLocaleString('fa-IR')+' آگهی';if(!data.length){list.innerHTML='<div class="empty">هنوز آگهی تأییدشدهای ثبت نشده است.</div>';return}list.innerHTML=(await Promise.all(data.map(renderProperty))).join('')}catch(error){console.error('خطای واقعی دریافت آگهیها:',error);count.textContent='خطا';list.innerHTML='';const box=document.createElement('div');box.className='empty';box.style.cssText='white-space:pre-wrap;direction:rtl;text-align:right;overflow-wrap:anywhere;padding:16px;border:1px solid #e2b8b8;background:#fff8f8;color:#8b1e1e';box.textContent='خطای فنی دریافت آگهی‌ها - نسخه تشخیصی:\n'+(error?.message||String(error))+'\n\nکد خطا: '+(error?.code||'ندارد')+'\nجزئیات: '+(error?.details||'ندارد')+'\nراهنما: '+(error?.hint||'ندارد');list.appendChild(box)}}
 document.getElementById('propertyForm').addEventListener('submit',async function(e){
  e.preventDefault();if(currentWizardStep!==3){const g=document.getElementById('publishGlobalMessage');if(g){g.style.color='#b00020';g.textContent='برای ثبت، ابتدا فرم را تا مرحله ۴ از ۴ ادامه بده.';g.scrollIntoView({block:'nearest',behavior:'smooth'});}return;}if(!validateWizardStep(3)){wizardGoTo(3);return}
