@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-<rect width="512" height="512" rx="96" fill="#ffffff"/>
-<path d="M60 230 256 62 452 230 416 264 256 127 96 264Z" fill="#c62828"/>
-<path d="M111 232 256 109 401 232V405H111Z" fill="#c62828"/>
-<g fill="#ffffff"><rect x="157" y="246" width="67" height="67" rx="8"/><rect x="288" y="246" width="67" height="67" rx="8"/><rect x="157" y="333" width="67" height="58" rx="8"/><rect x="288" y="333" width="67" height="58" rx="8"/><rect x="237" y="321" width="38" height="84" rx="5"/></g>
-<text x="256" y="472" text-anchor="middle" direction="rtl" unicode-bidi="plaintext" font-family="Vazirmatn,Tahoma,Arial,sans-serif" font-size="61" font-weight="900" fill="#242424">املاک ۰۵۸</text>
+<rect width="512" height="512" rx="88" fill="#fff"/>
+<path d="M75 217 256 65 437 217" fill="none" stroke="#c62828" stroke-width="25" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M120 205V390H392V205" fill="#fff" stroke="#c62828" stroke-width="22" stroke-linejoin="round"/>
+<g fill="#c62828"><rect x="163" y="235" width="65" height="65" rx="7"/><rect x="284" y="235" width="65" height="65" rx="7"/><rect x="163" y="319" width="65" height="52" rx="7"/><rect x="284" y="319" width="65" height="52" rx="7"/></g>
+<path d="M240 390V315H272V390" fill="#fff" stroke="#c62828" stroke-width="8"/>
+<text x="256" y="468" text-anchor="middle" direction="rtl" unicode-bidi="plaintext" font-family="Tahoma,Arial,sans-serif" font-size="59" font-weight="bold" fill="#242424">املاک ۰۵۸</text>
 </svg>
