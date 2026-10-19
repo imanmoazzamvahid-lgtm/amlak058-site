@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+<title id="title">نشان املاک ۰۵۸</title>
+<desc id="desc">نشان مدرن خانه و موقعیت مکانی برای املاک ۰۵۸</desc>
+<defs>
+ <linearGradient id="pinRed" x1="20" y1="9" x2="103" y2="121" gradientUnits="userSpaceOnUse">
+  <stop offset="0" stop-color="#df333b"/>
+  <stop offset="1" stop-color="#9f1d25"/>
+ </linearGradient>
+ <filter id="markShadow" x="-20%" y="-20%" width="140%" height="150%">
+  <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#5c1820" flood-opacity=".18"/>
+ </filter>
+</defs>
+<path d="M64 7C39.4 7 20 26.2 20 50.1c0 29.6 44 70.9 44 70.9s44-41.3 44-70.9C108 26.2 88.6 7 64 7Z" fill="url(#pinRed)" filter="url(#markShadow)"/>
+<circle cx="64" cy="39.5" r="13.2" fill="#fff"/>
+<path d="M33.5 71.5 64 48.5l30.5 23" fill="none" stroke="#fff" stroke-width="7.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M42.5 70v29.5h43V70" fill="#fff" stroke="#fff" stroke-width="5.3" stroke-linejoin="round"/>
+<path d="M59 99.5V82h10v17.5" fill="#a91f29"/>
+<path d="M49 78h7v7h-7zM72 78h7v7h-7z" fill="#a91f29"/>
+<path d="M47 59.8 64 47l17 12.8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
+</svg>
