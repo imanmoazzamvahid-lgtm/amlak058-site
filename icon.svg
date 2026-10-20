@@ -1,17 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
-<title id="title">آیکون املاک ۰۵۸</title><desc id="desc">نشان طلایی برند املاک ۰۵۸</desc>
+<title id="title">لوگوی طلایی املاک ۰۵۸</title><desc id="desc">املاک ۰۵۸، سامانه آگهی رایگان املاک بجنورد، amlak058.ir</desc>
 <defs>
- <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0a5"/><stop offset=".25" stop-color="#b67b0b"/><stop offset=".5" stop-color="#ffe06b"/><stop offset=".78" stop-color="#a56b0a"/><stop offset="1" stop-color="#ffeb9a"/></linearGradient>
- <linearGradient id="cream" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fffdf7"/><stop offset="1" stop-color="#efe3c8"/></linearGradient>
- <linearGradient id="dark" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#292721"/><stop offset="1" stop-color="#111"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff2ae"/><stop offset=".2" stop-color="#b98112"/><stop offset=".42" stop-color="#ffe26c"/><stop offset=".62" stop-color="#9b6509"/><stop offset=".82" stop-color="#ffe58d"/><stop offset="1" stop-color="#a76f0c"/></linearGradient>
+ <linearGradient id="goldFace" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff1a3"/><stop offset=".4" stop-color="#e4b83c"/><stop offset="1" stop-color="#b57a0c"/></linearGradient>
+ <linearGradient id="cream" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fffdf8"/><stop offset="1" stop-color="#eee0c2"/></linearGradient>
+ <linearGradient id="dark" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#33302a"/><stop offset="1" stop-color="#111"/></linearGradient>
 </defs>
-<rect x="8" y="8" width="496" height="496" rx="90" fill="url(#cream)" stroke="url(#gold)" stroke-width="8"/>
-<path d="M62 230 256 77 450 230H405L256 114 107 230Z" fill="url(#gold)" stroke="#8b5a08" stroke-width="4" stroke-linejoin="round"/>
-<path d="M222 193Q256 151 290 193V213H222Z" fill="url(#dark)" stroke="url(#gold)" stroke-width="4"/>
-<path d="M256 163V211M231 178 249 208M281 178 263 208" stroke="#e5c258" stroke-width="4"/>
-<rect x="42" y="226" width="428" height="132" rx="18" fill="#fffdf8" stroke="url(#gold)" stroke-width="10"/>
-<rect x="52" y="236" width="408" height="112" rx="10" fill="none" stroke="#81550a" stroke-width="3"/>
-<text x="256" y="322" text-anchor="middle" direction="rtl" font-family="Tahoma,Arial,sans-serif" font-size="78" font-weight="900" fill="url(#gold)" stroke="#4b3308" stroke-width="2" paint-order="stroke">۰۵۸</text>
-<path d="M90 379H422L441 403 422 427H90L71 403Z" fill="url(#dark)" stroke="url(#gold)" stroke-width="6"/>
-<text x="256" y="414" text-anchor="middle" direction="rtl" font-family="Tahoma,Arial,sans-serif" font-size="26" font-weight="800" fill="#f4cf58">املاک بجنورد</text>
+<rect x="8" y="8" width="496" height="496" rx="82" fill="url(#cream)" stroke="url(#gold)" stroke-width="8"/>
+<path d="M49 213 256 50 463 213H416L256 88 96 213Z" fill="url(#gold)" stroke="#8b5a08" stroke-width="4" stroke-linejoin="round"/>
+<path d="M221 170Q256 128 291 170V197H221Z" fill="url(#dark)" stroke="url(#gold)" stroke-width="4"/>
+<path d="M256 141V195M230 155 249 193M282 155 263 193" stroke="#e5c258" stroke-width="4"/>
+<rect x="35" y="207" width="442" height="105" rx="14" fill="#fffdf8" stroke="url(#gold)" stroke-width="9"/>
+<rect x="45" y="217" width="422" height="85" rx="8" fill="none" stroke="#81550a" stroke-width="2.5"/>
+<text x="256" y="281" text-anchor="middle" direction="rtl" font-family="Tahoma,Arial,sans-serif" font-size="57" font-weight="900" fill="url(#goldFace)" stroke="#4b3308" stroke-width="1.4" paint-order="stroke">املاک ۰۵۸</text>
+<path d="M61 328H451L466 349 451 370H61L46 349Z" fill="url(#dark)" stroke="url(#gold)" stroke-width="5"/>
+<text x="256" y="355" text-anchor="middle" direction="rtl" font-family="Tahoma,Arial,sans-serif" font-size="15.5" font-weight="800" fill="#f4cf58">سامانه آگهی رایگان املاک بجنورد</text>
+<path d="M98 413H155M357 413H414" stroke="url(#gold)" stroke-width="3" stroke-linecap="round"/>
+<text x="256" y="424" text-anchor="middle" font-family="Georgia,serif" font-size="22" font-weight="bold" fill="#9d6809">amlak058.ir</text>
 </svg>
