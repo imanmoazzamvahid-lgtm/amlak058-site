@@ -1,21 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 470" role="img" aria-labelledby="title desc">
-<title id="title">مهر طلایی املاک ۰۵۸</title><desc id="desc">لوگوی طلایی املاک ۰۵۸، سامانه آگهی رایگان املاک بجنورد و amlak058.ir</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+<title id="title">مهر طلایی املاک ۰۵۸</title><desc id="desc">مهر دایره‌ای طلایی املاک ۰۵۸، سامانه آگهی رایگان املاک بجنورد، amlak058.ir</desc>
 <defs>
- <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1a6"/><stop offset=".2" stop-color="#bd8617"/><stop offset=".42" stop-color="#ffdf65"/><stop offset=".65" stop-color="#a86d09"/><stop offset=".82" stop-color="#ffe58a"/><stop offset="1" stop-color="#9a6208"/></linearGradient>
- <linearGradient id="dark" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#292929"/><stop offset="1" stop-color="#111"/></linearGradient>
- <filter id="shadow" x="-15%" y="-15%" width="130%" height="135%"><feGaussianBlur in="SourceAlpha" stdDeviation="2.2" result="blur"/><feOffset dy="3" dx="1" result="off"/><feComponentTransfer><feFuncA type="linear" slope=".25"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff2ae"/><stop offset=".2" stop-color="#b98112"/><stop offset=".42" stop-color="#ffe26c"/><stop offset=".62" stop-color="#9b6509"/><stop offset=".82" stop-color="#ffe58d"/><stop offset="1" stop-color="#a76f0c"/></linearGradient>
+ <linearGradient id="dark" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#33302a"/><stop offset="1" stop-color="#111"/></linearGradient>
 </defs>
-<rect width="512" height="470" rx="18" fill="#fff"/>
-<g filter="url(#shadow)">
- <path d="M35 175 256 20 477 175H426L256 57 86 175Z" fill="url(#gold)" stroke="#80530a" stroke-width="2.5" stroke-linejoin="round"/>
- <path d="M210 125Q256 68 302 125V147H210Z" fill="url(#dark)" stroke="url(#gold)" stroke-width="5"/>
- <path d="M256 83V145M217 104 247 143M295 104 265 143" stroke="url(#gold)" stroke-width="5"/>
- <rect x="19" y="183" width="474" height="112" rx="13" fill="#fff" stroke="url(#gold)" stroke-width="8"/>
- <rect x="28" y="192" width="456" height="94" rx="8" fill="none" stroke="#80530a" stroke-width="2"/>
- <text x="256" y="266" text-anchor="middle" direction="rtl" font-family="Tahoma,Arial,sans-serif" font-size="67" font-weight="900" fill="url(#gold)" stroke="#4d3307" stroke-width="1.2" paint-order="stroke">املاک ۰۵۸</text>
- <path d="M54 309H458L477 333 458 357H54L35 333Z" fill="url(#dark)" stroke="url(#gold)" stroke-width="6"/>
- <text x="256" y="341" text-anchor="middle" direction="rtl" font-family="Tahoma,Arial,sans-serif" font-size="24" font-weight="800" fill="#f6d36a">سامانه آگهی رایگان املاک بجنورد</text>
- <path d="M72 395H146M366 395H440" stroke="url(#gold)" stroke-width="4" stroke-linecap="round"/>
- <text x="256" y="407" text-anchor="middle" font-family="Georgia,serif" font-size="30" font-weight="bold" fill="#a36c0b">amlak058.ir</text>
- <path d="M205 430Q256 449 307 430" fill="none" stroke="url(#gold)" stroke-width="3"/>
-</g></svg>
+<circle cx="256" cy="256" r="244" fill="#fffdf8" fill-opacity=".94" stroke="url(#gold)" stroke-width="10"/>
+<circle cx="256" cy="256" r="230" fill="none" stroke="#8f610b" stroke-width="2.5"/>
+<path d="M112 224 256 100 400 224H366L256 130 146 224Z" fill="url(#gold)" stroke="#8b5a08" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M228 194Q256 158 284 194V209H228Z" fill="url(#dark)" stroke="url(#gold)" stroke-width="3.5"/>
+<path d="M256 169V208M235 182 249 205M277 182 263 205" stroke="#e5c258" stroke-width="3.5"/>
+<rect x="70" y="220" width="372" height="80" rx="9" fill="#fffdf7" stroke="url(#gold)" stroke-width="7"/>
+<rect x="77" y="227" width="358" height="66" rx="5" fill="none" stroke="#81550a" stroke-width="1.6"/>
+<text x="256" y="276" text-anchor="middle" direction="rtl" font-family="Tahoma,Arial,sans-serif" font-size="53" font-weight="900" fill="url(#gold)" stroke="#4b3308" stroke-width=".8" paint-order="stroke">املاک ۰۵۸</text>
+<path d="M94 310H418L432 330 418 350H94L80 330Z" fill="url(#dark)" stroke="url(#gold)" stroke-width="4.5"/>
+<text x="256" y="336" text-anchor="middle" direction="rtl" font-family="Tahoma,Arial,sans-serif" font-size="17" font-weight="800" fill="#f4cf58">سامانه آگهی رایگان املاک بجنورد</text>
+<path d="M124 385H174M338 385H388" stroke="url(#gold)" stroke-width="3" stroke-linecap="round"/>
+<text x="256" y="395" text-anchor="middle" font-family="Georgia,serif" font-size="23" font-weight="bold" fill="#9d6809">amlak058.ir</text>
+</svg>
