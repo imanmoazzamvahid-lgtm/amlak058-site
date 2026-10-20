@@ -2960,7 +2960,7 @@ function printCommissionReceipt(){
  const printWindow=window.open('','_blank');
  if(printWindow){
   printWindow.document.open();
-  printWindow.document.write('<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>رسید کمیسیون املاک ۰۵۸</title><style>@page{size:A4 portrait;margin:12mm}*{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff;color:#222;font-family:Tahoma,Arial,sans-serif;font-size:11pt;line-height:1.7}body{padding:10mm}#commission-print-sheet{display:block!important;width:100%;direction:rtl}.cp-head{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #174b3a;padding-bottom:12px;margin-bottom:18px}.cp-brand{font-size:20pt;font-weight:900;color:#174b3a}.cp-sub{font-size:9pt;color:#555}.cp-stamp{width:78px;height:78px;object-fit:contain}.cp-title{text-align:center;font-weight:800;font-size:15pt;margin:12px 0}.cp-table{width:100%;border-collapse:collapse;margin:14px 0}.cp-table th,.cp-table td{border:1px solid #ddd;padding:8px;text-align:right}.cp-table th{background:#f4f6f4;width:38%}.cp-result{border:1px solid #cbd8d0;border-radius:8px;padding:12px;margin-top:12px}.cp-foot{display:flex;justify-content:space-between;border-top:1px solid #ddd;margin-top:20px;padding-top:8px;font-size:9pt;color:#555}@media screen{body{max-width:190mm;margin:0 auto}}</style></head><body>'+sheet.outerHTML+'</body></html>');
+  printWindow.document.write('<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><title>رسید کمیسیون املاک ۰۵۸</title><style>@page{size:A4 portrait;margin:12mm}*{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff;color:#222;font-family:Vazirmatn,Tahoma,Arial,sans-serif;font-size:11pt;line-height:1.7}body{padding:10mm}#commission-print-sheet{display:block!important;width:100%;direction:rtl}.cp-head{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #174b3a;padding-bottom:12px;margin-bottom:18px}.cp-brand{font-size:20pt;font-weight:900;color:#174b3a}.cp-sub{font-size:9pt;color:#555}.cp-stamp{width:78px;height:78px;object-fit:contain}.cp-title{text-align:center;font-weight:800;font-size:15pt;margin:12px 0}.cp-table{width:100%;border-collapse:collapse;margin:14px 0}.cp-table th,.cp-table td{border:1px solid #ddd;padding:8px;text-align:right}.cp-table th{background:#f4f6f4;width:38%}.cp-result{border:1px solid #cbd8d0;border-radius:8px;padding:12px;margin-top:12px}.cp-foot{display:flex;justify-content:space-between;border-top:1px solid #ddd;margin-top:20px;padding-top:8px;font-size:9pt;color:#555}@media screen{body{max-width:190mm;margin:0 auto}}</style></head><body>'+sheet.outerHTML+'</body></html>');
   printWindow.document.close();
   printWindow.onload=function(){printWindow.focus();setTimeout(function(){printWindow.print();},300);};
  }else{
@@ -6064,5 +6064,88 @@ hr,.divider,.section-divider{border-color:#eadfc8!important}
 }
 /* Keep all focus and selected states readable on the cream/gold palette */
 [aria-current="page"],[aria-selected="true"]{color:#80560b}
+</style>
+
+
+
+<style id="amlak058-logo-matched-typography-v1">
+/* Typography system matched to the bold, gold املاک ۰۵۸ logo */
+:root{
+ --brand-font:"Vazirmatn",Tahoma,Arial,sans-serif;
+ --brand-heading-weight:800;
+ --brand-body-weight:400;
+}
+html,body{
+ font-family:var(--brand-font)!important;
+ font-feature-settings:"kern" 1,"liga" 1;
+ text-rendering:optimizeLegibility;
+}
+body *:not(svg):not(svg *){
+ font-family:var(--brand-font)!important;
+}
+/* Strong, clean Persian headings like the bold lettering in the mark */
+h1,h2,h3,h4,h5,h6,
+.section-heading h2,.hero h2,.mobile-reference-top h1,
+.property-title,.property-card h3,.listing-card h3,.category-title,
+.modal-header h2,.modal-box h2,
+#commission-calculator h2,#commission-calculator h3,
+.cp-brand,.cp-title{
+ font-family:var(--brand-font)!important;
+ font-weight:800!important;
+ letter-spacing:0!important;
+ font-synthesis:weight!important;
+}
+h1{font-weight:900!important}
+h2{font-weight:800!important}
+h3,h4,h5,h6{font-weight:750!important}
+p,.description,.muted,.section-description,.brand small,
+.property-description,.listing-description,.cp-sub{
+ font-family:var(--brand-font)!important;
+ font-weight:400!important;
+ letter-spacing:0!important;
+}
+nav a,header .btn,.btn,button,.button,
+.mobile-nav-item,.bottom-nav-item,
+.category,.category-card,.badge,.chip,.tag,
+.tab,.filter-chip,#commission-calculator .commission-tab{
+ font-family:var(--brand-font)!important;
+ font-weight:650!important;
+ letter-spacing:0!important;
+}
+input,select,textarea,option,label,table,th,td{
+ font-family:var(--brand-font)!important;
+ font-weight:500!important;
+ letter-spacing:0!important;
+}
+button strong,.btn strong,.property-price,.price,.amount,
+#commission-result,.commission-result{
+ font-family:var(--brand-font)!important;
+ font-weight:800!important;
+ font-variant-numeric:tabular-nums;
+}
+input::placeholder,textarea::placeholder{
+ font-family:var(--brand-font)!important;
+ font-weight:400!important;
+}
+#commission-calculator .commission-box,
+#commission-calculator .commission-fields,
+#commission-calculator .commission-result,
+#commission-print-sheet{
+ font-family:var(--brand-font)!important;
+}
+@media(max-width:650px){
+ body{font-family:var(--brand-font)!important}
+ header .header-inner .btn,header .header-inner button,
+ .mobile-bottom-nav,.mobile-nav-item{
+  font-family:var(--brand-font)!important;
+ }
+ h1{line-height:1.4!important}
+ h2,h3{line-height:1.5!important}
+}
+@media print{
+ #commission-print-sheet,#commission-print-sheet *{
+  font-family:var(--brand-font)!important;
+ }
+}
 </style>
 
