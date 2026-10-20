@@ -2915,7 +2915,7 @@ function printCommissionReceipt(){
   if(el.tagName==='SELECT')value=el.options[el.selectedIndex]?.text||value;
   if(value)rows.push('<tr><th>'+label+'</th><td>'+value+((el.id.includes('price')||el.id.includes('deposit')||el.id.includes('rent'))?' تومان':'')+'</td></tr>');
  });
- const stamp='<img class="cp-stamp" src="/stamp-seal.svg?v=1" alt="مهر املاک ۰۵۸" />'
+ const stamp='<img class="cp-stamp" src="/stamp-seal.svg?v=2" alt="مهر املاک ۰۵۸" />'
  const date=new Intl.DateTimeFormat('fa-IR',{year:'numeric',month:'long',day:'numeric'}).format(new Date());
  sheet.innerHTML='<header class="cp-head"><div><div class="cp-brand">املاک ۰۵۸</div><div class="cp-sub">محاسبه آنلاین کمیسیون املاک</div><div class="cp-sub">amlak058.ir</div></div>'+stamp+'</header><div class="cp-title">رسید محاسبه کمیسیون '+(kind==='rent'?'رهن و اجاره':'خرید و فروش')+'</div><div>تاریخ چاپ: '+date+'</div><table class="cp-table"><tbody>'+(rows.length?rows.join(''):'<tr><td>اطلاعات معامله ثبت نشده است.</td></tr>')+'</tbody></table><div class="cp-result">'+result.innerHTML+'</div><footer class="cp-foot"><span>املاک ۰۵۸</span><span>amlak058.ir</span></footer>';
  // Print from a clean document so mobile browsers cannot include the rest of the page.
