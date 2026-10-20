@@ -1,5 +1,5 @@
-const CACHE_NAME = "amlak058-shell-v17";
-const APP_SHELL = ["/", "/manifest.webmanifest?v=17", "/icon.svg?v=17", "/logo-mark.svg?v=17"];
+const CACHE_NAME = "amlak058-shell-v20";
+const APP_SHELL = ["/", "/manifest.webmanifest?v=19", "/icon.svg?v=19", "/logo-mark.svg?v=18"];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
 });
