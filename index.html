@@ -3406,21 +3406,33 @@ async function makeSignedImage(path){
   if(!value) return '';
   if(/^data:image\//i.test(value)) return value;
 
-  // Convert legacy public/signed URLs from this private bucket back to an object path.
-  const ownStorageUrl=value.match(/^https?:\/\/[^/]+\/storage\/v1\/object\/(?:public|sign)\/property-images\/([^?#]+)/i);
-  let objectPath=ownStorageUrl ? decodeURIComponent(ownStorageUrl[1]) : value;
-  // Preserve external image URLs; only this site's property-images bucket requires signing.
-  if(!ownStorageUrl && /^https?:\/\//i.test(value)) return value;
-  objectPath=objectPath.replace(/^\/?property-images\//,'').replace(/^\//,'');
+  // Accept raw object keys, old public URLs, old signed URLs and root-relative Storage URLs.
+  const storageMatch=value.match(/(?:https?:\/\/[^/]+)?\/?storage\/v1\/object\/(?:public|sign|authenticated)\/property-images\/([^?#]+)/i);
+  let objectPath='';
+  if(storageMatch){
+    try{objectPath=decodeURIComponent(storageMatch[1]);}
+    catch(e){objectPath=storageMatch[1];}
+  }else{
+    if(/^https?:\/\//i.test(value)) return value;
+    objectPath=value
+      .replace(/^\/?storage\/v1\/object\/(?:public|sign|authenticated)\/property-images\//i,'')
+      .replace(/^\/?property-images\//i,'')
+      .replace(/^\//,'')
+      .split(/[?#]/,1)[0];
+    try{objectPath=decodeURIComponent(objectPath);}catch(e){}
+  }
+  objectPath=String(objectPath||'').replace(/^\/+/, '').replace(/[?#].*$/,'');
+  if(!objectPath)return '';
   try {
     const {data,error}=await db.storage.from(BUCKET).createSignedUrl(objectPath,3600);
-    if(!error && data?.signedUrl) return data.signedUrl;
-    console.warn('Could not create signed URL for private property media:', error?.message || 'unknown error');
+    if(!error && data && data.signedUrl) return data.signedUrl;
+    console.warn('Could not create signed URL for property media:',error&&error.message||'unknown error');
   } catch(e) {
-    console.warn('Signed property media URL failed:', e?.message || e);
+    console.warn('Signed property media URL failed:',e&&e.message||e);
   }
   return '';
 }
+
 function resetFilters(){['searchCity','searchType','searchAddress','minPrice','maxPrice','minArea','maxArea','searchMainCategory'].forEach(id=>document.getElementById(id).value='');fillSubcategorySelect(searchMainCategory,searchSubCategory);document.getElementById('sortProperties').value='newest';currentTransaction='';document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.transaction===''));loadProperties();}
 function closeDetails(){closePropertyDetailPage(true)}
 function renderPropertyMap(p){let lat=Number(p.location_lat),lng=Number(p.location_lng);if(!Number.isFinite(lat)||!Number.isFinite(lng)||!lat||!lng)return '';const exact=p.location_precision==='exact';if(!exact){lat=Math.round(lat*100)/100;lng=Math.round(lng*100)/100}const west=(lng-0.012).toFixed(5),east=(lng+0.012).toFixed(5),south=(lat-0.008).toFixed(5),north=(lat+0.008).toFixed(5),src='https://www.openstreetmap.org/export/embed.html?bbox='+west+'%2C'+south+'%2C'+east+'%2C'+north+'&layer=mapnik&marker='+lat.toFixed(5)+'%2C'+lng.toFixed(5);return '<div class="full" style="margin:16px 0"><h3 style="font-size:15px;margin-bottom:8px">موقعیت ملک • '+(exact?'موقعیت دقیق':'موقعیت حدودی')+'</h3><iframe title="نقشه موقعیت ملک" src="'+src+'" style="width:100%;height:260px;border:1px solid #ddd;border-radius:10px" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><p class="muted">'+(exact?'موقعیت انتخابشده توسط آگهیدهنده':'برای حفظ حریم خصوصی، موقعیت تقریبی نمایش داده میشود')+' • © OpenStreetMap</p></div>'}
@@ -3428,22 +3440,33 @@ function renderAdditionalDetails(details){if(!details||typeof details!=='object'
 function openDetails(id){return openPropertyDetailPage(id,true)}
 document.getElementById('detailsModal').addEventListener('click',e=>{if(e.target.id==='detailsModal')closeDetails()});
 
-function getIllustrativeImageHTML(p){
-  const textValue=[p.property_type,p.main_category,p.sub_category,p.title,p.transaction_type,p.description].filter(Boolean).join(' ').toLowerCase();
-  const pick=(items,key)=>{let hash=0;for(let i=0;i<key.length;i++)hash=(hash*31+key.charCodeAt(i))>>>0;return items[hash%items.length];};
-  const groups=[
-    {match:/زمین|کلنگی|قطعه زمین|باغچه/,images:['https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=85']},
-    {match:/مغازه|تجاری|سرقفلی|پاساژ/,images:['https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=85','https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85']},
-    {match:/اداری|دفتر|شرکت|کارگاه/,images:['https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85','https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=85']},
-    {match:/ویلا|خانه|باغ/,images:['https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=85','https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1000&q=85','https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85']},
-    {match:/آپارتمان|مسکونی|سوئیت|واحد/,images:['https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85','https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85','https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=85','https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1000&q=85']}
-  ];
-  const key=String(p.id||p.title||'amlak058'), group=groups.find(item=>item.match.test(textValue))||groups[4], url=pick(group.images,key);
-  return '<div style="position:relative;flex:0 0 100%;width:100%;min-width:100%;height:100%;overflow:hidden;background:linear-gradient(135deg,#e9eee8,#f6eee3)">'+
-    '<img src="'+url+'" alt="تصویر نمونه، نه عکس واقعی همین ملک" loading="lazy" referrerpolicy="no-referrer" style="position:absolute;inset:0;width:100%;min-width:100%;height:100%;object-fit:cover" onerror="this.style.display=\'none\';this.parentElement.style.background=\'linear-gradient(135deg,#dce9df,#f3e7d5)\'">'+
-    '<span style="position:absolute;right:8px;bottom:8px;background:#fffdf2;color:#765f3f;border:1px solid #eadcc5;border-radius:7px;padding:4px 8px;font-size:10px;font-weight:800;box-shadow:0 2px 8px #0002">تصویر نمونه</span></div>';
+function amlak058LuxuryIllustrationSvg(p){
+  const textValue=[p&&p.property_type,p&&p.main_category,p&&p.sub_category,p&&p.title,p&&p.transaction_type,p&&p.description].filter(Boolean).join(' ').toLowerCase();
+  let scene='';
+  if(/زمین|کلنگی|قطعه زمین|باغچه|land/.test(textValue)){
+    scene='<path d="M0 610Q210 555 395 595T800 570T1200 590V800H0Z" fill="#eadfc8"/><path d="M80 640H1120M180 640 260 780M1020 640 940 780" fill="none" stroke="#b78317" stroke-width="5" opacity=".8"/><path d="M285 330V618H915V330" fill="none" stroke="#b78317" stroke-width="5" stroke-dasharray="16 14"/><path d="M285 330 600 235 915 330" fill="none" stroke="#b78317" stroke-width="5" stroke-linejoin="round"/><path d="M355 590V472M335 500Q355 440 375 500M845 590V472M825 500Q845 440 865 500" fill="none" stroke="#80560b" stroke-width="13" stroke-linecap="round"/><path d="M500 610V480H700V610" fill="#fffdf8" stroke="#292721" stroke-width="7"/><path d="M470 480 600 395 730 480" fill="none" stroke="#b78317" stroke-width="11" stroke-linejoin="round"/>';
+  }else if(/مغازه|تجاری|سرقفلی|پاساژ|shop|store/.test(textValue)){
+    scene='<rect x="310" y="330" width="580" height="315" rx="12" fill="#fffdf8" stroke="#292721" stroke-width="7"/><path d="M280 340 335 245H865L920 340Z" fill="#eadfc8" stroke="#b78317" stroke-width="7" stroke-linejoin="round"/><path d="M340 250H860V350H340Z" fill="#b78317"/><path d="M340 250H427V350H340M513 250H600V350H513M686 250H773V350H686" fill="#fffdf8"/><rect x="380" y="390" width="200" height="255" rx="5" fill="#292721"/><rect x="608" y="390" width="226" height="145" rx="4" fill="#eadfc8" stroke="#b78317" stroke-width="5"/><path d="M720 390V535M608 462H834" stroke="#b78317" stroke-width="5"/><path d="M650 645V566H790V645" fill="#b78317" opacity=".75"/>';
+  }else if(/اداری|دفتر|شرکت|کارگاه|office/.test(textValue)){
+    scene='<path d="M355 650V310L515 220H875V650Z" fill="#292721"/><path d="M515 220V650M565 270H820V325H565ZM565 355H820V410H565ZM565 440H820V495H565ZM565 525H820V580H565Z" fill="#fffdf8" stroke="#b78317" stroke-width="5"/><path d="M390 350H480V440H390ZM390 470H480V560H390Z" fill="#eadfc8"/><path d="M250 650V430L335 375V650Z" fill="#b78317" opacity=".86"/>';
+  }else if(/ویلا|خانه|باغ|villa|house/.test(textValue)){
+    scene='<path d="M250 435 600 190 950 435V650H250Z" fill="#fffdf8" stroke="#292721" stroke-width="8" stroke-linejoin="round"/><path d="M195 445 600 155 1005 445" fill="none" stroke="#b78317" stroke-width="16" stroke-linejoin="round"/><rect x="330" y="465" width="210" height="185" rx="5" fill="#eadfc8" stroke="#b78317" stroke-width="6"/><path d="M435 465V650M330 558H540" stroke="#b78317" stroke-width="6"/><rect x="625" y="425" width="180" height="225" rx="5" fill="#292721"/><rect x="655" y="455" width="120" height="105" fill="#eadfc8"/><path d="M715 455V560M655 507H775" stroke="#b78317" stroke-width="5"/><path d="M250 650H950" stroke="#b78317" stroke-width="8" stroke-linecap="round"/>';
+  }else{
+    scene='<path d="M360 650V290Q360 270 380 270H610V650Z" fill="#eadfc8" stroke="#b78317" stroke-width="7"/><path d="M610 650V205H850Q870 205 870 225V650Z" fill="#292721"/><path d="M405 320H565V380H405ZM405 415H565V475H405ZM405 510H565V570H405Z" fill="#fffdf8" stroke="#b78317" stroke-width="5"/><path d="M655 260H820V315H655ZM655 350H820V405H655ZM655 440H820V495H655ZM655 530H820V585H655Z" fill="#fffdf8" stroke="#b78317" stroke-width="5"/><path d="M305 650H920" stroke="#b78317" stroke-width="9" stroke-linecap="round"/>';
+  }
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="تصویر نمونه ملکی به سبک لوکس طلایی"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fffdf8"/><stop offset=".58" stop-color="#fbf7ee"/><stop offset="1" stop-color="#eadfc8"/></linearGradient><linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4d56c"/><stop offset=".5" stop-color="#b78317"/><stop offset="1" stop-color="#80560b"/></linearGradient><filter id="shadow" x="-15%" y="-15%" width="130%" height="140%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#292721" flood-opacity=".15"/></filter></defs><rect width="1200" height="800" fill="url(#bg)"/><circle cx="1020" cy="140" r="72" fill="url(#metal)" opacity=".24"/><circle cx="1020" cy="140" r="48" fill="none" stroke="#b78317" stroke-width="3" opacity=".7"/><path d="M60 650H1140" stroke="#b78317" stroke-width="3" opacity=".32"/><g filter="url(#shadow)">'+scene+'</g><g fill="none" stroke="url(#metal)" stroke-width="3" opacity=".62"><path d="M75 105H260M75 105V150M1125 695H940M1125 695V650"/><circle cx="600" cy="95" r="5" fill="#b78317"/><circle cx="575" cy="95" r="3" fill="#b78317"/><circle cx="625" cy="95" r="3" fill="#b78317"/></g><text x="600" y="730" text-anchor="middle" direction="rtl" font-family="Tahoma,Arial,sans-serif" font-size="30" font-weight="800" fill="#80560b">املاک ۰۵۸</text><text x="600" y="770" text-anchor="middle" font-family="Georgia,serif" font-size="18" fill="#766b55">amlak058.ir</text></svg>';
 }
-async function renderProperty(p){propertyCache.set(String(p.id),p);let paths=Array.isArray(p.image_urls)?p.image_urls:[];if(!paths.length&&p.image_url)paths=[p.image_url];const urls=await Promise.all(paths.slice(0,MAX_IMAGES).map(makeSignedImage));const validUrls=urls.filter(Boolean);const imagesHTML=validUrls.length?validUrls.map(url=>`<img src="${escapeHTML(url)}" alt="${escapeHTML(p.title)}" loading="lazy" role="button" tabindex="0" onclick="openDetails(\'${escapeHTML(p.id)}\')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();openDetails(\'${escapeHTML(p.id)}\')}" title="برای مشاهده تصاویر و جزئیات کلیک کنید">`).join(''):getIllustrativeImageHTML(p);const contactHTML=`<button type="button" class="btn btn-outline" onclick="revealPropertyPhone('`+escapeHTML(p.id)+`',this)">مشاهده شماره</button>`;const saved=getFavorites().includes(String(p.id));const description=p.description?`<p class="property-description">${escapeHTML(p.description.length>150?p.description.slice(0,150)+'…':p.description)}</p>`:'';return `<article class="property-card"><div class="property-image">${imagesHTML}</div><div class="property-info"><span class="property-type">${escapeHTML(p.property_type||'ملک')}</span><button type="button" class="card-open" onclick="openDetails('${escapeHTML(p.id)}')"><h3>${escapeHTML(p.title)}</h3></button><p class="property-address">⌖ ${escapeHTML(p.address||'')}</p><div class="property-details"><span>${(p.area||p.building_area||p.land_area)?escapeHTML(p.area||p.building_area||p.land_area)+' متر':'متراژ نامشخص'}</span><span>${escapeHTML(p.transaction_type||'')}</span>${p.bedrooms!==null&&p.bedrooms!==undefined?`<span>${escapeHTML(p.bedrooms)} اتاق</span>`:''}</div><div class="property-price">${escapeHTML(formatListingPrice(p))}</div>${description}<div class="property-actions">${contactHTML}<button type="button" class="btn btn-outline" onclick="openDetails('${escapeHTML(p.id)}')">جزئیات آگهی</button><button type="button" class="favorite-btn ${saved?'saved':''}" onclick="toggleFavorite('${escapeHTML(p.id)}',this)">${saved?'♥ ذخیره شد':'♡ ذخیره آگهی'}</button></div></div></article>`}
+function amlak058LuxuryIllustrationUrl(p){
+  return 'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(amlak058LuxuryIllustrationSvg(p||{}));
+}
+function getIllustrativeImageHTML(p){
+  const title=String((p&&p.title)||'آگهی ملک');
+  const url=amlak058LuxuryIllustrationUrl(p);
+  const safeTitle=escapeHTML(title);
+  return '<div class="amlak058-luxury-placeholder"><img src="'+url+'" alt="تصویر نمونه برای '+safeTitle+'" data-viewer-src="'+url+'" data-viewer-title="'+safeTitle+'" data-property-type="'+escapeHTML((p&&(p.property_type||p.main_category))||'ملک')+'" loading="eager" onclick="amlak058OpenImageViewerFromElement(this)" onerror="this.dataset.fallbackApplied=\'1\';this.onerror=null" /><span class="amlak058-sample-label">تصویر نمونه</span></div>';
+}
+
+async function renderProperty(p){propertyCache.set(String(p.id),p);let paths=Array.isArray(p.image_urls)?p.image_urls:[];if(!paths.length&&p.image_url)paths=[p.image_url];const urls=await Promise.all(paths.slice(0,MAX_IMAGES).map(makeSignedImage));const validUrls=urls.filter(Boolean);const imagesHTML=validUrls.length?validUrls.map(url=>`<img src="${escapeHTML(url)}" alt="${escapeHTML(p.title)}" data-original-url="${escapeHTML(url)}" data-viewer-src="${escapeHTML(url)}" data-viewer-title="${escapeHTML(p.title||'آگهی ملک')}" data-property-type="${escapeHTML(p.property_type||p.main_category||'ملک')}" class="amlak058-listing-photo" loading="lazy" role="button" tabindex="0" onclick="amlak058OpenImageViewerFromElement(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();amlak058OpenImageViewerFromElement(this)}" onerror="amlak058HandleImageError(this)" title="برای بزرگ‌نمایی عکس کلیک کنید">`).join(''):getIllustrativeImageHTML(p);const contactHTML=`<button type="button" class="btn btn-outline" onclick="revealPropertyPhone('`+escapeHTML(p.id)+`',this)">مشاهده شماره</button>`;const saved=getFavorites().includes(String(p.id));const description=p.description?`<p class="property-description">${escapeHTML(p.description.length>150?p.description.slice(0,150)+'…':p.description)}</p>`:'';return `<article class="property-card"><div class="property-image">${imagesHTML}</div><div class="property-info"><span class="property-type">${escapeHTML(p.property_type||'ملک')}</span><button type="button" class="card-open" onclick="openDetails('${escapeHTML(p.id)}')"><h3>${escapeHTML(p.title)}</h3></button><p class="property-address">⌖ ${escapeHTML(p.address||'')}</p><div class="property-details"><span>${(p.area||p.building_area||p.land_area)?escapeHTML(p.area||p.building_area||p.land_area)+' متر':'متراژ نامشخص'}</span><span>${escapeHTML(p.transaction_type||'')}</span>${p.bedrooms!==null&&p.bedrooms!==undefined?`<span>${escapeHTML(p.bedrooms)} اتاق</span>`:''}</div><div class="property-price">${escapeHTML(formatListingPrice(p))}</div>${description}<div class="property-actions">${contactHTML}<button type="button" class="btn btn-outline" onclick="openDetails('${escapeHTML(p.id)}')">جزئیات آگهی</button><button type="button" class="favorite-btn ${saved?'saved':''}" onclick="toggleFavorite('${escapeHTML(p.id)}',this)">${saved?'♥ ذخیره شد':'♡ ذخیره آگهی'}</button></div></div></article>`}
 
 function markMobileSearchAndLoad(){document.body.classList.add('mobile-search-performed');loadProperties();}
 async function loadProperties(){const list=document.getElementById('propertyList'),count=document.getElementById('resultCount');list.innerHTML='<div class="empty">در حال دریافت آگهیها...</div>';try{let query=db.from('properties').select('id,title,main_category,sub_category,property_type,transaction_type,price,deposit,monthly_rent,convertible,area,bedrooms,year_built,floor_number,photos_own,elevator,parking,storage,video_url,address,city,description,image_url,image_urls,details_json,land_area,building_area,location_lat,location_lng,location_precision,created_at,owner_id').eq('status','approved').limit(100);const transaction=currentTransaction||'',type=document.getElementById('searchType').value,city=document.getElementById('searchCity').value,address=document.getElementById('searchAddress').value.trim(),keyword=(document.getElementById('searchKeyword')?.value||'').trim();const minPrice=document.getElementById('minPrice').value,maxPrice=document.getElementById('maxPrice').value,minArea=document.getElementById('minArea').value,maxArea=document.getElementById('maxArea').value,sort=document.getElementById('sortProperties').value;if(transaction)query=query.eq('transaction_type',transaction);if(type)query=query.eq('property_type',type);const mainCat=document.getElementById('searchMainCategory').value,subCat=document.getElementById('searchSubCategory').value;if(mainCat)query=query.eq('main_category',mainCat);if(subCat)query=query.eq('sub_category',subCat);if(city)query=query.eq('city',city);if(address)query=query.ilike('address','%'+address.replace(/[%_,]/g,' ')+'%');if(keyword){const safeKeyword=keyword.replace(/[%,()]/g,' ').trim();if(safeKeyword)query=query.or('title.ilike.%'+safeKeyword+'%,description.ilike.%'+safeKeyword+'%,property_type.ilike.%'+safeKeyword+'%');}if(minPrice)query=query.gte('price',Number(minPrice));if(maxPrice)query=query.lte('price',Number(maxPrice));if(minArea)query=query.gte('area',Number(minArea));if(maxArea)query=query.lte('area',Number(maxArea));if(sort==='priceAsc')query=query.order('price',{ascending:true,nullsFirst:false});else if(sort==='priceDesc')query=query.order('price',{ascending:false,nullsFirst:false});else if(sort==='areaDesc')query=query.order('area',{ascending:false,nullsFirst:false});else query=query.order('created_at',{ascending:false});const {data,error}=await query;if(error)throw error;count.textContent=data.length.toLocaleString('fa-IR')+' آگهی';if(!data.length){list.innerHTML='<div class="empty">هنوز آگهی تأییدشدهای ثبت نشده است.</div>';return}list.innerHTML=(await Promise.all(data.map(renderProperty))).join('')}catch(error){console.error('خطای واقعی دریافت آگهیها:',error);count.textContent='خطا';list.innerHTML='';const box=document.createElement('div');box.className='empty';box.style.cssText='white-space:pre-wrap;direction:rtl;text-align:right;overflow-wrap:anywhere;padding:16px;border:1px solid #eadfc8;background:#fbf7ee;color:#80560b';box.textContent='خطای فنی دریافت آگهی‌ها - نسخه تشخیصی:\n'+(error?.message||String(error))+'\n\nکد خطا: '+(error?.code||'ندارد')+'\nجزئیات: '+(error?.details||'ندارد')+'\nراهنما: '+(error?.hint||'ندارد');list.appendChild(box)}}
@@ -4926,12 +4949,16 @@ async function openPropertyDetailPage(id,pushHistory){
  }
 }
 function pdBuildGallery(urls,title){
- if(!urls||!urls.length)return '<div class="pd-gallery-empty">برای این آگهی عکسی ثبت نشده است.</div>';
- var html='<button type="button" class="pd-gallery-main" onclick="pdOpenImageAt('+pdCurrentImageIndex+')" aria-label="نمایش عکس بزرگ"><img id="pdGalleryMainImage" src="'+pdEsc(urls[0])+'" alt="'+pdEsc(title)+'" loading="eager"><span class="pd-gallery-counter" id="pdGalleryCounter">'+(1).toLocaleString('fa-IR')+' / '+urls.length.toLocaleString('fa-IR')+'</span></button>';
+ if(!urls||!urls.length){
+  const p={title:title||'آگهی ملک',property_type:'ملک'};
+  const image=amlak058LuxuryIllustrationUrl(p);
+  return '<div class="pd-gallery-empty amlak058-empty-gallery"><img src="'+image+'" alt="تصویر نمونه؛ عکس واقعی برای این آگهی ثبت نشده است" data-viewer-src="'+image+'" data-viewer-title="'+pdEsc(title||'تصویر نمونه ملک')+'" data-property-type="ملک" onclick="amlak058OpenImageViewerFromElement(this)" loading="eager"><span class="amlak058-empty-caption">عکس واقعی برای این آگهی ثبت نشده</span><span class="amlak058-sample-label">تصویر نمونه</span></div>';
+ }
+ var html='<button type="button" class="pd-gallery-main" onclick="pdOpenImageAt('+pdCurrentImageIndex+')" aria-label="نمایش عکس بزرگ"><img id="pdGalleryMainImage" src="'+pdEsc(urls[0])+'" alt="'+pdEsc(title)+'" data-viewer-src="'+pdEsc(urls[0])+'" data-viewer-title="'+pdEsc(title||'تصویر ملک')+'" class="amlak058-detail-photo" loading="eager" onerror="amlak058HandleImageError(this)"><span class="pd-gallery-counter" id="pdGalleryCounter">'+(1).toLocaleString('fa-IR')+' / '+urls.length.toLocaleString('fa-IR')+'</span></button>';
  if(urls.length>1)html+='<div class="pd-gallery-dots" id="pdGalleryDots" aria-label="انتخاب تصویر">'+urls.map(function(url,i){return '<button type="button" class="pd-gallery-dot '+(i===0?'active':'')+'" onclick="pdSelectGalleryImage('+i+')" aria-label="تصویر '+(i+1)+'"></button>'}).join('')+'</div>';
  var rest=urls.slice(1,4);
- if(rest.length)html+='<div class="pd-gallery-secondary">'+rest.map(function(url,i){var idx=i+1;return '<button type="button" class="pd-gallery-tile" id="pdGalleryTile'+idx+'" onclick="pdSelectGalleryImage('+idx+')" aria-label="نمایش تصویر '+(idx+1)+'"><img src="'+pdEsc(url)+'" alt="'+pdEsc(title)+' '+(idx+1)+'" loading="lazy"></button>'}).join('')+'</div>';
- if(urls.length>1)html+='<div class="pd-gallery-thumbs">'+urls.map(function(url,i){return '<button type="button" class="pd-gallery-thumb '+(i===0?'active':'')+'" id="pdGalleryThumb'+i+'" onclick="pdSelectGalleryImage('+i+')" aria-label="انتخاب تصویر '+(i+1)+'"><img src="'+pdEsc(url)+'" alt="" loading="lazy"></button>'}).join('')+'</div>';
+ if(rest.length)html+='<div class="pd-gallery-secondary">'+rest.map(function(url,i){var idx=i+1;return '<button type="button" class="pd-gallery-tile" id="pdGalleryTile'+idx+'" onclick="pdSelectGalleryImage('+idx+')" aria-label="نمایش تصویر '+(idx+1)+'"><img src="'+pdEsc(url)+'" alt="'+pdEsc(title)+' '+(idx+1)+'" data-viewer-src="'+pdEsc(url)+'" data-viewer-title="'+pdEsc(title||'تصویر ملک')+'" class="amlak058-detail-photo" loading="lazy" onerror="amlak058HandleImageError(this)"></button>'}).join('')+'</div>';
+ if(urls.length>1)html+='<div class="pd-gallery-thumbs">'+urls.map(function(url,i){return '<button type="button" class="pd-gallery-thumb '+(i===0?'active':'')+'" id="pdGalleryThumb'+i+'" onclick="pdSelectGalleryImage('+i+')" aria-label="انتخاب تصویر '+(i+1)+'"><img src="'+pdEsc(url)+'" alt="" data-viewer-src="'+pdEsc(url)+'" data-viewer-title="'+pdEsc(title||'تصویر ملک')+'" class="amlak058-detail-photo" loading="lazy" onerror="amlak058HandleImageError(this)"></button>'}).join('')+'</div>';
  return html;
 }
 function pdEnableGallerySwipe(){
@@ -6148,4 +6175,109 @@ input::placeholder,textarea::placeholder{
  }
 }
 </style>
+
+
+
+<style id="amlak058-luxury-image-viewer-v1">
+.property-image,.amlak058-luxury-placeholder,.amlak058-empty-gallery{background:#fbf7ee!important;border:1px solid #eadfc8!important}
+.property-image{border-radius:15px!important;overflow:hidden!important;position:relative!important}
+.property-image .amlak058-listing-photo,.property-image>img{display:block;width:100%;height:100%;min-width:100%;object-fit:cover;cursor:zoom-in;transition:transform .35s ease,filter .25s ease}
+.property-card:hover .property-image .amlak058-listing-photo{transform:scale(1.025)}
+.amlak058-luxury-placeholder,.amlak058-empty-gallery{position:relative!important;display:block!important;width:100%!important;height:100%!important;min-height:170px!important;overflow:hidden!important;border-radius:inherit!important;background:#fbf7ee!important}
+.amlak058-luxury-placeholder>img,.amlak058-empty-gallery>img{display:block!important;width:100%!important;height:100%!important;min-height:inherit!important;object-fit:cover!important;cursor:zoom-in!important}
+.amlak058-sample-label{position:absolute!important;inset:auto 10px 10px auto!important;z-index:4!important;display:inline-flex!important;align-items:center!important;padding:5px 10px!important;border-radius:999px!important;background:rgba(255,253,248,.94)!important;color:#80560b!important;border:1px solid #d9bd71!important;font-family:Vazirmatn,Tahoma,sans-serif!important;font-size:10px!important;font-weight:800!important;box-shadow:0 3px 12px rgba(41,39,33,.12)!important;pointer-events:none!important}
+.amlak058-empty-gallery{min-height:300px!important;height:clamp(250px,44vw,520px)!important;border-radius:18px!important}
+.amlak058-empty-caption{position:absolute!important;inset:12px 12px auto 12px!important;text-align:center!important;padding:9px 12px!important;z-index:4!important;background:rgba(255,253,248,.93)!important;border:1px solid #eadfc8!important;border-radius:10px!important;color:#292721!important;font-family:Vazirmatn,Tahoma,sans-serif!important;font-size:13px!important;font-weight:700!important}
+#amlak058ImageViewer{position:fixed;inset:0;z-index:999999;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(22,20,16,.94);backdrop-filter:blur(14px)}
+#amlak058ImageViewer[hidden]{display:none!important}
+#amlak058ImageViewer .amlak058-viewer-shell{position:relative;display:flex;align-items:center;justify-content:center;width:min(1180px,100%);height:min(92vh,900px);gap:12px}
+#amlak058ImageViewer .amlak058-viewer-stage{position:relative;display:flex;flex:1;align-items:center;justify-content:center;min-width:0;min-height:0;height:100%;border:1px solid rgba(217,189,113,.6);border-radius:18px;overflow:hidden;background:linear-gradient(145deg,#fbf7ee,#eadfc8);box-shadow:0 25px 100px rgba(0,0,0,.4)}
+#amlak058ImageViewer .amlak058-viewer-stage img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+#amlak058ImageViewer .amlak058-viewer-close,#amlak058ImageViewer .amlak058-viewer-nav{display:grid;place-items:center;border:1px solid rgba(244,213,108,.55);background:rgba(41,39,33,.86);color:#fff8e5;cursor:pointer;border-radius:50%;font-family:Vazirmatn,Tahoma,sans-serif;font-weight:800;box-shadow:0 5px 22px rgba(0,0,0,.25)}
+#amlak058ImageViewer .amlak058-viewer-close{position:absolute;top:12px;right:12px;width:46px;height:46px;font-size:24px;z-index:3}
+#amlak058ImageViewer .amlak058-viewer-nav{width:48px;height:48px;flex:0 0 48px;font-size:22px}
+#amlak058ImageViewer .amlak058-viewer-meta{position:absolute;left:12px;right:12px;bottom:12px;z-index:3;display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 14px;border-radius:12px;background:rgba(41,39,33,.86);border:1px solid rgba(244,213,108,.45);color:#fff8e5;font:600 13px Vazirmatn,Tahoma,sans-serif}
+#amlak058ImageViewer .amlak058-viewer-counter{white-space:nowrap;color:#f4d56c;font-weight:800}
+body.amlak058-viewer-open{overflow:hidden!important}
+@media(max-width:650px){
+ #amlak058ImageViewer{padding:9px}
+ #amlak058ImageViewer .amlak058-viewer-shell{height:88vh;gap:5px}
+ #amlak058ImageViewer .amlak058-viewer-stage{border-radius:12px}
+ #amlak058ImageViewer .amlak058-viewer-nav{width:36px;height:42px;flex:0 0 36px;border-radius:12px;font-size:19px}
+ #amlak058ImageViewer .amlak058-viewer-close{top:8px;right:8px;width:40px;height:40px}
+ #amlak058ImageViewer .amlak058-viewer-meta{bottom:8px;left:8px;right:8px;font-size:11px;padding:8px 10px}
+ .amlak058-empty-gallery{height:280px!important;min-height:280px!important}
+}
+</style>
+<script id="amlak058-luxury-image-viewer-script-v1">
+(function(){
+ let imageViewerItems=[],imageViewerIndex=0;
+ function ensureViewer(){
+  let modal=document.getElementById('amlak058ImageViewer');
+  if(modal)return modal;
+  modal=document.createElement('div');modal.id='amlak058ImageViewer';modal.hidden=true;modal.setAttribute('role','dialog');modal.setAttribute('aria-modal','true');modal.setAttribute('aria-label','نمایش بزرگ تصاویر ملک');
+  modal.innerHTML='<div class="amlak058-viewer-shell"><button type="button" class="amlak058-viewer-nav" aria-label="تصویر قبلی" data-viewer-prev>‹</button><div class="amlak058-viewer-stage"><button type="button" class="amlak058-viewer-close" aria-label="بستن تصویر">×</button><img alt=""><div class="amlak058-viewer-meta"><span class="amlak058-viewer-title"></span><span class="amlak058-viewer-counter"></span></div></div><button type="button" class="amlak058-viewer-nav" aria-label="تصویر بعدی" data-viewer-next>›</button></div>';
+  document.body.appendChild(modal);
+  modal.addEventListener('click',function(e){if(e.target===modal||e.target.closest('.amlak058-viewer-close'))closeViewer();if(e.target.closest('[data-viewer-prev]'))stepViewer(-1);if(e.target.closest('[data-viewer-next]'))stepViewer(1);});
+  return modal;
+ }
+ function showViewer(){
+  const modal=ensureViewer(),img=modal.querySelector('.amlak058-viewer-stage img');
+  if(!imageViewerItems.length)return;
+  const item=imageViewerItems[imageViewerIndex]||imageViewerItems[0];
+  img.src=item.src;img.alt=item.title||'تصویر ملک';
+  modal.querySelector('.amlak058-viewer-title').textContent=item.title||'املاک ۰۵۸';
+  modal.querySelector('.amlak058-viewer-counter').textContent=(imageViewerIndex+1).toLocaleString('fa-IR')+' / '+imageViewerItems.length.toLocaleString('fa-IR');
+  const multiple=imageViewerItems.length>1;
+  modal.querySelector('[data-viewer-prev]').hidden=!multiple;
+  modal.querySelector('[data-viewer-next]').hidden=!multiple;
+  modal.hidden=false;document.body.classList.add('amlak058-viewer-open');
+  modal.querySelector('.amlak058-viewer-close').focus({preventScroll:true});
+ }
+ function closeViewer(){const modal=document.getElementById('amlak058ImageViewer');if(modal)modal.hidden=true;document.body.classList.remove('amlak058-viewer-open');}
+ function stepViewer(step){if(!imageViewerItems.length)return;imageViewerIndex=(imageViewerIndex+step+imageViewerItems.length)%imageViewerItems.length;showViewer();}
+ window.amlak058OpenImageViewer=function(images,index,title){
+  imageViewerItems=(Array.isArray(images)?images:[images]).filter(Boolean).map(function(item){return typeof item==='string'?{src:item,title:title||'تصویر ملک'}:item;});
+  if(!imageViewerItems.length)return;
+  imageViewerIndex=Math.min(Math.max(Number(index)||0,0),imageViewerItems.length-1);showViewer();
+ };
+ window.amlak058OpenImageViewerFromElement=function(el){
+  if(!el)return;
+  const box=el.closest('.property-image,.amlak058-luxury-placeholder,.pd-gallery-main,.pd-gallery-tile,.pd-gallery-thumb,.amlak058-empty-gallery')||el.parentElement;
+  let imgs=box?Array.from(box.querySelectorAll('img')).filter(function(img){return img.dataset.viewerSrc||img.currentSrc||img.src;}):[el];
+  if(!imgs.length)imgs=[el];
+  const items=imgs.map(function(img){return {src:img.dataset.viewerSrc||img.currentSrc||img.src,title:img.dataset.viewerTitle||img.alt||el.dataset.viewerTitle||'تصویر ملک'};});
+  const idx=Math.max(0,imgs.indexOf(el));
+  window.amlak058OpenImageViewer(items,idx,el.dataset.viewerTitle||el.alt||'املاک ۰۵۸');
+ };
+ window.amlak058HandleImageError=async function(img){
+  if(!img||img.dataset.fallbackApplied==='1')return;
+  const original=img.dataset.originalUrl||img.dataset.viewerSrc||img.src;
+  if(img.dataset.refreshTried!=='1'){
+   img.dataset.refreshTried='1';
+   try{
+    if(/\/storage\/v1\/object\/(?:public|sign|authenticated)\/property-images\//i.test(original)||!/^https?:\/\//i.test(original)){
+     const fresh=await makeSignedImage(original);
+     if(fresh&&fresh!==original){img.dataset.originalUrl=fresh;img.dataset.viewerSrc=fresh;img.src=fresh;return;}
+    }
+   }catch(e){console.warn('تصویر ملک دوباره بارگذاری نشد:',e);}
+  }
+  img.dataset.fallbackApplied='1';
+  const fallback=amlak058LuxuryIllustrationUrl({title:img.dataset.viewerTitle||img.alt||'آگهی ملک',property_type:img.dataset.propertyType||'ملک'});
+  img.dataset.viewerSrc=fallback;img.src=fallback;
+  img.classList.add('amlak058-image-fallback');img.alt='تصویر نمونه؛ عکس واقعی این ملک بارگذاری نشد';
+ };
+ window.pdOpenImageAt=function(index){
+  if(!window.pdCurrentImages||!window.pdCurrentImages.length)return;
+  const items=window.pdCurrentImages.map(function(src){return {src:src,title:(window.pdCurrentProperty&&window.pdCurrentProperty.title)||'تصویر ملک'};});
+  window.amlak058OpenImageViewer(items,index,(window.pdCurrentProperty&&window.pdCurrentProperty.title)||'آگهی ملک');
+ };
+ document.addEventListener('keydown',function(e){
+  const modal=document.getElementById('amlak058ImageViewer');if(!modal||modal.hidden)return;
+  if(e.key==='Escape'){closeViewer();return;}
+  if(e.key==='ArrowLeft')stepViewer(1);
+  if(e.key==='ArrowRight')stepViewer(-1);
+ });
+})();
+</script>
 
