@@ -5689,6 +5689,32 @@ header .brand h1 .brand-number{color:#b78317!important}
   #categories .category{min-width:0!important;margin:0!important}
 }
 </style>
+
+<script id="amlak058-register-route">
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('openPost') !== '1') return;
+  params.delete('openPost');
+  var cleanUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '') + (window.location.hash || '#home');
+  window.history.replaceState(null, '', cleanUrl);
+  var attempts = 0;
+  function showPostForm() {
+    if (typeof window.openModal === 'function') {
+      window.openModal();
+      return;
+    }
+    attempts++;
+    if (attempts < 40) window.setTimeout(showPostForm, 100);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      window.setTimeout(showPostForm, 60);
+    }, { once: true });
+  } else {
+    window.setTimeout(showPostForm, 60);
+  }
+})();
+</script>
 </body></html>
 
 <style id="amlak058-mobile-layout-repair-v14">
