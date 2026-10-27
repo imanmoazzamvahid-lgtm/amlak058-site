@@ -1666,7 +1666,7 @@ header .brand h1 .brand-number{font-size:1.18em!important;font-weight:1000!impor
 #authPhonePanel{display:block!important}
 </style>
 
-<link rel="manifest" href="/manifest.webmanifest?v=18">
+<link rel="manifest" href="/manifest.webmanifest?v=20">
 <link rel="icon" type="image/svg+xml" href="/icon.svg?v=19">
 <link rel="shortcut icon" href="/icon.svg?v=19">
 <link rel="apple-touch-icon" href="/icon.svg?v=19">
@@ -2721,7 +2721,7 @@ header .btn-outline{border-color:#d8c28f!important;color:#79540d!important;backg
 </style>
 </head><body>
 
-<header><div class="container header-inner"><a class="brand amlak058-brand-link" href="#home" aria-label="صفحه اصلی املاک ۰۵۸"><img class="amlak058-brand-logo" src="/logo-mark.svg?v=18" alt="املاک ۰۵۸، سامانه آگهی رایگان املاک بجنورد، amlak058.ir" width="256" height="200" fetchpriority="high"/></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
+<header><div class="container header-inner"><a class="brand amlak058-brand-link" href="#home" aria-label="صفحه اصلی املاک ۰۵۸"><img class="amlak058-brand-logo" src="/logo-mark.svg?v=18" alt="املاک ۰۵۸، سامانه آگهی رایگان املاک بجنورد، amlak058.ir" width="256" height="200" fetchpriority="high"/></a><nav><a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a><a href="/s/bojnurd/rent-residential/">رهن و اجاره</a><a href="/download/">نصب برنامه</a></nav><div style="display:flex;gap:7px;align-items:center"><div class="header-actions">
   <!-- پنل مدیریت از سربرگ عمومی مخفی شد؛ دسترسی مدیر از مسیر مستقیم و احراز هویت محفوظ است. -->
   <button class="btn btn-outline" id="accountButton" onclick="handleAccountButton()">ورود / ثبت‌نام</button>
   <button class="btn btn-primary" onclick="openModal()">+ ثبت آگهی رایگان</button>
@@ -4023,7 +4023,7 @@ footer{background:#f8f6ef!important}
 (function(){
   if ("serviceWorker" in navigator && location.protocol === "https:") {
     window.addEventListener("load", function(){
-      navigator.serviceWorker.register("/sw.js?v=17").catch(function(err){console.warn("امکان فعال‌سازی حالت اپ فراهم نشد",err);});
+      navigator.serviceWorker.register("/sw.js?v=21").catch(function(err){console.warn("امکان فعال‌سازی حالت اپ فراهم نشد",err);});
     });
   }
   var installButton=document.getElementById("amlak058-pwa-install");
@@ -5069,14 +5069,11 @@ function pdToggleExtraDetails(){
 }
 function pdShowReportInfo(){var el=document.getElementById('pdReportInfo');el.hidden=!el.hidden;}
 function pdAskSeller(id,question){
+ const target='/chat.html?property='+encodeURIComponent(String(id))+'&question='+encodeURIComponent(String(question||''));
  db.auth.getUser().then(function(result){
   var user=result&&result.data?result.data.user:null;
   if(!user){openAuthModal();document.getElementById('authMessage').textContent='برای پرسیدن سؤال درباره ملک، ابتدا وارد شوید.';return;}
-  openInternalChat(id);
-  window.setTimeout(function(){
-   var modal=document.getElementById('chatModal'),input=document.getElementById('chatInput');
-   if(modal&&modal.style.display==='block'&&input){input.value=question;input.focus();}
-  },180);
+  window.location.href=target;
  }).catch(function(){openAuthModal();});
 }
 function pdSavePersonalNote(){
