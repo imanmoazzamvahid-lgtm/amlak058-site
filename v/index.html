@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fa-IR" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#b78317">
+<title>جزئیات آگهی ملک | املاک ۰۵۸</title>
+<meta name="description" content="مشاهده تصاویر، قیمت، مشخصات و اطلاعات تماس آگهی‌های املاک بجنورد در املاک ۰۵۸.">
+<meta property="og:type" content="product">
+<meta property="og:locale" content="fa_IR">
+<meta property="og:site_name" content="املاک ۰۵۸">
+<meta property="og:title" content="جزئیات آگهی ملک | املاک ۰۵۸">
+<meta property="og:description" content="تصاویر و جزئیات آگهی‌های ملک در بجنورد.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/property-detail.css?v=1">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="/property-detail.js?v=1"></script>
+</head>
+<body>
+<header class="site-header">
+<a class="brand" href="/" aria-label="بازگشت به املاک ۰۵۸"><img src="/logo-mark.svg?v=18" alt="" width="48" height="38"><span><strong>املاک ۰۵۸</strong><small>بازار آنلاین ملک بجنورد</small></span></a>
+<nav><a href="/">خانه</a><a href="/s/bojnurd/rent-residential/">رهن و اجاره</a><a href="/chat.html">پیام‌ها</a><a href="/my-divar/my-posts/">آگهی‌های من</a></nav>
+<a class="btn btn-gold" href="/#home">＋ ثبت آگهی</a>
+</header>
+<main class="container">
+<div class="breadcrumb"><a href="/">آگهی‌های ملک</a><span>›</span><a id="categoryLink" href="/#categories">املاک بجنورد</a><span>›</span><strong>جزئیات آگهی</strong></div>
+<div id="loading" class="state-card"><span class="spinner"></span><p>در حال بارگذاری تصاویر و مشخصات آگهی…</p></div>
+<div id="errorState" class="state-card" hidden><div class="state-icon">⌂</div><h1>آگهی پیدا نشد</h1><p id="errorText">این آگهی در دسترس نیست یا هنوز منتشر نشده است.</p><a class="btn btn-gold" href="/">بازگشت به آگهی‌ها</a></div>
+<article id="propertyContent" hidden>
+<div class="detail-heading">
+<div class="detail-heading-main"><div class="label-line"><span id="categoryBadge" class="category-badge">آگهی ملک</span><span id="dateLabel" class="muted"></span></div><h1 id="propertyTitle">عنوان آگهی</h1><p id="propertyLocation" class="location">⌖ بجنورد</p></div>
+<div class="heading-actions"><button id="shareButton" type="button" class="btn btn-light">↗ اشتراک‌گذاری</button><button id="copyButton" type="button" class="btn btn-light">⧉ کپی لینک</button></div>
+</div>
+<div class="detail-layout">
+<section class="main-column">
+<section class="gallery-card" aria-label="تصاویر آگهی">
+<div id="galleryMain" class="gallery-main"><div class="photo-placeholder"><span>⌂</span><small>تصویر ملک</small></div></div>
+<button id="galleryPrev" class="gallery-arrow prev" type="button" aria-label="تصویر قبلی" hidden>‹</button><button id="galleryNext" class="gallery-arrow next" type="button" aria-label="تصویر بعدی" hidden>›</button>
+<div id="galleryCount" class="gallery-count" hidden></div><div id="galleryThumbs" class="gallery-thumbs"></div>
+</section>
+<section class="info-card">
+<div class="section-title"><h2>مشخصات ملک</h2><span>اطلاعات ثبت‌شده در آگهی</span></div>
+<div id="specGrid" class="spec-grid"></div>
+<div id="extraDetailsWrap" hidden><button id="extraDetailsToggle" class="text-toggle" type="button">مشاهده سایر مشخصات <span>⌄</span></button><div id="extraDetails" class="extra-details" hidden></div></div>
+</section>
+<section id="descriptionCard" class="info-card">
+<div class="section-title"><h2>توضیحات آگهی‌دهنده</h2></div><p id="descriptionText" class="description-text"></p>
+</section>
+<section id="videoCard" class="info-card" hidden><div class="section-title"><h2>ویدئوی ملک</h2></div><video id="propertyVideo" controls playsinline preload="metadata"></video><a id="videoLink" class="text-link" href="#" target="_blank" rel="noopener" hidden>باز کردن ویدئو در صفحه جدید</a></section>
+<section id="locationCard" class="info-card" hidden><div class="section-title"><h2>موقعیت ملک</h2><span id="locationPrecision" class="muted"></span></div><iframe id="mapFrame" title="نقشه موقعیت ملک" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><p class="map-note">موقعیت نمایش‌داده‌شده بر اساس اطلاعات ثبت‌شده توسط آگهی‌دهنده است.</p></section>
+<section class="safety-card"><div class="safety-icon">!</div><div><h2>نکات ایمنی معامله</h2><p>پیش از پرداخت بیعانه، هویت آگهی‌دهنده و مدارک مالکیت را بررسی کنید. از انتقال وجه پیش از بررسی حضوری و توافق روشن درباره شرایط معامله خودداری کنید.</p></div></section>
+</section>
+<aside class="side-column">
+<section class="price-card">
+<div class="price-card-top"><span>قیمت و شرایط</span><span class="verified-mark">✓ آگهی منتشرشده</span></div>
+<div id="priceBlock" class="price-block"></div>
+<div id="summarySpecs" class="summary-specs"></div>
+<div class="contact-buttons"><button id="showPhoneButton" class="btn btn-gold full" type="button">نمایش شماره تماس</button><a id="callButton" class="btn btn-gold full" href="#" hidden>تماس با آگهی‌دهنده</a><a id="chatButton" class="btn btn-outline full" href="#">▱ گفت‌وگو با آگهی‌دهنده</a></div>
+<p id="contactHint" class="contact-hint">برای گفت‌وگو با آگهی‌دهنده، با حساب کاربری وارد شوید.</p>
+</section>
+<section class="side-note"><strong>درباره املاک ۰۵۸</strong><p>سامانه آگهی خرید، فروش، رهن و اجاره ملک در بجنورد.</p><a href="/#home">ثبت آگهی جدید ←</a></section>
+</aside>
+</div>
+</article>
+</main>
+<footer class="site-footer"><a href="/">املاک ۰۵۸</a><span>· آگهی ملک بجنورد</span><a href="/chat.html">پیام‌ها و گفت‌وگوها</a></footer>
+<div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
