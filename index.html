@@ -5069,12 +5069,7 @@ function pdToggleExtraDetails(){
 }
 function pdShowReportInfo(){var el=document.getElementById('pdReportInfo');el.hidden=!el.hidden;}
 function pdAskSeller(id,question){
- const target='/chat.html?property='+encodeURIComponent(String(id))+'&question='+encodeURIComponent(String(question||''));
- db.auth.getUser().then(function(result){
-  var user=result&&result.data?result.data.user:null;
-  if(!user){openAuthModal();document.getElementById('authMessage').textContent='برای پرسیدن سؤال درباره ملک، ابتدا وارد شوید.';return;}
-  window.location.href=target;
- }).catch(function(){openAuthModal();});
+ window.location.href='/chat.html?property='+encodeURIComponent(String(id))+'&question='+encodeURIComponent(String(question||''));
 }
 function pdSavePersonalNote(){
  if(!pdCurrentProperty)return;
