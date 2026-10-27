@@ -1,5 +1,5 @@
-const CACHE_NAME = "amlak058-shell-v20";
-const APP_SHELL = ["/", "/manifest.webmanifest?v=19", "/icon.svg?v=19", "/logo-mark.svg?v=18"];
+const CACHE_NAME = "amlak058-shell-v21";
+const APP_SHELL = ["/", "/manifest.webmanifest?v=20", "/icon.svg?v=20", "/logo-mark.svg?v=18"];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
 });
@@ -12,7 +12,12 @@ self.addEventListener("fetch", event => {
   if (request.method !== "GET" || url.origin !== self.location.origin) return;
   if (request.mode === "navigate") {
     event.respondWith(fetch(request).then(response => {
-      if (response.ok) caches.open(CACHE_NAME).then(cache => cache.put("/", response.clone()));
+      // Do not cache private account/chat pages. Cache each public page under its own URL,
+      // rather than overwriting the home page cache with every navigation.
+      const isPrivate = url.pathname === "/chat.html" || url.pathname.startsWith("/my-divar/my-posts");
+      if (response.ok && !isPrivate) {
+        caches.open(CACHE_NAME).then(cache => cache.put(request, response.clone())).catch(() => {});
+      }
       return response;
     }).catch(async () => (await caches.match(request)) || (await caches.match("/"))));
     return;
