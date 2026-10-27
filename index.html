@@ -3491,7 +3491,7 @@ function resetFilters(){['searchCity','searchType','searchAddress','minPrice','m
 function closeDetails(){closePropertyDetailPage(true)}
 function renderPropertyMap(p){let lat=Number(p.location_lat),lng=Number(p.location_lng);if(!Number.isFinite(lat)||!Number.isFinite(lng)||!lat||!lng)return '';const exact=p.location_precision==='exact';if(!exact){lat=Math.round(lat*100)/100;lng=Math.round(lng*100)/100}const west=(lng-0.012).toFixed(5),east=(lng+0.012).toFixed(5),south=(lat-0.008).toFixed(5),north=(lat+0.008).toFixed(5),src='https://www.openstreetmap.org/export/embed.html?bbox='+west+'%2C'+south+'%2C'+east+'%2C'+north+'&layer=mapnik&marker='+lat.toFixed(5)+'%2C'+lng.toFixed(5);return '<div class="full" style="margin:16px 0"><h3 style="font-size:15px;margin-bottom:8px">موقعیت ملک • '+(exact?'موقعیت دقیق':'موقعیت حدودی')+'</h3><iframe title="نقشه موقعیت ملک" src="'+src+'" style="width:100%;height:260px;border:1px solid #ddd;border-radius:10px" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><p class="muted">'+(exact?'موقعیت انتخابشده توسط آگهیدهنده':'برای حفظ حریم خصوصی، موقعیت تقریبی نمایش داده میشود')+' • © OpenStreetMap</p></div>'}
 function renderAdditionalDetails(details){if(!details||typeof details!=='object')return '';const labels={units_per_floor:'تعداد واحد در طبقه',total_floors:'تعداد کل طبقات',building_direction:'جهت ساختمان',balcony:'بالکن',floor_material:'جنس کف',bathroom_type:'سرویس بهداشتی',cooling:'سرمایش',heating:'گرمایش',hot_water:'تأمین آب گرم',deed_type:'سند',kitchen_type:'نوع آشپزخانه',facade:'نمای ساختمان',occupancy_status:'وضعیت سکونت',cabinet_material:'جنس کابینت',bathroom_count:'تعداد سرویس بهداشتی',parking_count:'تعداد پارکینگ',bath_count:'تعداد حمام',property_status:'وضعیت فعلی ملک',property_direction:'موقعیت ملک',renovated:'بازسازی شده است',has_loan:'وام دارد',exchange_allowed:'قابل معاوضه',pool:'استخر',jacuzzi:'جکوزی',sauna:'سونا'};return Object.entries(labels).filter(([k])=>details[k]!==undefined&&details[k]!==null&&details[k]!==''&&details[k]!==false).map(([k,label])=>'<div class="detail-row">'+escapeHTML(label)+': '+escapeHTML(details[k]===true?'بله':details[k]===false?'خیر':details[k])+'</div>').join('')}
-function openDetails(id){return openPropertyDetailPage(id,true)}
+function openDetails(id){window.location.href='/v/?id='+encodeURIComponent(String(id));}
 document.getElementById('detailsModal').addEventListener('click',e=>{if(e.target.id==='detailsModal')closeDetails()});
 
 function amlak058LuxuryIllustrationSvg(p){
@@ -4898,7 +4898,7 @@ function pdSelectedText(v,fallback){
  if(v===null||v===undefined||v==='')return fallback||'ثبت نشده';
  return String(v);
 }
-function pdGetAdUrl(id){return location.origin+location.pathname+location.search+'#ad-'+encodeURIComponent(String(id))}
+function pdGetAdUrl(id){return location.origin+'/v/?id='+encodeURIComponent(String(id))}
 async function pdResolveProperty(id){
  var key=String(id),cached=propertyCache.get(key);
  if(cached)return cached;
