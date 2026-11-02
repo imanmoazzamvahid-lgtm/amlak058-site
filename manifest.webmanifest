@@ -9,9 +9,12 @@
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#fbf7ee",
-  "theme_color": "#b78317",
-  "categories": ["business", "lifestyle"],
+  "background_color": "#f3f5f3",
+  "theme_color": "#176344",
+  "categories": [
+    "business",
+    "lifestyle"
+  ],
   "icons": [
     {
       "src": "/icon.svg?v=19",
