@@ -5779,18 +5779,57 @@ header .brand h1 .brand-number{color:#b78317!important}
 })();
 </script>
 
-<!-- پشتیبانی شناور املاک ۰۵۸ -->
-<style id="amlak058-support-widget-v1">
-#amlak058SupportWidget{position:fixed;z-index:99990;right:18px;bottom:calc(88px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:9px;padding:11px 17px;border:1px solid #d9bd71;border-radius:999px;background:linear-gradient(135deg,#d9b34a,#9e6b0b);color:#fffdf7!important;text-decoration:none!important;font:800 13px/1.5 Vazirmatn,Tahoma,sans-serif;box-shadow:0 7px 24px rgba(88,63,11,.24);transition:transform .18s,box-shadow .18s}
-#amlak058SupportWidget:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(88,63,11,.3)}
-#amlak058SupportWidget .support-icon{display:grid;place-items:center;width:27px;height:27px;border-radius:50%;background:rgba(255,255,255,.2);font-size:17px}
-#amlak058SupportWidget .support-label{white-space:nowrap}
-@media(min-width:651px){#amlak058SupportWidget{bottom:24px;right:24px}}
-@media(max-width:380px){#amlak058SupportWidget{right:10px;bottom:calc(82px + env(safe-area-inset-bottom));padding:9px 13px;font-size:12px}}
+<!-- پشتیبانی آنلاین داخل سایت املاک ۰۵۸ -->
+<style id="amlak058-onsite-support-v2">
+#amlak058SupportWidget{position:fixed;z-index:99990;right:18px;bottom:calc(88px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:9px;padding:11px 17px;border:1px solid #d9bd71;border-radius:999px;background:linear-gradient(135deg,#d9b34a,#9e6b0b);color:#fffdf7!important;font:800 13px/1.5 Vazirmatn,Tahoma,sans-serif;box-shadow:0 7px 24px #583f0b3d;cursor:pointer}
+#amlak058SupportWidget .support-icon{display:grid;place-items:center;width:27px;height:27px;border-radius:50%;background:#ffffff33;font-size:17px}
+#amlak058SupportPanel{position:fixed;z-index:99991;right:18px;bottom:calc(145px + env(safe-area-inset-bottom));width:min(360px,calc(100vw - 28px));background:#fff;border:1px solid #e7e1d4;border-radius:18px;box-shadow:0 14px 48px #17251e35;overflow:hidden;font-family:Vazirmatn,Tahoma,sans-serif;color:#24352c;display:none}
+#amlak058SupportPanel.open{display:block}
+#amlak058SupportPanel .support-head{background:#174b3a;color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+#amlak058SupportPanel .support-head button{background:transparent;border:0;color:#fff;font-size:23px;cursor:pointer}
+#amlak058SupportPanel .support-body{padding:15px}
+#amlak058SupportPanel label{display:block;font-size:12px;margin:9px 0 5px}
+#amlak058SupportPanel input,#amlak058SupportPanel textarea{box-sizing:border-box;width:100%;border:1px solid #d9ded9;border-radius:10px;padding:11px;font:13px Vazirmatn,Tahoma,sans-serif;background:#fff;color:#222}
+#amlak058SupportPanel textarea{min-height:95px;resize:vertical}
+#amlak058SupportPanel .support-send{width:100%;border:0;border-radius:10px;padding:12px;margin-top:12px;background:#174b3a;color:#fff;font:700 14px Vazirmatn,Tahoma,sans-serif;cursor:pointer}
+#amlak058SupportPanel .support-note{font-size:11px;color:#68756d;line-height:1.9;margin:0}
+#amlak058SupportPanel .support-result{font-size:12px;line-height:1.8;margin-top:9px}
+@media(min-width:651px){#amlak058SupportWidget{bottom:24px;right:24px}#amlak058SupportPanel{bottom:90px;right:24px}}
 </style>
-<a id="amlak058SupportWidget" href="https://t.me/AmlakIman058Bot" target="_blank" rel="noopener noreferrer" aria-label="ارتباط با پشتیبانی املاک ۰۵۸ در تلگرام">
- <span class="support-icon" aria-hidden="true">🎧</span><span class="support-label">پشتیبانی آنلاین</span>
-</a>
+<button id="amlak058SupportWidget" type="button" aria-expanded="false" aria-controls="amlak058SupportPanel"><span class="support-icon">🎧</span><span>پشتیبانی آنلاین</span></button>
+<section id="amlak058SupportPanel" aria-label="فرم پشتیبانی آنلاین">
+ <div class="support-head"><strong>پشتیبانی املاک ۰۵۸</strong><button type="button" id="amlak058SupportClose" aria-label="بستن">×</button></div>
+ <div class="support-body">
+  <p class="support-note">پیام خود را همین‌جا در سایت ارسال کنید. کارشناسان املاک ۰۵۸ پیگیری می‌کنند.</p>
+  <form id="amlak058SupportForm">
+   <label for="amlak058SupportName">نام و نام خانوادگی</label><input id="amlak058SupportName" maxlength="100" required placeholder="نام شما">
+   <label for="amlak058SupportPhone">شماره تماس</label><input id="amlak058SupportPhone" inputmode="tel" maxlength="20" required placeholder="مثلاً ۰۹۱۵۱۲۳۴۵۶۷">
+   <label for="amlak058SupportMessage">متن پیام</label><textarea id="amlak058SupportMessage" maxlength="3000" required placeholder="چطور می‌توانیم راهنمایی‌تان کنیم؟"></textarea>
+   <button class="support-send" id="amlak058SupportSend" type="submit">ارسال پیام</button>
+   <div class="support-result" id="amlak058SupportResult" role="status"></div>
+  </form>
+ </div>
+</section>
+<script>
+(function(){
+ const toggle=document.getElementById('amlak058SupportWidget'),panel=document.getElementById('amlak058SupportPanel'),close=document.getElementById('amlak058SupportClose'),form=document.getElementById('amlak058SupportForm'),result=document.getElementById('amlak058SupportResult'),send=document.getElementById('amlak058SupportSend');
+ if(!toggle||!panel||!form||!window.db&&!window.supabase)return;
+ function setOpen(open){panel.classList.toggle('open',open);toggle.setAttribute('aria-expanded',String(open))}
+ toggle.addEventListener('click',()=>setOpen(!panel.classList.contains('open')));close.addEventListener('click',()=>setOpen(false));
+ form.addEventListener('submit',async function(e){
+  e.preventDefault();send.disabled=true;send.textContent='در حال ارسال…';result.style.color='#68756d';result.textContent='';
+  const full_name=document.getElementById('amlak058SupportName').value.trim(),phone=document.getElementById('amlak058SupportPhone').value.trim(),message=document.getElementById('amlak058SupportMessage').value.trim();
+  try{
+   const client=window.amlak058Db||window.db;
+   if(!client)throw new Error('اتصال سامانه برقرار نیست. صفحه را تازه‌سازی کنید.');
+   const {error}=await client.from('website_support_requests').insert({full_name,phone,message});
+   if(error)throw error;
+   form.reset();result.style.color='#176344';result.textContent='پیام شما با موفقیت در سایت ثبت شد. کارشناسان پیگیری خواهند کرد.';
+  }catch(err){result.style.color='#a64236';result.textContent='ارسال انجام نشد: '+(err.message||'خطای نامشخص')}
+  finally{send.disabled=false;send.textContent='ارسال پیام'}
+ });
+})();
+</script>
 </body></html>
 
 <style id="amlak058-mobile-layout-repair-v14">
