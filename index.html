@@ -5813,14 +5813,14 @@ header .brand h1 .brand-number{color:#b78317!important}
 <script>
 (function(){
  const toggle=document.getElementById('amlak058SupportWidget'),panel=document.getElementById('amlak058SupportPanel'),close=document.getElementById('amlak058SupportClose'),form=document.getElementById('amlak058SupportForm'),result=document.getElementById('amlak058SupportResult'),send=document.getElementById('amlak058SupportSend');
- if(!toggle||!panel||!form||!window.db&&!window.supabase)return;
+ if(!toggle||!panel||!form)return;
  function setOpen(open){panel.classList.toggle('open',open);toggle.setAttribute('aria-expanded',String(open))}
  toggle.addEventListener('click',()=>setOpen(!panel.classList.contains('open')));close.addEventListener('click',()=>setOpen(false));
  form.addEventListener('submit',async function(e){
   e.preventDefault();send.disabled=true;send.textContent='در حال ارسال…';result.style.color='#68756d';result.textContent='';
   const full_name=document.getElementById('amlak058SupportName').value.trim(),phone=document.getElementById('amlak058SupportPhone').value.trim(),message=document.getElementById('amlak058SupportMessage').value.trim();
   try{
-   const client=window.amlak058Db||window.db;
+   const client=db;
    if(!client)throw new Error('اتصال سامانه برقرار نیست. صفحه را تازه‌سازی کنید.');
    const {error}=await client.from('website_support_requests').insert({full_name,phone,message});
    if(error)throw error;
