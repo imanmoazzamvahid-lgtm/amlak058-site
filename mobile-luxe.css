@@ -102,7 +102,7 @@
     border-radius: 0 0 25px 25px !important;
     background:
       radial-gradient(ellipse at 12% 8%, rgba(255,255,255,.12), transparent 38%),
-      linear-gradient(145deg, #123f2e 0%, #176344 72%, #1c7050 100%) !important;
+      linear-gradient(145deg, #123f2e 0%, #176344 72%, #176344 100%) !important;
     color: #fff !important;
   }
   .premium-hero:before {
@@ -226,10 +226,7 @@
     filter: saturate(.45) !important;
   }
   .premium-hero-art svg [stroke] { stroke: #d5ddd7 !important; }
-  .premium-hero-art svg [fill="#f6e9c9"],
-  .premium-hero-art svg [fill="#e8d3a9"],
-  .premium-hero-art svg [fill="#b58a48"],
-  .premium-hero-art svg [fill="#f5d99a"] { fill: #d5ddd7 !important; }
+  .premium-hero-art svg [fill]:not([fill="none"]) { fill: #d5ddd7 !important; }
   .premium-art-orbit { width: 160px !important; height: 160px !important; border-color: rgba(255,255,255,.16) !important; }
   .premium-art-orbit.orbit-one { width: 190px !important; height: 190px !important; }
   .premium-art-orbit.orbit-two { width: 135px !important; height: 135px !important; }
@@ -352,7 +349,7 @@
   .mobile-reference-filters button:first-child {
     background: var(--mobile-green-soft) !important;
     color: var(--mobile-green) !important;
-    border-color: #bfcac3 !important;
+    border-color: #d5ddd7 !important;
   }
 
   /* Refined detailed search panel */
@@ -468,7 +465,7 @@
     min-width: 0 !important;
     min-height: 61px !important;
     padding: 8px !important;
-    border: 1px solid #e0e5e1 !important;
+    border: 1px solid #d5ddd7 !important;
     border-radius: 11px !important;
     background: #fff !important;
     text-align: right !important;
@@ -521,7 +518,7 @@
     border: 1px solid var(--mobile-gray-mid) !important;
     border-radius: 8px !important;
     background: var(--mobile-gray-light) !important;
-    color: #526158 !important;
+    color: #26332c !important;
     font-size: 9px !important;
     white-space: nowrap !important;
   }
@@ -651,7 +648,7 @@
     flex-wrap: wrap !important;
     gap: 5px !important;
     padding: 4px 0 2px !important;
-    border-top: 1px solid #e0e5e1 !important;
+    border-top: 1px solid #d5ddd7 !important;
     border-bottom: 0 !important;
     color: var(--mobile-gray) !important;
     font-size: 8px !important;
@@ -668,7 +665,7 @@
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
     margin: 1px 0 !important;
-    color: #526158 !important;
+    color: #26332c !important;
     font-size: 7px !important;
     line-height: 1.7 !important;
   }
@@ -690,7 +687,7 @@
   }
   #listings .empty {
     padding: 22px 10px !important;
-    border: 1px dashed #bfcac3 !important;
+    border: 1px dashed #d5ddd7 !important;
     border-radius: 11px !important;
     background: var(--mobile-gray-light) !important;
     color: var(--mobile-gray) !important;
@@ -704,13 +701,13 @@
     max-width: 520px !important;
     margin: 15px auto !important;
     padding: 15px !important;
-    border: 1px solid #bfcac3 !important;
+    border: 1px solid #d5ddd7 !important;
     border-radius: 15px !important;
     background: var(--mobile-green-soft) !important;
     box-shadow: none !important;
   }
   .request-strip h2 { color: var(--mobile-green-deep) !important; font-size: 13px !important; font-weight: 900 !important; }
-  .request-strip p { color: #526158 !important; font-size: 9px !important; }
+  .request-strip p { color: #26332c !important; font-size: 9px !important; }
   .request-strip .btn { width: 100% !important; min-height: 39px !important; margin-top: 9px !important; border-radius: 9px !important; font-size: 10px !important; }
   footer { padding: 18px 0 !important; margin-top: 18px !important; }
   footer .footer-inner { gap: 9px !important; }
@@ -880,7 +877,7 @@
   #detailsContent .details-content { grid-template-columns: 1fr 1fr !important; gap: 7px !important; }
   #detailsContent .detail-row {
     padding: 9px !important;
-    border: 1px solid #e0e5e1 !important;
+    border: 1px solid #d5ddd7 !important;
     border-radius: 9px !important;
     background: var(--mobile-gray-light) !important;
     color: var(--mobile-charcoal) !important;
