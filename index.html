@@ -4051,7 +4051,15 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
   </div>
 </section>
 
-</main><footer><div class="container footer-inner"><div><strong>املاک ۰۵۸</strong><p>بازار آنلاین ملک بجنورد</p></div><div><p id="footerAddress">تماس با مدیریت سامانه</p><p id="footerPhone">تماس با مدیریت سایت</p></div></div></footer>
+</main>
+<nav class="mobile-bottom-nav amlak-kilid-nav" aria-label="ناوبری موبایل">
+ <button type="button" class="mobile-nav-item active" onclick="mobileNavHome()"><span class="mobile-nav-icon">⌂</span><span>خانه</span></button>
+ <button type="button" class="mobile-nav-item" onclick="mobileNavSaved()"><span class="mobile-nav-icon">♡</span><span>علاقه‌مندی</span></button>
+ <button type="button" class="mobile-nav-item" onclick="document.getElementById('search').scrollIntoView({behavior:'smooth'});document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===2))"><span class="mobile-nav-icon">⌕</span><span>جست‌وجو</span></button>
+ <button type="button" class="mobile-nav-item post" onclick="openModal()"><span class="mobile-nav-icon">＋</span><span>ثبت آگهی</span></button>
+ <button type="button" class="mobile-nav-item" onclick="mobileNavMyProperties()"><span class="mobile-nav-icon">▤</span><span>آگهی‌های من</span></button>
+</nav>
+<footer><div class="container footer-inner"><div><strong>املاک ۰۵۸</strong><p>بازار آنلاین ملک بجنورد</p></div><div><p id="footerAddress">تماس با مدیریت سامانه</p><p id="footerPhone">تماس با مدیریت سایت</p></div></div></footer>
 
 <section id="install-guide" class="container" aria-labelledby="install-guide-title" style="margin:28px auto;padding:0 16px">
  <div class="install-guide-card">
@@ -8142,5 +8150,56 @@ hr,.divider,.section-divider{border-color:#e0e5e1!important}
  #amlak058-header-target .header-actions .btn{min-height:34px!important;padding:5px 7px!important;font-size:9.5px!important}
  #amlak058-header-target .header-actions #accountButton{min-width:44px!important}
  #amlak058-header-target .header-actions .btn-primary{min-width:82px!important}
+}
+
+/* Mobile marketplace refresh: original implementation for Amlak 058 */
+:root{--primary:#176344;--primary-dark:#124b35;--ink:#26332d;--muted:#78827c;--line:#e4e9e6;--surface:#f5f7f6}
+@media(max-width:650px){
+ html{scroll-padding-top:78px;scroll-behavior:smooth}
+ body{max-width:none!important;margin:0!important;padding-bottom:calc(76px + env(safe-area-inset-bottom))!important;background:#fff!important;color:var(--ink)!important}
+ #amlak058-header-target{position:sticky!important;top:0!important;z-index:100!important;background:#fff!important;border-bottom:1px solid var(--line)!important;box-shadow:0 2px 12px rgba(20,50,35,.05)!important}
+ #amlak058-header-target .container.header-inner{width:94%!important;min-height:62px!important;padding:5px 0!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important}
+ #amlak058-header-target .amlak058-brand-logo{height:43px!important;max-height:43px!important;object-fit:contain!important}
+ #amlak058-header-target .header-actions .btn-primary{background:var(--primary)!important;border:1px solid var(--primary)!important;color:#fff!important;border-radius:9px!important;font-size:11px!important;min-height:37px!important}
+ .mobile-reference-top{padding:13px 4% 9px!important;background:#f5f7f6!important}
+ .mobile-reference-search{height:48px!important;border:1px solid #dfe6e1!important;border-radius:12px!important;background:#fff!important;box-shadow:0 2px 9px rgba(20,50,35,.04)!important}
+ .mobile-reference-search input{font-size:13px!important;color:#26332d!important}
+ .mobile-reference-search button{color:var(--primary)!important}
+ .mobile-reference-location{color:#758078!important;padding:9px 3px 5px!important}
+ .mobile-reference-filters{display:flex!important;overflow-x:auto!important;gap:7px!important;padding:5px 0 3px!important;scrollbar-width:none}
+ .mobile-reference-filters button{white-space:nowrap!important;border:1px solid #dfe6e1!important;border-radius:20px!important;background:#fff!important;color:#405148!important;padding:7px 13px!important;font-size:11px!important}
+ .premium-hero{margin:8px 4%!important;border-radius:16px!important;overflow:hidden!important}
+ .premium-hero-inner{padding:22px 18px!important}
+ .premium-hero-art{display:none!important}
+ .premium-hero-copy h2{font-size:23px!important;line-height:1.8!important}
+ .premium-hero-copy p{font-size:12px!important;line-height:2!important}
+ .search-section,.section{width:92%!important;margin:18px auto!important;padding:0!important}
+ .search-section{background:#fff!important;border:0!important}
+ .search-section .search-panel{display:grid!important;grid-template-columns:1fr 1fr!important;gap:9px!important;padding:13px!important;border:1px solid var(--line)!important;border-radius:14px!important;background:#fff!important}
+ .search-section .search-panel .search-field-wide,.search-section .search-panel>button{grid-column:1/-1!important}
+ .search-section input,.search-section select,.advanced-filters input,.advanced-filters select{min-height:42px!important;border:1px solid #dfe6e1!important;border-radius:9px!important;background:#fff!important;color:#26332d!important}
+ .section-heading{display:flex!important;align-items:center!important;justify-content:space-between!important;margin-bottom:12px!important}
+ .section-heading h2,.search-section-heading h2{font-size:17px!important;color:#26332d!important}
+ .section-heading h2:after{background:var(--primary)!important}
+ #categories .categories{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:9px!important}
+ #categories .category{min-height:105px!important;border:1px solid var(--line)!important;border-radius:12px!important;background:#fff!important;padding:10px 5px!important;box-shadow:none!important}
+ #categories .category-icon{background:#f1f5f2!important;border-radius:10px!important}
+ #categories .category-icon svg{max-width:40px!important;max-height:40px!important}
+ #categories .category-icon svg path{stroke:var(--primary)!important}
+ #categories .category strong{font-size:11px!important;color:#2d3a33!important}
+ #categories .category small{font-size:9px!important;color:#77827b!important}
+ #propertyList .property-card{display:grid!important;grid-template-columns:112px minmax(0,1fr)!important;gap:11px!important;padding:12px 0!important;border-bottom:1px solid var(--line)!important}
+ #propertyList .property-image{width:112px!important;min-width:112px!important;height:108px!important;min-height:108px!important;border-radius:10px!important;object-fit:cover!important}
+ #propertyList .property-info h3{font-size:13px!important;line-height:1.8!important;color:#26332d!important}
+ #propertyList .property-info{min-width:0!important}
+ #propertyList .property-actions .btn{border-radius:8px!important}
+ .mobile-bottom-nav.amlak-kilid-nav{position:fixed!important;z-index:999!important;left:0!important;right:0!important;bottom:0!important;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;align-items:center!important;min-height:63px!important;padding:7px 4px calc(7px + env(safe-area-inset-bottom))!important;background:rgba(255,255,255,.98)!important;border-top:1px solid var(--line)!important;box-shadow:0 -4px 18px rgba(20,50,35,.07)!important}
+ .amlak-kilid-nav .mobile-nav-item{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:2px!important;padding:2px!important;border:0!important;background:transparent!important;color:#77827b!important;font-size:9px!important;font-weight:600!important;line-height:1.5!important}
+ .amlak-kilid-nav .mobile-nav-icon{display:block!important;min-height:23px!important;font-size:21px!important;line-height:1.2!important;color:inherit!important}
+ .amlak-kilid-nav .mobile-nav-item.active{color:var(--primary)!important}
+ .amlak-kilid-nav .mobile-nav-item.post .mobile-nav-icon{display:grid!important;place-items:center!important;width:39px!important;height:34px!important;border-radius:10px!important;background:var(--primary)!important;color:#fff!important;font-size:25px!important;box-shadow:none!important}
+ .amlak-kilid-nav .mobile-nav-item.post{color:var(--primary)!important}
+ .advanced-filter-details{border:1px solid var(--line)!important;border-radius:12px!important;padding:12px!important}
+ a,button{ -webkit-tap-highlight-color:transparent}
 }
 </style>
