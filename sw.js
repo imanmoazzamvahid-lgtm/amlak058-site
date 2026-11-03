@@ -1,11 +1,11 @@
-const CACHE_NAME = "amlak058-shell-v32";
+const CACHE_NAME = "amlak058-shell-v33";
 const APP_SHELL = [
   "/",
   "/manifest.webmanifest?v=21",
   "/icon.svg?v=21",
   "/logo-mark.svg?v=21",
   "/palette.css?v=3",
-  "/mobile-luxe.css?v=2",
+  "/mobile-luxe.css?v=3",
   "/assets/amlak058-home-banner.webp?v=1"
 ];
 self.addEventListener("install", event => {
