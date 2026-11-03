@@ -4262,7 +4262,13 @@ function printCommissionReceipt(){
  }catch(error){console.warn('ذخیره رسید انجام نشد',error);}
  const style='<style>@page{size:A4 portrait;margin:12mm}*{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff;color:#222;font-family:Vazirmatn,Tahoma,Arial,sans-serif;font-size:11pt;line-height:1.7}body{padding:10mm}#commission-print-sheet{display:block!important;width:100%;direction:rtl}.cp-head{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #176344;padding-bottom:12px;margin-bottom:18px}.cp-brand{font-size:20pt;font-weight:900;color:#176344}.cp-sub{font-size:9pt;color:#555}.cp-stamp{width:78px;height:78px;object-fit:contain}.cp-title{text-align:center;font-weight:800;font-size:15pt;margin:12px 0}.cp-location-note{margin:8px 0 12px;padding:8px 12px;border:1px solid #cbd8d0;background:#f4f6f4;color:#26332c;text-align:center;font-size:10pt;font-weight:700;border-radius:6px}.cp-table{width:100%;border-collapse:collapse;margin:14px 0}.cp-table th,.cp-table td{border:1px solid #ddd;padding:8px;text-align:right}.cp-table th{background:#f4f6f4;width:38%}.cp-result{border:1px solid #cbd8d0;border-radius:8px;padding:12px;margin-top:12px}.cp-bottom-stamp{text-align:center;margin:18px 0 8px;color:#555;font-size:9pt;font-weight:700;break-inside:avoid;page-break-inside:avoid}.cp-bottom-stamp img{display:block;width:66px;height:66px;object-fit:contain;margin:0 auto 3px}.cp-foot{display:flex;justify-content:space-between;border-top:1px solid #ddd;margin-top:20px;padding-top:8px;font-size:9pt;color:#555}@media screen{body{max-width:190mm;margin:0 auto}}</style>';
 
- const printDocument='<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>رسید کمیسیون املاک ۰۵۸</title><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">'+style+'</head><body>'+sheet.outerHTML+'</body></html>';
+ const printDocument='<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>رسید کمیسیون املاک ۰۵۸</title><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">'+style+'</head><body>'+sheet.outerHTML+'
+<style id="amlak058-commission-anchor-fix">
+#commission-calculator{scroll-margin-top:100px!important}
+@media(max-width:650px){#commission-calculator{scroll-margin-top:78px!important}}
+</style>
+
+</body></html>';
 
  // ابتدا پنجره مستقل رسید را باز می‌کنیم تا CSS کل سایت وارد چاپ نشود.
  const printWindow=window.open('','amlak058-commission-receipt','width=900,height=700');
@@ -7040,6 +7046,7 @@ header .brand h1 .brand-number{color:#b78317!important}
  }
  #amlak058CommissionWidget>span:first-child{width:23px;height:23px}
 }
+</style>
 <script id="amlak058-commission-floating-widget-script">
 (function(){
  const button=document.getElementById('amlak058CommissionWidget');
@@ -7048,7 +7055,9 @@ header .brand h1 .brand-number{color:#b78317!important}
   const target=document.getElementById('commission-calculator');
   if(!target){window.location.href='/#commission-calculator';return;}
   target.scrollIntoView({behavior:'smooth',block:'start'});
-  if(history&&history.replaceState)history.replaceState(null,'','#commission-calculator');
+  if(window.history&&window.history.replaceState){
+   window.history.replaceState(null,'',window.location.pathname+window.location.search+'#commission-calculator');
+  }
  });
 })();
 </script>
