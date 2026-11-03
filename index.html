@@ -4207,13 +4207,13 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
     <input id="commission-sale-price" type="text" inputmode="numeric" autocomplete="off" placeholder="مثلاً ۵,۰۰۰,۰۰۰,۰۰۰">
     <small id="commission-sale-price-words" class="commission-price-words" aria-live="polite">مبلغ به حروف: صفر تومان</small>
    </label>
-   <p class="commission-note" style="grid-column:1/-1">طبق تصویر نرخ‌نامه: تا ۵ میلیارد تومان، ۰٫۴۵٪؛ نسبت به مازاد ۵ تا ۱۰ میلیارد تومان، ۰٫۳۷٪؛ نسبت به مازاد ۱۰ میلیارد تومان، ۰٫۲۵٪ از هر طرف. پیش‌فروش: ۰٫۶۰٪ از هر طرف. درصدها به‌صورت پلکانی محاسبه می‌شوند.</p>
+   
   </div>
   <div id="commission-rent-fields" class="commission-fields" hidden>
    <label>نوع قرارداد اجاره<select id="commission-rent-type"><option value="rent">اجاره جدید</option><option value="renewal">تمدید اجاره</option></select></label>
    <label>مبلغ ودیعه / رهن (تومان)<input id="commission-deposit" type="number" min="0" inputmode="numeric" placeholder="مبلغ رهن"><small id="commission-deposit-words" class="commission-price-words" aria-live="polite">مبلغ به حروف: صفر تومان</small></label>
    <label>اجاره ماهانه (تومان)<input id="commission-monthly-rent" type="number" min="0" inputmode="numeric" placeholder="اجاره ماهانه"><small id="commission-monthly-rent-words" class="commission-price-words" aria-live="polite">مبلغ به حروف: صفر تومان</small></label>
-   <p class="commission-note" style="grid-column:1/-1">هر یک میلیون تومان رهن معادل ۴۰ هزار تومان اجاره ماهانه محاسبه می‌شود. اجاره جدید: ۷ روز اجاره معادل؛ تمدید: ۳ روز اجاره معادل، برای هر طرف.</p>
+   
   </div>
   <label class="commission-vat"><input id="commission-vat-on" type="checkbox" checked> محاسبه مالیات بر ارزش افزوده روی کمیسیون</label>
   <div class="commission-vat-rate-row"><label>درصد مالیات<input id="commission-vat-rate" type="number" min="0" max="100" step="1" value="10" inputmode="numeric"></label></div>
@@ -8918,6 +8918,47 @@ footer p,footer a{color:#dce8e0!important;font-size:11px!important}
  #categories .categories{grid-template-columns:repeat(2,minmax(0,1fr))!important}
  #propertyList .property-image{width:96px!important;min-width:96px!important}
 }
+}
+
+/* Stable listing photo gallery: horizontal swipe on desktop and mobile */
+#propertyList .property-image,#sampleListings .property-image{
+  display:flex!important;flex-flow:row nowrap!important;align-items:stretch!important;
+  justify-content:flex-start!important;direction:ltr!important;
+  overflow-x:auto!important;overflow-y:hidden!important;
+  scroll-snap-type:x mandatory!important;-webkit-overflow-scrolling:touch!important;
+  scrollbar-width:none!important;
+}
+#propertyList .property-image::-webkit-scrollbar,#sampleListings .property-image::-webkit-scrollbar{display:none!important}
+#propertyList .property-image>img,#sampleListings .property-image>img{
+  display:block!important;flex:0 0 100%!important;width:100%!important;
+  min-width:100%!important;max-width:100%!important;height:100%!important;
+  object-fit:cover!important;object-position:center!important;scroll-snap-align:start!important;
+}
+#propertyList .property-image>.amlak058-luxury-placeholder,
+#sampleListings .property-image>.amlak058-luxury-placeholder,
+#propertyList .property-image>.amlak058-empty-gallery,
+#sampleListings .property-image>.amlak058-empty-gallery{
+  display:block!important;flex:0 0 100%!important;width:100%!important;
+  min-width:100%!important;height:100%!important;min-height:0!important;
+  scroll-snap-align:start!important;
+}
+@media screen and (max-width:650px){
+ #propertyList .property-card,#sampleListings .property-card{
+  grid-template-columns:112px minmax(0,1fr)!important;
+ }
+ #propertyList .property-image,#sampleListings .property-image{
+  width:112px!important;min-width:112px!important;height:116px!important;
+  min-height:116px!important;max-height:116px!important;
+ }
+}
+@media screen and (max-width:380px){
+ #propertyList .property-card,#sampleListings .property-card{
+  grid-template-columns:96px minmax(0,1fr)!important;
+ }
+ #propertyList .property-image,#sampleListings .property-image{
+  width:96px!important;min-width:96px!important;height:100px!important;
+  min-height:100px!important;max-height:100px!important;
+ }
 }
 </style>
 
