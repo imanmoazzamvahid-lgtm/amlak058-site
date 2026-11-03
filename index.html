@@ -3555,7 +3555,69 @@ function printCommissionReceipt(){
  const printWindow=window.open('','_blank');
  if(printWindow){
   printWindow.document.open();
-  printWindow.document.write('<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><title>رسید کمیسیون املاک ۰۵۸</title><style>@page{size:A4 portrait;margin:12mm}*{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff;color:#222;font-family:Vazirmatn,Tahoma,Arial,sans-serif;font-size:11pt;line-height:1.7}body{padding:10mm}#commission-print-sheet{display:block!important;width:100%;direction:rtl}.cp-head{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #292721;padding-bottom:12px;margin-bottom:18px}.cp-brand{font-size:20pt;font-weight:900;color:#292721}.cp-sub{font-size:9pt;color:#555}.cp-stamp{width:78px;height:78px;object-fit:contain}.cp-title{text-align:center;font-weight:800;font-size:15pt;margin:12px 0}.cp-location-note{margin:8px 0 12px;padding:8px 12px;border:1px solid #80560b;background:#fbf7ee;color:#553b10;text-align:center;font-size:10pt;font-weight:700;border-radius:6px}.cp-table{width:100%;border-collapse:collapse;margin:14px 0}.cp-table th,.cp-table td{border:1px solid #ddd;padding:8px;text-align:right}.cp-table th{background:#f4f6f4;width:38%}.cp-result{border:1px solid #cbd8d0;border-radius:8px;padding:12px;margin-top:12px}.cp-bottom-stamp{text-align:center;margin:18px 0 8px;color:#555;font-size:9pt;font-weight:700;break-inside:avoid;page-break-inside:avoid}.cp-bottom-stamp img{display:block;width:66px;height:66px;object-fit:contain;margin:0 auto 3px}.cp-foot{display:flex;justify-content:space-between;border-top:1px solid #ddd;margin-top:20px;padding-top:8px;font-size:9pt;color:#555}@media screen{body{max-width:190mm;margin:0 auto}}</style></head><body>'+sheet.outerHTML+'</body></html>');
+  printWindow.document.write('<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><title>رسید کمیسیون املاک ۰۵۸</title><style>@page{size:A4 portrait;margin:12mm}*{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff;color:#222;font-family:Vazirmatn,Tahoma,Arial,sans-serif;font-size:11pt;line-height:1.7}body{padding:10mm}#commission-print-sheet{display:block!important;width:100%;direction:rtl}.cp-head{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #292721;padding-bottom:12px;margin-bottom:18px}.cp-brand{font-size:20pt;font-weight:900;color:#292721}.cp-sub{font-size:9pt;color:#555}.cp-stamp{width:78px;height:78px;object-fit:contain}.cp-title{text-align:center;font-weight:800;font-size:15pt;margin:12px 0}.cp-location-note{margin:8px 0 12px;padding:8px 12px;border:1px solid #80560b;background:#fbf7ee;color:#553b10;text-align:center;font-size:10pt;font-weight:700;border-radius:6px}.cp-table{width:100%;border-collapse:collapse;margin:14px 0}.cp-table th,.cp-table td{border:1px solid #ddd;padding:8px;text-align:right}.cp-table th{background:#f4f6f4;width:38%}.cp-result{border:1px solid #cbd8d0;border-radius:8px;padding:12px;margin-top:12px}.cp-bottom-stamp{text-align:center;margin:18px 0 8px;color:#555;font-size:9pt;font-weight:700;break-inside:avoid;page-break-inside:avoid}.cp-bottom-stamp img{display:block;width:66px;height:66px;object-fit:contain;margin:0 auto 3px}.cp-foot{display:flex;justify-content:space-between;border-top:1px solid #ddd;margin-top:20px;padding-top:8px;font-size:9pt;color:#555}@media screen{body{max-width:190mm;margin:0 auto}}</style></head><body>'+sheet.outerHTML+'
+<style id="amlak058-header-brand-fix-v1">
+/* Restore the real brand mark in the top-right of the RTL header */
+header.amlak058-site-header{background:#fff!important;border-bottom:1px solid #e0e5e1!important}
+header.amlak058-site-header .amlak058-header-shell{width:100%!important}
+header.amlak058-site-header .header-inner{
+  direction:rtl!important;display:flex!important;flex-direction:row!important;
+  justify-content:space-between!important;align-items:center!important;
+  width:min(1200px,94%)!important;min-height:76px!important;height:auto!important;
+  margin:0 auto!important;padding:8px 0!important;gap:18px!important;flex-wrap:nowrap!important
+}
+header.amlak058-site-header .brand.amlak058-brand-link{
+  order:0!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;
+  flex:0 0 auto!important;width:auto!important;max-width:210px!important;min-width:0!important;
+  margin:0!important;padding:0!important;gap:0!important
+}
+header.amlak058-site-header .amlak058-brand-logo{
+  display:block!important;visibility:visible!important;opacity:1!important;
+  width:176px!important;max-width:100%!important;height:auto!important;max-height:62px!important;
+  object-fit:contain!important
+}
+header.amlak058-site-header .brand.amlak058-brand-link:before,
+header.amlak058-site-header .brand.amlak058-brand-link:after{content:none!important;display:none!important}
+header.amlak058-site-header .header-actions{
+  order:2!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;
+  flex:0 0 auto!important;gap:8px!important;margin-inline-start:auto!important
+}
+header.amlak058-site-header .header-actions .btn{
+  min-height:40px!important;border-radius:9px!important;font-weight:700!important;white-space:nowrap!important
+}
+header.amlak058-site-header .header-actions .btn-primary{
+  background:#176344!important;color:#fff!important;border:1px solid #176344!important
+}
+header.amlak058-site-header .header-actions .btn-outline{
+  background:#fff!important;color:#176344!important;border:1px solid #d9e1dc!important
+}
+header.amlak058-site-header .amlak058-main-nav{
+  direction:rtl!important;display:flex!important;justify-content:center!important;align-items:center!important;
+  gap:clamp(12px,2vw,25px)!important;padding:8px 16px!important;
+  border-top:1px solid #edf0ed!important;background:#fff!important
+}
+header.amlak058-site-header .amlak058-main-nav a{
+  color:#46534b!important;font-weight:600!important;text-decoration:none!important;white-space:nowrap!important
+}
+header.amlak058-site-header .amlak058-main-nav a:hover,
+header.amlak058-site-header .amlak058-main-nav a:focus{color:#176344!important}
+@media(max-width:650px){
+  header.amlak058-site-header .header-inner{
+    width:100%!important;min-height:62px!important;padding:7px 12px!important;gap:7px!important
+  }
+  header.amlak058-site-header .amlak058-brand-logo{width:132px!important;max-height:48px!important}
+  header.amlak058-site-header .header-actions{gap:5px!important}
+  header.amlak058-site-header .header-actions #accountButton{display:none!important}
+  header.amlak058-site-header .header-actions .btn-primary{font-size:11px!important;padding:8px 10px!important;min-height:36px!important}
+  header.amlak058-site-header .amlak058-main-nav{
+    justify-content:flex-start!important;overflow-x:auto!important;white-space:nowrap!important;
+    scrollbar-width:none!important;padding:7px 12px!important;gap:17px!important
+  }
+  header.amlak058-site-header .amlak058-main-nav::-webkit-scrollbar{display:none!important}
+}
+</style>
+
+</body></html>');
   printWindow.document.close();
   printWindow.onload=function(){printWindow.focus();setTimeout(function(){printWindow.print();},300);};
  }else{
