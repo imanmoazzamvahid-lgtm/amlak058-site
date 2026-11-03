@@ -4656,7 +4656,6 @@ function updatePriceSummary(){const price=parseMoney(document.getElementById('pr
 ['price','deposit','monthlyRent'].forEach(id=>{const el=document.getElementById(id);el.addEventListener('input',()=>{const pos=el.selectionStart;const before=el.value;const clean=latinDigits(before).replace(/[^0-9,٬،\s]/g,'').replace(/[٬،,\s]/g,'');if(clean!==before.replace(/[٬،,\s]/g,'')){el.value=clean}updatePriceSummary()});el.addEventListener('blur',()=>{formatMoneyField(el);updatePriceSummary()})});
 mainCategoryInput.addEventListener('change',updatePriceSummary);
 function getFavorites(){try{return JSON.parse(localStorage.getItem(FAVORITES_KEY)||'[]')}catch{return []}}
-function getFavorites(){try{return JSON.parse(localStorage.getItem(FAVORITES_KEY)||'[]')}catch{return []}}
 function toggleFavorite(id,button){const fav=getFavorites();const key=String(id);const next=fav.includes(key)?fav.filter(x=>x!==key):[...fav,key];localStorage.setItem(FAVORITES_KEY,JSON.stringify(next));button.classList.toggle('saved',next.includes(key));button.textContent=next.includes(key)?'♥ ذخیره شد':'♡ ذخیره آگهی'}
 let currentWizardStep=0,propertyMap=null,propertyMapMarker=null,defaultMapCenter=[37.475,57.329];
 function openModal(){const globalMessage=document.getElementById('publishGlobalMessage');if(globalMessage){globalMessage.textContent='';globalMessage.style.color='';}document.getElementById('propertyModal').style.display='block';wizardGoTo(0);setTimeout(()=>{initPropertyMap();if(propertyMap)propertyMap.invalidateSize()},180)}
