@@ -3887,12 +3887,13 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
 }
 </style>
 
+ <link rel="preload" as="image" href="/assets/amlak058-home-banner.webp?v=1" fetchpriority="high"/>
 </head><body>
 
 <header id="amlak058-header-target" class="amlak058-site-header">
 <div class="amlak058-header-shell">
 <div class="container header-inner">
-<a class="brand amlak058-brand-link" href="#home" aria-label="صفحه اصلی املاک ۰۵۸"><img class="amlak058-brand-logo" src="/logo-mark.svg?v=22" alt="لوگوی املاک ۰۵۸" width="690" height="190" fetchpriority="high"/></a>
+<a class="brand amlak058-brand-link" href="#home" aria-label="صفحه اصلی املاک ۰۵۸"><img class="amlak058-brand-logo" src="/icon.svg?v=26" alt="" aria-hidden="true" width="48" height="48" fetchpriority="high"/><span class="amlak058-brand-wordmark">املاک <strong>۰۵۸</strong></span></a>
 <nav class="amlak058-main-nav" aria-label="منوی اصلی">
 <a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a><a href="/s/bojnurd/rent-residential/">رهن و اجاره</a><a href="#commission-calculator">محاسبه کمیسیون</a>
 </nav>
@@ -8459,15 +8460,20 @@ header#amlak058-header-target,.amlak058-site-header{
   direction:rtl!important;overflow:visible!important;flex-wrap:nowrap!important;
 }
 #amlak058-header-target .brand.amlak058-brand-link{
-  grid-area:brand!important;display:flex!important;flex:0 0 190px!important;
-  width:190px!important;max-width:190px!important;min-width:0!important;height:60px!important;
+  grid-area:brand!important;display:flex!important;flex:0 0 170px!important;
+  width:170px!important;max-width:170px!important;min-width:0!important;height:60px!important;
   margin:0!important;padding:0!important;align-items:center!important;justify-content:flex-start!important;
-  line-height:0!important;background:transparent!important;overflow:hidden!important;
+  gap:9px!important;line-height:1.2!important;background:transparent!important;overflow:hidden!important;
 }
 #amlak058-header-target .amlak058-brand-logo{
-  display:block!important;width:100%!important;height:58px!important;max-width:100%!important;
-  max-height:58px!important;object-fit:contain!important;object-position:right center!important;
+  display:block!important;flex:0 0 46px!important;width:46px!important;height:46px!important;
+  min-width:46px!important;max-width:46px!important;max-height:46px!important;object-fit:contain!important;
 }
+#amlak058-header-target .amlak058-brand-wordmark{
+  display:inline-flex!important;align-items:center!important;gap:4px!important;white-space:nowrap!important;
+  color:#26332c!important;font:900 17px/1.3 Vazirmatn,Tahoma,Arial,sans-serif!important;
+}
+#amlak058-header-target .amlak058-brand-wordmark strong{color:#176344!important;font-weight:950!important;}
 #amlak058-header-target .brand.amlak058-brand-link:before,
 #amlak058-header-target .brand.amlak058-brand-link:after{content:none!important;display:none!important}
 #amlak058-header-target nav.amlak058-main-nav{
@@ -8514,8 +8520,8 @@ header#amlak058-header-target,.amlak058-site-header{
   position:relative!important;isolation:isolate!important;overflow:hidden!important;
   width:min(1200px,calc(100% - 40px))!important;margin:22px auto 18px!important;padding:0!important;
   border:0!important;border-radius:22px!important;color:#fff!important;
-  background:radial-gradient(circle at 78% 15%,rgba(117,159,133,.34),transparent 32%),
-    linear-gradient(120deg,#123f2e 0%,#176344 62%,#2b7655 100%)!important;
+  background:linear-gradient(90deg,rgba(15,54,39,.98) 0%,rgba(20,76,52,.92) 49%,rgba(18,63,46,.44) 100%),
+    url('/assets/amlak058-home-banner.webp?v=1') 70% center/cover no-repeat!important;
   box-shadow:0 14px 36px rgba(18,63,46,.12)!important;
 }
 .premium-hero:before{
@@ -8527,10 +8533,10 @@ header#amlak058-header-target,.amlak058-site-header{
 .premium-hero:after{display:none!important}
 .premium-hero-inner{
   width:min(1120px,calc(100% - 64px))!important;min-height:390px!important;margin:0 auto!important;
-  display:grid!important;grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr)!important;
-  gap:28px!important;align-items:center!important;padding:26px 0 20px!important;
+  display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+  gap:0!important;align-items:center!important;padding:26px 0 20px!important;
 }
-.premium-hero-copy{max-width:590px!important;padding:12px 0 18px!important;text-align:right!important}
+.premium-hero-copy{max-width:650px!important;padding:12px 0 18px!important;text-align:right!important;position:relative!important;z-index:1!important}
 .premium-kicker{
   display:inline-flex!important;align-items:center!important;gap:8px!important;
   margin:0 0 16px!important;padding:7px 13px!important;border-radius:999px!important;
@@ -8564,7 +8570,7 @@ header#amlak058-header-target,.amlak058-site-header{
 .premium-proof div{display:flex!important;flex-direction:column!important;gap:2px!important}
 .premium-proof b{color:#fff!important;font-size:12px!important}
 .premium-proof small{color:#d4e4da!important;font-size:11px!important}
-.premium-hero-art{min-height:310px!important;display:flex!important;align-items:center!important;justify-content:center!important}
+.premium-hero-art{display:none!important}
 .premium-hero-art svg{width:min(100%,500px)!important;height:auto!important;filter:drop-shadow(0 16px 24px rgba(0,0,0,.18))!important}
 .premium-art-orbit{border-color:rgba(255,255,255,.18)!important}
 .premium-art-sun{background:#dce9e1!important;opacity:.16!important}
@@ -8799,9 +8805,10 @@ footer p,footer a{color:#dce8e0!important;font-size:11px!important}
   width:calc(100% - 24px)!important;min-height:64px!important;height:64px!important;padding:5px 0!important;gap:8px!important;
  }
  #amlak058-header-target .brand.amlak058-brand-link{
-  flex:0 1 142px!important;width:142px!important;max-width:142px!important;height:52px!important;
+  flex:0 1 148px!important;width:148px!important;max-width:148px!important;height:52px!important;gap:7px!important;
  }
- #amlak058-header-target .amlak058-brand-logo{height:48px!important;max-height:48px!important}
+ #amlak058-header-target .amlak058-brand-logo{flex-basis:40px!important;width:40px!important;height:40px!important;min-width:40px!important;max-width:40px!important}
+ #amlak058-header-target .amlak058-brand-wordmark{font-size:15px!important}
  #amlak058-header-target nav.amlak058-main-nav{display:none!important}
  #amlak058-header-target .header-actions{display:flex!important;flex:0 0 auto!important;gap:5px!important}
  #amlak058-header-target .header-actions>.btn{
@@ -8910,7 +8917,9 @@ footer p,footer a{color:#dce8e0!important;font-size:11px!important}
  .mobile-bottom-nav:not(.amlak-kilid-nav){display:none!important}
 }
 @media screen and (max-width:380px){
- #amlak058-header-target .brand.amlak058-brand-link{flex-basis:112px!important;width:112px!important}
+ #amlak058-header-target .brand.amlak058-brand-link{flex-basis:122px!important;width:122px!important}
+ #amlak058-header-target .amlak058-brand-logo{flex-basis:36px!important;width:36px!important;height:36px!important;min-width:36px!important;max-width:36px!important}
+ #amlak058-header-target .amlak058-brand-wordmark{font-size:13px!important}
  #amlak058-header-target .header-actions>.btn{padding:6px 7px!important;font-size:9px!important}
  #amlak058-header-target .header-actions .btn-primary{min-width:80px!important}
  .premium-hero-copy h2{font-size:20px!important}
