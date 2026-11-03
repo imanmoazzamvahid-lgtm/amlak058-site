@@ -3895,7 +3895,7 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
 <div class="container header-inner">
 <a class="brand amlak058-brand-link" href="#home" aria-label="صفحه اصلی املاک ۰۵۸"><img class="amlak058-brand-logo" src="/icon.svg?v=26" alt="" aria-hidden="true" width="48" height="48" fetchpriority="high"/><span class="amlak058-brand-wordmark">املاک <strong>۰۵۸</strong></span></a>
 <nav class="amlak058-main-nav" aria-label="منوی اصلی">
-<a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a><a href="/s/bojnurd/rent-residential/">رهن و اجاره</a><a href="#commission-calculator">محاسبه کمیسیون</a>
+<a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a><a href="/s/bojnurd/rent-residential/">رهن و اجاره</a>
 </nav>
 <div class="header-actions">
 <button class="btn btn-outline" id="accountButton" onclick="handleAccountButton()" aria-label="ورود و ثبت‌نام">ورود</button>
@@ -7033,6 +7033,25 @@ header .brand h1 .brand-number{color:#b78317!important}
 #amlak058SupportPanel .support-result{font-size:12px;line-height:1.8;margin-top:9px}
 @media(min-width:651px){#amlak058SupportWidget{bottom:24px;right:24px}#amlak058SupportPanel{bottom:90px;right:24px}}
 </style>
+<button id="amlak058CommissionWidget" type="button" aria-label="رفتن به محاسبه آنلاین کمیسیون"><span aria-hidden="true">٪</span><span>محاسبه کمیسیون</span></button>
+<style id="amlak058-commission-floating-widget">
+#amlak058CommissionWidget{position:fixed;left:24px;right:auto;bottom:24px;z-index:2490;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:46px;padding:0 16px;border:1px solid #dce6df;border-radius:999px;background:#176344;color:#fff;font:800 12px Vazirmatn,Tahoma,Arial,sans-serif;box-shadow:0 5px 18px rgba(23,99,68,.2);cursor:pointer;white-space:nowrap}
+#amlak058CommissionWidget>span:first-child{display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.16);font-size:17px}
+#amlak058CommissionWidget:focus-visible{outline:3px solid #9bc8ae;outline-offset:3px}
+@media(max-width:650px){#amlak058CommissionWidget{left:12px;right:auto;bottom:calc(78px + env(safe-area-inset-bottom));height:40px;padding:0 12px;font-size:11px;z-index:2490}}
+</style>
+<script id="amlak058-commission-floating-widget-script">
+(function(){
+ const button=document.getElementById('amlak058CommissionWidget');
+ if(!button)return;
+ button.addEventListener('click',function(){
+  const target=document.getElementById('commission-calculator');
+  if(!target){window.location.href='/#commission-calculator';return;}
+  target.scrollIntoView({behavior:'smooth',block:'start'});
+  if(history&&history.replaceState)history.replaceState(null,'','#commission-calculator');
+ });
+})();
+</script>
 <button id="amlak058SupportWidget" type="button" aria-expanded="false" aria-controls="amlak058SupportPanel"><span class="support-icon">🎧</span><span>پشتیبانی آنلاین</span></button>
 <section id="amlak058SupportPanel" aria-label="فرم پشتیبانی آنلاین">
  <div class="support-head"><strong>پشتیبانی املاک ۰۵۸</strong><button type="button" id="amlak058SupportClose" aria-label="بستن">×</button></div>
