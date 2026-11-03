@@ -2974,6 +2974,18 @@ header .btn-outline{border-color:#d8c28f!important;color:#79540d!important;backg
 <section class="container section" id="commission-calculator" aria-labelledby="commission-title">
  <div class="section-heading"><h2 id="commission-title">محاسبه آنلاین کمیسیون بنگاه در بجنورد</h2><span class="muted">کمیسیون خرید و فروش، پیش‌فروش، رهن، اجاره و تمدید با امکان چاپ رسید</span></div>
  <div class="commission-box">
+  <div class="commission-fields commission-extra-fields">
+   <label>نام همکار / مشاور تنظیم‌کننده<input id="commission-agent-name" type="text" maxlength="100" placeholder="نام مشاور املاک"></label>
+   <label>نشانی ملک / توضیحات معامله<input id="commission-property-address" type="text" maxlength="180" placeholder="نشانی یا مشخصات ملک"></label>
+  </div>
+  <div id="commission-sale-parties" class="commission-fields commission-extra-fields">
+   <label>نام خریدار<input id="commission-buyer-name" type="text" maxlength="100" placeholder="نام و نام خانوادگی خریدار"></label>
+   <label>نام فروشنده<input id="commission-seller-name" type="text" maxlength="100" placeholder="نام و نام خانوادگی فروشنده"></label>
+  </div>
+  <div id="commission-rent-parties" class="commission-fields commission-extra-fields" hidden>
+   <label>نام مستأجر<input id="commission-tenant-name" type="text" maxlength="100" placeholder="نام و نام خانوادگی مستأجر"></label>
+   <label>نام موجر<input id="commission-landlord-name" type="text" maxlength="100" placeholder="نام و نام خانوادگی موجر"></label>
+  </div>
   <div class="commission-tabs" role="group" aria-label="نوع معامله">
    <button type="button" class="commission-tab active" data-kind="sale" onclick="setCommissionKind('sale')">خرید و فروش</button>
    <button type="button" class="commission-tab" data-kind="rent" onclick="setCommissionKind('rent')">رهن و اجاره</button>
@@ -3000,6 +3012,11 @@ header .btn-outline{border-color:#d8c28f!important;color:#79540d!important;backg
  </div>
 </section>
 <div id="commission-print-sheet" aria-hidden="true"></div>
+<div id="commission-history-panel" class="commission-history-panel">
+ <button type="button" class="btn btn-outline" id="commission-history-toggle" onclick="toggleCommissionHistory()">مشاهده رسیدهای ذخیره‌شده</button>
+ <div id="commission-history-list" hidden></div>
+ <p class="commission-history-note">رسیدها برای دسترسی مجدد، روی همین مرورگر و دستگاه ذخیره می‌شوند.</p>
+</div>
 <style id="commission-print-styles">
 #commission-calculator .commission-print-btn{width:100%;margin-top:10px;padding:12px;background:#fff;color:#292721;border:1px solid #292721;border-radius:10px;font:inherit;font-weight:700;cursor:pointer}
 #commission-print-sheet{display:none}
@@ -3038,6 +3055,15 @@ function printCommissionReceipt(){
  const stamp='<img class="cp-stamp" src="/stamp-seal.svg?v=4" alt="مهر املاک ۰۵۸" />'
  const date=new Intl.DateTimeFormat('fa-IR',{year:'numeric',month:'long',day:'numeric'}).format(new Date());
  sheet.innerHTML='<header class="cp-head"><div><div class="cp-brand">املاک ۰۵۸</div><div class="cp-sub">محاسبه آنلاین کمیسیون املاک</div><div class="cp-sub">amlak058.ir</div></div>'+stamp+'</header><div class="cp-title">رسید محاسبه کمیسیون '+(kind==='rent'?'رهن و اجاره':'خرید و فروش')+'</div><div class="cp-location-note">این محاسبه و نرخ‌های کمیسیون صرفاً مخصوص شهر بجنورد است و برای شهرهای دیگر اعتبار ندارد.</div><div>تاریخ چاپ: '+date+'</div><table class="cp-table"><tbody>'+(rows.length?rows.join(''):'<tr><td>اطلاعات معامله ثبت نشده است.</td></tr>')+'</tbody></table><div class="cp-result">'+result.innerHTML+'</div><div class="cp-bottom-stamp"><img src="/stamp-seal.svg?v=4" alt="مهر املاک ۰۵۸"><div>مهر سامانه املاک ۰۵۸</div></div><footer class="cp-foot"><span>املاک ۰۵۸</span><span>amlak058.ir</span></footer>';
+ // Keep a local copy so the user can reopen and print this receipt later.
+ try{
+  const history=JSON.parse(localStorage.getItem('amlak058_commission_receipts_v1')||'[]');
+  const receiptId='058-'+Date.now().toString().slice(-9);
+  const receiptTitle=(kind==='rent'?'رهن و اجاره':'خرید و فروش')+' | '+(document.getElementById('commission-agent-name')?.value||'بدون نام مشاور');
+  history.unshift({id:receiptId,title:receiptTitle,date:date,html:sheet.innerHTML});
+  localStorage.setItem('amlak058_commission_receipts_v1',JSON.stringify(history.slice(0,30)));
+  renderCommissionHistory();
+ }catch(e){console.warn('ذخیره رسید انجام نشد',e);}
  // Print from a clean document so mobile browsers cannot include the rest of the page.
  const printWindow=window.open('','_blank');
  if(printWindow){
@@ -3049,8 +3075,36 @@ function printCommissionReceipt(){
   alert('مرورگر اجازه باز کردن صفحه چاپ را نداد. اجازه باز شدن پنجره را برای سایت فعال کنید.');
  }
 }
+function getCommissionHistory(){
+ try{return JSON.parse(localStorage.getItem('amlak058_commission_receipts_v1')||'[]');}catch(e){return [];}
+}
+function renderCommissionHistory(){
+ const list=document.getElementById('commission-history-list');if(!list)return;
+ const items=getCommissionHistory();
+ list.innerHTML=items.length?items.map((item,index)=>'<div class="commission-history-item"><div><strong>'+escapeCommissionText(item.title)+'</strong><small>'+escapeCommissionText(item.id)+' · '+escapeCommissionText(item.date)+'</small></div><button type="button" class="btn btn-outline" onclick="printSavedCommissionReceipt('+index+')">چاپ مجدد</button></div>').join(''):'<p class="muted">هنوز رسیدی ذخیره نشده است.</p>';
+}
+function escapeCommissionText(value){return String(value||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function toggleCommissionHistory(){
+ const list=document.getElementById('commission-history-list');if(!list)return;
+ list.hidden=!list.hidden;renderCommissionHistory();
+}
+function printSavedCommissionReceipt(index){
+ const item=getCommissionHistory()[index];if(!item)return;
+ const w=window.open('','_blank');if(!w){alert('اجازه باز شدن پنجره چاپ را فعال کنید.');return;}
+ w.document.open();
+ w.document.write('<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><title>چاپ مجدد رسید کمیسیون</title><style>@page{size:A4 portrait;margin:12mm}*{box-sizing:border-box}body{margin:0;padding:10mm;color:#222;font-family:Vazirmatn,Tahoma,sans-serif;font-size:11pt;line-height:1.7}#commission-print-sheet{display:block!important;width:100%;direction:rtl}.cp-head{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #292721;padding-bottom:12px;margin-bottom:18px}.cp-brand{font-size:20pt;font-weight:900}.cp-sub{font-size:9pt;color:#555}.cp-stamp{width:78px;height:78px;object-fit:contain}.cp-title{text-align:center;font-weight:800;font-size:15pt;margin:12px 0}.cp-location-note{margin:8px 0 12px;padding:8px;border:1px solid #ddd;text-align:center;font-size:10pt}.cp-table{width:100%;border-collapse:collapse;margin:14px 0}.cp-table th,.cp-table td{border:1px solid #ddd;padding:8px;text-align:right}.cp-table th{background:#f4f6f4;width:38%}.cp-result{border:1px solid #cbd8d0;border-radius:8px;padding:12px;margin-top:12px}.cp-bottom-stamp{text-align:center;margin:18px 0 8px}.cp-bottom-stamp img{width:66px;height:66px;object-fit:contain}.cp-foot{display:flex;justify-content:space-between;border-top:1px solid #ddd;margin-top:20px;padding-top:8px;font-size:9pt;color:#555}</style></head><body>'+item.html+'</body></html>');
+ w.document.close();w.onload=function(){w.focus();setTimeout(function(){w.print();},300);};
+}
+document.addEventListener('DOMContentLoaded',renderCommissionHistory);
 </script>
 <style id="commission-calculator-styles">
+#commission-calculator .commission-extra-fields{margin:12px 0;padding:12px;border:1px solid #e5ebe7;border-radius:12px;background:#fbfdfb}
+#commission-history-panel{max-width:720px;margin:14px auto 0;padding:14px;border:1px solid #e1e9e4;border-radius:14px;background:#fff}
+#commission-history-panel #commission-history-list{margin-top:12px}
+.commission-history-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #edf0ed}
+.commission-history-item:last-child{border-bottom:0}
+.commission-history-item small{display:block;color:#777;font-size:11px}
+.commission-history-note{font-size:11px;color:#777;margin-top:8px}
 #commission-calculator .commission-box{max-width:720px;margin:0 auto;padding:18px;border:1px solid #e6e6e6;border-radius:18px;background:#fff;box-shadow:0 4px 18px #00000008}
 #commission-calculator .commission-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
 #commission-calculator .commission-tab{padding:11px;border:1px solid #ddd;border-radius:10px;background:#fff;color:#444;font:inherit}
@@ -3105,6 +3159,8 @@ function printCommissionReceipt(){
   document.querySelectorAll('#commission-calculator .commission-tab').forEach(b=>b.classList.toggle('active',b.dataset.kind===kind));
   document.getElementById('commission-sale-fields').hidden=kind!=='sale';
   document.getElementById('commission-rent-fields').hidden=kind!=='rent';
+  document.getElementById('commission-sale-parties').hidden=kind!=='sale';
+  document.getElementById('commission-rent-parties').hidden=kind!=='rent';
   document.getElementById('commission-result').textContent='اطلاعات معامله را وارد کنید و محاسبه را بزنید.';
  };
  window.calculateCommission=function(){
