@@ -4287,7 +4287,7 @@ function printCommissionReceipt(){
   document.getElementById('commission-result').textContent='اطلاعات معامله را وارد کنید و محاسبه را بزنید.';
  };
  window.calculateCommission=function(){
-  const val=id=>{const raw=faDigits(document.getElementById(id)?.value||'').replace(/[٬,،\\s]/g,'').replace(/[^0-9.-]/g,'');return Math.max(0,Number(raw)||0);};
+  const val=id=>{const raw=faDigits(document.getElementById(id)?.value||'').replace(/[٬,،\s]/g,'').replace(/[^0-9.-]/g,'');return Math.max(0,Number(raw)||0);};
   const vatOn=document.getElementById('commission-vat-on').checked;
   const vatRate=vatOn?val('commission-vat-rate')/100:0;
   let base=0,details='';
