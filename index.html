@@ -7016,23 +7016,6 @@ header .brand h1 .brand-number{color:#b78317!important}
 })();
 </script>
 
-<!-- پشتیبانی آنلاین داخل سایت املاک ۰۵۸ -->
-<style id="amlak058-onsite-support-v2">
-#amlak058SupportWidget{position:fixed;z-index:99990;right:18px;bottom:calc(88px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:9px;padding:11px 17px;border:1px solid #d9bd71;border-radius:999px;background:linear-gradient(135deg,#d9b34a,#9e6b0b);color:#fffdf7!important;font:800 13px/1.5 Vazirmatn,Tahoma,sans-serif;box-shadow:0 7px 24px #583f0b3d;cursor:pointer}
-#amlak058SupportWidget .support-icon{display:grid;place-items:center;width:27px;height:27px;border-radius:50%;background:#ffffff33;font-size:17px}
-#amlak058SupportPanel{position:fixed;z-index:99991;right:18px;bottom:calc(145px + env(safe-area-inset-bottom));width:min(360px,calc(100vw - 28px));background:#fff;border:1px solid #e7e1d4;border-radius:18px;box-shadow:0 14px 48px #17251e35;overflow:hidden;font-family:Vazirmatn,Tahoma,sans-serif;color:#24352c;display:none}
-#amlak058SupportPanel.open{display:block}
-#amlak058SupportPanel .support-head{background:#174b3a;color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
-#amlak058SupportPanel .support-head button{background:transparent;border:0;color:#fff;font-size:23px;cursor:pointer}
-#amlak058SupportPanel .support-body{padding:15px}
-#amlak058SupportPanel label{display:block;font-size:12px;margin:9px 0 5px}
-#amlak058SupportPanel input,#amlak058SupportPanel textarea{box-sizing:border-box;width:100%;border:1px solid #d9ded9;border-radius:10px;padding:11px;font:13px Vazirmatn,Tahoma,sans-serif;background:#fff;color:#222}
-#amlak058SupportPanel textarea{min-height:95px;resize:vertical}
-#amlak058SupportPanel .support-send{width:100%;border:0;border-radius:10px;padding:12px;margin-top:12px;background:#174b3a;color:#fff;font:700 14px Vazirmatn,Tahoma,sans-serif;cursor:pointer}
-#amlak058SupportPanel .support-note{font-size:11px;color:#68756d;line-height:1.9;margin:0}
-#amlak058SupportPanel .support-result{font-size:12px;line-height:1.8;margin-top:9px}
-@media(min-width:651px){#amlak058SupportWidget{bottom:24px;right:24px}#amlak058SupportPanel{bottom:90px;right:24px}}
-</style>
 <button id="amlak058CommissionWidget" type="button" aria-label="رفتن به محاسبه آنلاین کمیسیون"><span aria-hidden="true">٪</span><span>محاسبه کمیسیون</span></button>
 <style id="amlak058-commission-floating-widget">
 #amlak058CommissionWidget{position:fixed;left:24px;right:auto;bottom:24px;z-index:2490;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:46px;padding:0 16px;border:1px solid #dce6df;border-radius:999px;background:#176344;color:#fff;font:800 12px Vazirmatn,Tahoma,Arial,sans-serif;box-shadow:0 5px 18px rgba(23,99,68,.2);cursor:pointer;white-space:nowrap}
@@ -7052,41 +7035,6 @@ header .brand h1 .brand-number{color:#b78317!important}
  });
 })();
 </script>
-<button id="amlak058SupportWidget" type="button" aria-expanded="false" aria-controls="amlak058SupportPanel"><span class="support-icon">🎧</span><span>پشتیبانی آنلاین</span></button>
-<section id="amlak058SupportPanel" aria-label="فرم پشتیبانی آنلاین">
- <div class="support-head"><strong>پشتیبانی املاک ۰۵۸</strong><button type="button" id="amlak058SupportClose" aria-label="بستن">×</button></div>
- <div class="support-body">
-  <p class="support-note">پیام خود را همین‌جا در سایت ارسال کنید. کارشناسان املاک ۰۵۸ پیگیری می‌کنند.</p>
-  <form id="amlak058SupportForm">
-   <label for="amlak058SupportName">نام و نام خانوادگی</label><input id="amlak058SupportName" maxlength="100" required placeholder="نام شما">
-   <label for="amlak058SupportPhone">شماره تماس</label><input id="amlak058SupportPhone" inputmode="tel" maxlength="20" required placeholder="مثلاً ۰۹۱۵۱۲۳۴۵۶۷">
-   <label for="amlak058SupportMessage">متن پیام</label><textarea id="amlak058SupportMessage" maxlength="3000" required placeholder="چطور می‌توانیم راهنمایی‌تان کنیم؟"></textarea>
-   <button class="support-send" id="amlak058SupportSend" type="submit">ارسال پیام</button>
-   <div class="support-result" id="amlak058SupportResult" role="status"></div>
-  </form>
- </div>
-</section>
-<script>
-(function(){
- const toggle=document.getElementById('amlak058SupportWidget'),panel=document.getElementById('amlak058SupportPanel'),close=document.getElementById('amlak058SupportClose'),form=document.getElementById('amlak058SupportForm'),result=document.getElementById('amlak058SupportResult'),send=document.getElementById('amlak058SupportSend');
- if(!toggle||!panel||!form)return;
- function setOpen(open){panel.classList.toggle('open',open);toggle.setAttribute('aria-expanded',String(open))}
- toggle.addEventListener('click',()=>setOpen(!panel.classList.contains('open')));close.addEventListener('click',()=>setOpen(false));
- form.addEventListener('submit',async function(e){
-  e.preventDefault();send.disabled=true;send.textContent='در حال ارسال…';result.style.color='#68756d';result.textContent='';
-  const full_name=document.getElementById('amlak058SupportName').value.trim(),phone=document.getElementById('amlak058SupportPhone').value.trim(),message=document.getElementById('amlak058SupportMessage').value.trim();
-  try{
-   const client=db;
-   if(!client)throw new Error('اتصال سامانه برقرار نیست. صفحه را تازه‌سازی کنید.');
-   const {error}=await client.from('website_support_requests').insert({full_name,phone,message});
-   if(error)throw error;
-   form.reset();result.style.color='#176344';result.textContent='پیام شما با موفقیت در سایت ثبت شد. کارشناسان پیگیری خواهند کرد.';
-  }catch(err){result.style.color='#a64236';result.textContent='ارسال انجام نشد: '+(err.message||'خطای نامشخص')}
-  finally{send.disabled=false;send.textContent='ارسال پیام'}
- });
-})();
-</script>
-
 <style id="amlak058-header-rebuild-v1">
 /* هدر بازطراحی‌شده: سه ردیف مستقل، با پالت سبز، طوسی و سفید */
 .amlak058-site-header{
@@ -9130,6 +9078,68 @@ footer p,footer a{color:#dce8e0!important;font-size:11px!important}
   .mobile-bottom-nav.amlak-kilid-nav>.mobile-nav-item>span:last-child{font-size:8px!important}
 }
 
+</style>
+
+
+<style id="amlak058-mobile-photo-and-support-cleanup-v1">
+/* Remove the floating support launcher/panel without changing account or contact features. */
+#amlak058SupportWidget,#amlak058SupportPanel{display:none!important}
+
+/* Larger listing photos on phones; show the complete uploaded photo rather than cropping it. */
+@media screen and (max-width:650px){
+  #propertyList .property-card,#sampleListings .property-card{
+    display:grid!important;
+    grid-template-columns:minmax(128px,43%) minmax(0,1fr)!important;
+    grid-template-areas:"image info"!important;
+    align-items:stretch!important;
+    min-height:142px!important;
+  }
+  #propertyList .property-image,#sampleListings .property-image{
+    grid-area:image!important;
+    width:100%!important;min-width:0!important;
+    height:142px!important;min-height:142px!important;max-height:none!important;
+    overflow-x:auto!important;overflow-y:hidden!important;
+    border-radius:0!important;background:#f1f4f1!important;
+  }
+  #propertyList .property-image>img,#sampleListings .property-image>img{
+    flex:0 0 100%!important;width:100%!important;min-width:100%!important;
+    max-width:100%!important;height:100%!important;
+    object-fit:contain!important;object-position:center!important;
+    background:#f1f4f1!important;
+  }
+  #propertyList .property-info,#sampleListings .property-info{
+    grid-area:info!important;min-width:0!important;
+  }
+
+  /* Main property detail gallery: preserve the whole photo in the visible frame. */
+  #propertyDetailPage .pd-gallery-main{
+    width:100%!important;height:auto!important;aspect-ratio:4/3!important;
+    max-height:62vh!important;background:#f1f4f1!important;overflow:hidden!important;
+  }
+  #propertyDetailPage .pd-gallery-main img{
+    display:block!important;width:100%!important;height:100%!important;
+    object-fit:contain!important;object-position:center!important;background:#f1f4f1!important;
+  }
+  #propertyDetailPage .pd-gallery-tile img{
+    object-fit:contain!important;object-position:center!important;background:#f1f4f1!important;
+  }
+
+  /* Legacy details modal gallery, if opened by an older route. */
+  #detailsModal .details-gallery{grid-template-columns:1fr!important}
+  #detailsModal .details-gallery img{
+    display:block!important;width:100%!important;height:clamp(220px,64vw,420px)!important;
+    max-height:68vh!important;aspect-ratio:auto!important;
+    object-fit:contain!important;object-position:center!important;background:#f1f4f1!important;
+  }
+}
+@media screen and (max-width:380px){
+  #propertyList .property-card,#sampleListings .property-card{
+    grid-template-columns:minmax(118px,42%) minmax(0,1fr)!important;
+  }
+  #propertyList .property-image,#sampleListings .property-image{
+    height:132px!important;min-height:132px!important;
+  }
+}
 </style>
 
 </body>
