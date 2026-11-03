@@ -4417,8 +4417,26 @@ function printCommissionReceipt(){
 
  const printDocument='<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>رسید کمیسیون املاک ۰۵۸</title><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">'+style+'</head><body>'+sheet.outerHTML+'</body></html>';
 
- // چاپ در همان صفحه انجام می‌شود تا مسدودکننده پنجره‌های بازشو در موبایل
- // و مرورگرهای درون‌برنامه‌ای مانع اجرای دستور چاپ نشود.
+ // ابتدا پنجره مستقل رسید را باز می‌کنیم تا CSS کل سایت وارد چاپ نشود.
+ const printWindow=window.open('','amlak058-commission-receipt','width=900,height=700');
+ if(printWindow&&!printWindow.closed){
+  let started=false;
+  const startPrint=function(){
+   if(started||printWindow.closed)return;
+   started=true;
+   try{printWindow.focus();printWindow.print();}
+   catch(error){alert('مرورگر نتوانست پنجره چاپ را اجرا کند. از منوی چاپ مرورگر استفاده کنید.');}
+  };
+  printWindow.addEventListener('load',function(){setTimeout(startPrint,300);},{once:true});
+  printWindow.document.open();
+  printWindow.document.write(printDocument);
+  printWindow.document.close();
+  // پشتیبان برای مرورگرهایی که رویداد load را برای about:blank ارسال نمی‌کنند.
+  setTimeout(startPrint,1000);
+  return;
+ }
+
+ // اگر مرورگر پنجره جدید را مسدود کرد، چاپ در همین صفحه به‌عنوان مسیر جایگزین انجام می‌شود.
  const cleanup=function(){
   document.body.classList.remove('commission-print-mode');
   window.removeEventListener('afterprint',cleanup);
@@ -4427,7 +4445,6 @@ function printCommissionReceipt(){
  sheet.setAttribute('aria-hidden','false');
  document.body.classList.add('commission-print-mode');
  window.addEventListener('afterprint',cleanup,{once:true});
- // فرصت کوتاه برای به‌روزرسانی DOM و بارگذاری مهر رسید
  requestAnimationFrame(function(){
   setTimeout(function(){
    try{window.focus();window.print();}
