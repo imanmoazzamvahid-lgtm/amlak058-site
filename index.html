@@ -4219,26 +4219,8 @@ function printCommissionReceipt(){
 
  const printDocument='<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>رسید کمیسیون املاک ۰۵۸</title><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">'+style+'</head><body>'+sheet.outerHTML+'</body></html>';
 
- // پنجره چاپ باید همان لحظه کلیک کاربر باز شود؛ رویداد load نیز پیش از نوشتن سند ثبت می‌شود.
- const printWindow=window.open('','amlak058-commission-receipt','width=900,height=700');
- if(printWindow&&!printWindow.closed){
-  let started=false;
-  const startPrint=function(){
-   if(started||printWindow.closed)return;
-   started=true;
-   try{printWindow.focus();printWindow.print();}
-   catch(error){alert('مرورگر نتوانست پنجره چاپ را باز کند. از گزینه چاپ مرورگر استفاده کنید.');}
-  };
-  printWindow.addEventListener('load',function(){setTimeout(startPrint,250);},{once:true});
-  printWindow.document.open();
-  printWindow.document.write(printDocument);
-  printWindow.document.close();
-  // بعضی مرورگرها برای about:blank رویداد load را ارسال نمی‌کنند.
-  setTimeout(startPrint,1000);
-  return;
- }
-
- // اگر پنجره جدید مسدود شده باشد، رسید در همین صفحه چاپ می‌شود.
+ // چاپ در همان صفحه انجام می‌شود تا مسدودکننده پنجره‌های بازشو در موبایل
+ // و مرورگرهای درون‌برنامه‌ای مانع اجرای دستور چاپ نشود.
  const cleanup=function(){
   document.body.classList.remove('commission-print-mode');
   window.removeEventListener('afterprint',cleanup);
@@ -4246,8 +4228,17 @@ function printCommissionReceipt(){
  };
  sheet.setAttribute('aria-hidden','false');
  document.body.classList.add('commission-print-mode');
- window.addEventListener('afterprint',cleanup);
- requestAnimationFrame(function(){window.print();});
+ window.addEventListener('afterprint',cleanup,{once:true});
+ // فرصت کوتاه برای به‌روزرسانی DOM و بارگذاری مهر رسید
+ requestAnimationFrame(function(){
+  setTimeout(function(){
+   try{window.focus();window.print();}
+   catch(error){
+    cleanup();
+    alert('چاپ در این مرورگر پشتیبانی نشد. صفحه را در Chrome باز کرده و از منوی چاپ استفاده کنید.');
+   }
+  },250);
+ });
 }
 function getCommissionHistory(){try{return JSON.parse(localStorage.getItem('amlak058_commission_receipts_v1')||'[]');}catch(e){return [];}}
 function renderCommissionHistory(){
