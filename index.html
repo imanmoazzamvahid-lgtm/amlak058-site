@@ -3886,6 +3886,108 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
  .mobile-reference-top{display:none!important}
 }
 </style>
+
+<style id="amlak058-mobile-screenshot-hotfix">
+/* Screenshot-driven mobile correction: remove the duplicate top search strip and pseudo-header artifacts. */
+@media (max-width: 650px) {
+  #amlak058-header-target,
+  #amlak058-header-target .amlak058-header-shell {
+    display:block!important; position:sticky!important; top:0!important; z-index:1000!important;
+    width:100%!important; min-height:0!important; height:auto!important; overflow:visible!important;
+    background:#fff!important;
+  }
+  #amlak058-header-target .container.header-inner {
+    width:94%!important; max-width:none!important; min-height:68px!important; height:68px!important;
+    margin:0 auto!important; padding:6px 0!important; display:flex!important; flex-flow:row nowrap!important;
+    align-items:center!important; justify-content:space-between!important; gap:8px!important;
+    direction:rtl!important; overflow:visible!important;
+  }
+  #amlak058-header-target .brand.amlak058-brand-link,
+  #amlak058-header-target .header-inner>a.brand.amlak058-brand-link {
+    display:flex!important; flex:0 1 126px!important; width:126px!important; max-width:126px!important;
+    min-width:0!important; height:50px!important; margin:0!important; padding:0!important;
+    align-items:center!important; justify-content:flex-start!important; overflow:hidden!important;
+    line-height:0!important; background:transparent!important;
+  }
+  #amlak058-header-target .amlak058-brand-logo {
+    display:block!important; width:100%!important; height:46px!important; max-height:46px!important;
+    min-width:0!important; object-fit:contain!important; object-position:right center!important;
+  }
+  #amlak058-header-target .brand.amlak058-brand-link:before,
+  #amlak058-header-target .brand.amlak058-brand-link:after,
+  #amlak058-header-target .header-actions .btn-primary:before,
+  #amlak058-header-target .header-actions .btn-primary:after,
+  #amlak058-header-target .header-actions #accountButton:before,
+  #amlak058-header-target .header-actions #accountButton:after {
+    content:none!important; display:none!important;
+  }
+  #amlak058-header-target nav.amlak058-main-nav {display:none!important}
+  #amlak058-header-target .header-inner>.header-actions {
+    position:static!important; inset:auto!important; transform:none!important;
+    display:flex!important; flex:0 0 auto!important; width:auto!important; min-width:0!important;
+    align-items:center!important; justify-content:flex-end!important; gap:6px!important; margin:0!important;
+    white-space:nowrap!important;
+  }
+  #amlak058-header-target .header-actions>.btn {
+    display:inline-flex!important; position:static!important; width:auto!important; min-width:0!important;
+    height:auto!important; min-height:37px!important; margin:0!important; padding:7px 10px!important;
+    border-radius:9px!important; font:700 10px/1.4 Vazirmatn,Tahoma,Arial,sans-serif!important;
+    letter-spacing:0!important; white-space:nowrap!important; opacity:1!important; visibility:visible!important;
+    transform:none!important;
+  }
+  #amlak058-header-target .header-actions>#accountButton {
+    background:#fff!important; color:#315b46!important; border:1px solid #dce5df!important;
+  }
+  #amlak058-header-target .header-actions>.btn-primary {
+    background:#176344!important; color:#fff!important; border:1px solid #176344!important;
+    min-width:92px!important; box-shadow:none!important;
+  }
+  .mobile-reference-top {display:none!important; height:0!important; min-height:0!important; margin:0!important; padding:0!important; border:0!important; overflow:hidden!important}
+  .premium-hero {
+    width:calc(100% - 24px)!important; margin:12px auto 0!important; padding:0!important;
+    border-radius:18px!important; overflow:hidden!important;
+    background:linear-gradient(135deg,#123f2e 0%,#176344 58%,#34775a 100%)!important;
+  }
+  .premium-hero-inner {
+    width:100%!important; min-height:0!important; display:block!important; padding:24px 18px 18px!important;
+  }
+  .premium-hero-copy {width:100%!important; max-width:none!important; padding:0!important; text-align:right!important}
+  .premium-kicker {display:inline-flex!important; max-width:100%!important; margin:0 0 15px!important; padding:7px 12px!important;
+    border-radius:30px!important; background:#edf4ef!important; color:#315b46!important; font-size:11px!important}
+  .premium-kicker span {display:none!important}
+  .premium-hero-copy h2 {font-size:23px!important; line-height:1.85!important; color:#fff!important; margin:0 0 9px!important}
+  .premium-hero-copy h2 em {color:#dce9e1!important}
+  .premium-hero-copy>p {font-size:12px!important; line-height:2!important; color:#e1ebe5!important; margin:0 0 16px!important}
+  .premium-hero-actions {display:grid!important; grid-template-columns:1fr 1fr!important; gap:8px!important}
+  .premium-primary-action,.premium-secondary-action {
+    min-width:0!important; min-height:48px!important; padding:9px 8px!important; border-radius:11px!important;
+    font:700 11px/1.7 Vazirmatn,Tahoma,Arial,sans-serif!important; text-align:center!important;
+  }
+  .premium-primary-action {background:#fff!important; color:#176344!important; border:1px solid #fff!important}
+  .premium-secondary-action {background:transparent!important; color:#fff!important; border:1px solid #c4d8cb!important}
+  .premium-proof {margin-top:15px!important; padding-top:12px!important; border-top:1px solid #ffffff35!important}
+  .premium-proof>span {color:#fff!important; border-color:#ffffff70!important}
+  .premium-proof b {color:#fff!important}
+  .premium-proof small {color:#dce9e1!important}
+  .premium-hero-art,.premium-hero-bottom {display:none!important}
+  #search.search-section {width:calc(100% - 24px)!important; margin:12px auto!important; padding:13px!important;
+    border:1px solid #e0e5e1!important; border-radius:14px!important; background:#fff!important}
+  #search .search-section-heading {margin-bottom:10px!important}
+  #search .search-panel {display:grid!important; grid-template-columns:minmax(0,1fr) auto!important; gap:8px!important;
+    padding:0!important; border:0!important; background:transparent!important}
+  #search .search-panel>* {min-width:0!important}
+  #search .search-panel input,#search .search-panel select {min-height:44px!important; border-radius:10px!important}
+  #search .search-panel button {min-height:44px!important; grid-column:auto!important; border-radius:10px!important}
+}
+@media (max-width:380px) {
+  #amlak058-header-target .brand.amlak058-brand-link {flex-basis:104px!important;width:104px!important;max-width:104px!important}
+  #amlak058-header-target .header-actions>.btn {padding:6px 7px!important;font-size:9px!important}
+  #amlak058-header-target .header-actions>.btn-primary {min-width:82px!important}
+  .premium-hero-copy h2 {font-size:20px!important}
+  .premium-hero-actions {grid-template-columns:1fr!important}
+}
+</style>
+
 </head><body>
 
 <header id="amlak058-header-target" class="amlak058-site-header">
