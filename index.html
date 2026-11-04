@@ -3938,7 +3938,30 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
  body.commission-print-mode #commission-print-sheet .cp-result{break-inside:avoid!important;page-break-inside:avoid!important}
 }
 </style>
-</head><body>
+<style id="commission-luxury-refresh">
+#commission-calculator{position:relative;margin-top:34px!important;margin-bottom:46px!important}
+#commission-calculator .section-heading{display:flex;flex-direction:column;align-items:flex-start;gap:7px;margin-bottom:18px}
+#commission-calculator .section-heading h2{font-size:clamp(21px,3vw,29px);font-weight:900;letter-spacing:-.5px;color:#173d32;margin:0}
+#commission-calculator .section-heading .muted{font-size:13px;line-height:1.9;color:#748078}
+#commission-calculator .commission-box{position:relative;overflow:hidden;padding:clamp(17px,3vw,30px)!important;border:1px solid #d9e5dc!important;border-radius:22px!important;background:linear-gradient(145deg,#fff 0%,#f8fbf8 68%,#eef5ef 100%)!important;box-shadow:0 16px 42px rgba(24,62,47,.09)!important}
+#commission-calculator .commission-box:before{content:"";position:absolute;top:0;right:0;left:0;height:5px;background:linear-gradient(90deg,#173d32,#b99a5b,#173d32)}
+#commission-calculator .commission-fields{gap:15px!important;margin-bottom:16px}
+#commission-calculator .commission-fields label{display:flex;flex-direction:column;gap:8px;color:#34483d;font-size:13px;font-weight:800}
+#commission-calculator input:not([type=checkbox]){min-height:48px!important;border:1px solid #dce5de!important;border-radius:12px!important;background:#fff!important;padding:11px 13px!important;color:#20382d!important;box-shadow:inset 0 1px 2px rgba(20,50,35,.025)!important;transition:border-color .2s,box-shadow .2s}
+#commission-calculator input:focus{outline:none!important;border-color:#56836a!important;box-shadow:0 0 0 3px rgba(23,99,68,.10)!important}
+#commission-calculator .commission-tabs{display:flex;flex-wrap:wrap;gap:9px!important;margin:19px 0!important;padding:6px;background:#edf3ee;border:1px solid #e0e9e2;border-radius:15px}
+#commission-calculator .commission-tab{flex:1 1 120px;min-height:46px!important;border:1px solid transparent!important;border-radius:11px!important;background:transparent!important;color:#53675b!important;font-weight:800!important;transition:all .2s}
+#commission-calculator .commission-tab.active{background:#174b3a!important;color:#fff!important;border-color:#174b3a!important;box-shadow:0 5px 13px rgba(23,75,58,.17)!important}
+#commission-calculator .commission-rate-note{display:block;padding:10px 13px;border-radius:10px;background:#f1f5ed;color:#536d55;font-size:12px;line-height:1.8}
+#commission-calculator .commission-vat{display:flex;align-items:center;gap:9px;padding:13px 14px;margin:16px 0 10px;border:1px solid #e2e9e2;border-radius:12px;background:#fff;color:#43564a;font-weight:700}
+#commission-calculator .commission-vat-rate-row{max-width:220px;margin-bottom:17px}
+#commission-calculator .commission-calc-btn{width:100%;min-height:52px!important;border:0!important;border-radius:13px!important;background:linear-gradient(110deg,#174b3a,#246b50)!important;color:#fff!important;font-size:15px!important;font-weight:900!important;box-shadow:0 8px 19px rgba(23,75,58,.19)!important}
+#commission-calculator .commission-result{margin-top:17px!important;padding:18px!important;border:1px solid #dce8de!important;border-radius:14px!important;background:#f3f8f3!important;color:#244b36!important;line-height:2!important}
+#commission-calculator .commission-print-btn{width:100%;min-height:48px!important;margin-top:12px!important;border:1px solid #c5ad78!important;border-radius:12px!important;background:#fff!important;color:#80652e!important;font-weight:800!important}
+#commission-history-panel{margin:16px auto 28px!important;padding:15px!important;border:1px solid #e0e8e1!important;border-radius:15px!important;background:#fbfdfb!important}
+#commission-history-panel .btn{border-radius:11px!important}
+@media(max-width:600px){#commission-calculator{margin-top:24px!important}#commission-calculator .section-heading h2{font-size:20px}#commission-calculator .commission-box{padding:16px!important;border-radius:17px!important}#commission-calculator .commission-fields{grid-template-columns:1fr!important;gap:12px!important}#commission-calculator .commission-tab{flex-basis:calc(50% - 8px);font-size:11px!important}#commission-calculator .commission-vat-rate-row{max-width:none}}
+</style></head><body>
 
 <header id="amlak058-header-target" class="amlak058-site-header">
 <div class="amlak058-header-shell">
