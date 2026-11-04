@@ -1,48 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
-<title id="title">AMLAK 058 embossed seal</title>
-<desc id="desc">Minimal luxury embossed seal in deep green and silver, with L monogram and 058</desc>
+<title id="title">مهر املاک ۰۵۸</title>
+<desc id="desc">نشان دایره‌ای مینیمال املاک ۰۵۸ با جلوه برجسته سبز یشمی و نقره‌ای</desc>
 <defs>
-  <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#ffffff"/>
-    <stop offset=".22" stop-color="#aebbb4"/>
-    <stop offset=".48" stop-color="#f9fcfa"/>
-    <stop offset=".72" stop-color="#8e9e95"/>
-    <stop offset="1" stop-color="#eef3ef"/>
-  </linearGradient>
-  <linearGradient id="green" x1="0" y1="0" x2=".9" y2="1">
-    <stop offset="0" stop-color="#2b624b"/>
-    <stop offset=".48" stop-color="#174b3a"/>
-    <stop offset="1" stop-color="#0b3025"/>
-  </linearGradient>
-  <linearGradient id="ink" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0" stop-color="#396b52"/>
-    <stop offset=".5" stop-color="#174b3a"/>
-    <stop offset="1" stop-color="#09291f"/>
-  </linearGradient>
-  <filter id="emboss" x="-25%" y="-25%" width="150%" height="150%">
-    <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"/>
-    <feOffset in="blur" dx="2" dy="2.8" result="shade"/>
-    <feFlood flood-color="#09271e" flood-opacity=".42" result="shadeColor"/>
-    <feComposite in="shadeColor" in2="shade" operator="in" result="shadow"/>
-    <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="hiBlur"/>
-    <feOffset in="hiBlur" dx="-1.2" dy="-1.5" result="hiOffset"/>
-    <feFlood flood-color="#ffffff" flood-opacity=".8" result="hiColor"/>
-    <feComposite in="hiColor" in2="hiOffset" operator="in" result="highlight"/>
-    <feMerge><feMergeNode in="shadow"/><feMergeNode in="highlight"/><feMergeNode in="SourceGraphic"/></feMerge>
-  </filter>
-  <filter id="softShadow" x="-25%" y="-25%" width="150%" height="150%"><feGaussianBlur stdDeviation="7"/></filter>
+ <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".32" stop-color="#aebbb4"/><stop offset=".56" stop-color="#f8fbf9"/><stop offset="1" stop-color="#899b91"/></linearGradient>
+ <linearGradient id="green" x1="0" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#34775a"/><stop offset=".52" stop-color="#174b3a"/><stop offset="1" stop-color="#092d22"/></linearGradient>
+ <filter id="emboss" x="-25%" y="-25%" width="150%" height="150%"><feGaussianBlur in="SourceAlpha" stdDeviation="2" result="b"/><feOffset in="b" dx="2" dy="2.5" result="o"/><feFlood flood-color="#08281e" flood-opacity=".42" result="c"/><feComposite in="c" in2="o" operator="in" result="s"/><feMerge><feMergeNode in="s"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <filter id="shadow" x="-25%" y="-25%" width="150%" height="150%"><feGaussianBlur stdDeviation="8"/></filter>
 </defs>
-<circle cx="256" cy="263" r="226" fill="#0b2d22" opacity=".18" filter="url(#softShadow)"/>
-<circle cx="256" cy="252" r="229" fill="#f9fbfa" stroke="url(#silver)" stroke-width="15"/>
-<circle cx="256" cy="252" r="215" fill="none" stroke="url(#green)" stroke-width="5"/>
-<circle cx="256" cy="252" r="202" fill="none" stroke="#9aa99f" stroke-width="1.5"/>
-<circle cx="256" cy="252" r="188" fill="none" stroke="#d4ded8" stroke-width="1" stroke-dasharray="1.5 7"/>
-<text x="256" y="132" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="700" letter-spacing="6" fill="#536e60">REAL ESTATE</text>
-<path d="M159 153H353" stroke="url(#silver)" stroke-width="2.5" stroke-linecap="round"/>
-<circle cx="147" cy="153" r="3" fill="#174b3a"/><circle cx="365" cy="153" r="3" fill="#174b3a"/>
-<text x="256" y="330" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="220" font-style="italic" font-weight="700" fill="url(#green)" stroke="#e7eee9" stroke-width="1.2" paint-order="stroke" filter="url(#emboss)">L</text>
-<path d="M169 361H343" stroke="url(#silver)" stroke-width="2.5" stroke-linecap="round"/>
-<text x="256" y="419" text-anchor="middle" font-family="Arial,sans-serif" font-size="51" font-weight="800" letter-spacing="13" fill="url(#ink)" filter="url(#emboss)">058</text>
-<path d="M225 448H287" stroke="#6d8878" stroke-width="1.5" stroke-linecap="round"/>
-<g fill="url(#green)" filter="url(#emboss)"><path d="M256 45l6 8-6 8-6-8z"/><path d="M256 443l4 5-4 5-4-5z"/></g>
+<circle cx="256" cy="264" r="225" fill="#0b2d22" opacity=".16" filter="url(#shadow)"/>
+<circle cx="256" cy="252" r="228" fill="#f9fbfa" stroke="url(#silver)" stroke-width="15"/>
+<circle cx="256" cy="252" r="211" fill="none" stroke="url(#green)" stroke-width="6"/>
+<circle cx="256" cy="252" r="194" fill="none" stroke="#aab8b0" stroke-width="1.5"/>
+<circle cx="256" cy="252" r="181" fill="none" stroke="#d7e0db" stroke-width="1" stroke-dasharray="2 8"/>
+<path d="M166 143H346" stroke="url(#silver)" stroke-width="3" stroke-linecap="round"/>
+<circle cx="151" cy="143" r="4" fill="#174b3a"/><circle cx="361" cy="143" r="4" fill="#174b3a"/>
+<text x="256" y="126" text-anchor="middle" direction="rtl" font-family="Vazirmatn,Tahoma,Arial,sans-serif" font-size="35" font-weight="800" fill="#174b3a">املاک</text>
+<text x="256" y="307" text-anchor="middle" font-family="Vazirmatn,Tahoma,Arial,sans-serif" font-size="145" font-weight="900" letter-spacing="2" fill="url(#green)" stroke="#e8efeb" stroke-width="2" paint-order="stroke" filter="url(#emboss)">۰۵۸</text>
+<path d="M174 350H338" stroke="url(#silver)" stroke-width="3" stroke-linecap="round"/>
+<path d="M256 365l8 11-8 11-8-11z" fill="url(#green)" filter="url(#emboss)"/>
+<text x="256" y="423" text-anchor="middle" font-family="Vazirmatn,Tahoma,Arial,sans-serif" font-size="19" font-weight="700" letter-spacing="3" fill="#315b47">۰۵۸</text>
 </svg>
