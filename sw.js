@@ -1,4 +1,4 @@
-const CACHE_NAME = "amlak058-shell-v49";
+const CACHE_NAME = "amlak058-shell-v50";
 const APP_SHELL = [
   "/",
   "/manifest.webmanifest?v=21",
