@@ -4236,42 +4236,48 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
 function printCommissionSheetInCurrentTab(html){
  const sheet=document.getElementById('commission-print-sheet');
  if(!sheet){alert('بخش چاپ رسید در دسترس نیست. صفحه را تازه‌سازی کنید.');return;}
+ const originalNodes=Array.from(document.body.childNodes);
  const previousHTML=sheet.innerHTML;
  const previousAria=sheet.getAttribute('aria-hidden');
  let cleaned=false;
- const cleanup=function(){
+ const mediaQuery=window.matchMedia?window.matchMedia('print'):null;
+ const onMediaChange=function(event){if(!event.matches)cleanup();};
+ function cleanup(){
   if(cleaned)return;
   cleaned=true;
-  document.body.classList.remove('commission-print-mode');
-  sheet.innerHTML=previousHTML;
-  if(previousAria===null)sheet.removeAttribute('aria-hidden');
-  else sheet.setAttribute('aria-hidden',previousAria);
   window.removeEventListener('afterprint',cleanup);
   if(mediaQuery){
    if(mediaQuery.removeEventListener)mediaQuery.removeEventListener('change',onMediaChange);
    else if(mediaQuery.removeListener)mediaQuery.removeListener(onMediaChange);
   }
- };
- const mediaQuery=window.matchMedia?window.matchMedia('print'):null;
- const onMediaChange=function(event){if(!event.matches)cleanup();};
- sheet.innerHTML=html;
- sheet.setAttribute('aria-hidden','false');
- document.body.classList.add('commission-print-mode');
- window.addEventListener('afterprint',cleanup,{once:true});
- if(mediaQuery){
-  if(mediaQuery.addEventListener)mediaQuery.addEventListener('change',onMediaChange);
-  else if(mediaQuery.addListener)mediaQuery.addListener(onMediaChange);
+  document.body.classList.remove('commission-print-mode');
+  sheet.innerHTML=previousHTML;
+  if(previousAria===null)sheet.removeAttribute('aria-hidden');
+  else sheet.setAttribute('aria-hidden',previousAria);
+  // Restore the exact original page nodes and their event handlers after printing.
+  document.body.replaceChildren(...originalNodes);
  }
  try{
+  sheet.innerHTML=html;
+  sheet.setAttribute('aria-hidden','false');
+  // Physically detach the whole website while the native print dialog is active.
+  // This prevents any other page section from entering the print preview.
+  document.body.replaceChildren(sheet);
+  document.body.classList.add('commission-print-mode');
+  window.addEventListener('afterprint',cleanup,{once:true});
+  if(mediaQuery){
+   if(mediaQuery.addEventListener)mediaQuery.addEventListener('change',onMediaChange);
+   else if(mediaQuery.addListener)mediaQuery.addListener(onMediaChange);
+  }
+  void sheet.offsetHeight;
+  window.focus();
   if(typeof window.print!=='function')throw new Error('print unavailable');
-  // چاپ در همین صفحه انجام می‌شود؛ پنجره بازشو در موبایل مسدودکننده نیست.
   window.print();
  }catch(error){
   cleanup();
-  alert('مرورگر فرمان چاپ را اجرا نکرد. صفحه را در مرورگر Chrome باز کنید و دوباره چاپ بگیرید.');
+  alert('چاپ در این محیط پشتیبانی نمی‌شود. سایت را مستقیماً در مرورگر Chrome باز کنید و دوباره چاپ بگیرید.');
  }
 }
-
 function printCommissionReceipt(){
  const root=document.getElementById('commission-calculator');
  const sheet=document.getElementById('commission-print-sheet');
