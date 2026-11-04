@@ -4237,7 +4237,7 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
 <div id="commission-history-panel" class="commission-history-panel"><button type="button" class="btn btn-outline" onclick="toggleCommissionHistory()">مشاهده رسیدهای ذخیره‌شده</button><div id="commission-history-list" hidden></div><p class="commission-history-note">رسیدها برای دسترسی مجدد، روی همین مرورگر و دستگاه ذخیره می‌شوند.</p></div>
 
 <script id="commission-print-script">
-function printCommissionSheetInCurrentTab(html){
+async function printCommissionSheetInCurrentTab(html){
  const sheet=document.getElementById('commission-print-sheet');
  if(!sheet){alert('بخش چاپ رسید در دسترس نیست. صفحه را تازه‌سازی کنید.');return;}
  const previousHTML=sheet.innerHTML;
@@ -4270,6 +4270,31 @@ function printCommissionSheetInCurrentTab(html){
    else if(mediaQuery.addListener)mediaQuery.addListener(onMediaChange);
   }
   void sheet.offsetHeight;
+  // Wait for receipt images (especially the seal SVG) before opening print preview.
+  const receiptImages=Array.from(sheet.querySelectorAll('img'));
+  await Promise.all(receiptImages.map(function(img){
+   img.loading='eager';
+   img.decoding='sync';
+   if(img.complete&&img.naturalWidth>0)return Promise.resolve();
+   return new Promise(function(resolve){
+    let done=false;
+    const finish=function(){
+     if(done)return;
+     done=true;
+     img.removeEventListener('load',finish);
+     img.removeEventListener('error',finish);
+     clearTimeout(timer);
+     resolve();
+    };
+    const timer=setTimeout(finish,3000);
+    img.addEventListener('load',finish,{once:true});
+    img.addEventListener('error',finish,{once:true});
+    if(img.complete)finish();
+   });
+  }));
+  await Promise.all(receiptImages.map(function(img){
+   return typeof img.decode==='function'?img.decode().catch(function(){ }):Promise.resolve();
+  }));
   window.focus();
   if(typeof window.print!=='function')throw new Error('print unavailable');
   window.print();
