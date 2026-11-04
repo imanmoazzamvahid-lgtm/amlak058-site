@@ -3888,6 +3888,50 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
 </style>
 
  <link rel="preload" as="image" href="/assets/amlak058-home-banner.webp?v=1" fetchpriority="high"/>
+<style id="commission-print-unified">
+/* Single source of truth for commission receipt printing. */
+#commission-print-sheet{display:none!important}
+@media print{
+ @page{size:A4 portrait;margin:9mm}
+ html body.commission-print-mode>*:not(#commission-print-sheet){display:none!important}
+ html body.commission-print-mode #commission-print-sheet{display:block!important}
+ html,body{width:100%!important;min-height:0!important;margin:0!important;padding:0!important;background:#fff!important}
+ body.commission-print-mode{font-family:Vazirmatn,Tahoma,Arial,sans-serif!important;color:#222!important}
+ body.commission-print-mode>*:not(#commission-print-sheet){display:none!important}
+ body.commission-print-mode #commission-print-sheet,
+ body.commission-print-mode #commission-print-sheet *{visibility:visible!important}
+ body.commission-print-mode #commission-print-sheet{
+  display:block!important;position:relative!important;inset:auto!important;float:none!important;
+  width:192mm!important;max-width:192mm!important;min-height:279mm!important;height:auto!important;max-height:none!important;
+  margin:0 auto!important;padding:0!important;box-sizing:border-box!important;overflow:visible!important;
+  direction:rtl!important;background:#fff!important;color:#222!important;
+  font-family:Vazirmatn,Tahoma,Arial,sans-serif!important;font-size:10pt!important;line-height:1.55!important;
+  page-break-before:avoid!important;page-break-after:avoid!important;break-before:avoid-page!important;break-after:avoid-page!important;
+ }
+ body.commission-print-mode #commission-print-sheet *{font-family:Vazirmatn,Tahoma,Arial,sans-serif!important}
+ body.commission-print-mode #commission-print-sheet:before{
+  content:"amlak058.ir";position:absolute;top:48%;left:50%;transform:translate(-50%,-50%) rotate(-24deg);
+  font:900 38pt Arial,sans-serif;letter-spacing:2px;color:rgba(41,39,33,.055);white-space:nowrap;z-index:0;pointer-events:none
+ }
+ body.commission-print-mode #commission-print-sheet>*{position:relative;z-index:1}
+ body.commission-print-mode #commission-print-sheet .cp-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #26332c;padding-bottom:6px;margin-bottom:9px}
+ body.commission-print-mode #commission-print-sheet .cp-brand{font-size:18pt;font-weight:900;color:#26332c}
+ body.commission-print-mode #commission-print-sheet .cp-sub{font-size:8.5pt;line-height:1.45;color:#555}
+ body.commission-print-mode #commission-print-sheet .cp-stamp{display:block;width:66px;height:66px;flex:0 0 66px;object-fit:contain}
+ body.commission-print-mode #commission-print-sheet .cp-title{text-align:center;font-weight:800;font-size:13pt;margin:8px 0}
+ body.commission-print-mode #commission-print-sheet .cp-table{width:100%;border-collapse:collapse;margin:8px 0 10px}
+ body.commission-print-mode #commission-print-sheet .cp-table th,
+ body.commission-print-mode #commission-print-sheet .cp-table td{border:1px solid #ddd;padding:5px 7px;text-align:right;vertical-align:top;line-height:1.45}
+ body.commission-print-mode #commission-print-sheet .cp-table th{background:#f2f5f3;width:38%}
+ body.commission-print-mode #commission-print-sheet .cp-result{border:1px solid #cbd8d0;border-radius:6px;padding:8px;margin-top:8px;line-height:1.5}
+ body.commission-print-mode #commission-print-sheet .cp-bottom-stamp{display:flex;justify-content:flex-end;margin-top:8px}
+ body.commission-print-mode #commission-print-sheet .cp-bottom-stamp img{width:66px;height:66px;object-fit:contain}
+ body.commission-print-mode #commission-print-sheet .cp-foot{display:flex;justify-content:space-between;border-top:1px solid #ddd;margin-top:10px;padding-top:6px;font-size:8.5pt;color:#555}
+ body.commission-print-mode #commission-print-sheet tr,
+ body.commission-print-mode #commission-print-sheet .cp-head,
+ body.commission-print-mode #commission-print-sheet .cp-result{break-inside:avoid!important;page-break-inside:avoid!important}
+}
+</style>
 </head><body>
 
 <header id="amlak058-header-target" class="amlak058-site-header">
@@ -4190,79 +4234,34 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
 </section>
 <div id="commission-print-sheet" aria-hidden="true"></div>
 <div id="commission-history-panel" class="commission-history-panel"><button type="button" class="btn btn-outline" onclick="toggleCommissionHistory()">مشاهده رسیدهای ذخیره‌شده</button><div id="commission-history-list" hidden></div><p class="commission-history-note">رسیدها برای دسترسی مجدد، روی همین مرورگر و دستگاه ذخیره می‌شوند.</p></div>
-<style id="commission-print-unified">
-/* Single source of truth for commission receipt printing. */
-#commission-print-sheet{display:none}
-@media print{
- @page{size:A4 portrait;margin:9mm}
- html,body{width:100%!important;min-height:0!important;margin:0!important;padding:0!important;background:#fff!important}
- body.commission-print-mode{font-family:Vazirmatn,Tahoma,Arial,sans-serif!important;color:#222!important}
- body.commission-print-mode>*:not(#commission-print-sheet){display:none!important}
- body.commission-print-mode #commission-print-sheet,
- body.commission-print-mode #commission-print-sheet *{visibility:visible!important}
- body.commission-print-mode #commission-print-sheet{
-  display:block!important;position:relative!important;inset:auto!important;float:none!important;
-  width:192mm!important;max-width:192mm!important;min-height:279mm!important;height:auto!important;max-height:none!important;
-  margin:0 auto!important;padding:0!important;box-sizing:border-box!important;overflow:visible!important;
-  direction:rtl!important;background:#fff!important;color:#222!important;
-  font-family:Vazirmatn,Tahoma,Arial,sans-serif!important;font-size:10pt!important;line-height:1.55!important;
-  page-break-before:avoid!important;page-break-after:avoid!important;break-before:avoid-page!important;break-after:avoid-page!important;
- }
- body.commission-print-mode #commission-print-sheet *{font-family:Vazirmatn,Tahoma,Arial,sans-serif!important}
- body.commission-print-mode #commission-print-sheet:before{
-  content:"amlak058.ir";position:absolute;top:48%;left:50%;transform:translate(-50%,-50%) rotate(-24deg);
-  font:900 38pt Arial,sans-serif;letter-spacing:2px;color:rgba(41,39,33,.055);white-space:nowrap;z-index:0;pointer-events:none
- }
- body.commission-print-mode #commission-print-sheet>*{position:relative;z-index:1}
- body.commission-print-mode #commission-print-sheet .cp-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #26332c;padding-bottom:6px;margin-bottom:9px}
- body.commission-print-mode #commission-print-sheet .cp-brand{font-size:18pt;font-weight:900;color:#26332c}
- body.commission-print-mode #commission-print-sheet .cp-sub{font-size:8.5pt;line-height:1.45;color:#555}
- body.commission-print-mode #commission-print-sheet .cp-stamp{display:block;width:66px;height:66px;flex:0 0 66px;object-fit:contain}
- body.commission-print-mode #commission-print-sheet .cp-title{text-align:center;font-weight:800;font-size:13pt;margin:8px 0}
- body.commission-print-mode #commission-print-sheet .cp-table{width:100%;border-collapse:collapse;margin:8px 0 10px}
- body.commission-print-mode #commission-print-sheet .cp-table th,
- body.commission-print-mode #commission-print-sheet .cp-table td{border:1px solid #ddd;padding:5px 7px;text-align:right;vertical-align:top;line-height:1.45}
- body.commission-print-mode #commission-print-sheet .cp-table th{background:#f2f5f3;width:38%}
- body.commission-print-mode #commission-print-sheet .cp-result{border:1px solid #cbd8d0;border-radius:6px;padding:8px;margin-top:8px;line-height:1.5}
- body.commission-print-mode #commission-print-sheet .cp-bottom-stamp{display:flex;justify-content:flex-end;margin-top:8px}
- body.commission-print-mode #commission-print-sheet .cp-bottom-stamp img{width:66px;height:66px;object-fit:contain}
- body.commission-print-mode #commission-print-sheet .cp-foot{display:flex;justify-content:space-between;border-top:1px solid #ddd;margin-top:10px;padding-top:6px;font-size:8.5pt;color:#555}
- body.commission-print-mode #commission-print-sheet tr,
- body.commission-print-mode #commission-print-sheet .cp-head,
- body.commission-print-mode #commission-print-sheet .cp-result{break-inside:avoid!important;page-break-inside:avoid!important}
-}
-</style>
+
 <script id="commission-print-script">
 function printCommissionSheetInCurrentTab(html){
  const sheet=document.getElementById('commission-print-sheet');
  if(!sheet){alert('بخش چاپ رسید در دسترس نیست. صفحه را تازه‌سازی کنید.');return;}
- const originalNodes=Array.from(document.body.childNodes);
  const previousHTML=sheet.innerHTML;
  const previousAria=sheet.getAttribute('aria-hidden');
  let cleaned=false;
  const mediaQuery=window.matchMedia?window.matchMedia('print'):null;
- const onMediaChange=function(event){if(!event.matches)cleanup();};
  function cleanup(){
   if(cleaned)return;
   cleaned=true;
+  document.body.classList.remove('commission-print-mode');
+  sheet.innerHTML=previousHTML;
+  if(previousAria===null)sheet.removeAttribute('aria-hidden');
+  else sheet.setAttribute('aria-hidden',previousAria);
   window.removeEventListener('afterprint',cleanup);
   if(mediaQuery){
    if(mediaQuery.removeEventListener)mediaQuery.removeEventListener('change',onMediaChange);
    else if(mediaQuery.removeListener)mediaQuery.removeListener(onMediaChange);
   }
-  document.body.classList.remove('commission-print-mode');
-  sheet.innerHTML=previousHTML;
-  if(previousAria===null)sheet.removeAttribute('aria-hidden');
-  else sheet.setAttribute('aria-hidden',previousAria);
-  // Restore the exact original page nodes and their event handlers after printing.
-  document.body.replaceChildren(...originalNodes);
  }
+ function onMediaChange(event){if(!event.matches)cleanup();}
  try{
   sheet.innerHTML=html;
   sheet.setAttribute('aria-hidden','false');
-  // Physically detach the whole website while the native print dialog is active.
-  // This prevents any other page section from entering the print preview.
-  document.body.replaceChildren(sheet);
+  // Keep the document and its stylesheets intact. Print CSS in <head>
+  // hides every body child except the receipt sheet.
   document.body.classList.add('commission-print-mode');
   window.addEventListener('afterprint',cleanup,{once:true});
   if(mediaQuery){
@@ -4275,7 +4274,7 @@ function printCommissionSheetInCurrentTab(html){
   window.print();
  }catch(error){
   cleanup();
-  alert('چاپ در این محیط پشتیبانی نمی‌شود. سایت را مستقیماً در مرورگر Chrome باز کنید و دوباره چاپ بگیرید.');
+  alert('مرورگر فرمان چاپ را اجرا نکرد. سایت را مستقیماً در مرورگر Chrome باز کنید و دوباره چاپ بگیرید.');
  }
 }
 function printCommissionReceipt(){
