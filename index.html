@@ -3897,7 +3897,7 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
 /* Single source of truth for commission receipt printing. */
 #commission-print-sheet{display:none!important}
 @media print{
- @page{size:A4 portrait;margin:9mm}
+ @page{size:A5 portrait;margin:6mm}
  html body.commission-print-mode>*:not(#commission-print-sheet){display:none!important}
  html body.commission-print-mode #commission-print-sheet{display:block!important}
  html,body{width:100%!important;min-height:0!important;margin:0!important;padding:0!important;background:#fff!important}
@@ -3907,7 +3907,7 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
  body.commission-print-mode #commission-print-sheet *{visibility:visible!important}
  body.commission-print-mode #commission-print-sheet{
   display:block!important;position:relative!important;inset:auto!important;float:none!important;
-  width:192mm!important;max-width:192mm!important;min-height:279mm!important;height:auto!important;max-height:none!important;
+  width:136mm!important;max-width:136mm!important;min-height:198mm!important;height:auto!important;max-height:none!important;
   margin:0 auto!important;padding:0!important;box-sizing:border-box!important;overflow:visible!important;
   direction:rtl!important;background:#fff!important;color:#222!important;
   font-family:Vazirmatn,Tahoma,Arial,sans-serif!important;font-size:10pt!important;line-height:1.55!important;
@@ -3929,6 +3929,9 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
  body.commission-print-mode #commission-print-sheet .cp-table td{border:1px solid #ddd;padding:5px 7px;text-align:right;vertical-align:top;line-height:1.45}
  body.commission-print-mode #commission-print-sheet .cp-table th{background:#f2f5f3;width:38%}
  body.commission-print-mode #commission-print-sheet .cp-result{border:1px solid #cbd8d0;border-radius:6px;padding:8px;margin-top:8px;line-height:1.5}
+ body.commission-print-mode #commission-print-sheet .cp-bank{border:1px solid #b9c9bf;border-radius:6px;padding:7px 9px;margin-top:8px;line-height:1.65;background:#f7faf8;break-inside:avoid}
+ body.commission-print-mode #commission-print-sheet .cp-bank strong{display:block;color:#26332c;font-size:9pt}
+ body.commission-print-mode #commission-print-sheet .cp-bank b{display:block;direction:ltr;text-align:center;letter-spacing:1px;font-size:12pt;color:#183e35;margin-top:2px}
  body.commission-print-mode #commission-print-sheet .cp-bottom-stamp{display:flex;align-items:center;justify-content:flex-start;gap:8px;margin-top:10px;break-inside:avoid}
  body.commission-print-mode #commission-print-sheet .cp-bottom-stamp img{width:88px;height:88px;object-fit:contain;filter:drop-shadow(1px 2px 1px rgba(16,52,39,.3))}
  body.commission-print-mode #commission-print-sheet .cp-seal-caption{font-size:8pt;line-height:1.9;color:#426052;border-right:1px solid #b9c9bf;padding-right:8px}
@@ -4342,6 +4345,7 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
    <label>نام مستأجر<input id="commission-tenant-name" type="text" maxlength="100" placeholder="نام و نام خانوادگی مستأجر"></label>
    <label>نام موجر<input id="commission-landlord-name" type="text" maxlength="100" placeholder="نام و نام خانوادگی موجر"></label>
   </div>
+  <div class="commission-fields commission-extra-fields"><label>رسید به نام کدام طرف صادر شود؟<select id="commission-receipt-party"><option value="buyer">خریدار</option><option value="seller">فروشنده</option><option value="tenant">مستأجر</option><option value="landlord">موجر</option></select></label></div>
   <div class="commission-tabs" role="group" aria-label="نوع معامله">
    <button type="button" class="commission-tab active" data-kind="sale" onclick="setCommissionKind('sale')">خرید و فروش</button>
    <button type="button" class="commission-tab" data-kind="rent" onclick="setCommissionKind('rent')">رهن و اجاره</button>
@@ -4464,7 +4468,14 @@ function printCommissionReceipt(){
  };
  const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
  const rows=[];
+ const partySelect=document.getElementById('commission-receipt-party');
+ const partyValue=partySelect?.value||(kind==='rent'?'tenant':'buyer');
+ const partyNames={buyer:'نام خریدار',seller:'نام فروشنده',tenant:'نام مستأجر',landlord:'نام موجر'};
+ const partyInputIds={buyer:'commission-buyer-name',seller:'commission-seller-name',tenant:'commission-tenant-name',landlord:'commission-landlord-name'};
+ const selectedPartyName=document.getElementById(partyInputIds[partyValue])?.value||'';
+ rows.push('<tr><th>دریافت‌کننده رسید</th><td>'+escapeHTML(partyNames[partyValue])+(selectedPartyName?' - '+escapeHTML(selectedPartyName):'')+'</td></tr>');
  root.querySelectorAll('.commission-fields:not([hidden]) input:not([type=checkbox]),.commission-fields:not([hidden]) select').forEach(function(el){
+  if(['commission-buyer-name','commission-seller-name','commission-tenant-name','commission-landlord-name'].includes(el.id))return;
   const label=labels[el.id]||el.closest('label')?.childNodes[0]?.textContent?.trim()||el.id;
   let value=el.value;
   if(el.tagName==='SELECT')value=el.options[el.selectedIndex]?.text||value;
@@ -4473,7 +4484,13 @@ function printCommissionReceipt(){
  const stamp='<img class="cp-stamp" src="/stamp-seal.svg?v=10" alt="مهر برجسته املاک ۰۵۸">';
  const date=new Intl.DateTimeFormat('fa-IR',{year:'numeric',month:'long',day:'numeric'}).format(new Date());
  const receiptNumber='058-'+Date.now().toString().slice(-9);
- const html='<header class="cp-head"><div><div class="cp-brand">املاک ۰۵۸</div><div class="cp-sub">محاسبه آنلاین کمیسیون املاک</div><div class="cp-sub">amlak058.ir</div><div class="cp-sub">شماره رسید: '+receiptNumber+'</div></div>'+stamp+'</header><div class="cp-title">رسید محاسبه کمیسیون '+(kind==='rent'?'رهن و اجاره':'خرید و فروش')+'</div><div class="cp-location-note">این محاسبه و نرخ‌های کمیسیون صرفاً مخصوص شهر بجنورد است و برای شهرهای دیگر اعتبار ندارد.</div><div>تاریخ چاپ: '+date+'</div><table class="cp-table"><tbody>'+(rows.length?rows.join(''):'<tr><td>اطلاعات معامله ثبت نشده است.</td></tr>')+'</tbody></table><div class="cp-result">'+result.innerHTML+'</div><div class="cp-bottom-stamp"><div class="cp-seal-caption">مهر و تأیید<br>املاک ۰۵۸</div><img src="/stamp-seal.svg?v=10" alt="مهر برجسته املاک ۰۵۸"></div><footer class="cp-foot"><span>املاک ۰۵۸</span><span>amlak058.ir</span></footer>';
+ const resultForCustomer=result.cloneNode(true);
+ Array.from(resultForCustomer.children).forEach(function(child){
+  if((child.textContent||'').includes('جمع تقریبی دو طرف'))child.remove();
+  else child.innerHTML=child.innerHTML.replace(/جمع قابل پرداخت هر طرف/g,'مبلغ قابل پرداخت این مشتری');
+ });
+ const bank='<section class="cp-bank"><strong>اطلاعات واریز</strong><div>بانک شهر | صاحب کارت: ایمان معظم وحید</div><b dir="ltr">5047 0642 1731 6181</b></section>';
+ const html='<header class="cp-head"><div><div class="cp-brand">املاک ۰۵۸</div><div class="cp-sub">محاسبه آنلاین کمیسیون املاک</div><div class="cp-sub">amlak058.ir</div><div class="cp-sub">شماره رسید: '+receiptNumber+'</div></div>'+stamp+'</header><div class="cp-title">رسید محاسبه کمیسیون '+(kind==='rent'?'رهن و اجاره':'خرید و فروش')+'</div><div class="cp-location-note">این محاسبه و نرخ‌های کمیسیون صرفاً مخصوص شهر بجنورد است.</div><div>تاریخ چاپ: '+date+'</div><table class="cp-table"><tbody>'+(rows.length?rows.join(''):'<tr><td>اطلاعات معامله ثبت نشده است.</td></tr>')+'</tbody></table><div class="cp-result">'+resultForCustomer.innerHTML+'</div>'+bank+'<div class="cp-bottom-stamp"><div class="cp-seal-caption">مهر و تأیید<br>املاک ۰۵۸</div><img src="/stamp-seal.svg?v=10" alt="مهر برجسته املاک ۰۵۸"></div><footer class="cp-foot"><span>املاک ۰۵۸</span><span>amlak058.ir</span></footer>';
 
  try{
   const history=JSON.parse(localStorage.getItem('amlak058_commission_receipts_v1')||'[]');
