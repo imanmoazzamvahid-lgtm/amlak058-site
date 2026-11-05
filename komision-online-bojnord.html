@@ -2975,16 +2975,7 @@ header .btn-outline{border-color:#d8c28f!important;color:#79540d!important;backg
  <div class="section-heading"><h2 id="commission-title">محاسبه آنلاین کمیسیون بنگاه در بجنورد</h2><span class="muted">کمیسیون خرید و فروش، پیش‌فروش، رهن، اجاره و تمدید با امکان چاپ رسید</span></div>
  <div class="commission-box">
   <div class="commission-fields commission-extra-fields">
-   <label>نام همکار / مشاور تنظیم‌کننده<input id="commission-agent-name" type="text" maxlength="100" placeholder="نام مشاور املاک"></label>
    <label>نشانی ملک / توضیحات معامله<input id="commission-property-address" type="text" maxlength="180" placeholder="نشانی یا مشخصات ملک"></label>
-  </div>
-  <div id="commission-sale-parties" class="commission-fields commission-extra-fields">
-   <label>نام خریدار<input id="commission-buyer-name" type="text" maxlength="100" placeholder="نام و نام خانوادگی خریدار"></label>
-   <label>نام فروشنده<input id="commission-seller-name" type="text" maxlength="100" placeholder="نام و نام خانوادگی فروشنده"></label>
-  </div>
-  <div id="commission-rent-parties" class="commission-fields commission-extra-fields" hidden>
-   <label>نام مستأجر<input id="commission-tenant-name" type="text" maxlength="100" placeholder="نام و نام خانوادگی مستأجر"></label>
-   <label>نام موجر<input id="commission-landlord-name" type="text" maxlength="100" placeholder="نام و نام خانوادگی موجر"></label>
   </div>
   <div class="commission-tabs" role="group" aria-label="نوع معامله">
    <button type="button" class="commission-tab active" data-kind="sale" onclick="setCommissionKind('sale')">خرید و فروش</button>
@@ -3060,7 +3051,7 @@ function printCommissionReceipt(){
  try{
   const history=JSON.parse(localStorage.getItem('amlak058_commission_receipts_v1')||'[]');
   const receiptId=receiptNumber;
-  const receiptTitle=(kind==='rent'?'رهن و اجاره':'خرید و فروش')+' | '+(document.getElementById('commission-agent-name')?.value||'بدون نام مشاور');
+  const receiptTitle=(kind==='rent'?'رهن و اجاره':'خرید و فروش')+' | رسید کمیسیون';
   history.unshift({id:receiptId,title:receiptTitle,date:date,html:sheet.innerHTML});
   localStorage.setItem('amlak058_commission_receipts_v1',JSON.stringify(history.slice(0,30)));
   renderCommissionHistory();
