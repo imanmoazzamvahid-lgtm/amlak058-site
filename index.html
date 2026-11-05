@@ -4359,18 +4359,8 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
  <div class="section-heading"><h2 id="commission-title">محاسبه آنلاین کمیسیون بنگاه در بجنورد</h2><span class="muted">کمیسیون خرید و فروش، پیش‌فروش، رهن، اجاره و تمدید با امکان چاپ رسید</span></div>
  <div class="commission-box">
   <div class="commission-fields commission-extra-fields">
-   <label>نام همکار / مشاور تنظیم‌کننده<input id="commission-agent-name" type="text" maxlength="100" placeholder="نام مشاور املاک"></label>
    <label>نشانی ملک / توضیحات معامله<input id="commission-property-address" type="text" maxlength="180" placeholder="نشانی یا مشخصات ملک"></label>
   </div>
-  <div id="commission-sale-parties" class="commission-fields commission-extra-fields">
-   <label>نام خریدار<input id="commission-buyer-name" type="text" maxlength="100" placeholder="نام و نام خانوادگی خریدار"></label>
-   <label>نام فروشنده<input id="commission-seller-name" type="text" maxlength="100" placeholder="نام و نام خانوادگی فروشنده"></label>
-  </div>
-  <div id="commission-rent-parties" class="commission-fields commission-extra-fields" hidden>
-   <label>نام مستأجر<input id="commission-tenant-name" type="text" maxlength="100" placeholder="نام و نام خانوادگی مستأجر"></label>
-   <label>نام موجر<input id="commission-landlord-name" type="text" maxlength="100" placeholder="نام و نام خانوادگی موجر"></label>
-  </div>
-  <div class="commission-fields commission-extra-fields"><label>رسید به نام کدام طرف صادر شود؟<select id="commission-receipt-party"><option value="buyer">خریدار</option><option value="seller">فروشنده</option><option value="tenant">مستأجر</option><option value="landlord">موجر</option></select></label></div>
   <div class="commission-tabs" role="group" aria-label="نوع معامله">
    <button type="button" class="commission-tab active" data-kind="sale" onclick="setCommissionKind('sale')">خرید و فروش</button>
    <button type="button" class="commission-tab" data-kind="rent" onclick="setCommissionKind('rent')">رهن و اجاره</button>
@@ -4493,14 +4483,7 @@ function printCommissionReceipt(){
  };
  const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
  const rows=[];
- const partySelect=document.getElementById('commission-receipt-party');
- const partyValue=partySelect?.value||(kind==='rent'?'tenant':'buyer');
- const partyNames={buyer:'نام خریدار',seller:'نام فروشنده',tenant:'نام مستأجر',landlord:'نام موجر'};
- const partyInputIds={buyer:'commission-buyer-name',seller:'commission-seller-name',tenant:'commission-tenant-name',landlord:'commission-landlord-name'};
- const selectedPartyName=document.getElementById(partyInputIds[partyValue])?.value||'';
- rows.push('<tr><th>دریافت‌کننده رسید</th><td>'+escapeHTML(partyNames[partyValue])+(selectedPartyName?' - '+escapeHTML(selectedPartyName):'')+'</td></tr>');
  root.querySelectorAll('.commission-fields:not([hidden]) input:not([type=checkbox]),.commission-fields:not([hidden]) select').forEach(function(el){
-  if(['commission-buyer-name','commission-seller-name','commission-tenant-name','commission-landlord-name'].includes(el.id))return;
   const label=labels[el.id]||el.closest('label')?.childNodes[0]?.textContent?.trim()||el.id;
   let value=el.value;
   if(el.tagName==='SELECT')value=el.options[el.selectedIndex]?.text||value;
@@ -4519,7 +4502,7 @@ function printCommissionReceipt(){
 
  try{
   const history=JSON.parse(localStorage.getItem('amlak058_commission_receipts_v1')||'[]');
-  history.unshift({id:receiptNumber,title:(kind==='rent'?'رهن و اجاره':'خرید و فروش')+' | '+(document.getElementById('commission-agent-name')?.value||'بدون نام مشاور'),date:date,html:html});
+  history.unshift({id:receiptNumber,title:(kind==='rent'?'رهن و اجاره':'خرید و فروش')+' | '+'رسید کمیسیون',date:date,html:html});
   localStorage.setItem('amlak058_commission_receipts_v1',JSON.stringify(history.slice(0,30)));
   if(typeof renderCommissionHistory==='function')renderCommissionHistory();
  }catch(error){console.warn('ذخیره رسید انجام نشد',error);}
