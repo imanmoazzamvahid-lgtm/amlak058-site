@@ -9455,5 +9455,38 @@ footer p,footer a{color:#dce8e0!important;font-size:11px!important}
 }
 </style>
 
+
+<style id="amlak058-mobile-photo-size-v3">
+/* Make listing thumbnails visibly larger on mobile, including sample cards. */
+@media screen and (max-width:650px){
+  #listings .property-card,#propertyList .property-card,#sampleListings .property-card{
+    display:grid!important;
+    grid-template-columns:minmax(154px,48%) minmax(0,1fr)!important;
+    grid-template-areas:"image info"!important;
+    min-height:178px!important;height:auto!important;
+    gap:11px!important;padding:11px!important;
+  }
+  #listings .property-image,#propertyList .property-image,#sampleListings .property-image{
+    grid-area:image!important;width:100%!important;min-width:0!important;
+    height:178px!important;min-height:178px!important;max-height:178px!important;
+    border-radius:9px!important;overflow:hidden!important;background:#eef2ef!important;
+  }
+  #listings .property-image>img,#propertyList .property-image>img,#sampleListings .property-image>img{
+    display:block!important;width:100%!important;min-width:100%!important;
+    max-width:100%!important;height:100%!important;flex:0 0 100%!important;
+    object-fit:cover!important;object-position:center!important;
+  }
+}
+@media screen and (max-width:380px){
+  #listings .property-card,#propertyList .property-card,#sampleListings .property-card{
+    grid-template-columns:minmax(142px,47%) minmax(0,1fr)!important;
+    min-height:164px!important;
+  }
+  #listings .property-image,#propertyList .property-image,#sampleListings .property-image{
+    height:164px!important;min-height:164px!important;max-height:164px!important;
+  }
+}
+</style>
+
 </body>
 </html>
