@@ -4052,6 +4052,40 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
 .amlak058-footer-bottom p{margin:5px 0 0}
 @media(max-width:650px){.amlak058-footer{padding:18px 0 12px!important}.amlak058-footer-ad{display:block;padding:21px 18px;border-radius:16px}.amlak058-footer-ad h2{font-size:20px}.amlak058-footer-ad p{font-size:12px}.amlak058-footer-ad-actions{align-items:stretch;margin-top:17px}.amlak058-footer-ad-actions>button{width:100%;padding:13px}.amlak058-footer-contact{justify-content:center}.amlak058-footer-ad:after{left:4%;top:10px;font-size:110px}.amlak058-footer-bottom{gap:8px}}
 </style>
+
+<style id="mobile-property-image-fix">
+/* نمایش کامل عکس ملک در کارت‌های فهرست موبایل، بدون برش تصویر */
+@media(max-width:700px){
+  #listings .property-card{align-items:center!important}
+  #listings .property-image{
+    position:relative!important;
+    flex:0 0 128px!important;
+    width:128px!important;
+    min-width:128px!important;
+    height:116px!important;
+    min-height:116px!important;
+    max-height:116px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    overflow:hidden!important;
+    background:#f3f4f3!important;
+    border-radius:8px!important;
+  }
+  #listings .property-image img{
+    display:block!important;
+    flex:0 0 100%!important;
+    width:100%!important;
+    min-width:100%!important;
+    max-width:100%!important;
+    height:100%!important;
+    object-fit:contain!important;
+    object-position:center!important;
+  }
+  #listings .property-info{flex:1 1 auto!important;min-width:0!important}
+}
+</style>
+
 </head><body>
 
 <header id="amlak058-header-target" class="amlak058-site-header">
