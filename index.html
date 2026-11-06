@@ -9375,5 +9375,85 @@ footer p,footer a{color:#dce8e0!important;font-size:11px!important}
 }
 </style>
 
+
+<style id="amlak058-divar-mobile-listing-v2">
+/* Mobile listing cards: clear Divar-inspired photo + readable listing information. */
+@media screen and (max-width:650px){
+  #propertyList,#sampleListings{display:block!important;width:100%!important}
+  #propertyList .property-card,#sampleListings .property-card{
+    display:grid!important;
+    grid-template-columns:minmax(142px,44%) minmax(0,1fr)!important;
+    grid-template-areas:"image info"!important;
+    gap:12px!important;align-items:stretch!important;
+    min-height:154px!important;height:auto!important;
+    padding:12px!important;margin:0!important;
+    border:0!important;border-bottom:1px solid #e8ece9!important;
+    border-radius:0!important;background:#fff!important;
+    box-shadow:none!important;transform:none!important;
+  }
+  #propertyList .property-image,#sampleListings .property-image{
+    grid-area:image!important;align-self:stretch!important;
+    width:100%!important;min-width:0!important;
+    height:154px!important;min-height:154px!important;max-height:154px!important;
+    border-radius:9px!important;overflow:hidden!important;
+    background:#f2f5f3!important;
+  }
+  #propertyList .property-image>img,#sampleListings .property-image>img{
+    width:100%!important;min-width:100%!important;max-width:100%!important;
+    height:100%!important;flex:0 0 100%!important;
+    object-fit:cover!important;object-position:center!important;
+    background:#f2f5f3!important;
+  }
+  #propertyList .property-info,#sampleListings .property-info{
+    grid-area:info!important;display:flex!important;flex-direction:column!important;
+    align-items:flex-start!important;justify-content:flex-start!important;
+    min-width:0!important;padding:0!important;gap:2px!important;
+  }
+  #propertyList .property-info h3,#sampleListings .property-info h3{
+    font-size:13px!important;line-height:1.75!important;font-weight:800!important;
+    margin:0 0 3px!important;color:#26332c!important;
+    display:-webkit-box!important;-webkit-line-clamp:2!important;
+    -webkit-box-orient:vertical!important;overflow:hidden!important;
+  }
+  #propertyList .property-address,#sampleListings .property-address{
+    font-size:10px!important;line-height:1.6!important;margin:0 0 3px!important;
+    color:#78827c!important;display:-webkit-box!important;
+    -webkit-line-clamp:1!important;-webkit-box-orient:vertical!important;overflow:hidden!important;
+  }
+  #propertyList .property-details,#sampleListings .property-details{
+    display:flex!important;gap:5px 9px!important;flex-wrap:wrap!important;
+    padding:0!important;margin:0!important;border:0!important;
+    font-size:10px!important;line-height:1.7!important;color:#66736b!important;
+  }
+  #propertyList .property-price,#sampleListings .property-price{
+    font-size:12px!important;font-weight:900!important;color:#176344!important;
+    margin:4px 0!important;line-height:1.6!important;
+  }
+  #propertyList .property-type,#sampleListings .property-type{
+    font-size:9px!important;color:#176344!important;background:#edf5f0!important;
+    border-radius:5px!important;padding:1px 6px!important;
+  }
+  #propertyList .property-description,#sampleListings .property-description{display:none!important}
+  #propertyList .property-actions,#sampleListings .property-actions{
+    margin-top:auto!important;gap:5px!important;flex-wrap:nowrap!important;
+  }
+  #propertyList .property-actions .btn,#sampleListings .property-actions .btn{
+    font-size:9px!important;padding:4px 7px!important;min-height:27px!important;
+  }
+  #propertyList .favorite-btn,#sampleListings .favorite-btn{
+    font-size:10px!important;padding:4px 6px!important;
+  }
+}
+@media screen and (max-width:380px){
+  #propertyList .property-card,#sampleListings .property-card{
+    grid-template-columns:minmax(126px,43%) minmax(0,1fr)!important;
+    min-height:142px!important;padding:10px!important;gap:9px!important;
+  }
+  #propertyList .property-image,#sampleListings .property-image{
+    height:142px!important;min-height:142px!important;max-height:142px!important;
+  }
+}
+</style>
+
 </body>
 </html>
