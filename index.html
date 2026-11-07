@@ -4117,6 +4117,20 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
 }
 </style>
 
+
+<style id="amlak058-ad-carousel-v1">
+/* بنرهای تبلیغاتی چرخشی HTML5/CSS، بدون Flash */
+.ad-carousel{width:min(1200px,94%);margin:18px auto 26px;position:relative;min-height:132px;border-radius:16px;overflow:hidden;background:#123f32;box-shadow:0 10px 28px #173d3418;isolation:isolate}
+.ad-slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 28px;color:#fff;opacity:0;transform:translateX(18px);animation:adCycle 15s infinite;pointer-events:none}
+.ad-slide:nth-child(1){animation-delay:0s;background:linear-gradient(110deg,#123f32,#176344 65%,#b28b43)}
+.ad-slide:nth-child(2){animation-delay:5s;background:linear-gradient(110deg,#243b32,#536b55 65%,#a88950)}
+.ad-slide:nth-child(3){animation-delay:10s;background:linear-gradient(110deg,#173d34,#245b49 65%,#92723c)}
+.ad-copy{min-width:0}.ad-kicker{font-size:11px;color:#f0d9a6;letter-spacing:.2px}.ad-slide h3{font-size:clamp(17px,2.4vw,23px);line-height:1.5;margin:3px 0}.ad-slide p{font-size:12px;color:#f1f4ef;opacity:.9}.ad-cta{flex:0 0 auto;border:1px solid #e4c98e;background:#f5e8c9;color:#173d34;border-radius:9px;padding:10px 16px;font-size:12px;font-weight:800;white-space:nowrap}
+.ad-dots{position:absolute;bottom:9px;left:16px;display:flex;gap:5px;z-index:2}.ad-dots i{width:5px;height:5px;border-radius:50%;background:#ffffff80}
+@keyframes adCycle{0%,2%{opacity:0;transform:translateX(18px)}5%,29%{opacity:1;transform:translateX(0);pointer-events:auto}34%,100%{opacity:0;transform:translateX(-18px)}}
+@media(max-width:560px){.ad-carousel{min-height:145px;margin:12px auto 20px;border-radius:12px}.ad-slide{padding:18px 15px;gap:9px}.ad-slide p{font-size:10px;max-width:230px}.ad-cta{padding:8px 10px;font-size:10px}.ad-slide h3{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.ad-slide{animation:none;position:relative;opacity:1;transform:none}.ad-slide~.ad-slide{display:none}}
+</style>
 </head><body>
 
 <header id="amlak058-header-target" class="amlak058-site-header">
@@ -4171,6 +4185,22 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
  </div>
  <div class="premium-hero-bottom"><span>خرید و فروش</span><i></i><span>رهن و اجاره</span><i></i><span>املاک تجاری</span><i></i><span>زمین و ویلا</span></div>
 </section>
+<section class="ad-carousel" aria-label="تبلیغات و پیشنهادهای ویژه">
+ <article class="ad-slide">
+  <div class="ad-copy"><span class="ad-kicker">املاک ۰۵۸ | ویژه بجنورد</span><h3>ملکت را رایگان آگهی کن</h3><p>مشخصات و تصاویر ملک را ثبت کن تا در دسترس متقاضیان قرار بگیرد.</p></div>
+  <button class="ad-cta" type="button" onclick="openModal()">ثبت آگهی رایگان ←</button>
+ </article>
+ <article class="ad-slide">
+  <div class="ad-copy"><span class="ad-kicker">ابزار کاربردی املاک ۰۵۸</span><h3>قبل از معامله، کمیسیون را بدان</h3><p>برآورد آنلاین هزینه معامله، سریع و شفاف.</p></div>
+  <a class="ad-cta" href="#commission-calculator">محاسبه کمیسیون ←</a>
+ </article>
+ <article class="ad-slide">
+  <div class="ad-copy"><span class="ad-kicker">فرصت معرفی کسب‌وکار</span><h3>جای تبلیغ کسب‌وکارت اینجاست</h3><p>بنرهای ویژه برای معرفی خدمات و آگهی‌های منتخب در سایت.</p></div>
+  <a class="ad-cta" href="https://amlak058.ir/#contact">اطلاعات بیشتر ←</a>
+ </article>
+ <div class="ad-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+</section>
+
 <section class="mobile-reference-top" id="mobile-reference-search" aria-label="جست‌وجوی آگهی ملک">
 <div class="mobile-reference-search"><span class="search-mark" aria-hidden="true">⌕</span><input id="mobileQuickSearch" type="search" placeholder="مثلاً فروش آپارتمان، خانه، زمین" aria-label="جست‌وجوی آگهی" onkeydown="if(event.key==='Enter'){const x=document.getElementById('searchKeyword');if(x)x.value=this.value;markMobileSearchAndLoad();document.getElementById('listings').scrollIntoView({behavior:'smooth'});}"><button type="button" aria-label="جست‌وجو" onclick="const x=document.getElementById('searchKeyword');if(x)x.value=document.getElementById('mobileQuickSearch').value;markMobileSearchAndLoad();document.getElementById('listings').scrollIntoView({behavior:'smooth'});">➜</button></div>
 <div class="mobile-reference-location"><span>⌖</span><span>موقعیت:</span><strong>بجنورد</strong><span class="location-line"></span></div>
