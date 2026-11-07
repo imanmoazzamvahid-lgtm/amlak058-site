@@ -9508,5 +9508,201 @@ footer p,footer a{color:#dce8e0!important;font-size:11px!important}
 }
 </style>
 
+
+
+<!-- دستیار هوشمند املاک ۰۵۸ -->
+<div id="amlak058-ai-assistant-v1" dir="rtl">
+  <button id="a058AiLauncher" type="button" aria-label="بازکردن دستیار هوشمند املاک ۰۵۸" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5c-4.8 0-8.5 3.1-8.5 7.4 0 2.2 1.1 4.1 3 5.4l-.7 3.1 3.6-1.5c.8.2 1.7.3 2.6.3 4.8 0 8.5-3.1 8.5-7.3S16.8 3.5 12 3.5Z"/><path d="M8 10.9h.1M12 10.9h.1M16 10.9h.1"/></svg>
+    <span>دستیار هوشمند</span>
+    <i></i>
+  </button>
+  <section id="a058AiPanel" aria-label="گفت‌وگو با دستیار هوشمند" hidden>
+    <header class="a058-ai-header">
+      <div class="a058-ai-brand">
+        <span class="a058-ai-mark" aria-hidden="true">۰۵۸</span>
+        <span><strong>دستیار هوشمند املاک ۰۵۸</strong><small>جست‌وجوی آگهی‌های واقعی بجنورد</small></span>
+      </div>
+      <button id="a058AiClose" type="button" aria-label="بستن">×</button>
+    </header>
+    <div id="a058AiMessages" aria-live="polite" aria-relevant="additions">
+      <div class="a058-ai-message assistant">سلام! برای پیدا کردن ملک موردنظرتان، نوع معامله، بودجه، متراژ یا محله را به زبان ساده بنویسید.</div>
+      <div class="a058-ai-suggestions">
+        <button type="button" data-ai-prompt="آپارتمان دوخوابه برای خرید تا ۴ میلیارد تومان در بجنورد پیدا کن.">آپارتمان تا ۴ میلیارد</button>
+        <button type="button" data-ai-prompt="ملک اجاره‌ای در محله فردوسی بجنورد چه گزینه‌هایی دارد؟">اجاره در فردوسی</button>
+        <button type="button" data-ai-prompt="مغازه برای اجاره در بجنورد می‌خواهم.">مغازه اجاره‌ای</button>
+      </div>
+    </div>
+    <div class="a058-ai-composer">
+      <textarea id="a058AiInput" rows="1" maxlength="700" placeholder="مثلاً خانه ویلایی برای خرید تا ۶ میلیارد..."></textarea>
+      <button id="a058AiSend" type="button" aria-label="ارسال پیام">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 16-8-5 16-3-6-8-2Z"/><path d="m12 14 4-5"/></svg>
+      </button>
+    </div>
+    <div class="a058-ai-footnote">پاسخ‌ها بر اساس آگهی‌های تأییدشده سایت است؛ موجودی نهایی باید با مشاور تأیید شود.</div>
+  </section>
+</div>
+<style id="amlak058-ai-assistant-styles-v1">
+#a058AiLauncher{position:fixed;left:22px;bottom:24px;z-index:9990;display:flex;align-items:center;gap:9px;padding:11px 16px;border:1px solid #287553;border-radius:999px;background:#14583d;color:#fff;font:700 13px Tahoma,Arial,sans-serif;box-shadow:0 8px 28px #0d3f2c30;cursor:pointer}
+#a058AiLauncher[hidden],#a058AiPanel[hidden]{display:none!important}
+#a058AiLauncher svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+#a058AiLauncher i{width:7px;height:7px;border-radius:50%;background:#9ad3ad;box-shadow:0 0 0 3px #ffffff20}
+#a058AiPanel{position:fixed;left:22px;bottom:82px;z-index:9991;width:min(390px,calc(100vw - 28px));height:min(620px,72vh);min-height:390px;display:flex;flex-direction:column;overflow:hidden;border:1px solid #dbe7df;border-radius:18px;background:#fff;box-shadow:0 18px 55px #102f2130;font-family:Tahoma,Arial,sans-serif;color:#25352c}
+.a058-ai-header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 15px;background:linear-gradient(135deg,#124b35,#1a6849);color:#fff}
+.a058-ai-brand{display:flex;align-items:center;gap:10px;min-width:0}.a058-ai-brand>span:last-child{display:flex;flex-direction:column;gap:3px}.a058-ai-brand strong{font-size:13px}.a058-ai-brand small{font-size:10px;color:#d5e9dd}
+.a058-ai-mark{display:grid;place-items:center;width:42px;height:42px;flex:none;border:1px solid #c7a45a;border-radius:12px;color:#f0d18c;font-weight:900;font-size:13px}
+#a058AiClose{width:34px;height:34px;border:1px solid #ffffff45;border-radius:10px;background:#ffffff12;color:#fff;font-size:24px;line-height:1;cursor:pointer}
+#a058AiMessages{flex:1;overflow-y:auto;padding:15px 13px;display:flex;flex-direction:column;gap:10px;background:#f7faf8}
+.a058-ai-message{max-width:92%;padding:10px 12px;border-radius:13px;font-size:12px;line-height:1.95;white-space:pre-wrap;overflow-wrap:anywhere}
+.a058-ai-message.assistant{align-self:flex-start;background:#fff;border:1px solid #e3ebe5;border-top-right-radius:4px}
+.a058-ai-message.user{align-self:flex-end;background:#e4f1e8;border:1px solid #d2e7d9;border-top-left-radius:4px}
+.a058-ai-message.loading{color:#698074}
+.a058-ai-suggestions{display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start;max-width:100%}
+.a058-ai-suggestions button{border:1px solid #cddfd3;border-radius:999px;background:#fff;color:#235c41;padding:7px 9px;font:11px Tahoma,Arial,sans-serif;cursor:pointer}
+.a058-ai-results{display:flex;flex-direction:column;gap:8px;align-self:stretch}
+.a058-ai-result{padding:10px;border:1px solid #dce9df;border-radius:12px;background:#fff}
+.a058-ai-result strong{display:block;font-size:12px;line-height:1.8;color:#254b37}
+.a058-ai-result p{margin:4px 0;color:#69756e;font-size:10px;line-height:1.8}
+.a058-ai-result button{border:0;border-radius:8px;background:#176344;color:#fff;padding:7px 10px;font:700 10px Tahoma,Arial,sans-serif;cursor:pointer}
+.a058-ai-composer{display:flex;align-items:flex-end;gap:8px;padding:10px 12px;border-top:1px solid #e6eee8;background:#fff}
+#a058AiInput{flex:1;min-width:0;max-height:100px;resize:none;border:1px solid #dce5de;border-radius:11px;padding:10px 11px;background:#fbfdfb;font:12px/1.8 Tahoma,Arial,sans-serif;outline:none}
+#a058AiInput:focus{border-color:#438464}
+#a058AiSend{width:42px;height:42px;flex:none;display:grid;place-items:center;border:0;border-radius:11px;background:#176344;color:#fff;cursor:pointer}
+#a058AiSend:disabled{opacity:.5;cursor:wait}
+#a058AiSend svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.a058-ai-footnote{padding:0 12px 10px;background:#fff;color:#89968e;font:9px/1.7 Tahoma,Arial,sans-serif;text-align:center}
+@media(max-width:650px){
+ #a058AiLauncher{left:12px;bottom:calc(88px + env(safe-area-inset-bottom));padding:10px 13px;font-size:11px}
+ #a058AiPanel{left:9px;right:9px;bottom:calc(80px + env(safe-area-inset-bottom));width:auto;height:min(72vh,600px);min-height:360px;border-radius:16px}
+}
+</style>
+<script id="amlak058-ai-assistant-script-v1">
+(function(){
+  const launcher=document.getElementById('a058AiLauncher');
+  const panel=document.getElementById('a058AiPanel');
+  const closeButton=document.getElementById('a058AiClose');
+  const messages=document.getElementById('a058AiMessages');
+  const input=document.getElementById('a058AiInput');
+  const sendButton=document.getElementById('a058AiSend');
+  if(!launcher||!panel||!messages||!input||!sendButton)return;
+
+  const apiUrl=SUPABASE_URL.replace(/\/$/,'')+'/functions/v1/property-ai-assistant';
+  let history=[];
+  let busy=false;
+
+  function addMessage(role,text){
+    const item=document.createElement('div');
+    item.className='a058-ai-message '+role;
+    item.textContent=String(text||'');
+    messages.appendChild(item);
+    messages.scrollTop=messages.scrollHeight;
+    return item;
+  }
+
+  function formatMoney(value){
+    const number=Number(value);
+    return Number.isFinite(number)&&number>0?number.toLocaleString('fa-IR')+' تومان':'';
+  }
+
+  function renderMatches(items){
+    if(!Array.isArray(items)||!items.length)return;
+    const box=document.createElement('div');
+    box.className='a058-ai-results';
+    items.slice(0,4).forEach(function(p){
+      const card=document.createElement('article');
+      card.className='a058-ai-result';
+      const title=document.createElement('strong');
+      title.textContent=p.title||'آگهی ملک';
+      const detail=document.createElement('p');
+      const facts=[p.property_type,p.transaction_type,p.city,p.address].filter(Boolean);
+      if(p.area)facts.push(String(p.area)+' متر');
+      if(p.bedrooms!==null&&p.bedrooms!==undefined)facts.push(String(p.bedrooms)+' خوابه');
+      detail.textContent=facts.join(' · ');
+      const price=document.createElement('p');
+      price.textContent=p.transaction_type==='رهن و اجاره'
+        ? ['رهن '+formatMoney(p.deposit),'اجاره '+formatMoney(p.monthly_rent)].filter(Boolean).join(' · ')
+        : formatMoney(p.price);
+      const view=document.createElement('button');
+      view.type='button';
+      view.textContent='مشاهده جزئیات آگهی';
+      view.addEventListener('click',function(){
+        if(typeof window.openDetails==='function')window.openDetails(p.id);
+        else window.location.href='/v/?id='+encodeURIComponent(String(p.id));
+      });
+      card.append(title,detail,price,view);
+      box.appendChild(card);
+    });
+    messages.appendChild(box);
+    messages.scrollTop=messages.scrollHeight;
+  }
+
+  async function sendMessage(value){
+    const message=String(value||'').trim();
+    if(!message||busy)return;
+    if(message.length>700){addMessage('assistant','لطفاً پیام را در حداکثر ۷۰۰ نویسه ارسال کنید.');return;}
+    busy=true;
+    sendButton.disabled=true;
+    input.disabled=true;
+    addMessage('user',message);
+    const typing=addMessage('assistant loading','در حال بررسی آگهی‌های تأییدشده...');
+    const previousHistory=history.slice(-8);
+    input.value='';
+    try{
+      const response=await fetch(apiUrl,{
+        method:'POST',
+        headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY},
+        body:JSON.stringify({message:message,history:previousHistory})
+      });
+      const result=await response.json().catch(function(){return {};});
+      typing.remove();
+      if(!response.ok){
+        const errorText=result.error==='AI_NOT_CONFIGURED'
+          ? 'اتصال امن سرویس هوش مصنوعی هنوز کامل نشده است. پس از تنظیم کلید محرمانه سرویس، این بخش فعال می‌شود.'
+          : (result.message||'پاسخ‌گویی موقتاً ممکن نیست. کمی بعد دوباره تلاش کنید.');
+        addMessage('assistant',errorText);
+      }else{
+        addMessage('assistant',result.answer||'برای راهنمایی بیشتر، جزئیات ملک موردنظرتان را بنویسید.');
+        renderMatches(result.matches);
+        history.push({role:'user',content:message},{role:'assistant',content:String(result.answer||'')});
+        history=history.slice(-8);
+      }
+    }catch(error){
+      typing.remove();
+      addMessage('assistant','ارتباط با دستیار برقرار نشد. اتصال اینترنت را بررسی کنید و دوباره تلاش کنید.');
+    }finally{
+      busy=false;
+      sendButton.disabled=false;
+      input.disabled=false;
+      input.focus();
+    }
+  }
+
+  function openPanel(){
+    panel.hidden=false;
+    launcher.setAttribute('aria-expanded','true');
+    input.focus();
+  }
+  function closePanel(){
+    panel.hidden=true;
+    launcher.setAttribute('aria-expanded','false');
+  }
+
+  launcher.addEventListener('click',function(){panel.hidden?openPanel():closePanel();});
+  closeButton.addEventListener('click',closePanel);
+  sendButton.addEventListener('click',function(){sendMessage(input.value);});
+  input.addEventListener('keydown',function(event){
+    if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage(input.value);}
+  });
+  messages.querySelectorAll('[data-ai-prompt]').forEach(function(button){
+    button.addEventListener('click',function(){sendMessage(button.getAttribute('data-ai-prompt'));});
+  });
+
+  fetch(apiUrl,{method:'GET',headers:{'apikey':SUPABASE_KEY}})
+    .then(function(response){return response.ok?response.json():{ready:false};})
+    .then(function(status){if(status&&status.ready)launcher.hidden=false;})
+    .catch(function(){launcher.hidden=true;});
+})();
+</script>
+
 </body>
 </html>
