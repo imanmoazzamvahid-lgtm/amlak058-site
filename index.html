@@ -4147,7 +4147,19 @@ nav a:hover,.filter-btn.active,.mobile-nav-item.active{color:#176344!important}
  #listings .property-card{min-width:0!important}
 }
 </style>
-</head><body>
+<style id="amlak058-mobile-nav-pro-icons">
+@media(max-width:650px){
+ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))!important}
+ .mobile-bottom-nav.amlak-kilid-nav{grid-template-columns:repeat(5,minmax(0,1fr))!important;align-items:center!important;min-height:66px;padding:7px 5px calc(7px + env(safe-area-inset-bottom))!important;background:rgba(255,255,255,.97)!important;border-top:1px solid #e4eae6!important;box-shadow:0 -5px 22px rgba(18,63,50,.09)!important;backdrop-filter:blur(14px)}
+ .mobile-bottom-nav .mobile-nav-item{gap:3px!important;color:#69766f!important;font-size:10px!important;font-weight:600!important;transition:color .18s ease,transform .18s ease}
+ .mobile-bottom-nav .mobile-nav-svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;display:block}
+ .mobile-bottom-nav .mobile-nav-item.active{color:#176344!important}
+ .mobile-bottom-nav .mobile-nav-item.active .mobile-nav-svg{stroke-width:2.2}
+ .mobile-bottom-nav .mobile-nav-item.post{color:#176344!important;font-weight:800!important}
+ .mobile-bottom-nav .mobile-nav-item.post .mobile-nav-svg{width:26px;height:26px;padding:5px;box-sizing:content-box;background:#176344;color:#fff;stroke:#fff;border-radius:12px;box-shadow:0 4px 10px rgba(23,99,68,.2)}
+ .mobile-bottom-nav .mobile-nav-item:active{transform:translateY(-2px)}
+}
+</style></head><body>
 
 <header id="amlak058-header-target" class="amlak058-site-header">
 <div class="amlak058-header-shell">
@@ -4394,11 +4406,11 @@ nav a:hover,.filter-btn.active,.mobile-nav-item.active{color:#176344!important}
 
 </main>
 <nav class="mobile-bottom-nav amlak-kilid-nav" aria-label="ناوبری موبایل">
- <button type="button" class="mobile-nav-item active" onclick="mobileNavHome()"><span class="mobile-nav-icon">⌂</span><span>خانه</span></button>
- <button type="button" class="mobile-nav-item" onclick="mobileNavSaved()"><span class="mobile-nav-icon">♡</span><span>علاقه‌مندی</span></button>
- <button type="button" class="mobile-nav-item" onclick="document.getElementById('search').scrollIntoView({behavior:'smooth'});document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===2))"><span class="mobile-nav-icon">⌕</span><span>جست‌وجو</span></button>
- <button type="button" class="mobile-nav-item post" onclick="openModal()"><span class="mobile-nav-icon">＋</span><span>ثبت آگهی</span></button>
- <button type="button" class="mobile-nav-item" onclick="mobileNavMyProperties()"><span class="mobile-nav-icon">▤</span><span>آگهی‌های من</span></button>
+ <button type="button" class="mobile-nav-item active" onclick="mobileNavHome()" aria-label="خانه"><svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg><span>خانه</span></button>
+ <button type="button" class="mobile-nav-item" onclick="mobileNavSaved()" aria-label="علاقه‌مندی"><svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.7c0 5.1-8.8 11-8.8 11s-8.8-5.9-8.8-11A4.7 4.7 0 0 1 12 6.1a4.7 4.7 0 0 1 8.8 2.6Z"/></svg><span>علاقه‌مندی</span></button>
+ <button type="button" class="mobile-nav-item" onclick="document.getElementById('search').scrollIntoView({behavior:'smooth'});document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===2))" aria-label="جست‌وجو"><svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><span>جست‌وجو</span></button>
+ <button type="button" class="mobile-nav-item post" onclick="openModal()" aria-label="ثبت آگهی"><svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>ثبت آگهی</span></button>
+ <button type="button" class="mobile-nav-item" onclick="mobileNavMyProperties()" aria-label="آگهی‌های من"><svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span>آگهی‌های من</span></button>
 </nav>
 <style>
 #official-property-services{margin:30px auto;padding:24px 18px;background:#f8f7f1;border:1px solid #e9e5d9;border-radius:16px}
