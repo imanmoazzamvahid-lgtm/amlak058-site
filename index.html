@@ -1852,8 +1852,6 @@ header{position:sticky;top:0;z-index:80;background:#fff!important;border-bottom:
  function rearrange(){
   var main=document.querySelector('main'),home=document.getElementById('home'),search=document.getElementById('search');
   if(main&&home&&search&&home.nextElementSibling!==search)main.insertBefore(search,home);
-  var install=document.getElementById('installAppButton');
-  if(install){install.style.position='fixed';install.style.right='14px';install.style.bottom='86px';install.style.zIndex='45';install.style.maxWidth='calc(100vw - 28px)'}
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',rearrange);else rearrange();
 })();
@@ -4482,11 +4480,7 @@ nav a:hover,.filter-btn.active,.mobile-nav-item.active{color:#176344!important}
 </style>
 
 
-<section class="container amlak058-install-cta" id="installAppSection" aria-label="نصب اپلیکیشن املاک ۰۵۸">
- <div class="amlak058-install-copy"><span>همیشه همراهت</span><h2>املاک ۰۵۸ را روی گوشی نصب کن</h2><p>مثل یک اپلیکیشن، سریع و راحت به آگهی‌های بجنورد دسترسی داشته باش.</p></div>
- <button type="button" id="installAppButton" class="amlak058-install-button">↓ نصب اپلیکیشن</button>
- <p id="installAppStatus" class="amlak058-install-status" aria-live="polite"></p>
-</section>
+
 
 <footer class="amlak058-footer">
  <div class="container">
@@ -4507,6 +4501,13 @@ nav a:hover,.filter-btn.active,.mobile-nav-item.active{color:#176344!important}
   </div>
  </div>
 </footer>
+
+<section class="container amlak058-install-cta" id="installAppSection" aria-label="نصب اپلیکیشن املاک ۰۵۸">
+ <div class="amlak058-install-copy"><span>همیشه همراهت</span><h2>املاک ۰۵۸ را روی گوشی نصب کن</h2><p>مثل یک اپلیکیشن، سریع و راحت به آگهی‌های بجنورد دسترسی داشته باش.</p></div>
+ <button type="button" id="installAppButton" class="amlak058-install-button">↓ نصب اپلیکیشن</button>
+ <p id="installAppStatus" class="amlak058-install-status" aria-live="polite"></p>
+</section>
+
 
 
 
@@ -9704,31 +9705,62 @@ footer p,footer a{color:#dce8e0!important;font-size:11px!important}
 
 
 
-<script id="amlak058-pwa-install-v1">
+<script id="amlak058-pwa-install-v2">
 (function(){
- let deferredPrompt=null;
  const button=document.getElementById('installAppButton');
  const status=document.getElementById('installAppStatus');
  if(!button)return;
- function message(text){if(status)status.textContent=text;}
+ let deferredPrompt=null;
+ function message(value){if(status)status.textContent=value;}
+ function isStandalone(){return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;}
+ function showManualGuide(){
+  const ua=navigator.userAgent||'';
+  let guide='برای نصب، منوی مرورگر را باز کنید و گزینه «افزودن به صفحه اصلی» یا «نصب برنامه» را انتخاب کنید.';
+  if(/iPhone|iPad|iPod/i.test(ua))guide='در مرورگر Safari دکمه اشتراک‌گذاری را بزنید، سپس «Add to Home Screen / افزودن به صفحه اصلی» را انتخاب کنید.';
+  else if(/SamsungBrowser/i.test(ua))guide='در Samsung Internet منوی سه‌خط را باز کنید و «Add page to / افزودن صفحه به» و سپس «Home screen» را بزنید.';
+  else if(/Chrome|CriOS/i.test(ua))guide='در Chrome منوی سه‌نقطه ⋮ را باز کنید و «Install app / نصب برنامه» یا «Add to Home screen / افزودن به صفحه اصلی» را انتخاب کنید.';
+  message(guide);
+ }
  window.addEventListener('beforeinstallprompt',function(event){
-  event.preventDefault();deferredPrompt=event;button.hidden=false;
+  event.preventDefault();
+  deferredPrompt=event;
+  button.disabled=false;
+  button.textContent='↓ نصب اپلیکیشن';
+  message('برای نصب آماده است؛ دکمه را بزنید.');
  });
  window.addEventListener('appinstalled',function(){
-  deferredPrompt=null;button.hidden=true;message('اپلیکیشن املاک ۰۵۸ نصب شد.');
+  deferredPrompt=null;
+  button.textContent='اپلیکیشن نصب شد ✓';
+  button.disabled=true;
+  message('املاک ۰۵۸ با موفقیت نصب شد.');
  });
  button.addEventListener('click',async function(){
+  if(isStandalone()){message('املاک ۰۵۸ در حال حاضر روی دستگاه شما نصب است.');return;}
   if(deferredPrompt){
-   deferredPrompt.prompt();
-   const choice=await deferredPrompt.userChoice;
-   message(choice&&choice.outcome==='accepted'?'در حال نصب املاک ۰۵۸...':'نصب انجام نشد؛ هر زمان خواستید دوباره تلاش کنید.');
-   deferredPrompt=null;return;
+   try{
+    deferredPrompt.prompt();
+    const choice=await deferredPrompt.userChoice;
+    if(choice&&choice.outcome==='accepted')message('درخواست نصب پذیرفته شد. پس از پایان نصب، آیکون املاک ۰۵۸ در صفحه برنامه‌ها قرار می‌گیرد.');
+    else message('نصب لغو شد. هر زمان خواستید دوباره دکمه نصب را بزنید.');
+   }catch(error){showManualGuide();}
+   deferredPrompt=null;
+   return;
   }
-  if(window.matchMedia('(display-mode: standalone)').matches){message('املاک ۰۵۸ روی گوشی شما نصب شده است.');return;}
-  message('برای نصب، از منوی مرورگر گزینه «افزودن به صفحه اصلی» را انتخاب کنید.');
+  showManualGuide();
  });
- if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}
- button.hidden=false;
+ if('serviceWorker' in navigator&&window.isSecureContext){
+  window.addEventListener('load',function(){
+   navigator.serviceWorker.register('/sw.js',{scope:'/'}).then(function(reg){
+    if(reg.waiting)reg.waiting.postMessage({type:'SKIP_WAITING'});
+   }).catch(function(){message('مرورگر امکان نصب خودکار را فعال نکرده است؛ از راهنمای نصب مرورگر استفاده کنید.');});
+  });
+ }else{
+  message('برای نصب برنامه، سایت باید با نشانی امن HTTPS باز شود.');
+ }
+ if(isStandalone()){
+  button.textContent='اپلیکیشن نصب شده است ✓';
+  button.disabled=true;
+ }
 })();
 </script>
 
