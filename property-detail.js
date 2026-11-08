@@ -65,7 +65,25 @@ async function renderTour360(p){
   viewer.replaceChildren(makeElement('div','tour360-error',error.message||'بارگذاری تور مجازی انجام نشد.'));
  }
 }
-function renderLocation(p){var lat=number(p.location_lat),lng=number(p.location_lng);if(lat===null||lng===null||!lat||!lng){$('locationCard').hidden=true;return;}var d=0.008;var src='https://www.openstreetmap.org/export/embed.html?bbox='+(lng-d)+'%2C'+(lat-d)+'%2C'+(lng+d)+'%2C'+(lat+d)+'&layer=mapnik&marker='+lat+'%2C'+lng;$('mapFrame').src=src;$('locationPrecision').textContent=p.location_precision==='exact'?'موقعیت دقیق':'موقعیت تقریبی';$('locationCard').hidden=false;}
+var propertyLocationMap=null;
+function renderLocation(p){
+ var lat=number(p.location_lat),lng=number(p.location_lng),exact=p.location_precision==='exact';
+ var card=$('locationCard'),mapEl=$('mapFrame');
+ if(lat===null||lng===null||!lat||!lng){card.hidden=true;return;}
+ if(!exact){lat=Math.round(lat*100)/100;lng=Math.round(lng*100)/100;}
+ $('locationPrecision').textContent=exact?'موقعیت دقیق':'موقعیت تقریبی';
+ card.hidden=false;
+ if(!window.L){mapEl.textContent='نقشه رنگی بارگذاری نشد؛ اتصال اینترنت را بررسی کنید.';return;}
+ if(propertyLocationMap){propertyLocationMap.remove();propertyLocationMap=null;}
+ mapEl.replaceChildren();
+ propertyLocationMap=L.map(mapEl,{scrollWheelZoom:false}).setView([lat,lng],exact?15:12);
+ L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{
+  maxZoom:20,
+  attribution:'&copy; OpenStreetMap contributors &copy; CARTO'
+ }).addTo(propertyLocationMap);
+ L.circleMarker([lat,lng],{radius:10,color:'#b89a61',weight:3,fillColor:'#176344',fillOpacity:.96}).addTo(propertyLocationMap);
+ setTimeout(function(){if(propertyLocationMap)propertyLocationMap.invalidateSize();},120);
+}
 function renderContact(p){$('showPhoneButton').hidden=!p.phone;$('callButton').hidden=true;$('contactHint').textContent=p.phone?'برای نمایش شماره تماس روی دکمه بزنید.':'شماره تماس برای این آگهی ثبت نشده است.';$('showPhoneButton').onclick=function(){if(!p.phone){showToast('شماره تماس ثبت نشده است.');return;}phoneShown=true;$('showPhoneButton').hidden=true;$('callButton').hidden=false;$('callButton').href='tel:'+String(p.phone).replace(/[^\d+]/g,'');$('callButton').textContent=p.phone;$('contactHint').textContent='شماره تماس آگهی‌دهنده';};$('chatButton').href='/chat.html?property='+encodeURIComponent(String(p.id));}
 async function load(){var id=new URLSearchParams(location.search).get('id');if(!id||!/^\d+$/.test(id)){fail('لینک آگهی معتبر نیست.');return;}try{var result=await db.from('properties').select('id,title,main_category,sub_category,property_type,transaction_type,price,deposit,monthly_rent,convertible,area,bedrooms,year_built,floor_number,photos_own,elevator,parking,storage,video_url,address,city,description,image_url,image_urls,details_json,land_area,building_area,location_lat,location_lng,location_precision,created_at,owner_id,status,phone').eq('id',Number(id)).maybeSingle();if(result.error)throw result.error;if(!result.data){fail('این آگهی پیدا نشد، حذف شده یا برای نمایش عمومی تأیید نشده است.');return;}property=result.data;if(property.status!=='approved'){var session=await db.auth.getUser();if(!session.data||!session.data.user||property.owner_id!==session.data.user.id){fail('این آگهی هنوز برای نمایش عمومی تأیید نشده است.');return;}}renderPropertyBase(property);await renderGallery(property);}catch(e){console.error('Property page load failed:',e);fail('بارگذاری آگهی انجام نشد. صفحه را تازه‌سازی کنید. '+(e.message||''));}}
 function fail(msg){$('loading').hidden=true;$('propertyContent').hidden=true;$('errorState').hidden=false;$('errorText').textContent=msg;}
