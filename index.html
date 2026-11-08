@@ -4352,6 +4352,9 @@ footer{background:#f1f4f1!important;border-top:1px solid #e0e7e1!important}
 </style><style id="amlak058-saved-search-alert">
 .saved-search-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:13px;padding:12px 14px;border:1px solid #e3e9e4;border-radius:10px;background:#f8faf8}.saved-search-row>div{display:grid;gap:4px}.saved-search-row strong{font-size:12px;color:#234333}.saved-search-row small{font-size:11px;line-height:1.8;color:#77837b}.saved-search-button{flex-shrink:0;border:1px solid #174333;border-radius:7px;background:#174333;color:#fff;padding:10px 14px;font:inherit;font-size:11px;font-weight:800;cursor:pointer}.saved-search-button:hover{background:#205a43}
 @media(max-width:600px){.saved-search-row{align-items:stretch;flex-direction:column}.saved-search-button{width:100%;min-height:42px}}
+</style><style id="amlak058-owner-listing-panel">
+.account-listing-summary{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px}.account-listing-summary span{padding:8px 11px;border:1px solid #e0e8e1;border-radius:8px;background:#f7faf7;color:#315443;font-size:11px;font-weight:700}
+.account-owner-status{display:inline-flex;align-items:center;width:max-content;margin-bottom:8px;padding:5px 9px;border-radius:6px;font-size:11px;font-weight:800}.account-owner-status.approved{background:#e8f3eb;color:#23643b}.account-owner-status.pending{background:#fff5df;color:#8a6824}.account-owner-status.rejected{background:#f9eaea;color:#934444}
 </style></head><body>
 
 <header id="amlak058-header-target" class="amlak058-site-header">
@@ -6503,7 +6506,7 @@ async function accountDashboardAction(action){
   if(action==='newRequest'){closeAccountDashboard();openRequestModal();return;}
   if(action==='messages'){window.location.href='/chat.html';return;}
   if(!user){accountLoginPending=true;openAuthModal();return;}
-  if(action==='listings'){window.location.href='/my-divar/my-posts/';return;}
+  if(action==='listings'){await renderAccountListings(user);return;}
   if(action==='saved'){await renderAccountSaved(user);return;}
   if(action==='recent'){await renderAccountRecent(user);return;}
   if(action==='requests'){await renderAccountRequests(user);return;}
@@ -6524,13 +6527,14 @@ async function renderAccountListings(user){
     var data=result.data||[];
     if(!data.length){box.innerHTML=accountEmpty('هنوز آگهی‌ای ثبت نکرده‌ای','بعد از ثبت آگهی، وضعیت بررسی و نتیجه آن را همین‌جا می‌بینی.','ثبت آگهی رایگان','new');return;}
     var labels={pending:['در انتظار تأیید','pending'],approved:['منتشر شده','approved'],rejected:['رد شده','rejected']};
+    var summary='<div class="account-listing-summary"><span>همه: '+data.length.toLocaleString('fa-IR')+'</span><span>منتشرشده: '+data.filter(function(x){return x.status==='approved'}).length.toLocaleString('fa-IR')+'</span><span>در انتظار: '+data.filter(function(x){return x.status==='pending'}).length.toLocaleString('fa-IR')+'</span><span>ردشده: '+data.filter(function(x){return x.status==='rejected'}).length.toLocaleString('fa-IR')+'</span></div>';
     var html=[];
     for(var i=0;i<data.length;i++){
       var p=data[i],lab=labels[p.status]||['وضعیت نامشخص','pending'],card=await renderProperty(p);
       card=card.replace('<div class="property-info">','<div class="property-info"><span class="account-owner-status '+lab[1]+'">'+lab[0]+'</span>');
       html.push(card);
     }
-    box.innerHTML=html.join('');
+    box.innerHTML=summary+html.join('');
   }catch(e){
     box.innerHTML=accountEmpty('آگهی‌ها بارگذاری نشدند',e.message||'خطای دریافت اطلاعات','','');
   }
