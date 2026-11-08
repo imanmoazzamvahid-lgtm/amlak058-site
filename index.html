@@ -4357,6 +4357,8 @@ footer{background:#f1f4f1!important;border-top:1px solid #e0e7e1!important}
 .account-owner-status{display:inline-flex;align-items:center;width:max-content;margin-bottom:8px;padding:5px 9px;border-radius:6px;font-size:11px;font-weight:800}.account-owner-status.approved{background:#e8f3eb;color:#23643b}.account-owner-status.pending{background:#fff5df;color:#8a6824}.account-owner-status.rejected{background:#f9eaea;color:#934444}
 </style><style id="amlak058-owner-listing-filters">
 .owner-listing-filters{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 16px}.owner-listing-filters button{border:1px solid #dfe7e0;background:#fff;color:#52645a;border-radius:20px;padding:8px 13px;font:inherit;font-size:11px;cursor:pointer}.owner-listing-filters button.active{background:#174333;border-color:#174333;color:#fff}.owner-listing-item[hidden]{display:none!important}
+</style><style id="amlak058-owner-view-counter">
+.pd-owner-views{display:inline-flex;align-items:center;margin:8px 0 4px;padding:7px 11px;border:1px solid #e2e9e3;border-radius:7px;background:#f7faf7;color:#315443;font-size:11px;line-height:1.8}
 </style></head><body>
 
 <header id="amlak058-header-target" class="amlak058-site-header">
@@ -4548,6 +4550,7 @@ footer{background:#f1f4f1!important;border-top:1px solid #e0e7e1!important}
           <div class="pd-label-line"><span id="pdCategoryTag" class="pd-category-tag">آگهی ملک</span><span id="pdTimeAgo" class="pd-muted"></span></div>
           <h1 id="pdTitle"></h1>
           <p id="pdLocationLine" class="pd-location-line"><span aria-hidden="true">⌖</span></p>
+          <div id="pdOwnerViews" class="pd-owner-views" hidden></div>
           <button type="button" class="pd-safety-link" onclick="pdToggleSafety()"><span aria-hidden="true">⚠</span> زنگ خطرهای قبل از معامله <span class="pd-chevron">‹</span></button>
           <div id="pdSafetyPanel" class="pd-safety-panel" hidden>
             پیش از پرداخت وجه، ملک و مدارک مالکیت را حضوری بررسی کن. برای بازدید و دریافت اطلاعات، از اطلاعات تماس همین آگهی استفاده کن و پیش از احراز هویت، بیعانه واریز نکن.
@@ -6705,12 +6708,32 @@ async function pdResolveProperty(id){
  propertyCache.set(key,result.data);
  return result.data;
 }
+async function pdRecordAndShowOwnerViews(p){
+ var box=document.getElementById('pdOwnerViews');if(!box)return;
+ box.hidden=true;box.textContent='';
+ try{
+  var auth=await db.auth.getUser(),user=auth.data&&auth.data.user;if(!user)return;
+  if(p.owner_id&&p.owner_id!==user.id){
+   await db.from('property_views').upsert({property_id:Number(p.id),viewer_id:user.id},{onConflict:'property_id,viewer_id,viewed_on',ignoreDuplicates:true});
+   return;
+  }
+  if(p.owner_id!==user.id)return;
+  var today=new Date(),since=new Date(today);since.setDate(since.getDate()-29);
+  var from=since.getFullYear()+'-'+String(since.getMonth()+1).padStart(2,'0')+'-'+String(since.getDate()).padStart(2,'0');
+  var result=await db.from('property_views').select('id,viewed_on',{count:'exact'}).eq('property_id',Number(p.id)).gte('viewed_on',from);
+  if(result.error)throw result.error;
+  var count=result.count??(result.data||[]).length;
+  box.textContent='بازدید ثبت‌شده کاربران عضو در ۳۰ روز اخیر: '+Number(count).toLocaleString('fa-IR');
+  box.hidden=false;
+ }catch(e){console.warn('Property view metrics unavailable',e)}
+}
 async function openPropertyDetailPage(id,pushHistory){
  var key=String(id||'').trim();if(!/^\d+$/.test(key))return;
  var page=document.getElementById('propertyDetailPage');
  var loader=document.getElementById('pdLoading'),content=document.getElementById('pdContent');
  try{
   var p=await pdResolveProperty(key);
+  if(p)pdRecordAndShowOwnerViews(p);
   if(!p){alert('این آگهی پیدا نشد یا دیگر در دسترس نیست.');return}
   if(!pdPageIsOpen){
    pdPreviousHash=location.hash&&location.hash.indexOf('#ad-')!==0?location.hash:'#listings';
