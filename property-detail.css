@@ -30,3 +30,10 @@
 #tour360Viewer .tour360-empty,#tour360Viewer .tour360-error{display:grid;place-items:center;text-align:center;min-height:300px;padding:28px;box-sizing:border-box;background:linear-gradient(145deg,#123f32,#1d5942);color:#f3eddf;font-size:14px;line-height:2.1}
 #tour360Viewer .tour360-error{background:#463d2d;color:#fff2d4}
 .tour360-card .section-title span{font-size:11px;color:var(--muted)}
+
+/* رنگ کامل نقشه در صفحه جزئیات ملک */
+#mapFrame{display:block;width:100%;height:300px;min-height:260px;border:1px solid #dce5dd;border-radius:10px;margin-top:13px;overflow:hidden;background:#e8f0e8}
+#mapFrame .leaflet-tile-pane{filter:none!important;-webkit-filter:none!important;opacity:1!important}
+#mapFrame .leaflet-tile{filter:none!important;-webkit-filter:none!important;opacity:1!important}
+#mapFrame .leaflet-control-attribution{background:rgba(255,255,255,.92)!important;color:#46584e!important;font-size:9px!important}
+#mapFrame .map-loading{display:grid;place-items:center;min-height:260px;color:#315443;font-size:12px}
