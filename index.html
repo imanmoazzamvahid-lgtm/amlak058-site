@@ -4145,7 +4145,36 @@ nav a:hover,.filter-btn.active,.mobile-nav-item.active{color:#176344!important}
  .mobile-bottom-nav .mobile-nav-item.post .mobile-nav-svg{width:26px;height:26px;padding:5px;box-sizing:content-box;background:#176344;color:#fff;stroke:#fff;border-radius:12px;box-shadow:0 4px 10px rgba(23,99,68,.2)}
  .mobile-bottom-nav .mobile-nav-item:active{transform:translateY(-2px)}
 }
-</style></head><body>
+</style>
+<style id="amlak058-home-polish-v1">
+.amlak058-install-cta{margin:34px auto 24px;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;background:linear-gradient(135deg,#124b35,#1b684a);border:1px solid #276e50;border-radius:18px;color:#fff;box-shadow:0 12px 30px #174b3515}
+.amlak058-install-copy span{font-size:11px;color:#d6e9dd;font-weight:700}
+.amlak058-install-copy h2{font-size:18px;margin:4px 0}
+.amlak058-install-copy p{font-size:12px;color:#e0eee5;margin:0}
+.amlak058-install-button{border:0;border-radius:12px;padding:13px 20px;background:#fff;color:#14583d;font-weight:900;white-space:nowrap}
+.amlak058-install-status{width:100%;font-size:11px;color:#e2f1e7;margin:0}
+.amlak058-footer-contact{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.amlak058-footer-contact a{font-weight:800}
+.amlak058-footer-contact .contact-page-link{padding:7px 11px;border:1px solid #dbe7df;border-radius:9px;color:#176344}
+.request-strip{min-height:unset;align-items:center;gap:16px}
+@media(max-width:650px){
+ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))!important}
+ .request-strip{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:13px!important;margin:26px 14px 34px!important;padding:18px 16px!important;border-radius:15px!important}
+ .request-strip h2{font-size:17px!important;line-height:1.8!important;margin:0 0 5px!important}
+ .request-strip p{font-size:12px!important;line-height:1.9!important;margin:0!important}
+ .request-strip .btn{width:100%!important;min-height:46px!important}
+ .amlak058-install-cta{width:calc(100% - 28px)!important;margin:24px auto 22px!important;padding:18px!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:13px!important}
+ .amlak058-install-copy h2{font-size:16px!important}
+ .amlak058-install-copy p{font-size:11px!important;line-height:1.9!important}
+ .amlak058-install-button{width:100%!important;min-height:46px!important}
+ .amlak058-footer{margin-bottom:10px}
+ #a058AiLauncher{bottom:calc(94px + env(safe-area-inset-bottom))!important;z-index:89!important}
+ #a058AiPanel{bottom:calc(90px + env(safe-area-inset-bottom))!important}
+ .mobile-bottom-nav{z-index:100!important;padding-bottom:calc(9px + env(safe-area-inset-bottom))!important}
+}
+</style>
+
+</head><body>
 
 <header id="amlak058-header-target" class="amlak058-site-header">
 <div class="amlak058-header-shell">
@@ -4413,6 +4442,13 @@ nav a:hover,.filter-btn.active,.mobile-nav-item.active{color:#176344!important}
 @media(max-width:420px){#official-property-services .ops-grid{grid-template-columns:1fr}}
 </style>
 
+
+<section class="container amlak058-install-cta" id="installAppSection" aria-label="نصب اپلیکیشن املاک ۰۵۸">
+ <div class="amlak058-install-copy"><span>همیشه همراهت</span><h2>املاک ۰۵۸ را روی گوشی نصب کن</h2><p>مثل یک اپلیکیشن، سریع و راحت به آگهی‌های بجنورد دسترسی داشته باش.</p></div>
+ <button type="button" id="installAppButton" class="amlak058-install-button">↓ نصب اپلیکیشن</button>
+ <p id="installAppStatus" class="amlak058-install-status" aria-live="polite"></p>
+</section>
+
 <footer class="amlak058-footer">
  <div class="container">
   <section class="amlak058-footer-ad" aria-label="تبلیغات و ثبت آگهی رایگان">
@@ -4423,7 +4459,7 @@ nav a:hover,.filter-btn.active,.mobile-nav-item.active{color:#176344!important}
    </div>
    <div class="amlak058-footer-ad-actions">
     <button type="button" onclick="openModal()">＋ ثبت آگهی رایگان</button>
-    <div class="amlak058-footer-contact"><span>تماس با مدیریت سایت</span><a id="footerPhone" href="tel:09152110616" dir="ltr">09152110616</a></div>
+    <div class="amlak058-footer-contact"><a class="contact-page-link" href="/contact.html">تماس با ما</a></div>
    </div>
   </section>
   <div class="footer-inner amlak058-footer-bottom">
@@ -9636,6 +9672,35 @@ footer p,footer a{color:#dce8e0!important;font-size:11px!important}
 })();
 </script>
 
+
+
+<script id="amlak058-pwa-install-v1">
+(function(){
+ let deferredPrompt=null;
+ const button=document.getElementById('installAppButton');
+ const status=document.getElementById('installAppStatus');
+ if(!button)return;
+ function message(text){if(status)status.textContent=text;}
+ window.addEventListener('beforeinstallprompt',function(event){
+  event.preventDefault();deferredPrompt=event;button.hidden=false;
+ });
+ window.addEventListener('appinstalled',function(){
+  deferredPrompt=null;button.hidden=true;message('اپلیکیشن املاک ۰۵۸ نصب شد.');
+ });
+ button.addEventListener('click',async function(){
+  if(deferredPrompt){
+   deferredPrompt.prompt();
+   const choice=await deferredPrompt.userChoice;
+   message(choice&&choice.outcome==='accepted'?'در حال نصب املاک ۰۵۸...':'نصب انجام نشد؛ هر زمان خواستید دوباره تلاش کنید.');
+   deferredPrompt=null;return;
+  }
+  if(window.matchMedia('(display-mode: standalone)').matches){message('املاک ۰۵۸ روی گوشی شما نصب شده است.');return;}
+  message('برای نصب، از منوی مرورگر گزینه «افزودن به صفحه اصلی» را انتخاب کنید.');
+ });
+ if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}
+ button.hidden=false;
+})();
+</script>
 
 </body>
 </html>
