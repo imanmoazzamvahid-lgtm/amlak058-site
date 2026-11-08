@@ -15,9 +15,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/property-detail.css?v=1">
+<link rel="stylesheet" href="/property-detail.css?v=2">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script defer src="/property-detail.js?v=1"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+<script defer src="/property-detail.js?v=2"></script>
 <link rel="stylesheet" href="/palette.css?v=1">
 </head>
 <body>
@@ -51,6 +53,7 @@
 <div class="section-title"><h2>توضیحات آگهی‌دهنده</h2></div><p id="descriptionText" class="description-text"></p>
 </section>
 <section id="videoCard" class="info-card" hidden><div class="section-title"><h2>ویدئوی ملک</h2></div><video id="propertyVideo" controls playsinline preload="metadata"></video><a id="videoLink" class="text-link" href="#" target="_blank" rel="noopener" hidden>باز کردن ویدئو در صفحه جدید</a></section>
+<section id="tour360Card" class="info-card tour360-card" hidden><div class="section-title"><h2>بازدید مجازی ۳۶۰ درجه</h2><span>برای چرخاندن تصویر، لمس کنید و بکشید</span></div><div id="tour360Viewer" role="application" aria-label="نمایش تعاملی تور مجازی ۳۶۰ درجه"><div class="tour360-loading">در حال آماده‌سازی بازدید مجازی…</div></div><p class="tour360-hint">تصویر پانورامای ثبت‌شده برای این ملک؛ با حرکت انگشت یا ماوس اطراف فضا را ببینید.</p></section>
 <section id="locationCard" class="info-card" hidden><div class="section-title"><h2>موقعیت ملک</h2><span id="locationPrecision" class="muted"></span></div><iframe id="mapFrame" title="نقشه موقعیت ملک" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><p class="map-note">موقعیت نمایش‌داده‌شده بر اساس اطلاعات ثبت‌شده توسط آگهی‌دهنده است.</p></section>
 <section class="safety-card"><div class="safety-icon">!</div><div><h2>نکات ایمنی معامله</h2><p>پیش از پرداخت بیعانه، هویت آگهی‌دهنده و مدارک مالکیت را بررسی کنید. از انتقال وجه پیش از بررسی حضوری و توافق روشن درباره شرایط معامله خودداری کنید.</p></div></section>
 </section>
