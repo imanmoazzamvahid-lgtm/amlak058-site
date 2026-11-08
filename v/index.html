@@ -15,11 +15,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/property-detail.css?v=3">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="/property-detail.css?v=4">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.7/build/pannellum.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/pannellum@2.5.7/build/pannellum.js"></script>
-<script defer src="/property-detail.js?v=3"></script>
+<script defer src="/property-detail.js?v=4"></script>
 <link rel="stylesheet" href="/palette.css?v=1">
 </head>
 <body>
@@ -54,7 +56,7 @@
 </section>
 <section id="videoCard" class="info-card" hidden><div class="section-title"><h2>ویدئوی ملک</h2></div><video id="propertyVideo" controls playsinline preload="metadata"></video><a id="videoLink" class="text-link" href="#" target="_blank" rel="noopener" hidden>باز کردن ویدئو در صفحه جدید</a></section>
 <section id="tour360Card" class="info-card tour360-card" hidden><div class="section-title"><h2>بازدید مجازی ۳۶۰ درجه</h2><span>برای چرخاندن تصویر، لمس کنید و بکشید</span></div><div id="tour360Viewer" role="application" aria-label="نمایش تعاملی تور مجازی ۳۶۰ درجه"><div class="tour360-loading">در حال آماده‌سازی بازدید مجازی…</div></div><div id="tour360Scenes" class="tour360-scenes" aria-label="انتخاب نمای تور مجازی"></div><p class="tour360-hint">با حرکت انگشت یا ماوس اطراف هر فضا را ببینید و برای جابه‌جایی بین فضاها، نمای موردنظر را انتخاب کنید.</p></section>
-<section id="locationCard" class="info-card" hidden><div class="section-title"><h2>موقعیت ملک</h2><span id="locationPrecision" class="muted"></span></div><iframe id="mapFrame" title="نقشه موقعیت ملک" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><p class="map-note">موقعیت نمایش‌داده‌شده بر اساس اطلاعات ثبت‌شده توسط آگهی‌دهنده است.</p></section>
+<section id="locationCard" class="info-card" hidden><div class="section-title"><h2>موقعیت ملک</h2><span id="locationPrecision" class="muted"></span></div><div id="mapFrame" role="application" aria-label="نقشه رنگی موقعیت ملک"><div class="map-loading">در حال آماده‌سازی نقشه…</div></div><p class="map-note">موقعیت نمایش‌داده‌شده بر اساس اطلاعات ثبت‌شده توسط آگهی‌دهنده است.</p></section>
 <section class="safety-card"><div class="safety-icon">!</div><div><h2>نکات ایمنی معامله</h2><p>پیش از پرداخت بیعانه، هویت آگهی‌دهنده و مدارک مالکیت را بررسی کنید. از انتقال وجه پیش از بررسی حضوری و توافق روشن درباره شرایط معامله خودداری کنید.</p></div></section>
 </section>
 <aside class="side-column">
