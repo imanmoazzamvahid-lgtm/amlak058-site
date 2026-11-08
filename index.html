@@ -4176,6 +4176,43 @@ nav a:hover,.filter-btn.active,.mobile-nav-item.active{color:#176344!important}
 }
 </style>
 
+
+<style id="request-strip-mobile-final-fix">
+/* کارت ثبت درخواست ملک: خوانا، مرتب و بدون برخورد با نوارهای شناور */
+#requestStrip.request-strip{
+ position:relative!important;z-index:2!important;
+ display:flex!important;flex-direction:row!important;align-items:center!important;
+ justify-content:space-between!important;gap:18px!important;
+ width:min(1160px,calc(100% - 44px))!important;
+ min-height:unset!important;height:auto!important;max-height:none!important;
+ margin:42px auto 54px!important;padding:28px 30px!important;
+ overflow:visible!important;box-sizing:border-box!important;
+ background:#edf3ed!important;border:1px solid #dfe9e1!important;
+ border-radius:18px!important;text-align:right!important;
+}
+#requestStrip>div{flex:1 1 auto!important;min-width:0!important}
+#requestStrip h2{display:block!important;margin:0 0 8px!important;font-size:20px!important;line-height:1.8!important;font-weight:900!important;color:#1d2b27!important;white-space:normal!important}
+#requestStrip p{display:block!important;margin:0!important;font-size:13px!important;line-height:2!important;color:#66736a!important;white-space:normal!important}
+#requestStrip .btn{display:inline-flex!important;align-items:center!important;justify-content:center!important;flex:0 0 auto!important;width:auto!important;min-width:210px!important;min-height:48px!important;margin:0!important;padding:12px 18px!important;white-space:normal!important;line-height:1.7!important}
+@media(max-width:650px){
+ body{padding-bottom:calc(210px + env(safe-area-inset-bottom))!important}
+ #requestStrip.request-strip{
+  display:flex!important;flex-direction:column!important;align-items:stretch!important;
+  justify-content:flex-start!important;gap:12px!important;
+  width:calc(100% - 32px)!important;min-height:0!important;height:auto!important;
+  margin:30px 16px 64px!important;padding:20px 17px!important;
+  border-radius:16px!important;overflow:visible!important;
+ }
+ #requestStrip>div{width:100%!important;min-width:0!important}
+ #requestStrip h2{font-size:17px!important;line-height:1.85!important;margin:0 0 6px!important;overflow:visible!important}
+ #requestStrip p{font-size:12px!important;line-height:2!important;overflow:visible!important}
+ #requestStrip .btn{display:flex!important;width:100%!important;min-width:0!important;min-height:48px!important;margin:2px 0 0!important;padding:12px 14px!important;font-size:12px!important;white-space:normal!important}
+ #a058AiLauncher{max-width:155px!important;min-height:48px!important;bottom:calc(92px + env(safe-area-inset-bottom))!important}
+ #a058AiPanel{bottom:calc(145px + env(safe-area-inset-bottom))!important;max-height:65vh!important}
+ .mobile-bottom-nav{z-index:100!important}
+}
+</style>
+
 </head><body>
 
 <header id="amlak058-header-target" class="amlak058-site-header">
@@ -9692,6 +9729,26 @@ footer p,footer a{color:#dce8e0!important;font-size:11px!important}
  });
  if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}
  button.hidden=false;
+})();
+</script>
+
+
+<script id="request-strip-mobile-visibility-fix">
+(function(){
+ const card=document.getElementById('requestStrip');
+ const launcher=document.getElementById('a058AiLauncher');
+ if(!card||!launcher||!('IntersectionObserver' in window))return;
+ const observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+   if(window.matchMedia('(max-width:650px)').matches){
+    launcher.style.visibility=entry.isIntersecting?'hidden':'visible';
+    launcher.style.pointerEvents=entry.isIntersecting?'none':'auto';
+   }else{
+    launcher.style.visibility='visible';launcher.style.pointerEvents='auto';
+   }
+  });
+ },{threshold:0.08});
+ observer.observe(card);
 })();
 </script>
 
