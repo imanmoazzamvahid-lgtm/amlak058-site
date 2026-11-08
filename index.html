@@ -1736,7 +1736,6 @@ footer strong,footer p{color:#555!important}
 .mobile-nav-item{color:#666!important}
 .mobile-nav-item.active{color:#b78317!important}
 .mobile-nav-item.post{background:#b78317!important;color:#fff!important;border:0!important;border-radius:8px!important;box-shadow:none!important}
-#amlak058-pwa-install{background:#b78317!important;border:0!important;box-shadow:none!important}
 @media(max-width:800px){
  .header-inner{min-height:58px!important;padding:6px 12px!important}
  .brand-icon{width:37px!important;height:37px!important;min-width:37px!important}
@@ -5637,43 +5636,15 @@ footer{background:#f8f6ef!important}
 </style>
 
 
-<style id="amlak058-pwa-styles">
-#amlak058-pwa-install{position:fixed;right:16px;bottom:calc(82px + env(safe-area-inset-bottom));z-index:9999;display:none;align-items:center;gap:9px;border:0;border-radius:999px;padding:12px 17px;background:#b78317;color:#fffaf0;font:700 14px Tahoma,Arial,sans-serif;box-shadow:0 8px 24px #29272140;cursor:pointer}
-#amlak058-pwa-install svg{width:20px;height:20px;flex:none}
-#amlak058-pwa-install:focus-visible{outline:3px solid #e4c27a;outline-offset:3px}
-@media(min-width:800px){#amlak058-pwa-install{bottom:24px;right:24px}}
-</style>
-<button id="amlak058-pwa-install" type="button" aria-label="نصب اپلیکیشن املاک ۰۵۸"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5"/><path d="M5 16v4h14v-4"/></svg><span>نصب اپلیکیشن</span></button>
-<script>
+<script id="amlak058-service-worker-registration">
 (function(){
   if ("serviceWorker" in navigator && location.protocol === "https:") {
     window.addEventListener("load", function(){
-      navigator.serviceWorker.register("/sw.js?v=23").catch(function(err){console.warn("امکان فعال‌سازی حالت اپ فراهم نشد",err);});
+      navigator.serviceWorker.register("/sw.js?v=23").catch(function(err){
+        console.warn("امکان فعال‌سازی حالت آفلاین فراهم نشد",err);
+      });
     });
   }
-  var installButton=document.getElementById("amlak058-pwa-install");
-  var installPrompt=null;
-  var standalone=window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone===true;
-  if(!installButton || standalone) return;
-  window.addEventListener("beforeinstallprompt",function(event){
-    event.preventDefault();
-    installPrompt=event;
-    installButton.style.display="inline-flex";
-  });
-  installButton.addEventListener("click",async function(){
-    if(!installPrompt){
-      alert("برای نصب، از منوی مرورگر گزینه «افزودن به صفحه اصلی» یا «Install app» را انتخاب کنید.");
-      return;
-    }
-    installPrompt.prompt();
-    await installPrompt.userChoice;
-    installPrompt=null;
-    installButton.style.display="none";
-  });
-  window.addEventListener("appinstalled",function(){
-    installPrompt=null;
-    installButton.style.display="none";
-  });
 })();
 </script>
 
@@ -5739,7 +5710,6 @@ footer strong,footer p{color:#fffaf0!important}
 .mobile-nav-item{color:#637268!important}
 .mobile-nav-item.active{color:#292721!important}
 .mobile-nav-item.post{background:linear-gradient(135deg,#292721,#292721)!important;color:#fffaf0!important;border:1px solid #c59a45!important;border-radius:15px!important;box-shadow:0 5px 13px #29272120!important}
-#amlak058-pwa-install{background:linear-gradient(135deg,#292721,#292721)!important;border:1px solid #c59a45!important;box-shadow:0 8px 25px #29272130!important}
 @media(max-width:800px){
  .header-inner{min-height:67px!important}
  .brand-icon{width:45px!important;height:45px!important;border-radius:14px!important}
@@ -5819,7 +5789,6 @@ footer p{color:#f7f2e6!important}
 .mobile-nav-item{color:#68776d!important}
 .mobile-nav-item.active{color:#292721!important}
 .mobile-nav-item.post{background:linear-gradient(135deg,#292721,#292721)!important;color:#fff9ed!important;border:1px solid #c6a15b!important;border-radius:15px!important;box-shadow:0 5px 15px #2927211c!important}
-#amlak058-pwa-install{background:linear-gradient(135deg,#292721,#292721)!important;border:1px solid #c6a15b!important;color:#fff9ed!important}
 @media(max-width:800px){
  #home.request-hero{width:calc(100% - 22px)!important;margin-top:12px!important;padding:25px 15px 29px!important;border-radius:21px!important}
  #home.request-hero:before{background-size:340px auto!important;background-position:center 12px!important;opacity:.55!important}
@@ -8283,7 +8252,6 @@ label,.form-label{color:#45564b!important}
 #amlak058SupportPanel .support-head,#amlak058SupportPanel .support-send{background:#183e35!important;color:#fff!important}
 #amlak058SupportPanel input,#amlak058SupportPanel textarea{background:#fff!important;border-color:#dfe7e0!important;color:#202d27!important}
 #amlak058SupportPanel .support-note{color:#748078!important}
-#amlak058-pwa-install{background:#183e35!important;background-image:linear-gradient(135deg,#244f43,#15372f)!important;border:1px solid #c6a36a!important;color:#fff!important}
 #commission-calculator .commission-tab{background:#fff!important;color:#526158!important;border-color:#dfe7e0!important}
 #commission-calculator .commission-tab.active{background:#edf3ee!important;color:#183e35!important;border-color:#a9c2b0!important}
 #commission-calculator .commission-result,.commission-result,#commission-calculator .result-box,.commission-result-box{background:#edf3ee!important;border-color:#cbdccc!important;color:#202d27!important}
@@ -8369,7 +8337,6 @@ label,.form-label{color:#46534b!important}
 #amlak058SupportPanel .support-head,#amlak058SupportPanel .support-send{background:#176344!important;color:#fff!important}
 #amlak058SupportPanel input,#amlak058SupportPanel textarea{background:#fff!important;border-color:#dfe5e1!important;color:#26332c!important}
 #amlak058SupportPanel .support-note{color:#7b8580!important}
-#amlak058-pwa-install{background:#176344!important;background-image:none!important;border:1px solid #176344!important;color:#fff!important}
 #commission-calculator .commission-tab{background:#fff!important;color:#59645e!important;border-color:#dfe5e1!important}
 #commission-calculator .commission-tab.active{background:#edf1ee!important;color:#176344!important;border-color:#b9c9bf!important}
 #commission-calculator .commission-result,.commission-result,#commission-calculator .result-box,.commission-result-box{background:#edf1ee!important;border-color:#d5dfd8!important;color:#26332c!important}
