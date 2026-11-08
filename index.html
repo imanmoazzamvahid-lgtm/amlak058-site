@@ -4355,6 +4355,8 @@ footer{background:#f1f4f1!important;border-top:1px solid #e0e7e1!important}
 </style><style id="amlak058-owner-listing-panel">
 .account-listing-summary{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px}.account-listing-summary span{padding:8px 11px;border:1px solid #e0e8e1;border-radius:8px;background:#f7faf7;color:#315443;font-size:11px;font-weight:700}
 .account-owner-status{display:inline-flex;align-items:center;width:max-content;margin-bottom:8px;padding:5px 9px;border-radius:6px;font-size:11px;font-weight:800}.account-owner-status.approved{background:#e8f3eb;color:#23643b}.account-owner-status.pending{background:#fff5df;color:#8a6824}.account-owner-status.rejected{background:#f9eaea;color:#934444}
+</style><style id="amlak058-owner-listing-filters">
+.owner-listing-filters{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 16px}.owner-listing-filters button{border:1px solid #dfe7e0;background:#fff;color:#52645a;border-radius:20px;padding:8px 13px;font:inherit;font-size:11px;cursor:pointer}.owner-listing-filters button.active{background:#174333;border-color:#174333;color:#fff}.owner-listing-item[hidden]{display:none!important}
 </style></head><body>
 
 <header id="amlak058-header-target" class="amlak058-site-header">
@@ -6518,6 +6520,7 @@ async function accountDashboardAction(action){
     return;
   }
 }
+function filterOwnerListings(status,button){document.querySelectorAll('.owner-listing-filters button').forEach(function(b){b.classList.toggle('active',b===button)});document.querySelectorAll('.owner-listing-item').forEach(function(card){card.hidden=status!=='all'&&card.dataset.ownerStatus!==status})}
 async function renderAccountListings(user){
   showAccountView('مدیریت آگهی‌ها','آگهی‌های ثبت‌شده با این حساب و وضعیت بررسی آن‌ها','<div class="account-view-notice">آگهی‌های جدید پس از ثبت در انتظار بررسی مدیریت می‌مانند.</div><div id="accountListingsResults" class="account-listing-results"><div class="account-view-empty">در حال دریافت آگهی‌ها...</div></div><div style="margin-top:12px"><button class="account-view-button primary" onclick="accountDashboardAction(\'new\')">＋ ثبت آگهی رایگان</button></div>','listings');
   var box=document.getElementById('accountListingsResults');
@@ -6528,13 +6531,14 @@ async function renderAccountListings(user){
     if(!data.length){box.innerHTML=accountEmpty('هنوز آگهی‌ای ثبت نکرده‌ای','بعد از ثبت آگهی، وضعیت بررسی و نتیجه آن را همین‌جا می‌بینی.','ثبت آگهی رایگان','new');return;}
     var labels={pending:['در انتظار تأیید','pending'],approved:['منتشر شده','approved'],rejected:['رد شده','rejected']};
     var summary='<div class="account-listing-summary"><span>همه: '+data.length.toLocaleString('fa-IR')+'</span><span>منتشرشده: '+data.filter(function(x){return x.status==='approved'}).length.toLocaleString('fa-IR')+'</span><span>در انتظار: '+data.filter(function(x){return x.status==='pending'}).length.toLocaleString('fa-IR')+'</span><span>ردشده: '+data.filter(function(x){return x.status==='rejected'}).length.toLocaleString('fa-IR')+'</span></div>';
+    var filters='<div class="owner-listing-filters" role="group" aria-label="فیلتر وضعیت آگهی‌ها"><button type="button" class="active" onclick="filterOwnerListings(\'all\',this)">همه</button><button type="button" onclick="filterOwnerListings(\'approved\',this)">منتشرشده</button><button type="button" onclick="filterOwnerListings(\'pending\',this)">در انتظار</button><button type="button" onclick="filterOwnerListings(\'rejected\',this)">ردشده</button></div>';
     var html=[];
     for(var i=0;i<data.length;i++){
       var p=data[i],lab=labels[p.status]||['وضعیت نامشخص','pending'],card=await renderProperty(p);
       card=card.replace('<div class="property-info">','<div class="property-info"><span class="account-owner-status '+lab[1]+'">'+lab[0]+'</span>');
-      html.push(card);
+      html.push('<div class="owner-listing-item" data-owner-status="'+String(p.status||'unknown')+'">'+card+'</div>');
     }
-    box.innerHTML=summary+html.join('');
+    box.innerHTML=summary+filters+html.join('');
   }catch(e){
     box.innerHTML=accountEmpty('آگهی‌ها بارگذاری نشدند',e.message||'خطای دریافت اطلاعات','','');
   }
