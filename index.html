@@ -4808,7 +4808,7 @@ async function printCommissionReceipt(){
  printCommissionSheetInCurrentTab(html);
 }
 function sanitizeOldCommissionReceipt(html){
- return String(html||'').replace(/<section class="cp-bank">[\\s\\S]*?<\\/section>/gi,'').replace(/5047\\s*0642\\s*1731\\s*6181/g,'');
+ return String(html||'').replace(/<section class="cp-bank">[\s\S]*?<\/section>/gi,'').replace(/5047\s*0642\s*1731\s*6181/g,'');
 }
 function getCommissionHistory(){
  try{
