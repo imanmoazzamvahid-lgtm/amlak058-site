@@ -10703,6 +10703,68 @@ footer a{color:#d9c49b!important}
  #categories .category-icon svg,.category-icon svg{width:29px!important;height:29px!important}
 }
 
+
+/* AMLAK 058 — calm single-search homepage. Keep the existing hero/banner artwork untouched. */
+#home.premium-hero{ /* preserve existing banner image, overlay and content */ }
+#search.search-section{
+ width:min(1120px,calc(100% - 40px))!important;
+ margin: -24px auto 30px!important;
+ padding:20px 24px!important;
+ background:#fffdf8!important;
+ border:1px solid #e8dfd0!important;
+ border-top:2px solid #b79a69!important;
+ border-radius:5px!important;
+ box-shadow:0 8px 24px rgba(34,47,38,.07)!important;
+}
+#search .search-section-heading{margin:0 0 12px!important}
+#search .search-section-heading h2{font-size:19px!important;font-weight:800!important;color:#203c30!important}
+#search .search-section-heading p{font-size:11px!important;color:#788078!important}
+#search .search-trust-note,#search .saved-search-row{display:none!important}
+#search .search-mode-tabs{display:flex!important;gap:6px!important;margin:0 0 12px!important}
+#search .search-mode-tabs button{padding:7px 15px!important;border:1px solid #e4ddcf!important;border-radius:3px!important;background:#faf8f2!important;color:#536257!important;font-size:12px!important}
+#search .search-mode-tabs button.active{background:#183d32!important;color:#fff!important;border-color:#183d32!important}
+#search .search-panel{
+ display:grid!important;grid-template-columns:1fr 1fr 1.3fr 1.3fr auto!important;
+ gap:8px!important;padding:0!important;margin:0!important;border:0!important;
+ background:transparent!important;box-shadow:none!important
+}
+#search .search-field{min-width:0!important}
+#search .search-field label{font-size:10px!important;color:#68756c!important;margin-bottom:4px!important}
+#search .search-panel input,#search .search-panel select{
+ width:100%!important;min-width:0!important;height:43px!important;min-height:43px!important;
+ padding:0 10px!important;border:1px solid #e5e0d5!important;border-radius:3px!important;
+ background:#fff!important;color:#263a30!important;font-size:12px!important
+}
+#search .search-panel>button{height:43px!important;min-height:43px!important;padding:0 20px!important;border-radius:3px!important;background:#183d32!important;color:white!important;white-space:nowrap!important}
+#categories,#listings{width:min(1120px,calc(100% - 40px))!important;margin:28px auto!important;padding:0!important}
+#categories .section-heading,#listings .section-heading{margin:0 0 14px!important;padding:0 0 10px!important;border-bottom:1px solid #e9e3d8!important}
+#categories .section-heading h2,#listings .section-heading h2{font-size:19px!important;font-weight:800!important;color:#203c30!important}
+#categories .categories{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:10px!important}
+#categories .category{padding:14px 8px!important;border:1px solid #ebe4d8!important;border-radius:4px!important;background:#fffdf8!important;box-shadow:none!important}
+#categories .category-icon{width:48px!important;height:48px!important;min-width:48px!important;min-height:48px!important;margin-bottom:7px!important}
+#categories .category strong{font-size:12px!important;color:#294637!important}
+#categories .category small{font-size:10px!important;color:#81877f!important}
+#listings .map-search-toolbar{margin:0 0 10px!important;padding:9px 12px!important;border:1px solid #e9e3d8!important;background:#faf8f2!important;border-radius:3px!important}
+#listings .advanced-filter-details{margin:0 0 12px!important}
+#listings .map-listing-layout{gap:14px!important}
+#listings .property-card{border-radius:4px!important;box-shadow:0 3px 14px rgba(30,45,35,.05)!important}
+.american-pathways,.ad-carousel,#requestStrip{display:none!important}
+@media(max-width:720px){
+ #search.search-section{width:calc(100% - 24px)!important;margin:-12px auto 22px!important;padding:14px!important}
+ #search .search-section-heading h2{font-size:17px!important}
+ #search .search-panel{grid-template-columns:1fr 1fr!important;gap:7px!important}
+ #search .search-field-wide{grid-column:1/-1!important}
+ #search .search-panel>button{grid-column:1/-1!important;width:100%!important}
+ #search .search-panel input,#search .search-panel select{height:42px!important;min-height:42px!important}
+ #categories,#listings{width:calc(100% - 24px)!important;margin:22px auto!important}
+ #categories .categories{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+ #categories .category{padding:10px 5px!important}
+ #categories .category-icon{width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important}
+ #categories .category strong{font-size:11px!important}
+ #listings .map-listing-layout{display:flex!important;flex-direction:column!important}
+ #listings #propertyMap{height:240px!important;min-height:240px!important}
+}
+
 </style>
 </body>
 </html>
