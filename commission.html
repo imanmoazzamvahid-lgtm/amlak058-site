@@ -1666,15 +1666,8 @@ header .brand h1 .brand-number{font-size:1.18em!important;font-weight:1000!impor
 #authPhonePanel{display:block!important}
 </style>
 
-<link rel="manifest" href="/manifest.webmanifest?v=21">
 <link rel="icon" type="image/svg+xml" href="/icon.svg?v=21">
 <link rel="shortcut icon" href="/icon.svg?v=21">
-<link rel="apple-touch-icon" href="/icon.svg?v=21">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="املاک ۰۵۸">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-
-
 <style id="amlak058-divar-ux-v1">
 :root{--primary:#b78317;--dark:#80560b;--bg:#fff;--border:#e5e5e5;--text:#303030;--muted:#777}
 body{font-family:Vazirmatn,Tahoma,Arial,sans-serif!important;background:#fff!important;color:#303030!important}
@@ -3928,9 +3921,9 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
  body.commission-print-mode #commission-print-sheet .cp-table td{border:1px solid #ddd;padding:5px 7px;text-align:right;vertical-align:top;line-height:1.45}
  body.commission-print-mode #commission-print-sheet .cp-table th{background:#f2f5f3;width:38%}
  body.commission-print-mode #commission-print-sheet .cp-result{border:1px solid #cbd8d0;border-radius:6px;padding:8px;margin-top:8px;line-height:1.5}
- body.commission-print-mode #commission-print-sheet .cp-bank{border:1px solid #b9c9bf;border-radius:6px;padding:7px 9px;margin-top:8px;line-height:1.65;background:#f7faf8;break-inside:avoid}
- body.commission-print-mode #commission-print-sheet .cp-bank strong{display:block;color:#26332c;font-size:9pt}
- body.commission-print-mode #commission-print-sheet .cp-bank b{display:block;direction:ltr;text-align:center;letter-spacing:1px;font-size:12pt;color:#183e35;margin-top:2px}
+
+
+
  body.commission-print-mode #commission-print-sheet .cp-bottom-stamp{display:flex;align-items:center;justify-content:flex-start;gap:8px;margin-top:10px;break-inside:avoid}
  body.commission-print-mode #commission-print-sheet .cp-bottom-stamp img{width:88px;height:88px;object-fit:contain;filter:drop-shadow(1px 2px 1px rgba(16,52,39,.3))}
  body.commission-print-mode #commission-print-sheet .cp-seal-caption{font-size:8pt;line-height:1.9;color:#426052;border-right:1px solid #b9c9bf;padding-right:8px}
@@ -4630,7 +4623,7 @@ async function printCommissionReceipt(){
   if((child.textContent||'').includes('جمع تقریبی دو طرف'))child.remove();
   else child.innerHTML=child.innerHTML.replace(/جمع قابل پرداخت هر طرف/g,'مبلغ قابل پرداخت این مشتری');
  });
- const html='<header class="cp-head"><div><div class="cp-brand">املاک ۰۵۸</div><div class="cp-sub">محاسبه آنلاین کمیسیون املاک</div><div class="cp-sub">شماره رسید: '+receiptNumber+'</div></div>'+stamp+'</header><div class="cp-title">رسید محاسبه کمیسیون '+(kind==='rent'?'رهن و اجاره':'خرید و فروش')+'</div><div class="cp-location-note">این محاسبه و نرخ‌های کمیسیون صرفاً مخصوص شهر بجنورد است.</div><div>تاریخ چاپ: '+date+'</div><table class="cp-table"><tbody>'+(rows.length?rows.join(''):'<tr><td>اطلاعات معامله ثبت نشده است.</td></tr>')+'</tbody></table><div class="cp-result">'+resultForCustomer.innerHTML+'</div>''<div class="cp-bottom-stamp"><div class="cp-seal-caption">مهر و تأیید<br>املاک ۰۵۸</div><img src="/stamp-seal.svg?v=10" alt="مهر برجسته املاک ۰۵۸"></div><footer class="cp-foot"><span>املاک ۰۵۸</span></footer>';
+ const html='<header class="cp-head"><div><div class="cp-brand">املاک ۰۵۸</div><div class="cp-sub">محاسبه آنلاین کمیسیون املاک</div><div class="cp-sub">شماره رسید: '+receiptNumber+'</div></div>'+stamp+'</header><div class="cp-title">رسید محاسبه کمیسیون '+(kind==='rent'?'رهن و اجاره':'خرید و فروش')+'</div><div class="cp-location-note">این محاسبه و نرخ‌های کمیسیون صرفاً مخصوص شهر بجنورد است.</div><div>تاریخ چاپ: '+date+'</div><table class="cp-table"><tbody>'+(rows.length?rows.join(''):'<tr><td>اطلاعات معامله ثبت نشده است.</td></tr>')+'</tbody></table><div class="cp-result">'+resultForCustomer.innerHTML+'</div><div class="cp-bottom-stamp"><div class="cp-seal-caption">مهر و تأیید<br>املاک ۰۵۸</div><img src="/stamp-seal.svg?v=10" alt="مهر برجسته املاک ۰۵۸"></div><footer class="cp-foot"><span>املاک ۰۵۸</span></footer>';
 
  try{
   const history=JSON.parse(localStorage.getItem('amlak058_commission_receipts_v1')||'[]');
@@ -4641,7 +4634,7 @@ async function printCommissionReceipt(){
  printCommissionSheetInCurrentTab(html);
 }
 function sanitizeOldCommissionReceipt(html){
- return String(html||'').replace(/<section class="cp-bank">[\\s\\S]*?<\\/section>/gi,'').replace(/5047\\s*0642\\s*1731\\s*6181/g,'');
+ return String(html||'').replace(/<section class="cp-bank">[\s\S]*?<\/section>/gi,'').replace(/5047\s*0642\s*1731\s*6181/g,'');
 }
 function getCommissionHistory(){
  try{
@@ -4659,7 +4652,7 @@ function renderCommissionHistory(){
 }
 function escapeCommissionHistoryText(value){return String(value||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function toggleCommissionHistory(){const list=document.getElementById('commission-history-list');if(!list)return;list.hidden=!list.hidden;renderCommissionHistory();}
-async function printSavedCommissionReceipt(index){
+async async function printSavedCommissionReceipt(index){
  const item=getCommissionHistory()[index];
  if(!item||!item.html){alert('رسید ذخیره‌شده پیدا نشد.');return;}
  await printCommissionSheetInCurrentTab(item.html);
@@ -5667,15 +5660,14 @@ footer{background:#f8f6ef!important}
 </style>
 
 
-<script id="amlak058-service-worker-registration">
+<script id="amlak058-remove-pwa-install">
 (function(){
-  if ("serviceWorker" in navigator && location.protocol === "https:") {
-    window.addEventListener("load", function(){
-      navigator.serviceWorker.register("/sw.js?v=23").catch(function(err){
-        console.warn("امکان فعال‌سازی حالت آفلاین فراهم نشد",err);
-      });
-    });
-  }
+ if(!("serviceWorker" in navigator))return;
+ window.addEventListener("load",function(){
+  navigator.serviceWorker.getRegistrations().then(function(registrations){
+   return Promise.all(registrations.map(function(registration){return registration.unregister();}));
+  }).catch(function(error){console.warn("Service worker cleanup:",error);});
+ });
 })();
 </script>
 
