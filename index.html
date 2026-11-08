@@ -4366,6 +4366,8 @@ footer{background:#f1f4f1!important;border-top:1px solid #e0e7e1!important}
 .owner-view-panel{margin:0 0 16px;padding:14px;border:1px solid #e1e8e2;border-radius:11px;background:#fff}.owner-view-panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.owner-view-panel-head>div:first-child{display:grid;gap:3px}.owner-view-panel-head strong{font-size:13px;color:#214532}.owner-view-panel-head small{font-size:10px;color:#819087}.owner-view-total{font-weight:900;font-size:20px;color:#174333;text-align:left}.owner-view-total small{display:block;font-weight:400;font-size:10px}.owner-view-row{display:grid;grid-template-columns:minmax(90px,1fr) minmax(70px,1.3fr) 32px;gap:10px;align-items:center;padding:8px 0;border-top:1px solid #eff2ef}.owner-view-title{font-size:11px;color:#52645a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.owner-view-track{height:7px;background:#edf2ee;border-radius:9px;overflow:hidden}.owner-view-track span{display:block;height:100%;background:#1e6147;border-radius:9px}.owner-view-row b{font-size:11px;color:#244a36;text-align:left}.owner-view-panel>p{font-size:10px;line-height:1.8;color:#88928b;margin:10px 0 0}@media(max-width:560px){.owner-view-panel{padding:11px}.owner-view-row{grid-template-columns:minmax(72px,1fr) minmax(45px,1fr) 26px;gap:7px}.owner-view-title{font-size:10px}}
 </style><style id="amlak058-owner-view-trend">
 .owner-view-trend-title{font-size:11px;font-weight:800;color:#405b49;margin:13px 0 7px}.owner-view-trend{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:end;padding:10px 8px 3px;background:#f8faf8;border:1px solid #edf1ed;border-radius:8px}.owner-view-day{display:grid;grid-template-rows:auto 72px auto;gap:5px;justify-items:center;min-width:0}.owner-view-day>span{font-size:10px;color:#355e46;font-weight:800}.owner-view-day-track{width:100%;height:72px;display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(to top,#eef3ef 1px,transparent 1px);border-radius:5px;overflow:hidden}.owner-view-day-track i{display:block;width:65%;min-height:3px;background:#2b7552;border-radius:5px 5px 0 0}.owner-view-day small{font-size:9px;color:#7e8b83;white-space:nowrap}
+</style><style id="amlak058-owner-tour-upload">
+.owner-edit-tour{display:grid;gap:7px;padding:12px;border:1px solid #dbe6dd;border-radius:9px;background:#f7faf7}.owner-edit-tour strong{font-size:12px;color:#174333}.owner-edit-tour small{font-size:10px;line-height:1.9;color:#68786e}.owner-edit-tour input{font-size:11px}.owner-edit-tour #ownerTour360Preview{font-size:10px;color:#3b6a4c;line-height:1.8}
 </style></head><body>
 
 <header id="amlak058-header-target" class="amlak058-site-header">
@@ -6540,8 +6542,11 @@ async function openOwnerEdit(id){
  modal.hidden=false;modal.setAttribute('aria-hidden','false');body.textContent='در حال دریافت آگهی...';
  try{
   var a=await db.auth.getUser(),user=a.data&&a.data.user;if(a.error||!user)throw new Error('ابتدا وارد حساب کاربری شوید.');
-  var r=await db.from('properties').select('id,title,price,area,bedrooms,address,description,deposit,monthly_rent,year_built,floor_number,city,status').eq('id',id).eq('owner_id',user.id).single();
+  var r=await db.from('properties').select('id,title,price,area,bedrooms,address,description,deposit,monthly_rent,year_built,floor_number,city,status,details_json').eq('id',id).eq('owner_id',user.id).single();
   if(r.error)throw r.error;var p=r.data;
+  window.ownerEditDetailsJson=p.details_json&&typeof p.details_json==='object'?p.details_json:{};
+  var tourSources=Array.isArray(window.ownerEditDetailsJson.tour_360_urls)?window.ownerEditDetailsJson.tour_360_urls.filter(Boolean):[];
+  if(!tourSources.length&&window.ownerEditDetailsJson.tour_360_url)tourSources=[window.ownerEditDetailsJson.tour_360_url];
   function esc(v){return String(v??'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
   body.innerHTML='<form id="ownerEditForm" onsubmit="saveOwnerEdit(event,'+Number(p.id)+')"><div class="owner-edit-grid">'+
    '<label>عنوان آگهی<input name="title" required maxlength="140" value="'+esc(p.title)+'"></label>'+
@@ -6554,13 +6559,16 @@ async function openOwnerEdit(id){
    '<label>طبقه<input name="floor_number" maxlength="30" value="'+esc(p.floor_number)+'"></label>'+
    '<label>شهر<input name="city" maxlength="80" value="'+esc(p.city)+'"></label>'+
    '<label>نشانی یا محله<input name="address" maxlength="300" value="'+esc(p.address)+'"></label>'+
-   '<label class="wide">توضیحات<textarea name="description" maxlength="5000" rows="4">'+esc(p.description)+'</textarea></label></div>'+
-   '<p class="owner-edit-note">پس از ذخیره، آگهی برای بررسی مجدد به وضعیت «در انتظار تأیید» بازمی‌گردد.</p>'+
+   '<label class="wide">توضیحات<textarea name="description" maxlength="5000" rows="4">'+esc(p.description)+'</textarea></label>'+
+   '<div class="owner-edit-tour wide"><strong>تور مجازی ۳۶۰ درجه</strong><small>نماهای فعلی: '+tourSources.length.toLocaleString('fa-IR')+' عدد. برای افزودن نما، تصویر پانورامای واقعی با نسبت ۲ به ۱ انتخاب کنید.</small><input id="ownerTour360Input" type="file" accept="image/jpeg,image/png,image/webp" multiple><small>حداکثر ۶ نما در مجموع؛ هر تصویر حداکثر ۲۰ مگابایت. پس از ذخیره، آگهی برای بررسی مجدد ارسال می‌شود.</small><div id="ownerTour360Preview"></div></div>'+
+   '</div><p class="owner-edit-note">پس از ذخیره، آگهی برای بررسی مجدد به وضعیت «در انتظار تأیید» بازمی‌گردد.</p>'+
    '<div class="owner-edit-actions"><button type="button" class="owner-edit-cancel" onclick="closeOwnerEdit()">انصراف</button><button type="submit" class="owner-edit-save">ذخیره تغییرات</button></div></form>';
+  var tourInput=document.getElementById('ownerTour360Input');
+  tourInput.addEventListener('change',function(){var files=Array.from(this.files||[]),preview=document.getElementById('ownerTour360Preview');preview.textContent='';if(tourSources.length+files.length>6){this.value='';preview.textContent='حداکثر ۶ نمای پانوراما مجاز است.';return;}preview.textContent=files.map(function(f,i){return (i+1)+'. '+f.name}).join('، ')});
  }catch(e){body.textContent=e.message||'دریافت آگهی ممکن نشد.'}
 }
 async function saveOwnerEdit(ev,id){
- ev.preventDefault();var form=ev.currentTarget,btn=form.querySelector('[type=submit]'),fd=new FormData(form);
+ ev.preventDefault();var form=ev.currentTarget,btn=form.querySelector('[type=submit]'),fd=new FormData(form),uploadedTourPaths=[];
  function val(k){return String(fd.get(k)||'').trim()}
  function num(k){var x=val(k).replace(/[۰-۹]/g,function(d){return '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)}).replace(/[٠-٩]/g,function(d){return '٠١٢٣٤٥٦٧٨٩'.indexOf(d)}).replace(/[٬,\s]/g,'');return x===''?null:Number(x)}
  var payload={title:val('title'),price:num('price'),deposit:num('deposit'),monthly_rent:num('monthly_rent'),area:num('area'),bedrooms:num('bedrooms'),year_built:num('year_built'),floor_number:val('floor_number')||null,city:val('city')||'بجنورد',address:val('address')||null,description:val('description')||null,status:'pending'};
@@ -6569,10 +6577,24 @@ async function saveOwnerEdit(ev,id){
  btn.disabled=true;btn.textContent='در حال ذخیره...';
  try{
   var a=await db.auth.getUser(),user=a.data&&a.data.user;if(a.error||!user)throw new Error('نشست کاربری معتبر نیست.');
-  var r=await db.from('properties').update(payload).eq('id',id).eq('owner_id',user.id).select('id,status').single();
-  if(r.error)throw r.error;
+  var oldDetails=window.ownerEditDetailsJson&&typeof window.ownerEditDetailsJson==='object'?window.ownerEditDetailsJson:{};
+  var oldTour=Array.isArray(oldDetails.tour_360_urls)?oldDetails.tour_360_urls.slice(0,6):[];
+  if(!oldTour.length&&oldDetails.tour_360_url)oldTour=[oldDetails.tour_360_url];
+  var newFiles=Array.from(document.getElementById('ownerTour360Input')?.files||[]);
+  if(oldTour.length+newFiles.length>6)throw new Error('حداکثر ۶ نمای پانوراما برای هر ملک مجاز است.');
+  if(newFiles.length){
+   if(typeof uploadTour360!=='function')throw new Error('بخش بارگذاری تور مجازی در دسترس نیست.');
+   uploadedTourPaths=await uploadTour360(newFiles);
+  }
+  var nextTour=oldTour.concat(uploadedTourPaths);
+  payload.details_json=Object.assign({},oldDetails,{tour_360_url:nextTour[0]||null,tour_360_urls:nextTour});
+  var result=await db.from('properties').update(payload).eq('id',id).eq('owner_id',user.id).select('id,status').single();
+  if(result.error)throw result.error;
   closeOwnerEdit();await renderAccountListings(user);alert('تغییرات ثبت شد و آگهی برای بررسی مجدد ارسال شد.');
- }catch(e){alert(e.message||'ذخیره تغییرات انجام نشد.')}finally{btn.disabled=false;btn.textContent='ذخیره تغییرات'}
+ }catch(e){
+  if(uploadedTourPaths.length){try{await db.storage.from(BUCKET).remove(uploadedTourPaths)}catch(cleanupError){console.warn('پاکسازی فایل‌های تور ناموفق بود',cleanupError)}}
+  alert(e.message||'ذخیره تغییرات انجام نشد.');
+ }finally{btn.disabled=false;btn.textContent='ذخیره تغییرات'}
 }
 function filterOwnerListings(status,button){document.querySelectorAll('.owner-listing-filters button').forEach(function(b){b.classList.toggle('active',b===button)});document.querySelectorAll('.owner-listing-item').forEach(function(card){card.hidden=status!=='all'&&card.dataset.ownerStatus!==status})}
 async function renderAccountListings(user){
