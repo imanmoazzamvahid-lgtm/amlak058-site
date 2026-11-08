@@ -20,3 +20,7 @@
 #tour360Viewer .tour360-loading{height:100%;display:grid;place-items:center;color:#fff;font-size:13px}
 .tour360-hint{font-size:11px;color:var(--muted);margin-top:9px}
 @media(max-width:700px){#tour360Viewer{height:auto;min-height:300px;aspect-ratio:4/3;border-radius:9px}.tour360-hint{font-size:10px}}
+
+.tour360-scenes{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tour360-scene-button{font-size:11px;padding:7px 12px}
+.tour360-scene-button.active{background:var(--gold-dark);color:#fff;border-color:var(--gold-dark)}
