@@ -24,3 +24,9 @@
 .tour360-scenes{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .tour360-scene-button{font-size:11px;padding:7px 12px}
 .tour360-scene-button.active{background:var(--gold-dark);color:#fff;border-color:var(--gold-dark)}
+
+/* Virtual-tour empty and error states */
+#tour360Scenes[hidden]{display:none!important}
+#tour360Viewer .tour360-empty,#tour360Viewer .tour360-error{display:grid;place-items:center;text-align:center;min-height:300px;padding:28px;box-sizing:border-box;background:linear-gradient(145deg,#123f32,#1d5942);color:#f3eddf;font-size:14px;line-height:2.1}
+#tour360Viewer .tour360-error{background:#463d2d;color:#fff2d4}
+.tour360-card .section-title span{font-size:11px;color:var(--muted)}
