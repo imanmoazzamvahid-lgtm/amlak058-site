@@ -37,3 +37,7 @@
 #mapFrame .leaflet-tile{filter:none!important;-webkit-filter:none!important;opacity:1!important}
 #mapFrame .leaflet-control-attribution{background:rgba(255,255,255,.92)!important;color:#46584e!important;font-size:9px!important}
 #mapFrame .map-loading{display:grid;place-items:center;min-height:260px;color:#315443;font-size:12px}
+
+/* نشان تأیید مدیریت آگهی در صفحه جزئیات */
+.property-approval-badge{display:inline-flex;align-items:center;gap:5px;margin-inline-start:8px;padding:5px 10px;border:1px solid #a9cbb5;border-radius:999px;background:#eaf5ed;color:#17623b;font-size:10px;font-weight:800;line-height:1.6;vertical-align:middle}
+.property-approval-badge[hidden]{display:none!important}
