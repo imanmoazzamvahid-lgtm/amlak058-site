@@ -4185,7 +4185,7 @@ nav a:hover,.filter-btn.active,.mobile-nav-item.active{color:#176344!important}
    <div class="premium-hero-actions">
     <a class="premium-primary-action" href="#search">جست‌وجوی ملک <span>←</span></a>
     <button class="premium-secondary-action" type="button" onclick="openModal()">＋ ثبت آگهی رایگان</button>
-    <a class="premium-commission-action" href="#commission-calculator"><span aria-hidden="true">٪</span> محاسبه آنلاین کمیسیون</a>
+    <a class="premium-commission-action" href="/?page=commission"><span aria-hidden="true">٪</span> محاسبه آنلاین کمیسیون</a>
    </div>
    <div class="premium-proof"><span>۰۵۸</span><div><b>ویژه بجنورد و خراسان شمالی</b><small>جست‌وجوی دقیق‌تر، انتخاب آسان‌تر</small></div></div>
   </div>
@@ -4219,7 +4219,7 @@ nav a:hover,.filter-btn.active,.mobile-nav-item.active{color:#176344!important}
  </article>
  <article class="ad-slide">
   <div class="ad-copy"><span class="ad-kicker">ابزار کاربردی املاک ۰۵۸</span><h3>قبل از معامله، کمیسیون را بدان</h3><p>برآورد آنلاین هزینه معامله، سریع و شفاف.</p></div>
-  <a class="ad-cta" href="#commission-calculator">محاسبه کمیسیون ←</a>
+  <a class="ad-cta" href="/?page=commission">محاسبه کمیسیون ←</a>
  </article>
  <article class="ad-slide">
   <div class="ad-copy"><span class="ad-kicker">فرصت معرفی کسب‌وکار</span><h3>جای تبلیغ کسب‌وکارت اینجاست</h3><p>بنرهای ویژه برای معرفی خدمات و آگهی‌های منتخب در سایت.</p></div>
@@ -4568,7 +4568,20 @@ async function printCommissionSheetInCurrentTab(html){
   alert('مرورگر فرمان چاپ را اجرا نکرد. سایت را مستقیماً در مرورگر Chrome باز کنید و دوباره چاپ بگیرید.');
  }
 }
-function printCommissionReceipt(){
+async function printCommissionReceipt(){
+ try{
+  const authClient=window.db||window.supabaseClient||db;
+  if(!authClient?.auth?.getUser)throw new Error('سامانه ورود در دسترس نیست. صفحه را تازه‌سازی کنید.');
+  const {data:{user},error}=await authClient.auth.getUser();
+  if(error)throw error;
+  if(!user){
+   accountLoginPending=false;
+   if(typeof openAuthModal==='function')openAuthModal();
+   else alert('برای چاپ رسید، ابتدا وارد حساب کاربری شوید یا ثبت‌نام کنید.');
+   return;
+  }
+ }catch(e){alert(e.message||'برای چاپ رسید ابتدا وارد حساب کاربری شوید.');return;}
+
  const root=document.getElementById('commission-calculator');
  const sheet=document.getElementById('commission-print-sheet');
  const result=document.getElementById('commission-result');
@@ -9671,5 +9684,33 @@ footer p,footer a{color:#dce8e0!important;font-size:11px!important}
 })();
 </script>
 
+
+<style id="commission-dedicated-page-style">
+body.commission-dedicated-page .commission-page-keep{display:block!important}
+body.commission-dedicated-page #commission-calculator{max-width:900px;margin:28px auto 18px;padding:26px;border-radius:22px;background:#fff;box-shadow:0 12px 38px rgba(15,55,38,.08)}
+body.commission-dedicated-page #commission-calculator .section-heading{margin-bottom:22px}
+body.commission-dedicated-page #commission-calculator .commission-box{max-width:100%}
+body.commission-dedicated-page #commission-history-panel{max-width:900px;margin:0 auto 40px;padding:0 20px}
+body.commission-dedicated-page .commission-page-title{display:block!important}
+</style>
+<script id="commission-dedicated-page-router">
+(function(){
+ if(new URLSearchParams(location.search).get('page')!=='commission')return;
+ document.body.classList.add('commission-dedicated-page');
+ var section=document.getElementById('commission-calculator');
+ if(!section)return;
+ var keep=new Set([section,document.getElementById('commission-history-panel'),document.getElementById('commission-print-sheet')].filter(Boolean));
+ var node=section;
+ while(node&&node!==document.body){
+  var parent=node.parentElement;
+  if(parent){Array.from(parent.children).forEach(function(sibling){if(sibling!==node&&!keep.has(sibling))sibling.style.setProperty('display','none','important')});}
+  node=parent;
+ }
+ section.style.setProperty('display','block','important');
+ var history=document.getElementById('commission-history-panel');if(history)history.style.setProperty('display','block','important');
+ document.title='محاسبه آنلاین کمیسیون | املاک ۰۵۸';
+ var heading=section.querySelector('.section-heading h2');if(heading)heading.textContent='محاسبه آنلاین کمیسیون املاک ۰۵۸';
+})();
+</script>
 </body>
 </html>
