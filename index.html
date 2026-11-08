@@ -4688,11 +4688,18 @@ footer{background:#f1f4f1!important;border-top:1px solid #e0e7e1!important}
 
 </main>
 <nav class="mobile-bottom-nav amlak-kilid-nav" aria-label="ناوبری موبایل">
- <button type="button" class="mobile-nav-item active" onclick="mobileNavHome()" aria-label="خانه"><svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg><span>خانه</span></button>
- <button type="button" class="mobile-nav-item" onclick="mobileNavSaved()" aria-label="علاقه‌مندی"><svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.7c0 5.1-8.8 11-8.8 11s-8.8-5.9-8.8-11A4.7 4.7 0 0 1 12 6.1a4.7 4.7 0 0 1 8.8 2.6Z"/></svg><span>علاقه‌مندی</span></button>
- <button type="button" class="mobile-nav-item" onclick="document.getElementById('search').scrollIntoView({behavior:'smooth'});document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===2))" aria-label="جست‌وجو"><svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><span>جست‌وجو</span></button>
- <button type="button" class="mobile-nav-item post" onclick="openModal()" aria-label="ثبت آگهی"><svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>ثبت آگهی</span></button>
- <button type="button" class="mobile-nav-item" onclick="mobileNavMyProperties()" aria-label="آگهی‌های من"><svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span>آگهی‌های من</span></button>
+ <button type="button" class="mobile-nav-item" onclick="openInbox()" aria-label="چت و تماس">
+  <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-5 4v-4.5A2.5 2.5 0 0 1 3 13V5.5Z"/><path d="M8 8h8M8 11.5h5"/></svg>
+  <span>چت و تماس</span>
+ </button>
+ <button type="button" class="mobile-nav-item post" onclick="openModal()" aria-label="ثبت آگهی">
+  <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg>
+  <span>ثبت آگهی</span>
+ </button>
+ <button type="button" class="mobile-nav-item" onclick="mobileNavSaved()" aria-label="آگهی‌های نشان‌شده">
+  <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.8h12a1.5 1.5 0 0 1 1.5 1.5v15L12 16l-7.5 4.3v-15A1.5 1.5 0 0 1 6 3.8Z"/></svg>
+  <span>نشان‌شده‌ها</span>
+ </button>
 </nav>
 <style>
 #official-property-services{margin:30px auto;padding:24px 18px;background:#f8f7f1;border:1px solid #e9e5d9;border-radius:16px}
@@ -10763,6 +10770,32 @@ footer a{color:#d9c49b!important}
  #categories .category strong{font-size:11px!important}
  #listings .map-listing-layout{display:flex!important;flex-direction:column!important}
  #listings #propertyMap{height:240px!important;min-height:240px!important}
+}
+
+
+/* Three-action mobile dock: chat/contact left, create centered, saved right */
+@media screen and (max-width:700px){
+ body{padding-bottom:calc(82px + env(safe-area-inset-bottom))!important}
+ .mobile-bottom-nav.amlak-kilid-nav{
+  display:grid!important;grid-template-columns:1fr 1.15fr 1fr!important;
+  direction:ltr!important;align-items:center!important;justify-items:stretch!important;
+  gap:8px!important;padding:7px 18px calc(7px + env(safe-area-inset-bottom))!important;
+  min-height:72px!important;height:auto!important;background:rgba(255,253,248,.98)!important;
+  border-top:1px solid #dfd4c0!important;box-shadow:0 -5px 22px rgba(26,48,35,.09)!important;
+ }
+ .mobile-bottom-nav.amlak-kilid-nav>.mobile-nav-item{
+  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+  gap:3px!important;min-width:0!important;min-height:52px!important;padding:4px 2px!important;
+  background:transparent!important;border:0!important;color:#586b5e!important;
+  font-family:Vazirmatn,Tahoma,sans-serif!important;font-size:10px!important;font-weight:700!important;
+ }
+ .mobile-bottom-nav.amlak-kilid-nav .mobile-nav-svg{width:23px!important;height:23px!important;fill:none!important;stroke:currentColor!important;stroke-width:1.7!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+ .mobile-bottom-nav.amlak-kilid-nav>.mobile-nav-item.post{
+  color:#fff!important;background:#183d32!important;border:1px solid #b79a69!important;
+  border-radius:5px!important;min-height:56px!important;box-shadow:0 4px 13px rgba(24,61,50,.18)!important;
+ }
+ .mobile-bottom-nav.amlak-kilid-nav>.mobile-nav-item.post .mobile-nav-svg{width:25px!important;height:25px!important;stroke:#fff!important;stroke-width:2!important}
+ .mobile-bottom-nav.amlak-kilid-nav>.mobile-nav-item.post>span:last-child{color:#fff!important;font-size:11px!important;font-weight:800!important}
 }
 
 </style>
