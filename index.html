@@ -4689,16 +4689,19 @@ footer{background:#f1f4f1!important;border-top:1px solid #e0e7e1!important}
 </main>
 <nav class="mobile-bottom-nav amlak-kilid-nav" aria-label="ناوبری موبایل">
  <button type="button" class="mobile-nav-item" onclick="mobileNavMyProperties()" aria-label="آگهی‌های من">
-  <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h16v14H4z"/><path d="M8 9h8M8 12.5h5M8 16h8M7 3v5M17 3v5"/></svg>
-  <span>آگهی‌های من</span>
+  <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h16v14H4z"/><path d="M8 9h8M8 12.5h5M8 16h8M7 3v5M17 3v5"/></svg><span>آگهی‌های من</span>
+ </button>
+ <button type="button" class="mobile-nav-item" onclick="openInbox()" aria-label="چت و تماس">
+  <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-5 4v-4.5A2.5 2.5 0 0 1 3 13V5.5Z"/><path d="M8 8h8M8 11.5h5"/></svg><span>چت و تماس</span>
  </button>
  <button type="button" class="mobile-nav-item post" onclick="openModal()" aria-label="ثبت آگهی">
-  <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg>
-  <span>ثبت آگهی</span>
+  <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span>ثبت آگهی</span>
+ </button>
+ <button type="button" class="mobile-nav-item" onclick="mobileNavSaved()" aria-label="نشان‌شده‌ها">
+  <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.8h12a1.5 1.5 0 0 1 1.5 1.5v15L12 16l-7.5 4.3v-15A1.5 1.5 0 0 1 6 3.8Z"/></svg><span>نشان‌شده‌ها</span>
  </button>
  <button type="button" class="mobile-nav-item" onclick="mobileNavHome()" aria-label="خانه">
-  <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5.5 9v11h13V9M9.5 20v-7h5v7"/></svg>
-  <span>خانه</span>
+  <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5.5 9v11h13V9M9.5 20v-7h5v7"/></svg><span>خانه</span>
  </button>
 </nav>
 <style>
@@ -5536,8 +5539,8 @@ async function openMobileListingsMap(){
 }
 function closeMobileListingsMap(){var modal=document.getElementById('mobileListingsMapModal');if(modal)modal.style.display='none';}
 function openMobileFilter(field){var details=document.querySelector('.advanced-filter-details');if(details){details.classList.add('user-open');details.open=true;}if(field==='neighborhood'){var modal=document.getElementById('locationModal');if(modal)modal.style.display='flex';return;}var target=field==='type'?document.getElementById('searchMainCategory'):field==='price'?document.getElementById('minPrice'):document.getElementById('searchMainCategory');if(details)details.scrollIntoView({behavior:'smooth',block:'center'});if(target)setTimeout(function(){target.focus();},120);}
-function mobileNavHome(){closeAccountDashboard();loadProperties();document.getElementById('home').scrollIntoView({behavior:'smooth'});document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===2))}
-async function mobileNavSaved(){document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===1));await openAccountDashboard();var saved=document.querySelector('[data-account-action="saved"]');if(saved&&document.getElementById('accountDashboard')&&!document.getElementById('accountDashboard').hidden)saved.click()}
+function mobileNavHome(){closeAccountDashboard();loadProperties();document.getElementById('home').scrollIntoView({behavior:'smooth'});document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===4))}
+async function mobileNavSaved(){document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===3));await openAccountDashboard();var saved=document.querySelector('[data-account-action="saved"]');if(saved&&document.getElementById('accountDashboard')&&!document.getElementById('accountDashboard').hidden)saved.click()}
 async function mobileNavMyProperties(){closeAccountDashboard();
  const list=document.getElementById('propertyList'),count=document.getElementById('resultCount');
  document.getElementById('listings').scrollIntoView({behavior:'smooth'});
