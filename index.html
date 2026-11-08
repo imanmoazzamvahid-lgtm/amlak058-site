@@ -4667,7 +4667,7 @@ footer{background:#f1f4f1!important;border-top:1px solid #e0e7e1!important}
 
       <section class="pd-media-column">
         <div class="pd-gallery" id="pdGallery"></div>
-        <div class="pd-gallery-caption" id="pdGalleryCaption"></div>
+        <div id="pdTour360Viewer" class="pd-tour360-viewer" hidden></div><div class="pd-gallery-caption" id="pdGalleryCaption"></div>
         <section class="pd-note-card">
           <label for="pdPersonalNote">یادداشت شخصی شما</label>
           <textarea id="pdPersonalNote" rows="3" maxlength="1500" placeholder="یادداشت شما..."></textarea>
@@ -5367,6 +5367,7 @@ videoInput.addEventListener('change',function(){const file=this.files&&this.file
 async function uploadVideo(file){if(!file)return null;const ext=file.type==='video/webm'?'webm':file.type==='video/quicktime'?'mov':'mp4';const path='pending/'+crypto.randomUUID()+'.'+ext;const {error}=await db.storage.from(BUCKET).upload(path,file,{contentType:file.type,upsert:false});if(error)throw new Error('آپلود ویدیو انجام نشد: '+error.message+'؛ سقف حجم و سیاستهای Storage را بررسی کن.');return path}
 function booleanFieldValue(id){const v=document.getElementById(id).value;return v==='na'||v===''?null:v==='true'}
 function formatListingPrice(p){if(['اجاره','اجاره مسکونی','اجاره دفتر اداری و تجاری'].includes(p.main_category)){const deposit=Number(p.deposit||0).toLocaleString('fa-IR'),rent=Number(p.monthly_rent??p.price??0).toLocaleString('fa-IR');return 'ودیعه: '+deposit+' تومان • اجارهٔ ماهانه: '+rent+' تومان'+(p.convertible?' • قابل تبدیل':'')}return formatPrice(p.price)}
+let pdPannellumPromise=null;function pdLoadPannellum(){if(window.pannellum)return Promise.resolve();if(pdPannellumPromise)return pdPannellumPromise;pdPannellumPromise=new Promise(function(resolve,reject){if(!document.querySelector('link[data-pannellum]')){var css=document.createElement('link');css.rel='stylesheet';css.href='https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css';css.dataset.pannellum='1';document.head.appendChild(css)}var script=document.createElement('script');script.src='https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js';script.onload=resolve;script.onerror=function(){reject(new Error('Pannellum library load failed'))};document.head.appendChild(script)});return pdPannellumPromise}
 async function makeSignedImage(path){
   if(!path || typeof path !== 'string') return '';
   const value=path.trim();
@@ -6942,6 +6943,7 @@ async function openPropertyDetailPage(id,pushHistory){
   document.getElementById('pdGallery').innerHTML=pdBuildGallery(urls,p.title||'تصویر ملک');pdEnableGallerySwipe();
   var videoUrl=p.video_url?await makeSignedImage(p.video_url):'';
   var videoHtml=videoUrl?'<div class="pd-video-wrap"><video controls preload="metadata" style="display:block;width:100%;max-height:280px;border-radius:4px;margin-top:8px"><source src="'+pdEsc(videoUrl)+'"></video></div>':'';
+  var tour360Paths=p.details_json&&Array.isArray(p.details_json.tour_360_urls)?p.details_json.tour_360_urls.filter(x=>typeof x==='string'&&x):[];if(!tour360Paths.length&&p.details_json&&p.details_json.tour_360_url)tour360Paths=[p.details_json.tour_360_url];var tour360Viewer=document.getElementById('pdTour360Viewer');tour360Viewer.hidden=true;tour360Viewer.innerHTML='';if(tour360Paths.length){var tour360Urls=(await Promise.all(tour360Paths.slice(0,6).map(makeSignedImage))).filter(Boolean);if(tour360Urls.length){tour360Viewer.hidden=false;tour360Viewer.innerHTML='<div class="pd-tour360-heading">گشت‌وگذار ۳۶۰ درجه در ملک</div><div id="pdTour360Canvas" class="pd-tour360-canvas"></div><div id="pdTour360Scenes" class="pd-tour360-scenes" aria-label="انتخاب نمای تور"></div><div class="pd-tour360-hint">برای چرخاندن تصویر، آن را با انگشت یا ماوس بکشید</div>';try{await pdLoadPannellum();var scenes={};tour360Urls.forEach(function(url,i){scenes['scene'+i]={type:'equirectangular',panorama:url,autoLoad:false,hotSpots:i<tour360Urls.length-1?[{pitch:0,yaw:0,type:'scene',text:'نمای بعدی',sceneId:'scene'+(i+1)}]:[]}});window.pdTour360Instance=pannellum.viewer('pdTour360Canvas',{default:{firstScene:'scene0',sceneFadeDuration:500,autoLoad:true,showControls:true,compass:false,mouseZoom:true,keyboardZoom:true},scenes:scenes});var sceneButtons=tour360Urls.map(function(url,i){return '<button type="button" class="pd-tour360-scene-btn" data-scene="scene'+i+'">نمای '+(i+1)+'</button>'}).join('');document.getElementById('pdTour360Scenes').innerHTML=sceneButtons;document.querySelectorAll('.pd-tour360-scene-btn').forEach(function(btn){btn.addEventListener('click',function(){window.pdTour360Instance.loadScene(this.dataset.scene)})})}catch(tourError){console.error('راه‌اندازی تور ۳۶۰ ناموفق بود',tourError);tour360Viewer.innerHTML='<p>نمایشگر تور ۳۶۰ بارگذاری نشد. لطفاً اتصال اینترنت را بررسی کنید.</p>'}}}
   var tour3dUrl=p.details_json&&p.details_json.tour_3d_url?String(p.details_json.tour_3d_url).trim():'';var safeTour3d='';try{var tourUrl=new URL(tour3dUrl);if(tourUrl.protocol==='https:'&&/(^|\.)matterport\.com$|(^|\.)kuula\.co$|(^|\.)3dvista\.com$|(^|\.)cloudpano\.com$|(^|\.)roundme\.com$/i.test(tourUrl.hostname))safeTour3d=tourUrl.href}catch(e){}var tour3dHtml=safeTour3d?'<div class="pd-tour3d-wrap"><a class="btn btn-primary" target="_blank" rel="noopener noreferrer" href="'+pdEsc(safeTour3d)+'">مشاهده تور سه‌بعدی ملک ↗</a></div>':'';document.getElementById('pdGalleryCaption').innerHTML=videoHtml+tour3dHtml;
   var note=document.getElementById('pdPersonalNote');
   try{note.value=localStorage.getItem('amlak058_property_note_'+key)||''}catch(e){note.value=''}
@@ -10817,6 +10819,15 @@ footer a{color:#d9c49b!important}
 }
 
 .pd-tour3d-wrap{display:flex;justify-content:flex-start;padding:12px 0}.pd-tour3d-wrap .btn{display:inline-flex;align-items:center;gap:8px;background:#183d32;color:#fff;border:1px solid #b79a69;border-radius:4px;padding:12px 18px;text-decoration:none;font-weight:700}
+
+.pd-tour360-viewer{margin:14px 0;padding:14px;background:#fbfaf6;border:1px solid #e6dece;border-radius:6px}
+.pd-tour360-viewer[hidden]{display:none!important}
+.pd-tour360-heading{font-weight:800;color:#183d32;margin-bottom:10px}
+.pd-tour360-canvas{width:100%;height: min(62vw,440px);min-height:250px;background:#18231d;border-radius:4px;overflow:hidden}
+.pd-tour360-scenes{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.pd-tour360-scene-btn{padding:7px 13px;background:#fff;border:1px solid #d9d1c3;border-radius:4px;color:#244638;font:inherit;font-size:12px}
+.pd-tour360-hint{font-size:11px;color:#6c776e;margin-top:8px}
+
 </style>
 </body>
 </html>
