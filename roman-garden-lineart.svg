@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" fill="none">
+<defs>
+ <pattern id="tile" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M14 1 27 14 14 27 1 14Z M14 6 22 14 14 22 6 14Z" stroke="#46766c" stroke-width="1"/><circle cx="14" cy="14" r="2.5" fill="#b58b49"/></pattern>
+ <pattern id="brick" width="54" height="22" patternUnits="userSpaceOnUse"><path d="M0 0H54M0 22H54M27 0V11M0 11H54M0 11V22M54 11V22" stroke="#a58b67" stroke-width=".8"/></pattern>
+ <pattern id="pave" width="36" height="24" patternUnits="userSpaceOnUse"><path d="M0 4 18 0 36 5 31 21 10 24Z" stroke="#a89575" stroke-width="1"/></pattern>
+ <g id="flower"><path d="M0 0q-8-12-1-18q8 5 1 18Zm0 0q8-13 16-9q-1 10-16 9Zm0 0q12 5 8 14q-9-1-8-14Zm0 0q-7 13-15 7q1-10 15-7Z" stroke="#9d8152" stroke-width="1.2"/><circle r="3" fill="#b58b49"/></g>
+ <g id="minaret"><path d="M-24 420V92Q-24 70 0 49Q24 70 24 92V420Z" stroke="#294e48" stroke-width="3"/><path d="M-30 92H30L23 78H-23Z M-24 127H24M-22 145H22M-21 167H21M-20 189H20M-19 211H19M-18 233H18M-17 255H17M-16 277H16M-15 299H15M-14 321H14M-13 343H13" stroke="#ad8750" stroke-width="2"/>
+ <path d="M-17 105 17 139-17 173 17 207-17 241 17 275-17 309 17 343-17 377" stroke="#538279" stroke-width="2"/>
+ <path d="M0 49V12M-7 24 0 0 7 24M-11 35H11" stroke="#294e48" stroke-width="3"/>
+ <path d="M-28 91H28M-24 80H24M-18 70H18" stroke="#294e48" stroke-width="2"/>
+ </g>
+ <g id="tree" stroke="#526d54" stroke-width="2" fill="none"><path d="M0 0Q-8-72 3-142M2-77Q-34-109-45-132M3-95Q36-126 43-153M0-54Q-23-74-36-77M4-63Q24-83 33-91"/><path d="M-45-132q-24-15-14-33q18 0 14 33ZM43-153q25-17 33 1q-10 20-33-1ZM3-142q-18-23 0-37q18 14 0 37ZM-36-77q-22-8-18-25q18-2 18 25ZM33-91q22-18 33-2q-8 18-33 2Z" fill="#d7c9a6" stroke="#8b805d"/></g>
+</defs>
+<!-- pale architectural paper -->
+<path d="M0 0H1200V900H0Z" fill="#f5efe3"/>
+<path d="M0 0H1200V900H0Z" fill="url(#brick)" opacity=".11"/>
+<!-- distant garden foliage -->
+<g opacity=".75"><use href="#tree" x="95" y="610"/><use href="#tree" x="160" y="560"/><use href="#tree" x="1030" y="570"/><use href="#tree" x="1110" y="630"/></g>
+<!-- building outline and roof -->
+<path d="M180 690V365L600 226 1020 365V690" stroke="#293f39" stroke-width="4"/>
+<path d="M150 372 600 212 1050 372 1036 390 600 246 164 390Z" fill="#eee3d0" stroke="#9c7944" stroke-width="3"/>
+<path d="M188 368H1012M200 390H1000M222 410H978" stroke="#293f39" stroke-width="2"/>
+<path d="M225 400V690M975 400V690M245 410V690M955 410V690" stroke="#a88755" stroke-width="2"/>
+<!-- side wings masonry -->
+<path d="M205 410H440V690H205ZM760 410H995V690H760Z" fill="url(#brick)" opacity=".34" stroke="#6b7666" stroke-width="2"/>
+<!-- central tile portal -->
+<path d="M420 690V390Q420 290 600 270Q780 290 780 390V690Z" fill="#efe6d6" stroke="#294e48" stroke-width="5"/>
+<path d="M440 690V396Q440 316 600 292Q760 316 760 396V690Z" fill="url(#tile)" stroke="#b28c50" stroke-width="3"/>
+<!-- grand central arch -->
+<path d="M480 690V465Q480 365 600 345Q720 365 720 465V690Z" fill="#f8f2e8" stroke="#294e48" stroke-width="5"/>
+<path d="M495 690V467Q495 382 600 364Q705 382 705 467V690Z" fill="url(#tile)" stroke="#ad8750" stroke-width="3"/>
+<!-- central wooden door -->
+<path d="M535 690V520Q535 485 600 475Q665 485 665 520V690Z" fill="#d7c09a" stroke="#4c5142" stroke-width="4"/>
+<path d="M550 690V525Q550 500 600 490Q650 500 650 525V690Z" stroke="#765d3b" stroke-width="3"/>
+<path d="M600 492V690M550 555H650M550 625H650" stroke="#765d3b" stroke-width="2"/>
+<circle cx="585" cy="585" r="5" fill="#9c7540"/><circle cx="615" cy="585" r="5" fill="#9c7540"/>
+<!-- upper central window and ornament -->
+<path d="M540 343Q600 282 660 343V430H540Z" fill="#d5e0d5" stroke="#294e48" stroke-width="3"/>
+<path d="M555 350Q600 310 645 350V414H555Z" fill="url(#tile)" stroke="#ad8750" stroke-width="2"/>
+<path d="M600 315V430M540 390H660" stroke="#294e48" stroke-width="2"/>
+<!-- upper side windows -->
+<g stroke="#4c5142" stroke-width="3" fill="#e5d7bf">
+ <path d="M265 465H390V570H265Z M810 465H935V570H810Z"/>
+ <path d="M280 480H375V555H280Z M825 480H920V555H825Z" fill="#d8e0d7"/>
+ <path d="M327 480V555M280 518H375M872 480V555M825 518H920"/>
+ <path d="M285 440H370M830 440H915" stroke="#ad8750" stroke-width="5"/>
+</g>
+<!-- lower side doors/windows -->
+<g stroke="#4c5142" stroke-width="3" fill="#d6e0d8">
+ <path d="M260 600H385V690H260Z M815 600H940V690H815Z"/>
+ <path d="M275 614H370V690H275Z M830 614H925V690H830Z"/>
+ <path d="M322 614V690M275 650H370M877 614V690M830 650H925"/>
+</g>
+<!-- minarets -->
+<use href="#minaret" x="370" y="240"/><use href="#minaret" x="830" y="240"/>
+<!-- small roof turrets -->
+<path d="M280 372V315Q280 288 305 268Q330 288 330 315V372M870 372V315Q870 288 895 268Q920 288 920 315V372" stroke="#294e48" stroke-width="3"/>
+<path d="M286 315H324M876 315H914M280 372H330M870 372H920" stroke="#ad8750" stroke-width="2"/>
+<!-- balcony/terrace rails -->
+<path d="M240 455H405M795 455H960M245 455V485M400 455V485M800 455V485M955 455V485" stroke="#765d3b" stroke-width="3"/>
+<path d="M252 458q16 26 32 0q16 26 32 0q16 26 32 0q16 26 32 0M812 458q16 26 32 0q16 26 32 0q16 26 32 0q16 26 32 0" stroke="#765d3b" stroke-width="2"/>
+<!-- front garden lamps -->
+<g stroke="#4d594c" stroke-width="3" fill="none"><path d="M115 700V505M95 520H135L128 485H102Z M102 485 115 463 128 485M108 700H122M108 555H122"/><path d="M1080 700V505M1060 520H1100L1093 485H1067Z M1067 485 1080 463 1093 485M1073 700H1087"/></g>
+<!-- stone path leading to entrance -->
+<path d="M485 690 390 900H810L715 690Z" fill="url(#pave)" stroke="#a48b66" stroke-width="2"/>
+<path d="M600 690V900M530 750H670M500 820H700M455 875H745" stroke="#b59a72" stroke-width="1.2"/>
+<!-- shrubs -->
+<g fill="none" stroke="#68785c" stroke-width="2">
+ <path d="M0 780q48-88 95-22q48-93 95-6q42-77 90 15M0 810q70-65 120 0q55-75 116-4M910 790q45-90 90-20q45-85 90-8q44-88 110-9M920 818q60-70 116-4q66-70 126 0"/>
+</g>
+<g><use href="#flower" x="80" y="755"/><use href="#flower" x="180" y="790"/><use href="#flower" x="290" y="770"/><use href="#flower" x="920" y="765"/><use href="#flower" x="1030" y="790"/><use href="#flower" x="1130" y="760"/></g>
+<!-- fine hand-sketch construction lines -->
+<g stroke="#9f875f" stroke-width="1" opacity=".42"><path d="M145 370 600 205 1055 370M180 700H1020M228 405H972M405 355 600 270 795 355M365 240V90M835 240V90"/><path d="M70 900 470 690M1130 900 730 690"/></g>
+</svg>
