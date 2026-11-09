@@ -4456,10 +4456,10 @@ body.amlak058-home-showcase .premium-hero-actions a{min-height:44px!important}
 }
 </style>
 <script id="amlak058-home-showcase-switch">
-(function(){
+document.addEventListener('DOMContentLoaded',function(){
  const isHome=(location.pathname==='/'||location.pathname.endsWith('/index.html'))&&!location.hash;
  if(isHome)document.body.classList.add('amlak058-home-showcase');
-})();
+});
 </script>
 
 </head><body>
