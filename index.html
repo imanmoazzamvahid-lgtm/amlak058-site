@@ -10925,6 +10925,48 @@ body.homepage-clean #home{display:block!important;min-height:calc(100svh - 150px
 body.homepage-clean #home .premium-hero-inner{min-height:inherit}
 @media(max-width:650px){body.homepage-clean #home{min-height:calc(100svh - 145px);display:flex!important;align-items:center!important}body.homepage-clean #home .premium-hero-inner{padding-top:24px!important;padding-bottom:24px!important}}
 
+
+/* Fix: keep the Roman illustration centered in the homepage showcase */
+body.homepage-clean #home{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  overflow:hidden!important;
+}
+body.homepage-clean #home .premium-hero-inner{
+  display:flex!important;flex-direction:column!important;align-items:center!important;
+  justify-content:center!important;gap:4px!important;width:min(920px,92%)!important;
+  min-height:0!important;margin:0 auto!important;text-align:center!important;
+}
+body.homepage-clean #home .premium-hero-art{
+  order:0!important;display:flex!important;position:relative!important;
+  width:100%!important;min-height:0!important;height:clamp(190px,34vh,320px)!important;
+  margin:0 auto 4px!important;align-items:center!important;justify-content:center!important;
+  overflow:visible!important;
+}
+body.homepage-clean #home .premium-hero-art svg,
+body.homepage-clean #home .premium-hero-art .premium-roman-sketch{
+  display:block!important;width:min(100%,430px)!important;height:100%!important;
+  max-height:100%!important;margin:0 auto!important;object-fit:contain!important;
+}
+body.homepage-clean #home .premium-hero-copy{
+  order:1!important;width:100%!important;max-width:760px!important;
+  margin:0 auto!important;padding:0 0 14px!important;text-align:center!important;
+}
+body.homepage-clean #home .premium-kicker{justify-content:center!important}
+body.homepage-clean #home .premium-hero-copy>p{margin:0 auto 16px!important}
+body.homepage-clean #home .premium-hero-actions{justify-content:center!important}
+body.homepage-clean #home .premium-proof{justify-content:center!important;text-align:right!important;margin:14px auto 0!important}
+body.homepage-clean #home .premium-art-orbit{left:50%!important;right:auto!important;transform:translateX(-50%)!important}
+body.homepage-clean #home .premium-art-sun{left:50%!important;right:auto!important;transform:translateX(-50%)!important}
+@media(max-width:650px){
+ body.homepage-clean #home{min-height:calc(100svh - 125px)!important;padding:12px 0!important}
+ body.homepage-clean #home .premium-hero-inner{width:92%!important;gap:0!important}
+ body.homepage-clean #home .premium-hero-art{height:clamp(170px,27vh,235px)!important;margin-bottom:0!important}
+ body.homepage-clean #home .premium-hero-art svg{width:min(100%,330px)!important}
+ body.homepage-clean #home .premium-hero-copy{padding-bottom:6px!important}
+ body.homepage-clean #home .premium-hero-copy h2{font-size:clamp(23px,6vw,29px)!important;line-height:1.55!important}
+ body.homepage-clean #home .premium-hero-actions{display:flex!important;flex-wrap:wrap!important}
+}
+
 </style>
 <script>(function(){if(location.pathname==='/'&&!location.hash){document.body.classList.add('homepage-clean')}})();</script>
 </body>
