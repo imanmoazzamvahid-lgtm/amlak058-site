@@ -4420,6 +4420,48 @@ footer{background:#f1f4f1!important;border-top:1px solid #e0e7e1!important}
  .premium-hero-bottom{background:#123f32!important}
 }
 </style>
+
+<style id="amlak058-homepage-showcase-only">
+/* Homepage is a quiet brand showcase: keep the existing Roman facade hero only. */
+html:has(body.amlak058-home-showcase){scroll-behavior:smooth}
+body.amlak058-home-showcase{background:#f8f5ed!important;min-height:100svh!important}
+body.amlak058-home-showcase main{padding:0!important;margin:0!important}
+body.amlak058-home-showcase main>*:not(#home){display:none!important}
+body.amlak058-home-showcase #home{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ width:100%!important;min-height:calc(100svh - 88px)!important;
+ margin:0!important;padding:36px 0 24px!important;border-radius:0!important;
+}
+body.amlak058-home-showcase #home .premium-hero-inner{
+ width:min(1180px,92%)!important;min-height:min(680px,calc(100svh - 120px))!important;
+ margin:auto!important;align-items:center!important;
+}
+body.amlak058-home-showcase #home .premium-hero-art{display:flex!important;min-height:360px!important}
+body.amlak058-home-showcase #home .premium-hero-art svg{display:block!important;width:min(100%,560px)!important;max-height:440px!important}
+body.amlak058-home-showcase .premium-hero-bottom{display:none!important}
+body.amlak058-home-showcase footer{display:none!important}
+body.amlak058-home-showcase #official-property-services{display:none!important}
+body.amlak058-home-showcase .premium-hero-actions{gap:9px!important;flex-wrap:wrap!important}
+body.amlak058-home-showcase .premium-hero-actions a{min-height:44px!important}
+@media(max-width:760px){
+ body.amlak058-home-showcase #home{min-height:calc(100svh - 145px)!important;padding:20px 0 16px!important}
+ body.amlak058-home-showcase #home .premium-hero-inner{width:91%!important;min-height:0!important;display:flex!important;flex-direction:column!important;justify-content:center!important;gap:8px!important}
+ body.amlak058-home-showcase #home .premium-hero-copy{padding:0!important;text-align:center!important}
+ body.amlak058-home-showcase #home .premium-hero-copy>p{margin-left:auto!important;margin-right:auto!important}
+ body.amlak058-home-showcase #home .premium-hero-art{display:flex!important;width:100%!important;min-height:0!important;max-height:none!important;margin:8px auto 0!important;overflow:visible!important}
+ body.amlak058-home-showcase #home .premium-hero-art svg{width:min(88%,390px)!important;max-height:260px!important}
+ body.amlak058-home-showcase #home .premium-hero-actions{display:grid!important;grid-template-columns:1fr 1fr!important;width:100%!important}
+ body.amlak058-home-showcase #home .premium-hero-actions .premium-commission-action{grid-column:1/-1!important}
+ body.amlak058-home-showcase #home .premium-proof{margin-top:12px!important}
+}
+</style>
+<script id="amlak058-home-showcase-switch">
+document.addEventListener('DOMContentLoaded',function(){
+ const isHome=(location.pathname==='/'||location.pathname.endsWith('/index.html'))&&!location.hash;
+ if(isHome)document.body.classList.add('amlak058-home-showcase');
+});
+</script>
+
 </head><body>
 
 <header id="amlak058-header-target" class="amlak058-site-header">
@@ -4427,7 +4469,7 @@ footer{background:#f1f4f1!important;border-top:1px solid #e0e7e1!important}
 <div class="container header-inner">
 <a class="brand amlak058-brand-link" href="#home" aria-label="صفحه اصلی املاک ۰۵۸"><img class="amlak058-brand-logo" src="/icon.svg?v=26" alt="" aria-hidden="true" width="48" height="48" fetchpriority="high"/><span class="amlak058-brand-wordmark">املاک <strong>۰۵۸</strong></span></a>
 <nav class="amlak058-main-nav" aria-label="منوی اصلی">
-<a href="#home">خانه</a><a href="/listings.html">آگهی‌ها</a><a href="/agents.html">مشاورین</a><a href="/about.html">درباره ما</a><a href="/contact.html">تماس با ما</a>
+<a href="#home">خانه</a><a href="/listings.html">آگهی‌ها</a><a href="/featured.html">آگهی‌های ویژه</a><a href="/agents.html">مشاورین</a><a href="/about.html">درباره ما</a><a href="/contact.html">تماس با ما</a>
 </nav>
 <div class="header-actions">
 <button class="btn btn-outline" id="accountButton" onclick="handleAccountButton()" aria-label="ورود و ثبت‌نام">ورود</button>
@@ -4447,6 +4489,7 @@ footer{background:#f1f4f1!important;border-top:1px solid #e0e7e1!important}
     <a class="premium-primary-action" href="/listings.html">مشاهده آگهی‌ها <span>←</span></a>
     <a class="premium-secondary-action" href="/submit-ad.html">＋ ثبت آگهی رایگان</a>
     <a class="premium-commission-action" href="/commission.html"><span aria-hidden="true">٪</span> محاسبه آنلاین کمیسیون</a>
+    <a class="premium-secondary-action" href="/featured.html">★ آگهی‌های ویژه</a>
    </div>
    <div class="premium-proof"><span>۰۵۸</span><div><b>ثبت آگهی ملک، رایگان و آسان</b><small>محاسبه آنلاین کمیسیون در amlak058.ir</small></div></div>
   </div>
