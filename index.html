@@ -10873,6 +10873,16 @@ footer a{color:#d9c49b!important}
 #home .premium-art-sun{background:#ead9b7!important;opacity:.4!important}
 #home .premium-art-orbit{border-color:rgba(174,137,72,.35)!important}
 
+
+/* Dedicated, uncluttered homepage: the hero is the entire landing view */
+body.homepage-clean main>section:not(#home){display:none!important}
+body.homepage-clean .search-panel,body.homepage-clean #categories,body.homepage-clean #search,body.homepage-clean #listings{display:none!important}
+body.homepage-clean main{padding-bottom:88px!important}
+body.homepage-clean #home{display:block!important;min-height:calc(100svh - 150px);margin-bottom:0!important}
+body.homepage-clean #home .premium-hero-inner{min-height:inherit}
+@media(max-width:650px){body.homepage-clean #home{min-height:calc(100svh - 145px);display:flex!important;align-items:center!important}body.homepage-clean #home .premium-hero-inner{padding-top:24px!important;padding-bottom:24px!important}}
+
 </style>
+<script>(function(){if(location.pathname==='/'&&!location.hash){document.body.classList.add('homepage-clean')}})();</script>
 </body>
 </html>
