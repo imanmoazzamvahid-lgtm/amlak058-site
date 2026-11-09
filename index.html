@@ -674,7 +674,7 @@ header nav{gap:22px!important}
 
 
  #commission-calculator .commission-price-words{display:block;color:#b78317;font-size:12px;line-height:1.8;margin-top:5px}\n</style>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
 
 <style id="site-theme-overrides">
 /* پوسته سبز و روشن صفحه اصلی املاک ۰۵۸، با حفظ منطق و فرم‌های موجود */
@@ -3111,7 +3111,7 @@ header .btn-outline{border-color:#d8dfd9!important;color:var(--premium-forest)!i
  .search-section{width:94%!important;margin:12px auto 0!important;padding:14px!important;border:1px solid #e6ebe7!important;border-radius:12px!important}
 }
 </style>
-<link rel="stylesheet" href="/palette.css?v=3">
+<link rel="stylesheet" href="/palette.css?v=4">
 <link rel="stylesheet" href="/mobile-luxe.css?v=3">
 
 <style id="amlak058-header-cleanup-v1">
@@ -4457,8 +4457,19 @@ body.amlak058-home-showcase .premium-hero-actions a{min-height:44px!important}
 </style>
 <script id="amlak058-home-showcase-switch">
 document.addEventListener('DOMContentLoaded',function(){
- const isHome=(location.pathname==='/'||location.pathname.endsWith('/index.html'))&&!location.hash;
- if(isHome)document.body.classList.add('amlak058-home-showcase');
+ const isHome=location.pathname==='/';
+ if(!isHome)return;
+ const body=document.body;
+ body.classList.add('amlak058-home-showcase','amlak058-home-art-pending');
+ const hero=document.getElementById('home');
+ const imageUrl='https://d2jqrm6oza8nb6.cloudfront.net/datasets/784bd4a5-4a58-41c7-bacd-aebba20f615d.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiY2E2Zjg1YzA3MGM2NjczZSIsImJ1Y2tldCI6InJ1bndheS1kYXRhc2V0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5NDM2Mzk2OH0.6orpziJygAXdLXDfcCE92anIRg0ozuCaX16-LxIudsw';
+ const probe=new Image();
+ let settled=false;
+ const fail=()=>{if(settled)return;settled=true;body.classList.remove('amlak058-home-art-pending');body.classList.add('amlak058-home-art-failed')};
+ probe.onload=()=>{if(settled)return;settled=true;body.classList.remove('amlak058-home-art-pending');body.classList.add('amlak058-home-art-loaded')};
+ probe.onerror=fail;
+ probe.src=imageUrl;
+ window.setTimeout(fail,9000);
 });
 </script>
 
@@ -4539,6 +4550,10 @@ document.addEventListener('DOMContentLoaded',function(){
   </div>
  </div>
  <div class="premium-hero-bottom"><span>خرید و فروش</span><i></i><span>رهن و اجاره</span><i></i><span>املاک تجاری</span><i></i><span>زمین و ویلا</span></div>
+  <div class="home-hero-hotspots" aria-label="میانبرهای صفحه اصلی">
+   <a class="home-hotspot home-hotspot-submit" href="/submit-ad.html" aria-label="ثبت آگهی رایگان">ثبت آگهی رایگان</a>
+   <a class="home-hotspot home-hotspot-commission" href="/commission.html" aria-label="محاسبه آنلاین کمیسیون">محاسبه آنلاین کمیسیون</a>
+  </div>
 </section>
 <section class="container search-section" id="search"><div class="search-section-heading"><div><span class="search-eyebrow">جست‌وجوی هدفمند</span><h2>ملک بعدی‌ات را پیدا کن</h2><p>خرید، رهن و اجاره در بجنورد و شهرهای خراسان شمالی</p></div><span class="search-trust-note">فقط آگهی‌های تأییدشده</span></div><div class="search-mode-tabs" role="group" aria-label="نوع معامله">
 <button type="button" class="active" data-home-transaction="" onclick="setHomepageTransaction('',this)">همه فایل‌ها</button>
