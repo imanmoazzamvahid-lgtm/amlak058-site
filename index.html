@@ -4457,22 +4457,31 @@ body.amlak058-home-showcase .premium-hero-actions a{min-height:44px!important}
 </style>
 <script id="amlak058-home-showcase-switch">
 document.addEventListener('DOMContentLoaded',function(){
- const isHome=location.pathname==='/';
+ const path=location.pathname.replace(/\\/+$/,'') || '/';
+ const isHome=path==='/' || path==='/index.html';
  if(!isHome)return;
- const body=document.body;
- body.classList.add('amlak058-home-showcase','amlak058-home-art-pending');
- const hero=document.getElementById('home');
- const imageUrl='/assets/homepage-hero-058.jpg?v=1';
- const probe=new Image();
- let settled=false;
- const fail=()=>{if(settled)return;settled=true;body.classList.remove('amlak058-home-art-pending');body.classList.add('amlak058-home-art-failed')};
- probe.onload=()=>{if(settled)return;settled=true;body.classList.remove('amlak058-home-art-pending');body.classList.add('amlak058-home-art-loaded')};
- probe.onerror=fail;
- probe.src=imageUrl;
- window.setTimeout(fail,9000);
+ document.body.classList.add('amlak058-home-showcase');
 });
 </script>
 
+
+<style id="amlak058-homepage-emergency-fix">
+/* Fail-safe homepage rendering for both / and /index.html */
+body.amlak058-home-showcase{display:block!important;visibility:visible!important;opacity:1!important;overflow-x:hidden!important}
+body.amlak058-home-showcase header{display:block!important;visibility:visible!important}
+body.amlak058-home-showcase main{display:block!important;visibility:visible!important;min-height:calc(100svh - 80px)!important}
+body.amlak058-home-showcase main>#home{display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;min-height:calc(100svh - 90px)!important}
+body.amlak058-home-showcase main>#home .premium-hero-inner,
+body.amlak058-home-showcase main>#home .premium-hero-copy,
+body.amlak058-home-showcase main>#home .premium-hero-art{display:flex!important;visibility:visible!important;opacity:1!important}
+body.amlak058-home-showcase main>*:not(#home){display:none!important}
+body.amlak058-home-showcase footer{display:none!important}
+@media(max-width:760px){
+ body.amlak058-home-showcase main>#home{min-height:calc(100svh - 70px)!important;padding:18px 0!important}
+ body.amlak058-home-showcase main>#home .premium-hero-inner{width:92%!important;min-height:0!important}
+ body.amlak058-home-showcase main>#home .premium-hero-art{min-height:190px!important}
+}
+</style>
 </head><body>
 
 <header id="amlak058-header-target" class="amlak058-site-header">
