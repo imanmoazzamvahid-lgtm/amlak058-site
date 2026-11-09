@@ -893,3 +893,60 @@ body.amlak058-home-showcase footer{display:none!important}
  }
  body.amlak058-home-showcase.amlak058-home-art-failed #home .premium-hero-actions a{width:100%!important}
 }
+
+
+/* Focus the commission tool on its own clean standalone page */
+body.amlak058-commission-page{
+ background:#f7f5ee!important;
+ min-height:100vh!important;
+ padding-bottom:30px!important;
+}
+body.amlak058-commission-page > :not(script):not(style):not(#amlak058-header-target):not(#commission-calculator):not(#commission-print-sheet):not(#commission-history-panel){
+ display:none!important;
+}
+body.amlak058-commission-page #amlak058-header-target{
+ display:block!important;position:relative!important;
+}
+body.amlak058-commission-page #commission-calculator{
+ display:block!important;visibility:visible!important;
+ width:min(900px,calc(100% - 32px))!important;
+ max-width:900px!important;margin:32px auto 16px!important;
+ padding:0!important;
+}
+body.amlak058-commission-page #commission-calculator .section-heading{
+ display:block!important;margin:0 0 18px!important;
+ text-align:right!important;
+}
+body.amlak058-commission-page #commission-calculator .section-heading h2{
+ font-size:clamp(22px,3vw,30px)!important;
+ color:#173f32!important;line-height:1.6!important;
+}
+body.amlak058-commission-page #commission-calculator .commission-box{
+ max-width:none!important;padding:clamp(16px,3vw,28px)!important;
+ border:1px solid #e4ddce!important;border-radius:18px!important;
+ background:#fffdf8!important;box-shadow:0 10px 35px rgba(33,53,42,.07)!important;
+}
+body.amlak058-commission-page #commission-calculator .commission-tab.active{
+ background:#eaf1eb!important;border-color:#b8cbbd!important;color:#164d37!important;
+}
+body.amlak058-commission-page #commission-calculator .commission-calc-btn{
+ background:#164d37!important;border-color:#164d37!important;color:#fff!important;
+ border-radius:10px!important;min-height:48px!important;
+}
+body.amlak058-commission-page #commission-calculator .commission-print-btn{
+ border-radius:10px!important;min-height:46px!important;
+}
+body.amlak058-commission-page #commission-history-panel{
+ display:block!important;visibility:visible!important;
+ width:min(900px,calc(100% - 32px))!important;max-width:900px!important;
+ margin:0 auto 36px!important;padding:18px!important;
+ border:1px solid #e4ddce!important;border-radius:14px!important;
+ background:#fffdf8!important;
+}
+body.amlak058-commission-page #commission-print-sheet{display:none}
+@media(max-width:650px){
+ body.amlak058-commission-page #commission-calculator{
+  width:calc(100% - 24px)!important;margin:20px auto 12px!important;
+ }
+ body.amlak058-commission-page #commission-history-panel{width:calc(100% - 24px)!important}
+}
