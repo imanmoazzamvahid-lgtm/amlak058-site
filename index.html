@@ -4427,11 +4427,11 @@ footer{background:#f1f4f1!important;border-top:1px solid #e0e7e1!important}
 <div class="container header-inner">
 <a class="brand amlak058-brand-link" href="#home" aria-label="صفحه اصلی املاک ۰۵۸"><img class="amlak058-brand-logo" src="/icon.svg?v=26" alt="" aria-hidden="true" width="48" height="48" fetchpriority="high"/><span class="amlak058-brand-wordmark">املاک <strong>۰۵۸</strong></span></a>
 <nav class="amlak058-main-nav" aria-label="منوی اصلی">
-<a href="#home">خانه</a><a href="#search">جست‌وجو</a><a href="#listings">آگهی‌ها</a><a href="/commission.html">محاسبه کمیسیون</a><a href="/estelamat-melk.html">راهنمای استعلام‌ها</a>
+<a href="#home">خانه</a><a href="/listings.html">آگهی‌ها</a><a href="/agents.html">مشاورین</a><a href="/about.html">درباره ما</a><a href="/contact.html">تماس با ما</a>
 </nav>
 <div class="header-actions">
 <button class="btn btn-outline" id="accountButton" onclick="handleAccountButton()" aria-label="ورود و ثبت‌نام">ورود</button>
-<button class="btn btn-primary" onclick="openModal()" aria-label="ثبت آگهی رایگان">＋ ثبت آگهی</button>
+<a class="btn btn-primary" href="/submit-ad.html" aria-label="ثبت آگهی رایگان">＋ ثبت آگهی</a>
 </div>
 </div>
 </div>
@@ -4444,8 +4444,8 @@ footer{background:#f1f4f1!important;border-top:1px solid #e0e7e1!important}
    <h2>ملکت رو <em>رایگان آگهی کن!</em><br>هوشمندانه‌تر از همیشه دیده شو.</h2>
    <p>جایگزینی ساده برای دیوار؛ آگهی ملک خود را ثبت کن و کمیسیون املاک را آنلاین، سریع و دقیق محاسبه کن.</p>
    <div class="premium-hero-actions">
-    <a class="premium-primary-action" href="#search">جست‌وجوی ملک <span>←</span></a>
-    <button class="premium-secondary-action" type="button" onclick="openModal()">＋ ثبت آگهی رایگان</button>
+    <a class="premium-primary-action" href="/listings.html">مشاهده آگهی‌ها <span>←</span></a>
+    <a class="premium-secondary-action" href="/submit-ad.html">＋ ثبت آگهی رایگان</a>
     <a class="premium-commission-action" href="/commission.html"><span aria-hidden="true">٪</span> محاسبه آنلاین کمیسیون</a>
    </div>
    <div class="premium-proof"><span>۰۵۸</span><div><b>ثبت آگهی ملک، رایگان و آسان</b><small>محاسبه آنلاین کمیسیون در amlak058.ir</small></div></div>
@@ -4712,16 +4712,16 @@ footer{background:#f1f4f1!important;border-top:1px solid #e0e7e1!important}
 
 </main>
 <nav class="mobile-bottom-nav amlak-kilid-nav" aria-label="ناوبری موبایل">
- <button type="button" class="mobile-nav-item" onclick="mobileNavMyProperties()" aria-label="آگهی‌های من">
+ <button type="button" class="mobile-nav-item" onclick="location.href='/my-properties.html'" aria-label="آگهی‌های من">
   <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h16v14H4z"/><path d="M8 9h8M8 12.5h5M8 16h8M7 3v5M17 3v5"/></svg><span>آگهی‌های من</span>
  </button>
- <button type="button" class="mobile-nav-item" onclick="openInbox()" aria-label="چت و تماس">
+ <button type="button" class="mobile-nav-item" onclick="location.href='/chat.html'" aria-label="چت و تماس">
   <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-5 4v-4.5A2.5 2.5 0 0 1 3 13V5.5Z"/><path d="M8 8h8M8 11.5h5"/></svg><span>چت و تماس</span>
  </button>
- <button type="button" class="mobile-nav-item post" onclick="openModal()" aria-label="ثبت آگهی">
+ <button type="button" class="mobile-nav-item post" onclick="location.href='/submit-ad.html'" aria-label="ثبت آگهی">
   <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span>ثبت آگهی</span>
  </button>
- <button type="button" class="mobile-nav-item" onclick="mobileNavSaved()" aria-label="نشان‌شده‌ها">
+ <button type="button" class="mobile-nav-item" onclick="location.href='/featured.html'" aria-label="نشان‌شده‌ها">
   <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.8h12a1.5 1.5 0 0 1 1.5 1.5v15L12 16l-7.5 4.3v-15A1.5 1.5 0 0 1 6 3.8Z"/></svg><span>نشان‌شده‌ها</span>
  </button>
  <button type="button" class="mobile-nav-item" onclick="mobileNavHome()" aria-label="خانه">
