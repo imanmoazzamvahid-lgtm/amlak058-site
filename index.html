@@ -11110,6 +11110,99 @@ body.amlak058-home-showcase footer{display:none!important}
  body.amlak058-home-showcase #home .premium-proof{justify-content:center!important;margin-top:16px!important}
 }
 
+
+/* Hard full-bleed override: make the hero occupy the entire browser canvas */
+html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!important}
+body.amlak058-home-showcase main{
+ display:block!important;width:100vw!important;max-width:100vw!important;
+ margin:0!important;padding:0!important;position:relative!important;
+ inset-inline:0!important;
+}
+body.amlak058-home-showcase #home{
+ position:relative!important;inset-inline-start:50%!important;
+ transform:translateX(-50%)!important;
+ display:flex!important;width:100vw!important;max-width:100vw!important;
+ min-width:100vw!important;height:calc(100svh - 78px)!important;
+ min-height:calc(100svh - 78px)!important;max-height:none!important;
+ margin:0!important;padding:0!important;border:0!important;border-radius:0!important;
+ overflow:hidden!important;box-sizing:border-box!important;
+ background:linear-gradient(130deg,#f2eadb 0%,#fffdf8 50%,#f3ecdf 100%)!important;
+}
+body.amlak058-home-showcase #home .premium-hero-inner{
+ width:100%!important;max-width:none!important;height:100%!important;min-height:100%!important;
+ margin:0!important;padding:0 3vw!important;box-sizing:border-box!important;
+ display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+ grid-template-areas:"art copy"!important;gap:0!important;
+ align-items:stretch!important;justify-items:stretch!important;direction:ltr!important;
+}
+body.amlak058-home-showcase #home .premium-hero-art{
+ grid-area:art!important;position:relative!important;inset:auto!important;
+ display:flex!important;width:100%!important;height:100%!important;min-height:0!important;
+ max-height:none!important;margin:0!important;padding:2vh 1vw!important;
+ box-sizing:border-box!important;align-items:center!important;justify-content:center!important;
+ background:transparent!important;overflow:visible!important;
+}
+body.amlak058-home-showcase #home .premium-roman-sketch{
+ display:block!important;position:relative!important;width:100%!important;
+ max-width:none!important;height:auto!important;max-height:88svh!important;
+ margin:auto!important;object-fit:contain!important;
+}
+body.amlak058-home-showcase #home .premium-hero-copy{
+ grid-area:copy!important;direction:rtl!important;display:flex!important;
+ width:100%!important;height:100%!important;max-width:none!important;
+ margin:0!important;padding:5vh clamp(24px,4.2vw,76px)!important;
+ box-sizing:border-box!important;justify-content:center!important;align-items:flex-start!important;
+ text-align:right!important;background:rgba(255,253,248,.42)!important;
+ border-inline-start:1px solid rgba(173,139,82,.25)!important;
+}
+body.amlak058-home-showcase #home .premium-hero-copy h2{
+ max-width:850px!important;font-size:clamp(34px,4.3vw,66px)!important;
+ line-height:1.55!important;
+}
+body.amlak058-home-showcase #home .premium-hero-copy>p{
+ max-width:680px!important;font-size:clamp(14px,1.25vw,18px)!important;
+ margin:0 0 26px!important;
+}
+body.amlak058-home-showcase #home .premium-hero-actions{
+ max-width:760px!important;display:flex!important;flex-wrap:wrap!important;
+ justify-content:flex-start!important;gap:10px!important;
+}
+body.amlak058-home-showcase #home .premium-proof{
+ width:100%!important;max-width:740px!important;margin:25px 0 0!important;
+ justify-content:flex-start!important;
+}
+body.amlak058-home-showcase .premium-hero-bottom,
+body.amlak058-home-showcase footer{display:none!important}
+@media(max-width:760px){
+ body.amlak058-home-showcase #home{
+  inset-inline-start:auto!important;transform:none!important;
+  width:100%!important;min-width:0!important;max-width:100%!important;
+  height:auto!important;min-height:calc(100svh - 128px)!important;overflow:visible!important;
+ }
+ body.amlak058-home-showcase #home .premium-hero-inner{
+  display:flex!important;flex-direction:column!important;width:100%!important;
+  height:auto!important;min-height:0!important;padding:0!important;gap:0!important;
+ }
+ body.amlak058-home-showcase #home .premium-hero-art{
+  width:100%!important;height:clamp(280px,42svh,430px)!important;
+  min-height:280px!important;padding:10px 4vw 0!important;
+ }
+ body.amlak058-home-showcase #home .premium-roman-sketch{
+  width:100%!important;height:100%!important;max-height:100%!important;max-width:650px!important;
+ }
+ body.amlak058-home-showcase #home .premium-hero-copy{
+  width:100%!important;height:auto!important;min-height:0!important;
+  padding:22px 6vw 30px!important;align-items:center!important;text-align:center!important;
+  border-inline-start:0!important;border-top:1px solid rgba(173,139,82,.22)!important;
+ }
+ body.amlak058-home-showcase #home .premium-kicker,
+ body.amlak058-home-showcase #home .premium-hero-actions,
+ body.amlak058-home-showcase #home .premium-proof{justify-content:center!important}
+ body.amlak058-home-showcase #home .premium-hero-copy h2{font-size:clamp(27px,7vw,40px)!important}
+ body.amlak058-home-showcase #home .premium-hero-copy>p{margin:0 auto 18px!important}
+ body.amlak058-home-showcase #home .premium-hero-actions{display:grid!important;grid-template-columns:1fr 1fr!important;width:100%!important}
+}
+
 </style>
 <script>(function(){if(location.pathname==='/'&&!location.hash){document.body.classList.add('homepage-clean')}})();</script>
 </body>
