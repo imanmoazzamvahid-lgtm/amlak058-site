@@ -824,3 +824,17 @@ body.amlak058-home-showcase footer{display:none!important}
   background-size:100% 100%!important;
  }
 }
+
+
+/* Keep the live site navigation; crop only the screenshot's duplicated top nav strip */
+body.amlak058-home-showcase #home{
+ background-size:100% calc(100% + 4.46vw)!important;
+ background-position:center -4.46vw!important;
+}
+@media(max-width:760px){
+ body.amlak058-home-showcase #home{
+  height:calc(100vw * .518)!important;
+  background-size:100% calc(100% + 4.46vw)!important;
+  background-position:center -4.46vw!important;
+ }
+}
