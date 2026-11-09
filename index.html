@@ -10967,6 +10967,46 @@ body.homepage-clean #home .premium-art-sun{left:50%!important;right:auto!importa
  body.homepage-clean #home .premium-hero-actions{display:flex!important;flex-wrap:wrap!important}
 }
 
+
+/* Correct selector: homepage mode is aml ak058-home-showcase */
+body.amlak058-home-showcase #home .premium-hero-inner{
+ display:flex!important;flex-direction:column!important;align-items:center!important;
+ justify-content:center!important;gap:12px!important;width:min(1100px,94%)!important;
+ min-height:0!important;margin:0 auto!important;text-align:center!important;
+}
+body.amlak058-home-showcase #home{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ width:100%!important;min-height:calc(100svh - 80px)!important;
+ margin:0!important;padding:24px 0!important;overflow:hidden!important;
+}
+body.amlak058-home-showcase #home .premium-hero-art{
+ order:0!important;display:flex!important;position:relative!important;
+ width:min(680px,90%)!important;height:clamp(220px,38vh,360px)!important;
+ min-height:0!important;margin:0 auto!important;align-items:center!important;
+ justify-content:center!important;inset:auto!important;
+}
+body.amlak058-home-showcase #home .premium-roman-sketch{
+ display:block!important;width:min(100%,560px)!important;height:100%!important;
+ max-height:100%!important;margin:0 auto!important;object-fit:contain!important;
+}
+body.amlak058-home-showcase #home .premium-hero-copy{
+ order:1!important;width:100%!important;max-width:900px!important;
+ margin:0 auto!important;padding:0 12px!important;text-align:center!important;
+}
+body.amlak058-home-showcase #home .premium-kicker,
+body.amlak058-home-showcase #home .premium-hero-actions,
+body.amlak058-home-showcase #home .premium-proof{
+ justify-content:center!important;margin-left:auto!important;margin-right:auto!important;
+}
+body.amlak058-home-showcase #home .premium-hero-copy>p{margin-left:auto!important;margin-right:auto!important}
+@media(max-width:650px){
+ body.amlak058-home-showcase #home{min-height:calc(100svh - 130px)!important;padding:12px 0!important}
+ body.amlak058-home-showcase #home .premium-hero-inner{width:94%!important;gap:8px!important}
+ body.amlak058-home-showcase #home .premium-hero-art{width:96%!important;height:clamp(180px,29vh,250px)!important}
+ body.amlak058-home-showcase #home .premium-roman-sketch{width:100%!important}
+ body.amlak058-home-showcase #home .premium-hero-copy h2{font-size:clamp(23px,6vw,30px)!important;line-height:1.55!important}
+}
+
 </style>
 <script>(function(){if(location.pathname==='/'&&!location.hash){document.body.classList.add('homepage-clean')}})();</script>
 </body>
