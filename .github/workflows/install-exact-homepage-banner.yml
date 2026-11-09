@@ -1,0 +1,33 @@
+name: Install exact AMlaK 058 homepage banner
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/install-exact-homepage-banner.yml"
+permissions:
+  contents: write
+jobs:
+  install-banner:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Download and verify original uploaded image
+        env:
+          HERO_URL: "https://d2jqrm6oza8nb6.cloudfront.net/datasets/784bd4a5-4a58-41c7-bacd-aebba20f615d.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiY2E2Zjg1YzA3MGM2NjczZSIsImJ1Y2tldCI6InJ1bndheS1kYXRhc2V0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5NDM2Mzk2OH0.6orpziJygAXdLXDfcCE92anIRg0ozuCaX16-LxIudsw"
+          EXPECTED_SHA256: "bf6dda217d5f9a96e2643888d84f2aba80d3c010c5dec1d1ddeb1e7af3201334"
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 "$HERO_URL" -o homepage-hero-058.png
+          echo "$EXPECTED_SHA256  homepage-hero-058.png" | sha256sum --check -
+          file homepage-hero-058.png
+      - name: Commit original artwork to main
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add homepage-hero-058.png
+          git commit -m "Install exact user-provided homepage banner"
+          git push origin HEAD:main
