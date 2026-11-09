@@ -1,0 +1,58 @@
+/* Exact user-provided homepage banner. Original PNG is stored at /homepage-hero-058.png */
+body.amlak058-home-showcase{background:#f5efe3!important;overflow-x:hidden!important}
+body.amlak058-home-showcase main{display:block!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important}
+body.amlak058-home-showcase main>*:not(#home){display:none!important}
+body.amlak058-home-showcase #home{
+ position:relative!important;display:block!important;width:100%!important;max-width:none!important;
+ min-height:0!important;height:calc(100svh - var(--amlak-header-height,76px))!important;
+ margin:0!important;padding:0!important;border:0!important;border-radius:0!important;overflow:hidden!important;
+ background-color:#f5efe3!important;
+ background-image:url('/homepage-hero-058.png')!important;
+ background-repeat:no-repeat!important;background-size:100% 100%!important;background-position:center center!important;
+}
+body.amlak058-home-showcase #home .premium-hero-inner{
+ display:block!important;width:100%!important;max-width:none!important;height:100%!important;min-height:0!important;
+ margin:0!important;padding:0!important;position:relative!important;
+}
+body.amlak058-home-showcase #home .premium-hero-art{display:none!important}
+body.amlak058-home-showcase #home .premium-hero-copy{
+ display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+ max-width:none!important;margin:0!important;padding:0!important;opacity:1!important;
+ background:transparent!important;border:0!important;pointer-events:none!important;
+}
+body.amlak058-home-showcase #home .premium-kicker,
+body.amlak058-home-showcase #home .premium-hero-copy h2,
+body.amlak058-home-showcase #home .premium-hero-copy>p,
+body.amlak058-home-showcase #home .premium-proof{display:none!important}
+body.amlak058-home-showcase #home .premium-hero-actions{
+ display:block!important;position:absolute!important;inset:0!important;margin:0!important;
+ padding:0!important;pointer-events:none!important;
+}
+body.amlak058-home-showcase #home .premium-hero-actions a{
+ position:absolute!important;display:block!important;min-height:0!important;height:8%!important;
+ padding:0!important;margin:0!important;border:0!important;border-radius:40px!important;
+ background:transparent!important;box-shadow:none!important;color:transparent!important;
+ opacity:0!important;pointer-events:auto!important;z-index:10!important;
+}
+body.amlak058-home-showcase #home .premium-hero-actions a:nth-child(1){display:none!important}
+body.amlak058-home-showcase #home .premium-hero-actions a:nth-child(2){
+ left:78.5%!important;top:63.4%!important;width:15.5%!important
+}
+body.amlak058-home-showcase #home .premium-hero-actions a:nth-child(3){
+ left:61.7%!important;top:63.4%!important;width:15.6%!important
+}
+body.amlak058-home-showcase #home .premium-hero-actions a:nth-child(4){display:none!important}
+body.amlak058-home-showcase .premium-hero-bottom,
+body.amlak058-home-showcase footer{display:none!important}
+@media(max-width:760px){
+ body.amlak058-home-showcase #home{
+  height:calc(100vw * .5628)!important;min-height:0!important;max-height:none!important;
+  background-size:100% 100%!important;
+ }
+ body.amlak058-home-showcase #home .premium-hero-actions a:nth-child(2){
+  left:78.5%!important;top:63.4%!important;width:15.5%!important;height:8%!important
+ }
+ body.amlak058-home-showcase #home .premium-hero-actions a:nth-child(3){
+  left:61.7%!important;top:63.4%!important;width:15.6%!important;height:8%!important
+ }
+}
