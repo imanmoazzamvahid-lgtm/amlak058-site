@@ -4483,6 +4483,7 @@ body.amlak058-home-showcase footer{display:none!important}
 }
 </style>
 <link rel="stylesheet" href="/mobile-app-v1.css?v=1">
+<link rel="stylesheet" href="/mobile-app-v2.css?v=2">
 </head><body>
 
 <header id="amlak058-header-target" class="amlak058-site-header">
@@ -4741,21 +4742,21 @@ body.amlak058-home-showcase footer{display:none!important}
 </section>
 
 </main>
-<nav class="mobile-bottom-nav amlak-kilid-nav" aria-label="ناوبری موبایل">
- <button type="button" class="mobile-nav-item" onclick="location.href='/my-properties.html'" aria-label="آگهی‌های من">
-  <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h16v14H4z"/><path d="M8 9h8M8 12.5h5M8 16h8M7 3v5M17 3v5"/></svg><span>آگهی‌های من</span>
+<nav class="mobile-bottom-nav amlak-kilid-nav" aria-label="ناوبری اپلیکیشن املاک ۰۵۸">
+ <button type="button" class="mobile-nav-item active" onclick="mobileNavHome()" aria-label="خانه">
+  <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5.5 9v11h13V9M9.5 20v-7h5v7"/></svg><span>خانه</span>
  </button>
- <button type="button" class="mobile-nav-item" onclick="location.href='/chat.html'" aria-label="چت و تماس">
-  <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-5 4v-4.5A2.5 2.5 0 0 1 3 13V5.5Z"/><path d="M8 8h8M8 11.5h5"/></svg><span>چت و تماس</span>
+ <button type="button" class="mobile-nav-item" onclick="mobileNavListings()" aria-label="آگهی‌ها">
+  <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h16v14H4z"/><path d="M8 9h8M8 12.5h8M8 16h5"/></svg><span>آگهی‌ها</span>
  </button>
  <button type="button" class="mobile-nav-item post" onclick="location.href='/submit-ad.html'" aria-label="ثبت آگهی">
   <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span>ثبت آگهی</span>
  </button>
- <button type="button" class="mobile-nav-item" onclick="location.href='/featured.html'" aria-label="نشان‌شده‌ها">
+ <button type="button" class="mobile-nav-item" onclick="mobileNavSaved()" aria-label="نشان‌شده‌ها">
   <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.8h12a1.5 1.5 0 0 1 1.5 1.5v15L12 16l-7.5 4.3v-15A1.5 1.5 0 0 1 6 3.8Z"/></svg><span>نشان‌شده‌ها</span>
  </button>
- <button type="button" class="mobile-nav-item" onclick="mobileNavHome()" aria-label="خانه">
-  <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5.5 9v11h13V9M9.5 20v-7h5v7"/></svg><span>خانه</span>
+ <button type="button" class="mobile-nav-item" onclick="location.href='/my-properties.html'" aria-label="حساب من">
+  <svg class="mobile-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M4.5 20c.8-3.6 3.2-5.4 7.5-5.4s6.7 1.8 7.5 5.4"/></svg><span>حساب من</span>
  </button>
 </nav>
 <style>
@@ -11442,5 +11443,49 @@ body.homepage-clean #home.home-exact-hero{margin-top:0!important;top:0!important
 }
 </style>
 
+<script id="amlak058-mobile-app-runtime-v2">
+(function(){
+  var mq=window.matchMedia ? window.matchMedia('(max-width:650px)') : {matches:false};
+  var main=document.querySelector('main');
+  if(!main) return;
+  var home=document.getElementById('home');
+  var search=document.getElementById('search');
+  var categories=document.getElementById('categories');
+  var shortcuts=document.querySelector('.mobile-app-shortcuts');
+  var listings=document.getElementById('listings');
+  var pathways=main.querySelector('.american-pathways');
+  function arrange(){
+    if(!mq.matches) return;
+    /* Keep the DOM nodes and their existing event handlers; only change their order. */
+    if(search && search.parentNode===main && home && home.parentNode===main) main.insertBefore(search,home);
+    if(categories && categories.parentNode===main && shortcuts && shortcuts.parentNode===main) categories.insertAdjacentElement('afterend',shortcuts);
+    if(shortcuts && shortcuts.parentNode===main && listings && listings.parentNode===main) shortcuts.insertAdjacentElement('afterend',listings);
+    if(listings && listings.parentNode===main && home && home.parentNode===main) listings.insertAdjacentElement('afterend',home);
+    if(home && home.parentNode===main && pathways && pathways.parentNode===main) home.insertAdjacentElement('afterend',pathways);
+  }
+  arrange();
+  if(mq.addEventListener) mq.addEventListener('change',arrange);
+  else if(mq.addListener) mq.addListener(arrange);
+
+  var oldHome=window.mobileNavHome;
+  window.mobileNavHome=function(){
+    if(mq.matches){
+      if(typeof window.closeAccountDashboard==='function') window.closeAccountDashboard();
+      if(typeof window.loadProperties==='function') window.loadProperties();
+      document.querySelectorAll('.mobile-nav-item').forEach(function(b,i){b.classList.toggle('active',i===0);});
+      window.scrollTo({top:0,behavior:'smooth'});
+      return;
+    }
+    if(typeof oldHome==='function') return oldHome.apply(this,arguments);
+  };
+  window.mobileNavListings=function(){
+    if(typeof window.closeAccountDashboard==='function') window.closeAccountDashboard();
+    if(typeof window.loadProperties==='function') window.loadProperties();
+    var target=document.getElementById('listings');
+    document.querySelectorAll('.mobile-nav-item').forEach(function(b,i){b.classList.toggle('active',i===1);});
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  };
+})();
+</script>
 </body>
 </html>
