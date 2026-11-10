@@ -117,8 +117,18 @@ private suspend fun loadMine(uid: String): List<Property> =
         order("created_at", Order.DESCENDING)
     }.decodeList()
 
+private fun asciiDigits(value: String): String = buildString {
+    value.forEach { ch ->
+        when (ch) {
+            in '۰'..'۹' -> append((ch.code - '۰'.code + '0'.code).toChar())
+            in '٠'..'٩' -> append((ch.code - '٠'.code + '0'.code).toChar())
+            else -> if (ch.isDigit()) append(ch)
+        }
+    }
+}
+
 private fun iranPhone(value: String): String {
-    var digits = value.filter(Char::isDigit)
+    var digits = asciiDigits(value)
     if (digits.startsWith("0098")) digits = digits.drop(4)
     else if (digits.startsWith("98")) digits = digits.drop(2)
     if (digits.startsWith("0")) digits = digits.drop(1)
@@ -229,7 +239,7 @@ private fun AmlakApp() {
                                 busy = true
                                 try {
                                     val normalized = iranPhone(raw)
-                                    supabase.auth.verifyPhoneOtp(type = OtpType.Phone.SMS, phone = normalized, token = code)
+                                    supabase.auth.verifyPhoneOtp(type = OtpType.Phone.SMS, phone = normalized, token = asciiDigits(code))
                                     uid = supabase.auth.currentUserOrNull()?.id
                                     phone = normalized
                                     message = "ورود با موفقیت انجام شد."
@@ -525,10 +535,10 @@ private fun NewAdPage(modifier: Modifier, uid: String, phone: String, busy: Bool
             Button(onClick = {
                 try {
                     require(title.isNotBlank()) { "عنوان آگهی را وارد کنید." }
-                    val priceValue = price.filter(Char::isDigit).toLongOrNull()
-                    val depositValue = deposit.filter(Char::isDigit).toLongOrNull()
-                    val rentValue = rent.filter(Char::isDigit).toLongOrNull()
-                    val areaValue = area.replace(",", ".").toDoubleOrNull()
+                    val priceValue = asciiDigits(price).toLongOrNull()
+                    val depositValue = asciiDigits(deposit).toLongOrNull()
+                    val rentValue = asciiDigits(rent).toLongOrNull()
+                    val areaValue = asciiDigits(area).replace(",", ".").toDoubleOrNull()
                     require(deal != "خرید و فروش" || (priceValue ?: 0) > 0) { "قیمت فروش را وارد کنید." }
                     require(deal != "رهن و اجاره" || (depositValue ?: 0) > 0 || (rentValue ?: 0) > 0) { "مبلغ رهن یا اجاره را وارد کنید." }
                     onSubmit(PropertyDraft(
