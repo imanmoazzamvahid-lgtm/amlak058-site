@@ -38,9 +38,12 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
     implementation("io.coil-kt:coil-compose:2.7.0")
     constraints {
-        implementation("androidx.browser:browser:1.9.0")
-        implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.4")
-        implementation("androidx.lifecycle:lifecycle-runtime-compose:2.9.4")
+        implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.4") {
+            version { strictly("2.9.4") }
+        }
+        implementation("androidx.lifecycle:lifecycle-runtime-compose:2.9.4") {
+            version { strictly("2.9.4") }
+        }
     }
     debugImplementation("androidx.compose.ui:ui-tooling")
 }
