@@ -978,3 +978,70 @@
     min-height:106px!important;padding:9px 5px!important;
   }
 }
+
+
+/* Mobile category strip: place all property icons side by side in one row */
+@media screen and (max-width:650px){
+  html body.homepage-clean main > #categories.section > .categories{
+    display:flex!important;
+    flex-direction:row!important;
+    flex-wrap:nowrap!important;
+    align-items:stretch!important;
+    justify-content:flex-start!important;
+    gap:8px!important;
+    width:100%!important;
+    min-width:0!important;
+    margin:0!important;
+    padding:2px 1px 8px!important;
+    direction:rtl!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    overscroll-behavior-x:contain!important;
+    -webkit-overflow-scrolling:touch!important;
+    scroll-snap-type:x proximity!important;
+    scrollbar-width:none!important;
+  }
+  html body.homepage-clean main > #categories.section > .categories::-webkit-scrollbar{
+    display:none!important;
+  }
+  html body.homepage-clean main > #categories.section > .categories > .category,
+  html body.homepage-clean main > #categories.section > .categories > .category:last-child{
+    display:flex!important;
+    flex:0 0 94px!important;
+    width:94px!important;
+    min-width:94px!important;
+    max-width:94px!important;
+    min-height:104px!important;
+    height:104px!important;
+    grid-column:auto!important;
+    justify-self:auto!important;
+    margin:0!important;
+    padding:9px 6px!important;
+    gap:5px!important;
+    scroll-snap-align:start!important;
+  }
+  html body.homepage-clean main > #categories.section > .categories > .category > .category-icon{
+    flex:0 0 42px!important;
+    width:42px!important;height:42px!important;
+    min-width:42px!important;min-height:42px!important;
+    margin:0!important;
+  }
+  html body.homepage-clean main > #categories.section > .categories > .category > .category-icon svg{
+    width:28px!important;height:28px!important;
+  }
+  html body.homepage-clean main > #categories.section > .categories > .category > strong{
+    font-size:10px!important;
+    line-height:1.5!important;
+    white-space:normal!important;
+  }
+  html body.homepage-clean main > #categories.section > .categories > .category > small{
+    font-size:8px!important;
+    line-height:1.4!important;
+  }
+}
+@media screen and (max-width:380px){
+  html body.homepage-clean main > #categories.section > .categories > .category,
+  html body.homepage-clean main > #categories.section > .categories > .category:last-child{
+    flex-basis:88px!important;width:88px!important;min-width:88px!important;max-width:88px!important;
+  }
+}
