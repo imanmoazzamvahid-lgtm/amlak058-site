@@ -1045,3 +1045,25 @@
     flex-basis:88px!important;width:88px!important;min-width:88px!important;max-width:88px!important;
   }
 }
+
+
+/* Commission calculator is a first-class destination in the mobile app */
+@media screen and (max-width:650px){
+  html body.homepage-clean nav.mobile-bottom-nav.amlak-kilid-nav{
+    grid-template-columns:repeat(6,minmax(0,1fr))!important;
+    min-height:68px!important;
+  }
+  html body.homepage-clean nav.mobile-bottom-nav.amlak-kilid-nav .mobile-nav-item{
+    font-size:8px!important;
+    gap:2px!important;
+  }
+  html body.homepage-clean nav.mobile-bottom-nav.amlak-kilid-nav .mobile-nav-svg{
+    width:21px!important;height:21px!important;
+  }
+  html body.homepage-clean nav.mobile-bottom-nav.amlak-kilid-nav .mobile-nav-item.commission{
+    color:#176344!important;
+    background:#eef4ef!important;
+    border:1px solid #dce9df!important;
+    border-radius:11px!important;
+  }
+}
