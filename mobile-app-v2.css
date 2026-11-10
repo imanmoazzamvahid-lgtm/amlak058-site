@@ -1067,3 +1067,46 @@
     border-radius:11px!important;
   }
 }
+
+
+/* FIX: real mobile bottom nav (body has no homepage-clean class) */
+@media (max-width:650px){
+  nav.mobile-bottom-nav.amlak-kilid-nav{
+    display:grid!important;
+    grid-template-columns:repeat(6,minmax(0,1fr))!important;
+    align-items:center!important;
+    gap:2px!important;
+    width:100%!important;
+    min-height:68px!important;
+    padding:7px 4px calc(7px + env(safe-area-inset-bottom))!important;
+  }
+  nav.mobile-bottom-nav.amlak-kilid-nav .mobile-nav-item{
+    display:flex!important;
+    min-width:0!important;
+    min-height:48px!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:3px!important;
+    padding:3px 1px!important;
+    font-size:9px!important;
+    line-height:1.3!important;
+    white-space:nowrap!important;
+  }
+  nav.mobile-bottom-nav.amlak-kilid-nav .mobile-nav-svg{
+    display:block!important;
+    width:21px!important;
+    height:21px!important;
+    flex:0 0 21px!important;
+    fill:none!important;
+    stroke:currentColor!important;
+    stroke-width:1.8!important;
+    stroke-linecap:round!important;
+    stroke-linejoin:round!important;
+  }
+  nav.mobile-bottom-nav.amlak-kilid-nav .mobile-nav-item.commission{
+    color:#176344!important;
+    border-radius:9px!important;
+    background:#eef5f0!important;
+  }
+}
