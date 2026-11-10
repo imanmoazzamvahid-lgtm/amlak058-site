@@ -6,7 +6,7 @@ plugins {
 }
 android {
     namespace = "ir.amlak058.app"
-    compileSdk = 35
+    compileSdk = 36
     defaultConfig {
         applicationId = "ir.amlak058.app"
         minSdk = 26
@@ -23,7 +23,7 @@ android {
 kotlin { compilerOptions { jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17) } }
 dependencies {
     implementation(platform("androidx.compose:compose-bom:2025.10.01"))
-    implementation("androidx.activity:activity-compose:1.11.0")
+    implementation("androidx.activity:activity-compose:1.10.1")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.9.4")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-tooling-preview")
@@ -37,5 +37,5 @@ dependencies {
     implementation("io.ktor:ktor-client-android:3.4.3")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
     implementation("io.coil-kt:coil-compose:2.7.0")
-    debugImplementation("androidx.compose.ui:ui-tooling")
+    constraints {\n        implementation("androidx.browser:browser:1.9.0")\n        implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.4")\n        implementation("androidx.lifecycle:lifecycle-runtime-compose:2.9.4")\n    }\n    debugImplementation("androidx.compose.ui:ui-tooling")
 }
