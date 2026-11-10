@@ -1,0 +1,478 @@
+/* AMLAK 058 | Mobile app experience v1
+   Phone-only overrides. Desktop and business logic remain untouched. */
+@media screen and (max-width: 650px) {
+  html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    overflow-x: hidden !important;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body.homepage-clean {
+    min-height: 100svh !important;
+    padding: 0 0 calc(88px + env(safe-area-inset-bottom)) !important;
+    margin: 0 !important;
+    background: #f5f6f4 !important;
+    overflow-x: hidden !important;
+    color: #26332c !important;
+  }
+
+  body.homepage-clean main {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 0 18px !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Keep the original homepage artwork intact and at its real 16:9 ratio.
+     This explicitly cancels the previous 200vw zoom-and-crop treatment. */
+  html body.homepage-clean #home.home-exact-hero {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #f8f1e5 !important;
+    line-height: 0 !important;
+  }
+
+  html body.homepage-clean #home.home-exact-hero img.home-exact-banner {
+    display: block !important;
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    object-fit: contain !important;
+    object-position: center top !important;
+  }
+
+  html body.homepage-clean #home .home-exact-hotspots {
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    pointer-events: none !important;
+  }
+
+  html body.homepage-clean #home .home-exact-hotspot {
+    display: block !important;
+    position: absolute !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+  }
+
+  /* Give the two main calls to action a larger touch area on phones. */
+  html body.homepage-clean #home .hs-commission,
+  html body.homepage-clean #home .hs-main-submit {
+    display: block !important;
+    top: 62.5% !important;
+    height: 17% !important;
+    min-height: 34px !important;
+    max-height: 52px !important;
+  }
+
+  /* Quick actions: app-like shortcuts directly below the full hero image. */
+  .mobile-app-shortcuts { display: none; }
+  html body.homepage-clean .mobile-app-shortcuts {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 9px !important;
+    width: calc(100% - 24px) !important;
+    max-width: 560px !important;
+    min-width: 0 !important;
+    margin: 12px auto 16px !important;
+    padding: 0 !important;
+    direction: rtl !important;
+  }
+
+  html body.homepage-clean .mobile-app-shortcut {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 9px !important;
+    min-width: 0 !important;
+    min-height: 68px !important;
+    padding: 10px 11px !important;
+    border: 1px solid #e1e7e2 !important;
+    border-radius: 14px !important;
+    background: #fff !important;
+    color: #26332c !important;
+    box-shadow: 0 3px 12px rgba(28, 45, 34, .055) !important;
+    text-align: right !important;
+    text-decoration: none !important;
+    line-height: 1.5 !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html body.homepage-clean .mobile-app-shortcut-icon {
+    display: grid !important;
+    flex: 0 0 36px !important;
+    width: 36px !important;
+    height: 36px !important;
+    place-items: center !important;
+    border-radius: 11px !important;
+    background: #f1f4f1 !important;
+    color: #176344 !important;
+    font-size: 21px !important;
+    font-weight: 900 !important;
+  }
+
+  html body.homepage-clean .mobile-app-shortcut-copy {
+    display: flex !important;
+    flex-direction: column !important;
+    min-width: 0 !important;
+    gap: 2px !important;
+  }
+
+  html body.homepage-clean .mobile-app-shortcut-copy strong {
+    display: block !important;
+    color: #26332c !important;
+    font-size: 11px !important;
+    font-weight: 850 !important;
+    white-space: nowrap !important;
+  }
+
+  html body.homepage-clean .mobile-app-shortcut-copy small {
+    display: block !important;
+    color: #78837c !important;
+    font-size: 9px !important;
+    line-height: 1.5 !important;
+  }
+
+  html body.homepage-clean .mobile-app-shortcut.primary {
+    border-color: #176344 !important;
+    background: #176344 !important;
+    color: #fff !important;
+  }
+
+  html body.homepage-clean .mobile-app-shortcut.primary .mobile-app-shortcut-icon {
+    background: rgba(255,255,255,.15) !important;
+    color: #fff !important;
+  }
+
+  html body.homepage-clean .mobile-app-shortcut.primary .mobile-app-shortcut-copy strong,
+  html body.homepage-clean .mobile-app-shortcut.primary .mobile-app-shortcut-copy small {
+    color: #fff !important;
+  }
+
+  /* Search and content surfaces behave like native app cards. */
+  html body.homepage-clean main > #search.search-section,
+  html body.homepage-clean main > #categories.section,
+  html body.homepage-clean main > .american-pathways,
+  html body.homepage-clean main > #listings.section,
+  html body.homepage-clean main > .ad-carousel,
+  html body.homepage-clean main > #requestStrip {
+    box-sizing: border-box !important;
+    width: calc(100% - 24px) !important;
+    max-width: 560px !important;
+    min-width: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  html body.homepage-clean main > #search.search-section {
+    margin-top: 0 !important;
+    margin-bottom: 16px !important;
+    padding: 15px !important;
+    border: 1px solid #e3e8e4 !important;
+    border-radius: 17px !important;
+    background: #fff !important;
+    box-shadow: 0 5px 18px rgba(28, 45, 34, .055) !important;
+    overflow: hidden !important;
+  }
+
+  html body.homepage-clean #search .search-section-heading h2 {
+    color: #26332c !important;
+    font-size: 17px !important;
+    line-height: 1.7 !important;
+  }
+
+  html body.homepage-clean #search .search-section-heading p {
+    color: #77827b !important;
+    font-size: 11px !important;
+    line-height: 1.9 !important;
+  }
+
+  html body.homepage-clean #search .search-mode-tabs {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  html body.homepage-clean #search .search-mode-tabs button {
+    min-width: 0 !important;
+    min-height: 40px !important;
+    width: 100% !important;
+    padding: 8px 4px !important;
+    border-radius: 10px !important;
+    white-space: normal !important;
+    line-height: 1.5 !important;
+    font-size: 11px !important;
+  }
+
+  html body.homepage-clean #search .search-panel {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 10px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  html body.homepage-clean #search .search-field,
+  html body.homepage-clean #search .search-field-wide {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  html body.homepage-clean #search input,
+  html body.homepage-clean #search select,
+  html body.homepage-clean #search .search-panel button {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    min-height: 44px !important;
+    font-size: 14px !important;
+  }
+
+  html body.homepage-clean #search .saved-search-row {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 9px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  html body.homepage-clean #categories.section,
+  html body.homepage-clean #listings.section {
+    padding: 15px !important;
+    border: 1px solid #e3e8e4 !important;
+    border-radius: 17px !important;
+    background: #fff !important;
+    box-shadow: 0 5px 18px rgba(28, 45, 34, .05) !important;
+  }
+
+  html body.homepage-clean #categories .categories {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 9px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  html body.homepage-clean #categories .category {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 94px !important;
+    padding: 10px 6px !important;
+    border: 1px solid #e5eae6 !important;
+    border-radius: 13px !important;
+    background: #fff !important;
+    text-align: center !important;
+    box-shadow: none !important;
+  }
+
+  html body.homepage-clean #categories .category-icon {
+    display: grid !important;
+    width: 38px !important;
+    height: 38px !important;
+    margin: 0 0 5px !important;
+    place-items: center !important;
+    border-radius: 11px !important;
+    background: #f1f4f1 !important;
+  }
+
+  html body.homepage-clean #categories .category strong {
+    font-size: 11px !important;
+    line-height: 1.6 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  html body.homepage-clean #categories .category small {
+    display: block !important;
+    font-size: 9px !important;
+    line-height: 1.5 !important;
+  }
+
+  html body.homepage-clean #listings .map-listing-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  html body.homepage-clean #listings #propertyMap {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 210px !important;
+    height: 210px !important;
+    max-height: 210px !important;
+  }
+
+  html body.homepage-clean #listings #propertyList {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 10px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  html body.homepage-clean #listings .property-card {
+    display: flex !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    gap: 10px !important;
+    padding: 10px !important;
+    border: 1px solid #e8ece9 !important;
+    border-radius: 13px !important;
+    background: #fff !important;
+  }
+
+  html body.homepage-clean #listings .property-image {
+    flex: 0 0 104px !important;
+    width: 104px !important;
+    min-width: 104px !important;
+    height: 104px !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+  }
+
+  html body.homepage-clean #listings .property-info {
+    min-width: 0 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  /* Restore the five working app tabs; the former homepage rule hid them. */
+  html body.homepage-clean nav.mobile-bottom-nav.amlak-kilid-nav {
+    display: grid !important;
+    position: fixed !important;
+    z-index: 9999 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    align-items: center !important;
+    min-height: 66px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 7px 5px calc(7px + env(safe-area-inset-bottom)) !important;
+    border-top: 1px solid #e3e9e5 !important;
+    background: rgba(255,255,255,.97) !important;
+    box-shadow: 0 -5px 22px rgba(18,63,50,.09) !important;
+    backdrop-filter: blur(14px);
+  }
+
+  html body.homepage-clean nav.mobile-bottom-nav.amlak-kilid-nav .mobile-nav-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    min-width: 0 !important;
+    min-height: 48px !important;
+    padding: 2px !important;
+    border: 0 !important;
+    border-radius: 10px !important;
+    background: transparent !important;
+    color: #66736b !important;
+    font-size: 9px !important;
+    font-weight: 700 !important;
+    line-height: 1.4 !important;
+    white-space: nowrap !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html body.homepage-clean nav.mobile-bottom-nav.amlak-kilid-nav .mobile-nav-svg {
+    display: block !important;
+    width: 22px !important;
+    height: 22px !important;
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 1.8 !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+  }
+
+  html body.homepage-clean nav.mobile-bottom-nav.amlak-kilid-nav .mobile-nav-item.active {
+    color: #176344 !important;
+  }
+
+  html body.homepage-clean nav.mobile-bottom-nav.amlak-kilid-nav .mobile-nav-item.post {
+    color: #176344 !important;
+    font-weight: 900 !important;
+  }
+
+  html body.homepage-clean nav.mobile-bottom-nav.amlak-kilid-nav .mobile-nav-item.post .mobile-nav-svg {
+    width: 34px !important;
+    height: 34px !important;
+    padding: 6px !important;
+    border-radius: 50% !important;
+    background: #176344 !important;
+    color: #fff !important;
+    stroke: #fff !important;
+    box-shadow: 0 4px 12px rgba(23,99,68,.22) !important;
+  }
+
+  html body.homepage-clean footer {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  html body.homepage-clean .mobile-app-shortcut {
+    gap: 6px !important;
+    padding: 9px 7px !important;
+  }
+  html body.homepage-clean .mobile-app-shortcut-icon {
+    flex-basis: 32px !important;
+    width: 32px !important;
+    height: 32px !important;
+  }
+  html body.homepage-clean .mobile-app-shortcut-copy strong {
+    font-size: 10px !important;
+  }
+}
