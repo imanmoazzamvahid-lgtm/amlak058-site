@@ -62,3 +62,16 @@ Keep a record of seed, data manifest, tokenizer hash, code commit, package versi
 7. Only after base pretraining: instruction tuning, then legal-domain adaptation with verified sources.
 
 No legal-domain reliability claim is permitted before evaluation and source-grounded retrieval are implemented.
+
+## Legal corpus validation
+
+Keep legal source documents and JSONL metadata under `data/legal/`. Do not put unlicensed material into the training corpus. Check each source record and raw-file hash before indexing or training:
+
+```bash
+python -m pip install jsonschema pytest
+python scripts/validate_legal_corpus.py --jsonl data/legal/documents.jsonl --schema data/legal_document.schema.json --raw-root data/legal/raw
+python scripts/validate_legal_corpus.py --jsonl data/legal/documents.jsonl --schema data/legal_document.schema.json --raw-root data/legal/raw --require-training-approved
+python -m pytest -q tests
+```
+
+The first command validates catalogue metadata. The second is stricter and must fail for every item without explicit documented training permission, reviewer, review timestamp, verified source hash and known legal status. The legal source registry intentionally marks all sources as not approved for model training until individually reviewed.
