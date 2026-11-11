@@ -1,5 +1,12 @@
+import sys
+from pathlib import Path
+
+# Allow "python scripts/smoke_test.py" from the iran-llm project root.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 import torch
 from model import IranGPT
+
 
 def main():
     torch.manual_seed(7)
@@ -13,6 +20,7 @@ def main():
     loss.backward()
     assert all(p.grad is not None for p in model.parameters() if p.requires_grad)
     print({"status": "PASS", "parameters": params, "loss": float(loss.detach())})
+
 
 if __name__ == "__main__":
     main()
