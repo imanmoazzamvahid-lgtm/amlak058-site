@@ -87,3 +87,12 @@ python scripts/audit_legal_intake.py --input data/legal/intake_queue.csv --outpu
 ```
 
 The current queue intentionally has zero training-approved legal documents. Official source pages may be temporarily unavailable to automated retrieval; a secondary website or a search result is discovery evidence only. A legal text cannot be marked ready until the official copy, amendment history, legal status, SHA-256, and training-use rights are verified.
+
+
+## Exact first-model parameter budget
+
+Run:
+```bash
+python scripts/model_profile.py
+```
+The current design (16,000 token vocabulary, context 512, width 768, 12 layers, 12 heads) has exactly 97,737,216 parameters with tied token embedding/output weights. The FP32 AdamW lower-bound estimate for weights, gradients, and two optimizer moments is approximately 1.46 GiB; this excludes activations, attention workspace and runtime overhead, so actual GPU memory needs are much higher.
