@@ -1,0 +1,5 @@
+source_id,source_name,source_url,document_types,authority_level,rights_status,approved_for_training,verification_notes
+IR-QAVANIN,سامانه ملی قوانین و مقررات جمهوری اسلامی ایران,https://qavanin.ir,"قوانین؛ مقررات؛ آرای قضایی؛ نظریات حقوقی",official_primary,UNVERIFIED,no,"منبع اولیه برای کشف و بررسی اسناد؛ شرایط استفاده و مجوز بازنشر هر سند باید جداگانه بررسی شود"
+IR-DOTIC,پایگاه ملی اطلاع‌رسانی قوانین و مقررات کشور,https://dotic.ir,"قوانین و مقررات",official_primary,UNVERIFIED,no,"منبع رسمی معرفی‌شده برای دسترسی به قوانین و مقررات؛ وضعیت مجوز داده باید بررسی شود"
+IR-RRK,روزنامه رسمی جمهوری اسلامی ایران,https://www.rrk.ir,"متن منتشرشده قوانین و مقررات؛ آگهی‌ها",official_publication,UNVERIFIED,no,"برای تطبیق متن منتشرشده و مشخصات انتشار؛ شرایط استخراج و استفاده باید بررسی شود"
+IR-MAJLES,معاونت قوانین مجلس شورای اسلامی,https://rc.majlis.ir,"قوانین؛ طرح‌ها و لوایح؛ مشروح مذاکرات",official_primary,UNVERIFIED,no,"برای بررسی سوابق تقنینی و نسخه‌های قانونی؛ مجوز هر مجموعه داده باید بررسی شود"
