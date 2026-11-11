@@ -75,3 +75,15 @@ python -m pytest -q tests
 ```
 
 The first command validates catalogue metadata. The second is stricter and must fail for every item without explicit documented training permission, reviewer, review timestamp, verified source hash and known legal status. The legal source registry intentionally marks all sources as not approved for model training until individually reviewed.
+
+
+## Initial Iranian legal document intake
+
+The first acquisition queue contains eight priority statutes, their provisional enactment dates, source-discovery references, and explicit acquisition/amendment/rights states. It is a **queue**, not a set of collected statute texts.
+
+Review its audit report with:
+```bash
+python scripts/audit_legal_intake.py --input data/legal/intake_queue.csv --output data/legal/intake_audit.json
+```
+
+The current queue intentionally has zero training-approved legal documents. Official source pages may be temporarily unavailable to automated retrieval; a secondary website or a search result is discovery evidence only. A legal text cannot be marked ready until the official copy, amendment history, legal status, SHA-256, and training-use rights are verified.
