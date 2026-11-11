@@ -16,9 +16,9 @@ def main():
     p.add_argument("--lr", type=float, default=3e-4)
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--out", default="checkpoints/iran-llm.pt")
-    p.add_argument("--dim", type=int, default=512)
-    p.add_argument("--layers", type=int, default=8)
-    p.add_argument("--heads", type=int, default=8)
+    p.add_argument("--dim", type=int, default=768)
+    p.add_argument("--layers", type=int, default=12)
+    p.add_argument("--heads", type=int, default=12)
     args = p.parse_args()
 
     random.seed(args.seed); np.random.seed(args.seed); torch.manual_seed(args.seed)
