@@ -5,6 +5,7 @@ on:
     paths:
       - "iran-llm/**"
       - ".github/workflows/iran-llm-data-tests.yml"
+      - ".github/workflows/iran-llm-data-tests.yml"
   push:
     branches:
       - "iran-llm-bootstrap"
