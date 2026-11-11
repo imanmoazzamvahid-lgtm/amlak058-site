@@ -1,48 +1,64 @@
-# IRAN-LLM 100M — From-Scratch Persian Language Model
+# IRAN-LLM 100M — Persian foundation model trained from random initialization
 
-This is an experimental foundation-model project. The model weights are initialized randomly. No pretrained model weights or hosted LLM APIs are used.
+This experimental project does not load pretrained model weights and does not call OpenAI, Gemini, Groq, or another hosted LLM API. Parameters are initialized randomly in \`model.py\`.
 
-## Scope of the first milestone
-- Train a Persian-capable tokenizer from an owned/licensed text corpus.
-- Train a decoder-only Transformer with causal next-token prediction.
-- Save checkpoints and training metadata locally.
-- Evaluate on a held-out corpus before any legal-domain fine-tuning.
+## What this first milestone is
+A reproducible research scaffold: tokenizer training, a causal Transformer, auditable corpus preparation, token encoding, and a CPU/GPU smoke test. It is **not yet a trained language model** and is not suitable for legal advice.
 
-## Important limits
-A 100M-parameter model is a research prototype, not a ChatGPT replacement. It may produce poor or incorrect answers. Do not use it for legal advice or client matters. Legal specialization comes only after base-language training, evaluation, source curation, and safety testing.
+## 1. Environment
+Python 3.11+, PyTorch 2.x, SentencePiece, NumPy, tqdm.
 
-## Data requirements
-Prepare UTF-8 plain-text files under `data/raw/`. Use only public-domain, permissioned, or properly licensed material. Keep source URL/title, license, retrieval date, and hash in a dataset manifest. Exclude private client files, personal data, copyrighted books without permission, and unverified legal text. Deduplicate before training and reserve a held-out test split.
-
-## Environment
-Python 3.11+, PyTorch 2.x, SentencePiece, NumPy.
-
-```bash
+\`\`\`bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-mkdir -p data/raw data/processed artifacts checkpoints
-```
+mkdir -p data/raw data/processed data/encoded artifacts checkpoints
+\`\`\`
 
-## Train tokenizer
-```bash
-python scripts/train_tokenizer.py --input data/processed/corpus.txt --model-prefix artifacts/iran_spm --vocab-size 16000
-```
+## 2. Corpus provenance comes first
+Place UTF-8 \`.txt\` documents in \`data/raw/\`. Complete \`data/manifest.csv\` with:
+\`source_id,path,title,source_url,license,approved,retrieved_at\`.
 
-## Train model from random initialization
-```bash
-python train.py --text data/processed/corpus.txt --tokenizer artifacts/iran_spm.model --steps 1000
-```
+Only use public-domain, permissioned, or otherwise properly licensed sources. Set \`approved=yes\` only after checking the exact license and source provenance. Do not use private client files, personal data, leaked material, or copyrighted books without permission. The script preserves an audit manifest with SHA-256 hashes and splits by document to avoid same-document leakage.
 
-The initial config is intentionally small for smoke tests. Increase dimensions only after measuring GPU memory, throughput, loss curves, and data quality. A 100M model requires substantially more data and compute than a smoke test.
+\`\`\`bash
+python scripts/prepare_corpus.py --raw-dir data/raw --manifest data/manifest.csv --output-dir data/processed
+\`\`\`
+
+## 3. Train tokenizer from the project's own corpus
+\`\`\`bash
+python scripts/train_tokenizer.py --input data/processed/train.txt --model-prefix artifacts/iran_spm --vocab-size 16000
+\`\`\`
+Tokenizer training is not language-model training. Evaluate Persian character coverage, ZWNJ, Arabic/Persian letter variants, numbers, Latin text, and punctuation before freezing the vocabulary. SentencePiece can train BPE/Unigram directly from raw sentences; see its official docs: https://google.github.io/sentencepiece/.
+
+## 4. Encode corpora to disk-backed uint32 arrays
+\`\`\`bash
+python scripts/encode_corpus.py --tokenizer artifacts/iran_spm.model --train-text data/processed/train.txt --validation-text data/processed/validation.txt
+\`\`\`
+The training loop samples batches from memory-mapped files instead of copying the complete corpus to GPU memory.
+
+## 5. Run the code smoke test
+\`\`\`bash
+python scripts/smoke_test.py
+\`\`\`
+This initializes a small random Transformer, checks output shapes, finite loss, and backpropagation. It does not train a production model.
+
+## 6. Train the initial ~100M-parameter configuration
+\`\`\`bash
+python train.py --train-bin data/encoded/train.bin --validation-bin data/encoded/validation.bin --tokenizer artifacts/iran_spm.model --steps 1000 --batch-size 4 --context 512
+\`\`\`
+The default architecture uses dim=768, 12 layers, 12 attention heads and a 16k vocabulary, approximately 100M parameters. The true count is printed at startup. Benchmark memory and tokens/second before choosing a long run.
 
 ## Reproducibility
-Set and record the random seed, corpus manifest, tokenizer model hash, code commit, hardware, precision, batch size, sequence length, optimizer, and checkpoint step. Never claim a model is trained until a completed run and evaluation artifacts exist.
+Keep a record of seed, data manifest, tokenizer hash, code commit, package versions, GPU model/driver, precision, batch size, sequence length, optimizer, training tokens, wall-clock time, checkpoint hashes, and evaluation results. PyTorch notes that exact reproducibility is not guaranteed across releases and hardware, even with fixed seeds: https://pytorch.org/docs/stable/notes/randomness.html.
 
 ## Roadmap
-1. Corpus inventory and licensing.
-2. Tokenizer training and coverage tests for Persian, Arabic, Latin, digits, ZWNJ, and punctuation.
-3. Small random-init training smoke test.
-4. Scale toward 100M parameters after benchmark.
-5. Held-out perplexity and human evaluation.
-6. Only then consider supervised instruction tuning and legal retrieval.
+1. Corpus acquisition, licensing and quality audits.
+2. Tokenizer coverage/round-trip tests.
+3. Smoke test on a developer machine.
+4. Small GPU benchmark and memory profile.
+5. Train 100M from random initialization.
+6. Evaluate held-out loss/perplexity and human Persian quality.
+7. Only after base pretraining: instruction tuning, then legal-domain adaptation with verified sources.
+
+No legal-domain reliability claim is permitted before evaluation and source-grounded retrieval are implemented.
