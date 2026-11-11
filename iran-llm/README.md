@@ -96,3 +96,17 @@ Run:
 python scripts/model_profile.py
 ```
 The current design (16,000 token vocabulary, context 512, width 768, 12 layers, 12 heads) has exactly 97,737,216 parameters with tied token embedding/output weights. The FP32 AdamW lower-bound estimate for weights, gradients, and two optimizer moments is approximately 1.46 GiB; this excludes activations, attention workspace and runtime overhead, so actual GPU memory needs are much higher.
+
+
+## Persian corpus source review
+
+Potential sources and their current acquisition decisions are tracked in `data/corpus_candidates.csv` and explained in `data/DATA_SOURCE_DECISIONS.md`. The candidate list is deliberately not an approval list.
+
+- Persian Wikipedia: conditional candidate; preserve per-page attribution and source history, and resolve CC BY-SA/GFDL implications for model weights.
+- SLPL/naab: blocked pending written rights clarification because the Hugging Face MIT card conflicts with CC BY-NC-SA copyright metadata and the source mixture has provenance/privacy risks.
+- Tatoeba: small auxiliary candidate; sentence-level license and attribution must be retained. Do not assume all Persian records are CC0.
+- ParsiNLU: hold out for evaluation only after source permissions are checked.
+- Mixed-license corpora: split by original source before any use.
+- CC BY-NC data: exclude from commercial product training unless separate permission is obtained.
+
+No candidate is currently approved for model training.
