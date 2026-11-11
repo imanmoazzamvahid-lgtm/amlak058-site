@@ -17,11 +17,13 @@
 - `performance_tuning.sql`: ایندکس‌ها و بهینه‌سازی سیاست‌های RLS اجراشده.
 - `../../supabase/functions/legal-assistant/index.ts`: Edge Function برای احراز هویت، جست‌وجوی مستندات و فراخوانی مدل زبانی.
 
-## راه‌اندازی باقی‌مانده
-در Supabase Dashboard > Project Settings > Edge Functions > Secrets این متغیرهای سمت‌سرور تنظیم شوند:
-- `AI_API_KEY`: کلید محرمانه ارائه‌دهنده مدل
-- `AI_MODEL`: نام مدل
-- `AI_API_URL`: اختیاری؛ برای API سازگار با OpenAI، در صورت نیاز
+## پیکربندی Gemini
+تابع `legal-assistant` اکنون به‌صورت پیش‌فرض روی Gemini تنظیم شده است:
+- مدل: `gemini-3.8-flash`
+- نشانی: `https://generativelanguage.googleapis.com/v1beta/openai/chat/completions`
+- تنها secret لازم برای شروع: `AI_API_KEY`
+
+کلید را از Google AI Studio بسازید و فقط در Supabase Dashboard > Edge Functions > Secrets با نام `AI_API_KEY` ذخیره کنید. کلید را در چت، مرورگر یا مخزن GitHub قرار ندهید. تغییر مدل و endpoint در صورت نیاز با secrets اختیاری `AI_MODEL` و `AI_API_URL` امکان‌پذیر است.
 
 همچنین باید روش ورود کاربران فعال و سرویس SMS یا ایمیل پیکربندی شود. تا آن زمان، Edge Function به JWT معتبر نیاز دارد و چت عمومی برای کاربران ناشناس فعال نیست.
 
