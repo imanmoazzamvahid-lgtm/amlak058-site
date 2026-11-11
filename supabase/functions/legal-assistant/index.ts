@@ -39,10 +39,10 @@ Deno.serve(async (req: Request) => {
   const supabaseUrl = Deno.env.get("SUPABASE_URL");
   const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY");
   const aiApiKey = Deno.env.get("AI_API_KEY");
-  const aiModel = Deno.env.get("AI_MODEL");
-  const aiApiUrl = Deno.env.get("AI_API_URL") ?? "https://api.openai.com/v1/chat/completions";
+  const aiModel = Deno.env.get("AI_MODEL") ?? "gemini-3.8-flash";
+  const aiApiUrl = Deno.env.get("AI_API_URL") ?? "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
 
-  if (!supabaseUrl || !supabaseAnonKey || !aiApiKey || !aiModel) {
+  if (!supabaseUrl || !supabaseAnonKey || !aiApiKey) {
     return json({ error: "service_not_configured", message: "سرویس هنوز به‌طور کامل پیکربندی نشده است." }, 503, origin);
   }
 
