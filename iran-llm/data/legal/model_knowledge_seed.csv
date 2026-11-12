@@ -1,0 +1,33 @@
+document_id,title,document_type,legal_domain,seed_origin,verification_status,official_source_url,rights_status,training_approved,notes
+IR-CONSTITUTION,قانون اساسی جمهوری اسلامی ایران,constitution,constitutional,LLM_KNOWLEDGE,unverified,,not_assessed,no,عنوان برای کشف سند؛ متن و اصلاحات باید از منبع رسمی دریافت و تطبیق شود.
+IR-CIVIL-CODE,قانون مدنی,statute,civil,LLM_KNOWLEDGE,unverified,https://qavanin.ir/Law/TreeText/?IDS=12021850837713548188,not_assessed,no,شناسه رسمی کشف شده ولی فایل متن رسمی در ممیزی قبلی دریافت نشده است.
+IR-CIVIL-PROCEDURE,قانون آیین دادرسی دادگاه‌های عمومی و انقلاب در امور مدنی,statute,civil_procedure,LLM_KNOWLEDGE,unverified,,not_assessed,no,عنوان بذر برای جست‌وجوی نسخه رسمی و اصلاحات.
+IR-CIVIL-ENFORCEMENT,قانون اجرای احکام مدنی,statute,civil_enforcement,LLM_KNOWLEDGE,unverified,,not_assessed,no,عنوان بذر برای جست‌وجوی نسخه رسمی و اصلاحات.
+IR-AHVAL-HESBI,قانون امور حسبی,statute,non_contentious_matters,LLM_KNOWLEDGE,unverified,,not_assessed,no,عنوان بذر برای جست‌وجوی نسخه رسمی و اصلاحات.
+IR-COMMERCE,قانون تجارت,statute,commercial,LLM_KNOWLEDGE,unverified,,not_assessed,no,عنوان بذر؛ لایحه اصلاحی قانون تجارت نیز رکورد مستقل دارد.
+IR-COMPANIES-AMENDMENT,لایحه قانونی اصلاح قسمتی از قانون تجارت,statute,corporate,LLM_KNOWLEDGE,unverified,,not_assessed,no,عنوان بذر برای جست‌وجوی نسخه رسمی و اصلاحات.
+IR-CHECKS,قانون صدور چک,statute,commercial_banking,LLM_KNOWLEDGE,unverified,,not_assessed,no,نسخه و اصلاحات متعدد باید ماده‌به‌ماده بررسی شود.
+IR-REGISTRATION-ACT,قانون ثبت اسناد و املاک,statute,registration,LLM_KNOWLEDGE,unverified,,not_assessed,no,عنوان بذر؛ تاریخچه اصلاحات و متن روزآمد باید احراز شود.
+IR-COMMON-PROPERTY,قانون افراز و فروش املاک مشاع,statute,property,LLM_KNOWLEDGE,unverified,,not_assessed,no,عنوان بذر برای جست‌وجوی نسخه رسمی.
+IR-LANDLORD-1356,قانون روابط موجر و مستأجر مصوب ۱۳۵۶,statute,lease,LLM_KNOWLEDGE,unverified,,not_assessed,no,قانون جداگانه از قانون روابط موجر و مستأجر ۱۳۷۶.
+IR-LANDLORD-1376,قانون روابط موجر و مستأجر مصوب ۱۳۷۶,statute,lease,LLM_KNOWLEDGE,unverified,,not_assessed,no,قانون جداگانه از قانون روابط موجر و مستأجر ۱۳۵۶.
+IR-APARTMENT-OWNERSHIP,قانون تملک آپارتمان‌ها,statute,property,LLM_KNOWLEDGE,unverified,,not_assessed,no,آیین‌نامه اجرایی باید به‌عنوان سند جداگانه فهرست شود.
+IR-PRESELLING,قانون پیش‌فروش ساختمان,statute,property,LLM_KNOWLEDGE,unverified,,not_assessed,no,با قانون الزام به ثبت رسمی معاملات اموال غیرمنقول رابطه تقنینی و اجرایی بررسی شود.
+IR-REAL-ESTATE-REGISTRATION,قانون الزام به ثبت رسمی معاملات اموال غیرمنقول,statute,property_registration,LLM_KNOWLEDGE,unverified,,not_assessed,no,تاریخ تصویب و انتشار و مواد لازم‌الاجرا باید از منبع رسمی احراز شوند.
+IR-ISLAMIC-PENAL-CODE,قانون مجازات اسلامی,statute,criminal,LLM_KNOWLEDGE,unverified,,not_assessed,no,کتاب‌ها و اصلاحات و مقررات زمانی جداگانه کنترل شوند.
+IR-CRIMINAL-PROCEDURE,قانون آیین دادرسی کیفری,statute,criminal_procedure,LLM_KNOWLEDGE,unverified,,not_assessed,no,نسخه و اصلاحات بعدی باید احراز شود.
+IR-AGGRAVATED-PUNISHMENT,قانون تشدید مجازات مرتکبین ارتشاء و اختلاس و کلاهبرداری,statute,criminal_economic,LLM_KNOWLEDGE,unverified,,not_assessed,no,متن و وضعیت اصلاحات/نسخ باید از منبع رسمی بررسی شود.
+IR-AML,قانون مبارزه با پولشویی,statute,criminal_economic,LLM_KNOWLEDGE,unverified,,not_assessed,no,اصلاحات و آیین‌نامه‌های اجرایی رکوردهای جداگانه می‌خواهند.
+IR-DRUGS,قانون مبارزه با مواد مخدر,statute,criminal,LLM_KNOWLEDGE,unverified,,not_assessed,no,اصلاحات و مصوبات مرتبط باید نسخه‌بندی شوند.
+IR-FAMILY-PROTECTION,قانون حمایت خانواده,statute,family,LLM_KNOWLEDGE,unverified,,not_assessed,no,عنوان بذر؛ متن رسمی و اصلاحات باید احراز شوند.
+IR-CHILD-PROTECTION,قانون حمایت از اطفال و نوجوانان,statute,child_protection,LLM_KNOWLEDGE,unverified,,not_assessed,no,عنوان بذر برای جست‌وجوی نسخه رسمی و مقررات مرتبط.
+IR-CIVIL-LIABILITY,قانون مسئولیت مدنی,statute,civil_liability,LLM_KNOWLEDGE,unverified,,not_assessed,no,عنوان بذر برای جست‌وجوی نسخه رسمی و اصلاحات.
+IR-THIRD-PARTY-INSURANCE,قانون بیمه اجباری خسارات وارد شده به شخص ثالث در اثر حوادث ناشی از وسایل نقلیه,statute,insurance,LLM_KNOWLEDGE,unverified,,not_assessed,no,مقررات بیمه‌ای مرتبط باید جداگانه ثبت شود.
+IR-LABOR,قانون کار,statute,labor,LLM_KNOWLEDGE,unverified,,not_assessed,no,مصوبات و بخشنامه‌های مزدی و آیین‌نامه‌ها سند مستقل هستند.
+IR-SOCIAL-SECURITY,قانون تأمین اجتماعی,statute,social_security,LLM_KNOWLEDGE,unverified,,not_assessed,no,اصلاحات و مقررات اجرایی باید نسخه‌بندی شوند.
+IR-DIRECT-TAX,قانون مالیات‌های مستقیم,statute,tax,LLM_KNOWLEDGE,unverified,,not_assessed,no,اصلاحات پرتعداد و تاریخ لازم‌الاجرا بودن باید کنترل شود.
+IR-VAT,قانون مالیات بر ارزش افزوده,statute,tax,LLM_KNOWLEDGE,unverified,,not_assessed,no,نسخه جاری و مقررات اجرایی باید احراز شود.
+IR-ADMIN-JUSTICE,قانون دیوان عدالت اداری,statute,administrative,LLM_KNOWLEDGE,unverified,,not_assessed,no,نسخه اصلاحی و تاریخ اثر مواد باید از منبع رسمی ثبت شود.
+IR-FINANCIAL-JUDGMENTS,قانون نحوه اجرای محکومیت‌های مالی,statute,enforcement,LLM_KNOWLEDGE,unverified,,not_assessed,no,عنوان بذر برای جست‌وجوی متن رسمی و اصلاحات.
+IR-DISPUTE-COUNCILS,قانون شوراهای حل اختلاف,statute,judicial_organization,LLM_KNOWLEDGE,unverified,,not_assessed,no,قانون جدید و مقررات اجرایی و احکام انتقالی باید جداگانه بررسی شوند.
+IR-CIVIL-REGISTRY,قانون ثبت احوال,statute,civil_status,LLM_KNOWLEDGE,unverified,,not_assessed,no,نسخه و اصلاحات باید از منبع رسمی احراز شوند.
