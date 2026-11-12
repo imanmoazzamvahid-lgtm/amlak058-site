@@ -360,3 +360,75 @@ db.auth.onAuthStateChange(()=>{refreshAuthState()});
 async function loadPublicSiteSettings(){try{const {data,error}=await db.from('site_settings').select('settings').eq('id',1).maybeSingle();if(error){console.warn('تنظیمات عمومی در دسترس نیست:',error.message);return}if(!data?.settings)return;const s=data.settings;function setText(selector,value){const el=document.querySelector(selector);if(el&&typeof value==='string'&&value.trim())el.textContent=value}setText('header .brand h1',s.site_name);setText('header .brand small',s.tagline);setText('.hero h2',s.hero_title);setText('.hero > p',s.hero_subtitle);setText('#listings .section-heading h2',s.listings_title);setText('.about h2',s.about_title);setText('.about p',s.about_text);setText('footer .footer-inner > div:first-child > strong',s.site_name);if(s.phone)document.getElementById('footerPhone').textContent='تماس با مدیریت سایت: '+s.phone;if(typeof s.primary_color==='string'&&/^#[0-9a-fA-F]{6}$/.test(s.primary_color)){document.documentElement.style.setProperty('--primary',s.primary_color);const h=s.primary_color.slice(1),rgb=[0,2,4].map(i=>parseInt(h.slice(i,i+2),16));document.documentElement.style.setProperty('--dark','#'+rgb.map(n=>Math.max(0,n-25).toString(16).padStart(2,'0')).join(''))}const icon=document.getElementById('brandIcon');if(icon&&s.logo_url){icon.innerHTML='';icon.style.background='transparent';const img=document.createElement('img');img.src=s.logo_url;img.alt=s.site_name||'لوگوی سایت';img.style.cssText='width:100%;height:100%;object-fit:contain';icon.appendChild(img)}if(s.banner_url){const hero=document.querySelector('.hero');hero.style.backgroundImage='linear-gradient(#ffffffd9,#ffffffd9),url("'+s.banner_url.replace(/["\\]/g,'')+'")';hero.style.backgroundSize='cover';hero.style.backgroundPosition='center';hero.style.borderRadius='12px'}}catch(error){console.warn('تنظیمات عمومی بارگذاری نشد:',error)}}
 loadPublicSiteSettings();loadProperties();refreshAuthState();
 </script></body></html>
+
+
+/* Iman 058 — luxury editorial visual layer */
+:root{
+ --primary:#a98545;--dark:#806332;--bg:#f5f1e8;--border:#e5dccb;
+ --text:#24211c;--muted:#81796c;--gold:#b4945b;--ink:#211f1b;
+}
+html{scroll-behavior:smooth}
+body{font-family:"Vazirmatn",Tahoma,Arial,sans-serif!important;background:#f8f6f1!important;color:var(--text)!important}
+header{background:rgba(250,248,243,.97)!important;border-bottom:1px solid #e7dece!important;box-shadow:0 5px 22px #2820140a!important}
+.header-inner{min-height:76px!important}
+.brand-icon{background:var(--ink)!important;color:#d8bd86!important;border:1px solid #b99b64!important;border-radius:50%!important}
+.brand h1{font-family:"Vazirmatn",Tahoma,sans-serif!important;font-weight:800!important;letter-spacing:-.4px;color:#24211c}
+.brand small{color:#9b8154!important;letter-spacing:.2px}
+nav a{color:#50483b!important;font-weight:500}
+nav a:hover{color:var(--gold)!important}
+.btn{border-radius:3px!important;letter-spacing:0!important}
+.btn-primary{background:var(--ink)!important;color:#ead9b5!important;border:1px solid #a88b57!important}
+.btn-primary:hover{background:#3a3328!important}
+.btn-outline{background:transparent!important;border-color:#c9b995!important;color:#4b4030!important}
+.hero{background:linear-gradient(115deg,#24221d 0%,#343027 62%,#4a4030 100%)!important;color:#f7f0e2!important;border:0!important;border-radius:2px!important;margin-top:20px!important;padding:42px 38px!important;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;inset:12px;border:1px solid #b99a624d;pointer-events:none}
+.hero h2{font-size:clamp(23px,3vw,34px)!important;font-weight:800!important;color:#f8f1e5!important;position:relative;z-index:1}
+.hero p{color:#d0c4ad!important;position:relative;z-index:1}
+.search-panel{background:#fbf9f4!important;border:1px solid #b99a62!important;border-radius:2px!important;box-shadow:0 12px 30px #0002!important;position:relative;z-index:1}
+input,select,textarea{border-radius:2px!important;border-color:#ded4c1!important;background:#fffdf9!important;color:#28251f!important}
+input:focus,select:focus,textarea:focus{outline:1px solid #b4945b!important;border-color:#b4945b!important}
+.section-heading h2{color:#29251f!important;font-weight:800!important}
+.section-heading{border-color:#e5dccb}
+#categories .categories{border-color:#e5dccb!important}
+.category{background:#fbf9f4!important;border:1px solid #e8dfd0!important;border-radius:2px!important}
+.category:hover{background:#f0e9dc!important;border-color:#b99a62!important}
+.category-icon{filter:grayscale(.45)}
+.category strong{color:#423a2e!important}
+.filter-btn{background:#fbf9f4!important;border-color:#ded4c1!important;color:#615744!important}
+.filter-btn.active{background:#eee5d5!important;border-color:#b99a62!important;color:#71562d!important}
+.advanced-filters{background:#f1ede4!important;border-color:#e2d8c6!important;border-radius:2px!important}
+.property-grid{border-color:#e5dccb!important}
+.property-card{background:#fbf9f4!important;border-bottom:1px solid #e5dccb!important}
+.property-image{border-radius:2px!important;background:#eee8dc!important}
+.property-info h3{color:#29251f!important;font-weight:700!important}
+.property-type{background:#eee5d5!important;color:#806332!important;border:1px solid #e1d2b5!important;border-radius:2px!important}
+.property-price{color:#806332!important;font-weight:800!important}
+.property-details{color:#827969!important}
+.favorite-btn{border-radius:2px!important;border-color:#d9cdb8!important}
+.about{background:transparent!important;border-top:1px solid #e5dccb!important}
+footer{background:#24221d!important;color:#f1e8d7!important;border:0!important}
+footer p,footer .muted{color:#c3b69d!important}
+.modal-box{border:1px solid #d7c7a8!important;border-radius:2px!important;background:#fbf9f4!important}
+.close-btn{border-radius:2px!important;background:#eee7db!important;color:#4b4030!important}
+.mobile-bottom-nav{background:#fbf9f4!important;border-color:#e1d7c5!important}
+.mobile-nav-item{color:#6d6251!important}
+.mobile-nav-item.active,.mobile-nav-item.post{color:#806332!important}
+.mobile-nav-item.post .mobile-nav-icon{background:#24221d!important;color:#e5d2ac!important;box-shadow:none!important;border:1px solid #b99a62!important}
+#detailsModal{background:#f8f6f1!important}
+#detailsModal .modal-header{background:#fbf9f4!important;border-color:#e5dccb!important}
+.detail-row{background:#f1ede4!important}
+.btn-chat{background:#e8eee7!important;color:#405d43!important;border-color:#c6d3c3!important}
+.site-note{color:#8c806d!important}
+@media(max-width:600px){
+ .hero{margin:0!important;padding:26px 16px 22px!important}
+ .hero:after{inset:8px}
+ .hero h2{font-size:19px!important}
+ .search-panel{background:transparent!important;border:0!important;box-shadow:none!important}
+ .search-panel input,.search-panel select{background:#fbf9f4!important}
+ .section{background:#f8f6f1!important}
+ #categories{background:#f3efe6!important;border-color:#ebe3d5!important}
+ .category{background:#fbf9f4!important}
+ .property-card{background:#fbf9f4!important}
+ .property-image{border:1px solid #e5dccb}
+ .mobile-bottom-nav{padding-bottom:calc(7px + env(safe-area-inset-bottom))!important}
+}
