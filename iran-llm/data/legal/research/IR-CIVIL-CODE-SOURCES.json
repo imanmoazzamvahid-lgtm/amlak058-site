@@ -36,5 +36,35 @@
     "rights_status": "not_assessed",
     "training_approved": false,
     "reason": "The national law database endpoint was identified but returned HTTP 503 during verification; the official gazette route was not successfully retrieved. Secondary sources do not replace the official original or establish training rights."
+  },
+  "enactment_history": {
+    "status": "multi_stage_history_identified_secondary_sources_conflict",
+    "first_stage_note": "The date 1307/02/18 is used only as a first-stage/commonly cited landmark, not as the sole enactment date of the complete code.",
+    "historical_reprint_reference": "https://fa.wikisource.org/wiki/قانون_مدنی_۱۳۱۳",
+    "historical_reprint_claim": "The reproduced text says the code was enacted over multiple legislative periods and distinguishes the first 955 articles from later materials enacted in later periods.",
+    "academic_secondary_reference": "https://spnuls.blogfa.com/1396/09",
+    "conflict_note": "Secondary references differ on article ranges assigned to later volumes and on the number of articles counted in current versions. No definitive count or complete chronology is adopted until checked against original parliamentary/gazette records."
+  },
+  "article_count_variance": {
+    "status": "unresolved",
+    "observed_secondary_counts": [
+      {
+        "count": 1335,
+        "source": "https://fa.wikisource.org/wiki/قانون_مدنی_۱۳۱۳"
+      },
+      {
+        "count": 1336,
+        "source": "https://www.vakilatazare.ir/laws/ghanoon-madani?page=1"
+      },
+      {
+        "count": 1338,
+        "source": "https://dadrasai.com/library/laws/قانون-مدنی"
+      },
+      {
+        "count": 1339,
+        "source": "https://lawlex.ir/laws/madani"
+      }
+    ],
+    "note": "These are counts reported by secondary reproductions/platforms and are not interchangeable. The corpus must preserve article-level identifiers and repeal/deletion status rather than infer a canonical count from page totals."
   }
 }
