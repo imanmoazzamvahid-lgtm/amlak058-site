@@ -60,3 +60,12 @@ README پروژه NLP-Final-Projects/legal_case_rag ادعا می‌کند حد�
 - Persian Legal Knowledge Base: https://huggingface.co/datasets/sosa123454321/persian-legal-kb
 - Sharif Legal Case RAG: https://github.com/NLP-Final-Projects/legal_case_rag
 - گزارش زیست‌بوم داده قضایی: https://www.tasnimnews.ir/fa/news/1405/07/21/3722068/سه-رکورد-تاریخی-قوه-قضاییه-در-زمینه-هوشمندسازی-در-کشور
+## بازبینی زنده snapshot در ۱۲ نوامبر ۲۰۲۶
+
+کارت فعلی Hugging Face، snapshot مورخ ۲۰۲۶/۱۱/۰۲ را با ۷٬۳۹۸ سند/مصوبه و ۲۵٬۳۸۵ ماده/بخش گزارش می‌کند. viewer subset قوانین را با حدود ۷٫۴ هزار ردیف نشان می‌دهد. کارت، ساختار `data/laws.parquet` و `data/articles.parquet` را معرفی می‌کند؛ این دو نباید با یکدیگر خلط شوند.
+
+در schema نمایشی، فیلدهای `date` و `date_issued` به‌صورت null نمایش داده می‌شوند؛ وضعیت‌های نمایش‌داده‌شده فقط یک مقدار `current` دارند؛ تاریخ دریافت بین ۲۰۲۶/۰۹/۰۴ تا ۲۰۲۶/۱۰/۳۰ است؛ سه مقدار برای license دیده می‌شود؛ `article_count` از صفر تا ۱٬۳۳۰ و طول متن از ۸۱ تا حدود ۲٫۰۲ میلیون نویسه متغیر است. این پراکندگی و فقدان تاریخ‌ها نشان می‌دهد این snapshot برای تعیین وضعیت زمانی قانون کافی نیست و باید تاریخ، اصلاحات و اعتبار هر سند از منبع رسمی بازیابی شود.
+
+صفحه فایل Parquet در شاخه تبدیل‌شده، فایل `laws/train/0000.parquet` را با اندازه ۱۶۲MB و SHA-256 اعلامی `ee3da2e4c11eb37d45b5e9171bea4a2363914db62c111469fdfc8944992681c4` نمایش می‌دهد. تلاش دریافت باینری در محیط این اجرا موفق نشد؛ بنابراین فایل محلی و hash مستقل نداریم و هیچ ادعای دریافت یا ممیزی داده واقعی ثبت نمی‌کنیم.
+
+منابع: [کارت فعلی مجموعه](https://huggingface.co/datasets/endomorphosis/ipfs_iran_laws)، [صفحه فایل Parquet و هش اعلامی](https://huggingface.co/datasets/endomorphosis/ipfs_iran_laws/blob/refs%2Fconvert%2Fparquet/laws/train/0000.parquet).
