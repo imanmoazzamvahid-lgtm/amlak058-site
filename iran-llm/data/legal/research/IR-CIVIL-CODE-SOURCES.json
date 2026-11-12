@@ -1,0 +1,70 @@
+{
+  "document_id": "IR-CIVIL-CODE",
+  "title": "قانون مدنی",
+  "reviewed_at": "2026-11-12T10:38:00+03:30",
+  "official_source_candidate": {
+    "name": "سامانه ملی قوانین و مقررات جمهوری اسلامی ایران",
+    "url": "https://qavanin.ir/Law/TreeText/?IDS=12021850837713548188",
+    "url_discovered_from": "پیوند «منبع رسمی» در صفحه قانون مدنی پایگاه حق‌پرور",
+    "verification_status": "official_endpoint_identified_but_not_retrieved",
+    "retrieval_result": "HTTP 503 Service Unavailable",
+    "training_rights_status": "not_assessed"
+  },
+  "secondary_comparison_sources": [
+    {
+      "name": "پایگاه حق‌پرور",
+      "url": "https://haghparvar.ir/laws/civil-code",
+      "publisher_claim": "متن تنقیح‌شده با همه اصلاحات بعدی، منتسب به سامانه ملی قوانین و مقررات",
+      "publisher_update_date_jalali": "1405/07/03",
+      "role": "candidate_for_article_by_article_comparison_only",
+      "official_status": "not_independently_verified",
+      "training_rights_status": "not_assessed"
+    },
+    {
+      "name": "مرکز اسناد حقوق بشر ایران",
+      "url": "https://iranhrdc.org/fa/قانون-مدنی/?download=1000001800",
+      "description": "فایل ۷۶ صفحه‌ای با عنوان قانون مدنی مصوب ۱۸ اردیبهشت ۱۳۰۷ با اصلاحات بعدی؛ نسخه ثانویه/آرشیوی",
+      "published_on_page": "2011-04-14",
+      "role": "historical_comparison_only",
+      "known_limitation": "PDF text extraction has reading-order/OCR artifacts and is not an official gazette copy",
+      "training_rights_status": "not_assessed"
+    }
+  ],
+  "current_decision": {
+    "official_copy_status": "not_acquired",
+    "amendment_review_status": "not_reviewed",
+    "rights_status": "not_assessed",
+    "training_approved": false,
+    "reason": "The national law database endpoint was identified but returned HTTP 503 during verification; the official gazette route was not successfully retrieved. Secondary sources do not replace the official original or establish training rights."
+  },
+  "enactment_history": {
+    "status": "multi_stage_history_identified_secondary_sources_conflict",
+    "first_stage_note": "The date 1307/02/18 is used only as a first-stage/commonly cited landmark, not as the sole enactment date of the complete code.",
+    "historical_reprint_reference": "https://fa.wikisource.org/wiki/قانون_مدنی_۱۳۱۳",
+    "historical_reprint_claim": "The reproduced text says the code was enacted over multiple legislative periods and distinguishes the first 955 articles from later materials enacted in later periods.",
+    "academic_secondary_reference": "https://spnuls.blogfa.com/1396/09",
+    "conflict_note": "Secondary references differ on article ranges assigned to later volumes and on the number of articles counted in current versions. No definitive count or complete chronology is adopted until checked against original parliamentary/gazette records."
+  },
+  "article_count_variance": {
+    "status": "unresolved",
+    "observed_secondary_counts": [
+      {
+        "count": 1335,
+        "source": "https://fa.wikisource.org/wiki/قانون_مدنی_۱۳۱۳"
+      },
+      {
+        "count": 1336,
+        "source": "https://www.vakilatazare.ir/laws/ghanoon-madani?page=1"
+      },
+      {
+        "count": 1338,
+        "source": "https://dadrasai.com/library/laws/قانون-مدنی"
+      },
+      {
+        "count": 1339,
+        "source": "https://lawlex.ir/laws/madani"
+      }
+    ],
+    "note": "These are counts reported by secondary reproductions/platforms and are not interchangeable. The corpus must preserve article-level identifiers and repeal/deletion status rather than infer a canonical count from page totals."
+  }
+}

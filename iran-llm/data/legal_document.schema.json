@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iran-llm.local/schemas/legal_document.schema.json",
+  "title": "IRAN Legal Corpus Document",
+  "type": "object",
+  "required": ["document_id", "document_type", "title", "jurisdiction", "source", "dates", "legal_status", "text", "rights"],
+  "properties": {
+    "document_id": {"type": "string", "minLength": 1},
+    "document_type": {"enum": ["constitution", "statute", "bylaw", "circular", "unified_precedent", "administrative_precedent", "advisory_opinion", "individual_judgment", "other"]},
+    "title": {"type": "string", "minLength": 1},
+    "jurisdiction": {"const": "IR"},
+    "issuing_authority": {"type": ["string", "null"]},
+    "dates": {
+      "type": "object",
+      "required": ["adoption_jalali", "publication_jalali", "effective_from_jalali"],
+      "properties": {
+        "adoption_jalali": {"type": ["string", "null"], "pattern": "^[0-9]{4}/[0-9]{2}/[0-9]{2}$"},
+        "approval_jalali": {"type": ["string", "null"], "pattern": "^[0-9]{4}/[0-9]{2}/[0-9]{2}$"},
+        "publication_jalali": {"type": ["string", "null"], "pattern": "^[0-9]{4}/[0-9]{2}/[0-9]{2}$"},
+        "effective_from_jalali": {"type": ["string", "null"], "pattern": "^[0-9]{4}/[0-9]{2}/[0-9]{2}$"},
+        "effective_until_jalali": {"type": ["string", "null"], "pattern": "^[0-9]{4}/[0-9]{2}/[0-9]{2}$"},
+        "date_notes": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "required": ["url", "retrieved_at", "source_kind", "original_file", "sha256"],
+      "properties": {
+        "url": {"type": "string", "format": "uri"},
+        "retrieved_at": {"type": "string", "format": "date-time"},
+        "source_kind": {"enum": ["official_gazette", "official_law_database", "official_issuing_authority", "court_publication", "other"]},
+        "publication_number": {"type": ["string", "null"]},
+        "publication_date_jalali": {"type": ["string", "null"], "pattern": "^[0-9]{4}/[0-9]{2}/[0-9]{2}$"},
+        "original_file": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "retrieval_notes": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "legal_status": {
+      "type": "object",
+      "required": ["status", "checked_at"],
+      "properties": {
+        "status": {"enum": ["in_force", "partially_amended", "repealed", "temporary", "unknown"]},
+        "checked_at": {"type": "string", "format": "date-time"},
+        "status_source_url": {"type": ["string", "null"], "format": "uri"},
+        "notes": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["relation", "target_document_id"],
+        "properties": {
+          "relation": {"enum": ["amends", "repeals", "implements", "interprets", "supersedes", "related_to"]},
+          "target_document_id": {"type": "string", "minLength": 1},
+          "affected_articles": {"type": "array", "items": {"type": "string"}}
+        },
+        "additionalProperties": false
+      }
+    },
+    "text": {
+      "type": "object",
+      "required": ["raw_text", "normalized_text"],
+      "properties": {
+        "raw_text": {"type": "string", "minLength": 1},
+        "normalized_text": {"type": "string", "minLength": 1},
+        "articles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["article_number", "body"],
+            "properties": {
+              "article_number": {"type": "string"},
+              "body": {"type": "string"},
+              "paragraphs": {"type": "array", "items": {"type": "string"}},
+              "amendment_note": {"type": ["string", "null"]}
+            },
+            "additionalProperties": false
+          }
+        },
+        "ocr_reviewed": {"type": "boolean"},
+        "review_notes": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "rights": {
+      "type": "object",
+      "required": ["license_or_legal_basis", "training_approved", "reviewer", "reviewed_at"],
+      "properties": {
+        "license_or_legal_basis": {"type": "string", "minLength": 1},
+        "training_approved": {"type": "boolean"},
+        "reviewer": {"type": ["string", "null"]},
+        "reviewed_at": {"type": ["string", "null"], "format": "date-time"},
+        "restrictions": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"rights": {"properties": {"training_approved": {"const": true}}}}, "required": ["rights"]},
+      "then": {"properties": {"rights": {"properties": {"reviewer": {"type": "string", "minLength": 1}, "reviewed_at": {"type": "string", "format": "date-time"}, "license_or_legal_basis": {"not": {"enum": ["unknown", "not assessed", "unverified", ""]}}}}}}
+    }
+  ],
+  "additionalProperties": false
+}

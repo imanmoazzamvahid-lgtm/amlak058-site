@@ -1,0 +1,33 @@
+name: IRAN-LLM corpus checks
+
+on:
+  pull_request:
+    paths:
+      - "iran-llm/**"
+      - ".github/workflows/iran-llm-data-tests.yml"
+      - ".github/workflows/iran-llm-data-tests.yml"
+  push:
+    branches:
+      - "iran-llm-bootstrap"
+    paths:
+      - "iran-llm/**"
+
+jobs:
+  legal-corpus-validation:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: iran-llm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install validation dependencies
+        run: python -m pip install --upgrade pip jsonschema pytest
+      - name: Validate Python syntax
+        run: python -m compileall -q scripts tests
+      - name: Audit legal document intake
+        run: python scripts/audit_legal_intake.py --input data/legal/intake_queue.csv --output data/legal/intake_audit.json
+      - name: Run corpus and model-profile tests
+        run: python -m pytest -q tests
