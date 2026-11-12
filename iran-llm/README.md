@@ -122,3 +122,18 @@ python scripts/extract_legal_articles.py --input data/legal/raw/IR-CIVIL-CODE/of
 ```
 
 Extracted articles are staging candidates only. They remain unverified and are not approved for training until the official text, amendments, legal status and exact reuse/training rights are independently reviewed.
+
+## Research and system design
+
+Research documents are kept separately from source code and corpus records:
+
+- `research/ADAD_COMPETITIVE_REVIEW.md`: public-evidence review of Adad; it does not claim access to Adad's internal data or architecture.
+- `research/IRAN_SYSTEM_BLUEPRINT.md`: proposed legal data model, ingestion, versioning, hybrid retrieval, RAG, security and model architecture.
+- `research/EXECUTION_ROADMAP.md`: staged delivery plan and acceptance criteria.
+- `research/MODEL_KNOWLEDGE_SEED_POLICY.md`: safe use of model knowledge for discovering legal documents without treating generated text as official legislation.
+
+`data/legal/model_knowledge_seed.csv` is a discovery index generated from model knowledge. Every row is deliberately `unverified`, has `training_approved=no`, and must be resolved to a primary source before any full text is accepted. This index is not a legal corpus and contains no claim that all Iranian laws have been enumerated.
+
+### Important distinction: model knowledge is not an exportable legal database
+
+The language model cannot export a complete inventory of its hidden training documents or guarantee that its internal knowledge contains every current amendment. Generated statutory text may contain omissions, outdated provisions or citation errors. Model knowledge can help discover titles, topics and evaluation questions; official legal text must be acquired and verified independently.
