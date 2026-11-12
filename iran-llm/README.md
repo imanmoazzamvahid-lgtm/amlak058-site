@@ -110,3 +110,15 @@ Potential sources and their current acquisition decisions are tracked in `data/c
 - CC BY-NC data: exclude from commercial product training unless separate permission is obtained.
 
 No candidate is currently approved for model training.
+
+
+## Controlled official legal acquisition
+
+For statutes, first identify and retrieve the primary official record. Never treat a secondary transcription or an index entry as an official source copy. The official acquisition utility stores the original response and SHA-256, restricts downloads and redirects to allow-listed official domains, and explicitly leaves training approval disabled:
+
+```bash
+python scripts/acquire_official_law.py --url 'https://qavanin.ir/Law/TreeText/?IDS=12021850837713548188' --output data/legal/raw/IR-CIVIL-CODE/official-source.html --metadata data/legal/raw/IR-CIVIL-CODE/source-metadata.json
+python scripts/extract_legal_articles.py --input data/legal/raw/IR-CIVIL-CODE/official-source.html --output data/legal/candidates/IR-CIVIL-CODE.articles.jsonl
+```
+
+Extracted articles are staging candidates only. They remain unverified and are not approved for training until the official text, amendments, legal status and exact reuse/training rights are independently reviewed.
