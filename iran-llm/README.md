@@ -137,3 +137,7 @@ Research documents are kept separately from source code and corpus records:
 ### Important distinction: model knowledge is not an exportable legal database
 
 The language model cannot export a complete inventory of its hidden training documents or guarantee that its internal knowledge contains every current amendment. Generated statutory text may contain omissions, outdated provisions or citation errors. Model knowledge can help discover titles, topics and evaluation questions; official legal text must be acquired and verified independently.
+- `research/LEGAL_CORPUS_DISCOVERY.md`: review of discovered qavanin tools and public Iranian legal datasets, including their limits and data-rights status.
+- `data/legal/model_knowledge_seed.csv`: 32 title-level discovery records generated from model knowledge; all remain unverified and excluded from training.
+
+Public legal datasets and third-party connectors are discovery aids only. A software license (for example, MIT on an MCP connector) does not license the law database content it reads. Secondary corpora must be audited record by record before reuse.
