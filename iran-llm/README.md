@@ -141,3 +141,13 @@ The language model cannot export a complete inventory of its hidden training doc
 - `data/legal/model_knowledge_seed.csv`: 32 title-level discovery records generated from model knowledge; all remain unverified and excluded from training.
 
 Public legal datasets and third-party connectors are discovery aids only. A software license (for example, MIT on an MCP connector) does not license the law database content it reads. Secondary corpora must be audited record by record before reuse.
+### Audit a DOTIC-derived research snapshot
+
+The project has an audit-only utility for a locally downloaded DOTIC-derived Parquet snapshot. It does not import source text into the canonical corpus and never approves training:
+
+```bash
+python -m pip install pyarrow
+python scripts/audit_dotic_snapshot.py --input /path/to/laws.parquet --output data/legal/dotic_snapshot_audit.json
+```
+
+The report checks required fields, duplicate IDs, empty text/title, claimed metadata hashes, source hosts, date gaps, license labels and reuse URLs. A passing audit is not proof of legal validity or permission; manual source and rights review remains mandatory.
