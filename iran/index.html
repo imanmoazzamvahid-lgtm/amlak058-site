@@ -67,6 +67,7 @@ footer{padding:24px 0 35px;text-align:center;color:#9098a1;font-size:10px}
 <script>
 (function(){
   'use strict';
+  if(!window.supabase || typeof window.supabase.createClient!=='function'){document.getElementById('dbStatus').textContent='خطای بارگذاری';document.getElementById('status').textContent='کتابخانه اتصال به پایگاه بارگذاری نشد. صفحه را تازه‌سازی کنید.';document.getElementById('status').className='status error';return;}
   const SUPABASE_URL='https://zjkghjlqzpuxpljiyfcj.supabase.co';
   const SUPABASE_KEY='sb_publishable_UeuwcJNnFLoeJna3NyYTrg_BsL_CSBe';
   const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
