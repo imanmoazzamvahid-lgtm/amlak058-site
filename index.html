@@ -11271,5 +11271,65 @@ body.homepage-clean #home.home-exact-hero{margin-top:0!important;top:0!important
 
 </style>
 
+
+<style id="amlak058-mobile-clean-flow-v1">
+/* Mobile only: keep one navigation path and avoid repeating the same category shortcuts. */
+@media screen and (max-width:650px){
+  body.homepage-clean{
+    padding-bottom:18px!important;
+    overflow-x:hidden!important;
+  }
+  body.homepage-clean > header,
+  body.homepage-clean nav.mobile-bottom-nav,
+  body.homepage-clean .amlak-kilid-nav,
+  body.homepage-clean footer{
+    display:none!important;
+  }
+  body.homepage-clean #categories,
+  body.homepage-clean .american-pathways{
+    display:none!important;
+  }
+  body.homepage-clean #search.search-section{
+    width:calc(100% - 24px)!important;
+    max-width:520px!important;
+    margin:14px auto 18px!important;
+  }
+  body.homepage-clean #search .search-panel{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+  }
+  body.homepage-clean #search .search-field{
+    min-width:0!important;
+  }
+  body.homepage-clean #search .search-field-wide,
+  body.homepage-clean #search .search-panel>button{
+    grid-column:1/-1!important;
+    width:100%!important;
+  }
+  body.homepage-clean #listings.section{
+    width:calc(100% - 24px)!important;
+    max-width:520px!important;
+    margin:18px auto!important;
+  }
+  body.homepage-clean #listings .map-listing-layout{
+    display:flex!important;
+    flex-direction:column!important;
+    gap:10px!important;
+  }
+  body.homepage-clean #listings #propertyMap{
+    width:100%!important;
+    min-height:230px!important;
+    height:230px!important;
+    position:relative!important;
+    top:auto!important;
+  }
+  body.homepage-clean #listings #propertyList{
+    display:flex!important;
+    flex-direction:column!important;
+    width:100%!important;
+  }
+}
+</style>
+
 </body>
 </html>
