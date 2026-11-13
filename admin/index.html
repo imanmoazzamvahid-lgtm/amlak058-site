@@ -9,6 +9,42 @@
 :root{--green:#174b3a;--green2:#22664f;--cream:#f6f3e9;--paper:#fffefa;--ink:#1e2b25;--muted:#718078;--line:#e4e9e2;--gold:#b99a55;--red:#a64236}
 *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Tahoma,Arial,sans-serif}button,input{font:inherit}.shell{max-width:1200px;margin:auto;padding:22px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--green);color:#fff;padding:20px 24px;border-radius:20px}.brand{display:flex;align-items:center;gap:13px}.brand img{width:46px;height:46px;background:#fff;border-radius:13px;padding:5px}.brand h1{font-size:19px;margin:0 0 5px}.brand p{margin:0;color:#d5e4db;font-size:12px}.btn{border:0;border-radius:11px;padding:11px 16px;cursor:pointer;font-weight:700}.btn:disabled{opacity:.55;cursor:wait}.primary{background:var(--green);color:white}.light{background:#fff;color:var(--green)}.outline{background:white;border:1px solid var(--line);color:var(--green)}.danger{color:var(--red);background:#fff1ef}.login,.panel{margin-top:22px;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:0 8px 30px #173d2a0b}.login{max-width:460px;margin:50px auto}.login h2{margin-top:0}.hint{color:var(--muted);font-size:13px;line-height:1.9}.field{display:block;margin:14px 0}.field span{display:block;font-size:13px;margin-bottom:7px}.field input{width:100%;padding:13px;border:1px solid var(--line);border-radius:10px;background:#fff}.message{font-size:13px;line-height:1.8;margin-top:12px;color:var(--red)}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:20px 0}.stat{background:#fff;border:1px solid var(--line);border-radius:15px;padding:17px}.stat small{color:var(--muted)}.stat strong{display:block;font-size:26px;color:var(--green);margin-top:8px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tab{background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 16px;color:var(--green);cursor:pointer}.tab.active{background:var(--green);color:#fff;border-color:var(--green)}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.toolbar h2{font-size:18px}.list{display:grid;gap:12px;margin-top:14px}.item{border:1px solid var(--line);border-radius:15px;padding:16px;background:white}.item-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.item h3{font-size:16px;margin:0 0 8px}.meta{color:var(--muted);font-size:12px;line-height:2}.details{margin-top:10px;line-height:1.9;font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}.actions .btn{font-size:12px;padding:9px 12px}.pill{display:inline-block;border-radius:999px;background:#edf4ef;color:var(--green);padding:5px 10px;font-size:11px}.empty,.loading{text-align:center;color:var(--muted);padding:35px 10px}.hidden{display:none!important}.footer{color:var(--muted);font-size:11px;text-align:center;padding:25px}
 @media(max-width:720px){.shell{padding:12px}.top{padding:16px;border-radius:15px}.stats{grid-template-columns:repeat(2,1fr)}.panel{padding:15px}.item-head{display:block}.brand h1{font-size:16px}}
+
+/* Admin controls: themes, featured inventory, advertisements */
+.theme-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:18px 0}
+.theme-option{display:block;width:100%;padding:11px;text-align:right;border:1px solid var(--line);border-radius:16px;background:#fff;color:var(--ink);cursor:pointer;transition:.18s}
+.theme-option:hover{transform:translateY(-2px);border-color:#b99a55;box-shadow:0 9px 24px #173d2a12}
+.theme-option.selected{border:2px solid #b99a55;padding:10px;box-shadow:0 0 0 3px #b99a551c}
+.theme-option strong{display:block;font-size:14px;margin:7px 0 3px}
+.theme-option small{display:block;color:var(--muted);font-size:11px;line-height:1.8}
+.theme-preview{height:105px;overflow:hidden;position:relative;border-radius:11px;padding:9px;display:flex;flex-direction:column;gap:8px}
+.theme-preview .tp-head{height:15px;border-radius:5px;display:flex;gap:4px;padding:3px}
+.theme-preview .tp-head i{display:block;width:22px;height:5px;border-radius:4px;background:currentColor;opacity:.7}
+.theme-preview .tp-hero{height:43px;border-radius:7px;display:flex;align-items:center;justify-content:space-between;padding:7px}
+.theme-preview .tp-hero b{display:block;width:42%;height:7px;border-radius:8px;background:currentColor;opacity:.85}
+.theme-preview .tp-hero em{display:block;width:23%;height:23px;border-radius:5px;background:var(--tp-accent)}
+.theme-preview .tp-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.theme-preview .tp-cards i{height:14px;border-radius:4px;background:var(--tp-card)}
+.preview-signature{background:#091a2a;color:#f6f0e4;--tp-accent:#d3ad68;--tp-card:#24384b}.preview-signature .tp-head{background:#152c40}.preview-signature .tp-hero{background:linear-gradient(110deg,#243f54,#0b1a29)}
+.preview-emerald{background:#103d30;color:#f4f0e5;--tp-accent:#cfb475;--tp-card:#285b48}.preview-emerald .tp-head{background:#1a5943}.preview-emerald .tp-hero{background:linear-gradient(110deg,#3b7058,#133a2d)}
+.preview-ivory{background:#f2eee5;color:#26313a;--tp-accent:#aa8a55;--tp-card:#fffdf8}.preview-ivory .tp-head{background:#fffdf8}.preview-ivory .tp-hero{background:linear-gradient(110deg,#e0d7c5,#faf7f0)}
+.preview-midnight{background:#111e31;color:#edf2f6;--tp-accent:#aebfce;--tp-card:#283c53}.preview-midnight .tp-head{background:#1d3048}.preview-midnight .tp-hero{background:linear-gradient(110deg,#344c68,#111e31)}
+.preview-copper{background:#2b2523;color:#f6eee7;--tp-accent:#c88761;--tp-card:#554039}.preview-copper .tp-head{background:#46352f}.preview-copper .tp-hero{background:linear-gradient(110deg,#684c3e,#2b2523)}
+.preview-sand{background:#e9dfcf;color:#382f27;--tp-accent:#98714d;--tp-card:#fff9ef}.preview-sand .tp-head{background:#fff9ef}.preview-sand .tp-hero{background:linear-gradient(110deg,#d3c0a4,#f8f1e5)}
+.module-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin:15px 0;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fbfaf6}
+.module-form label{display:block;font-size:12px;font-weight:700}
+.module-form input,.module-form select,.module-form textarea{width:100%;margin-top:6px;padding:11px;border:1px solid var(--line);border-radius:9px;background:#fff;font:inherit}
+.module-form .wide{grid-column:1/-1}
+.module-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.module-list{display:grid;gap:10px;margin-top:14px}
+.module-row{display:grid;grid-template-columns:115px 1fr;gap:13px;padding:12px;border:1px solid var(--line);border-radius:13px;background:#fff;align-items:center}
+.module-row img{width:100%;height:80px;object-fit:cover;border-radius:9px;background:#f1eee6}
+.module-row h3{margin:0 0 5px;font-size:14px}
+.module-row p{margin:3px 0;color:var(--muted);font-size:11px;line-height:1.8;overflow-wrap:anywhere}
+.check-inline{display:flex!important;align-items:center;gap:8px}.check-inline input{width:auto!important;margin:0!important}
+@media(max-width:850px){.theme-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.theme-grid,.module-form{grid-template-columns:1fr}.module-row{grid-template-columns:88px 1fr}.theme-preview{height:112px}}
+
 </style>
 <link rel="stylesheet" href="/palette.css?v=1">
 
@@ -58,16 +94,52 @@
 <div class="stat"><small>آگهی‌های در انتظار</small><strong id="statPending">۰</strong></div>
 <div class="stat"><small>آگهی‌های منتشرشده</small><strong id="statApproved">۰</strong></div>
 </div>
-<section class="panel">
+<section class="panel" id="contentPanel">
 <div class="toolbar"><div><h2 id="sectionTitle">درخواست‌های ربات تلگرام</h2><p class="hint">اطلاعات تماس مشتری فقط برای مدیر مجاز نمایش داده می‌شود.</p></div><button class="btn outline" onclick="refreshCurrent()">به‌روزرسانی</button></div>
 <nav class="tabs">
 <button class="tab active" data-tab="leads" onclick="switchTab('leads',this)">درخواست‌های ربات</button>
 <button class="tab" data-tab="requests" onclick="switchTab('requests',this)">درخواست‌های سایت</button>
 <button class="tab" data-tab="properties" onclick="switchTab('properties',this)">مدیریت آگهی‌ها</button>
 <button class="tab" data-tab="support" onclick="switchTab('support',this)">پشتیبانی آنلاین سایت</button>
+<button class="tab" data-tab="featured" onclick="switchTab('featured',this)">ملک‌های اکازیون</button>
+<button class="tab" data-tab="ads" onclick="switchTab('ads',this)">مدیریت تبلیغات</button>
+<button class="tab" data-tab="design" onclick="switchTab('design',this)">قالب و ظاهر سایت</button>
 </nav>
 <label class="field" style="margin:12px 0"><span>جست‌وجوی مشتری (شماره موبایل، محله، نوع درخواست یا نام)</span><input id="searchInput" type="search" placeholder="مثلاً ۰۹۱۵... یا معلم یا خرید" oninput="applySearch()" autocomplete="off"></label><div id="filters" class="tabs"></div><div id="list" class="list"><div class="loading">در حال دریافت اطلاعات…</div></div><p id="appMsg" class="message"></p>
 </section>
+
+<section id="designPanel" class="panel hidden">
+ <div class="toolbar"><div><h2>قالب و ظاهر سایت</h2><p class="hint">قالب موردنظر را انتخاب و ذخیره کنید. انتخاب مدیر روی سایت عمومی اعمال می‌شود.</p></div></div>
+ <div class="theme-grid" id="themeGrid">
+  <button type="button" class="theme-option" data-theme-key="signature" aria-pressed="false" onclick="selectTheme('signature',this)"><div class="theme-preview preview-signature"><span class="tp-head"><i></i><i></i><i></i></span><span class="tp-hero"><b></b><em></em></span><span class="tp-cards"><i></i><i></i><i></i></span></div><strong>1. امضای سرمه‌ای و طلایی</strong><small>قالب لوکس منتخب؛ رسمی و اختصاصی</small></button><button type="button" class="theme-option" data-theme-key="emerald" aria-pressed="false" onclick="selectTheme('emerald',this)"><div class="theme-preview preview-emerald"><span class="tp-head"><i></i><i></i><i></i></span><span class="tp-hero"><b></b><em></em></span><span class="tp-cards"><i></i><i></i><i></i></span></div><strong>2. سبز زمردی و عاجی</strong><small>اعتمادآفرین و کلاسیک</small></button><button type="button" class="theme-option" data-theme-key="ivory" aria-pressed="false" onclick="selectTheme('ivory',this)"><div class="theme-preview preview-ivory"><span class="tp-head"><i></i><i></i><i></i></span><span class="tp-hero"><b></b><em></em></span><span class="tp-cards"><i></i><i></i><i></i></span></div><strong>3. عاجی و شامپاینی</strong><small>روشن، مینیمال و مجلل</small></button><button type="button" class="theme-option" data-theme-key="midnight" aria-pressed="false" onclick="selectTheme('midnight',this)"><div class="theme-preview preview-midnight"><span class="tp-head"><i></i><i></i><i></i></span><span class="tp-hero"><b></b><em></em></span><span class="tp-cards"><i></i><i></i><i></i></span></div><strong>4. آبی نیمه‌شب</strong><small>مدرن، عمیق و حرفه‌ای</small></button><button type="button" class="theme-option" data-theme-key="copper" aria-pressed="false" onclick="selectTheme('copper',this)"><div class="theme-preview preview-copper"><span class="tp-head"><i></i><i></i><i></i></span><span class="tp-hero"><b></b><em></em></span><span class="tp-cards"><i></i><i></i><i></i></span></div><strong>5. ذغالی و مسی</strong><small>گرم، متمایز و لوکس</small></button><button type="button" class="theme-option" data-theme-key="sand" aria-pressed="false" onclick="selectTheme('sand',this)"><div class="theme-preview preview-sand"><span class="tp-head"><i></i><i></i><i></i></span><span class="tp-hero"><b></b><em></em></span><span class="tp-cards"><i></i><i></i><i></i></span></div><strong>6. شن و قهوه‌ای سنگی</strong><small>طبیعی، آرام و معماری‌محور</small></button>
+ </div>
+ <div class="theme-savebar"><p id="themeMessage">قالب فعلی در حال دریافت است.</p><button class="btn primary" id="saveThemeBtn" onclick="saveTheme()">ذخیره و اعمال قالب</button></div>
+</section>
+<section id="featuredPanel" class="panel hidden">
+ <div class="toolbar"><div><h2>مدیریت ملک‌های اکازیون</h2><p class="hint">از بین آگهی‌های منتشرشده، ملک‌های منتخب را فعال کنید. این املاک در بخش مستقل صفحه اصلی نمایش داده می‌شوند.</p></div><button class="btn outline" onclick="loadFeaturedProperties()">به‌روزرسانی</button></div>
+ <p id="featuredMessage" class="message" role="status"></p>
+ <div id="featuredList" class="module-list"><div class="loading">در حال دریافت آگهی‌ها…</div></div>
+</section>
+<section id="adsPanel" class="panel hidden">
+ <div class="toolbar"><div><h2>مدیریت تبلیغات سایت</h2><p class="hint">بنر تبلیغاتی با تصویر، لینک مقصد، محل نمایش و بازه زمانی مدیریت می‌شود.</p></div><button class="btn outline" onclick="loadAdvertisements()">به‌روزرسانی</button></div>
+ <form id="adForm" class="module-form" onsubmit="saveAdvertisement(event)">
+  <input type="hidden" id="adId">
+  <label>عنوان تبلیغ<input id="adTitle" required maxlength="120" placeholder="مثلاً نمایشگاه مبلمان"></label>
+  <label>آدرس تصویر بنر<input id="adImage" type="url" required placeholder="https://..."></label>
+  <label>لینک مقصد تبلیغ<input id="adTarget" type="url" required placeholder="https://..."></label>
+  <label>محل نمایش<select id="adPlacement"><option value="home_top">زیر تصویر اصلی</option><option value="home_middle">بعد از دسته‌بندی‌ها</option><option value="home_bottom">پایین آگهی‌ها</option></select></label>
+  <label>ترتیب نمایش<input id="adOrder" type="number" value="0" step="1"></label>
+  <label>شروع نمایش<input id="adStart" type="datetime-local"></label>
+  <label>پایان نمایش<input id="adEnd" type="datetime-local"></label>
+  <label class="check-inline"><input id="adActive" type="checkbox" checked> تبلیغ فعال باشد</label>
+  <label class="wide">توضیح کوتاه (اختیاری)<textarea id="adDescription" rows="2" maxlength="300" placeholder="متن کوتاه کنار بنر"></textarea></label>
+  <div class="wide module-actions"><button class="btn primary" id="adSaveBtn" type="submit">ثبت تبلیغ</button><button class="btn outline" type="button" onclick="resetAdForm()">پاک‌کردن فرم</button></div>
+ </form>
+ <p class="hint">برای تصویر، نشانی مستقیم فایل JPG، PNG یا WebP را وارد کنید. آدرس تصویر باید عمومی و قابل مشاهده باشد.</p>
+ <p id="adMessage" class="message" role="status"></p>
+ <div id="adList" class="module-list"><div class="loading">در حال دریافت تبلیغات…</div></div>
+</section>
+
 </main>
 <div class="footer">املاک ۰۵۸ | سامانه مدیریت داخلی</div>
 </div>
@@ -92,11 +164,24 @@ async function loadSiteTheme(){if(!isAdmin)return;try{const {data,error}=await d
 async function saveSiteTheme(){if(!isAdmin){$('themeManagerStatus').textContent='ابتدا با حساب مدیر وارد شوید.';return}const b=$('saveThemeBtn');b.disabled=true;$('themeManagerStatus').textContent='در حال ذخیره پوسته...';try{const {data,error}=await db.from('site_settings').select('settings').eq('id',1).maybeSingle();if(error)throw error;const settings={...(data?.settings||{}),theme:selectedSiteTheme};let result;if(data){result=await db.from('site_settings').update({settings}).eq('id',1)}else{result=await db.from('site_settings').insert({id:1,settings})}if(result.error)throw result.error;$('themeManagerStatus').textContent='پوسته با موفقیت ذخیره شد و در سایت اعمال خواهد شد.'}catch(e){$('themeManagerStatus').textContent='ذخیره انجام نشد: '+(e.message||'خطای نامشخص')}finally{b.disabled=false}}
 document.addEventListener('click',e=>{const b=e.target.closest('.theme-option');if(b)selectSiteTheme(b.dataset.theme)});
 
-function switchTab(tab,el){activeTab=tab;activeStatus=tab==='leads'?'new':tab==='support'?'new':'pending';document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.tab===tab));$('sectionTitle').textContent=tab==='leads'?'درخواست‌های ربات تلگرام':tab==='requests'?'درخواست‌های سایت':tab==='support'?'پشتیبانی آنلاین سایت':'مدیریت آگهی‌ها';renderFilters();loadCurrent()}
+function switchTab(tab,el){
+ activeTab=tab;
+ document.querySelectorAll('.tabs .tab[data-tab]').forEach(x=>x.classList.toggle('active',x.dataset.tab===tab));
+ const special={featured:'featuredPanel',ads:'adsPanel',design:'designPanel'};
+ $('contentPanel').classList.toggle('hidden',!!special[tab]);
+ Object.entries(special).forEach(([k,id])=>$(id).classList.toggle('hidden',k!==tab));
+ if(tab==='featured'){loadFeaturedProperties();return}
+ if(tab==='ads'){loadAdvertisements();return}
+ if(tab==='design'){loadThemeSettings();return}
+ activeStatus=tab==='leads'?'new':tab==='support'?'new':'pending';
+ $('sectionTitle').textContent=tab==='leads'?'درخواست‌های ربات تلگرام':tab==='requests'?'درخواست‌های سایت':tab==='support'?'پشتیبانی آنلاین سایت':'مدیریت آگهی‌ها';
+ $('searchField').classList.remove('hidden');$('filters').classList.remove('hidden');
+ renderFilters();loadCurrent()
+}
 function renderFilters(){const f=$('filters');let vals=activeTab==='leads'?[['new','جدید'],['reviewed','بررسی‌شده'],['contacted','پیگیری‌شده'],['closed','بسته‌شده']]:activeTab==='requests'?[['pending','در انتظار'],['reviewed','بررسی‌شده'],['contacted','پیگیری‌شده'],['closed','بسته‌شده'],['expired','منقضی']]:activeTab==='support'?[['new','پیام جدید'],['reviewed','در حال بررسی'],['replied','پاسخ داده‌شده'],['closed','بسته‌شده']]:[['pending','در انتظار تأیید'],['approved','منتشرشده'],['rejected','ردشده']];f.innerHTML=vals.map(([v,l])=>'<button class="tab '+(activeStatus===v?'active':'')+'" onclick="setStatus(\''+v+'\')">'+l+'</button>').join('')}
 function setStatus(s){activeStatus=s;renderFilters();loadCurrent()}
 async function loadStats(){const specs=[['telegram_bot_leads','statLeads'],['property_requests','statRequests']];for(const [table,id] of specs){const {count,error}=await db.from(table).select('id',{count:'exact',head:true});if(error)throw error;$(id).textContent=faNum(count||0)}for(const [status,id] of [['pending','statPending'],['approved','statApproved']]){const {count,error}=await db.from('properties').select('id',{count:'exact',head:true}).eq('status',status);if(error)throw error;$(id).textContent=faNum(count||0)}}
-async function loadCurrent(){if(!isAdmin)return;$('list').innerHTML='<div class="loading">در حال دریافت اطلاعات…</div>';$('appMsg').textContent='';try{if(activeTab==='leads')await loadLeads();else if(activeTab==='requests')await loadRequests();else if(activeTab==='support')await loadWebsiteSupport();else await loadProperties()}catch(e){$('list').innerHTML='<div class="empty">دریافت اطلاعات ناموفق بود.</div>';$('appMsg').textContent=e.message||'خطای نامشخص'}}
+async function loadCurrent(){if(!isAdmin)return;$('list').innerHTML='<div class="loading">در حال دریافت اطلاعات…</div>';$('appMsg').textContent='';try{if(activeTab==='leads')await loadLeads();else if(activeTab==='requests')await loadRequests();else if(activeTab==='support')await loadWebsiteSupport();else if(activeTab==='properties')await loadProperties()}catch(e){$('list').innerHTML='<div class="empty">دریافت اطلاعات ناموفق بود.</div>';$('appMsg').textContent=e.message||'خطای نامشخص'}}
 
 async function loadWebsiteSupport(){const {data,error}=await db.from('website_support_requests').select('id,full_name,phone,message,status,admin_reply,created_at').eq('status',activeStatus).order('created_at',{ascending:false}).limit(100);if(error)throw error;renderWebsiteSupport(data||[])}
 function renderWebsiteSupport(rows){if(!rows.length){$('list').innerHTML='<div class="empty">پیامی در این وضعیت ثبت نشده است.</div>';return}
@@ -115,6 +200,23 @@ function statusButtons(id,kind){let choices=kind==='lead'?[['reviewed','بررس
 async function updateStatus(kind,id,status){if(!confirm('وضعیت این مورد تغییر کند؟'))return;const table=kind==='lead'?'telegram_bot_leads':kind==='request'?'property_requests':'properties';const {error}=await db.from(table).update({status}).eq('id',id);if(error){$('appMsg').textContent='تغییر وضعیت انجام نشد: '+error.message;return}await loadCurrent();await loadStats();$('appMsg').style.color='#22664f';$('appMsg').textContent='وضعیت با موفقیت به‌روزرسانی شد.'}
 async function refreshCurrent(){await loadStats();await loadCurrent()}
 function switchTabOnSession(){db.auth.getSession().then(({data})=>{if(data.session)checkAdmin().catch(e=>msg(e.message))})}
+
+const themeNames={signature:'امضای سرمه‌ای و طلایی',emerald:'سبز زمردی و عاجی',ivory:'عاجی و شامپاینی',midnight:'آبی نیمه‌شب',copper:'ذغالی و مسی',sand:'شن و قهوه‌ای سنگی'};
+let selectedTheme='signature',savedTheme='signature';
+function selectTheme(key,el){if(!themeNames[key])return;selectedTheme=key;document.querySelectorAll('.theme-option').forEach(x=>{const yes=x.dataset.themeKey===key;x.classList.toggle('selected',yes);x.setAttribute('aria-pressed',yes?'true':'false')});$('themeMessage').textContent='قالب انتخاب‌شده: '+themeNames[key];$('themeMessage').className=''}
+async function loadThemeSettings(){if(!isAdmin)return;$('themeMessage').textContent='در حال دریافت قالب فعلی…';try{const {data,error}=await db.from('site_settings').select('settings').eq('id',1).single();if(error)throw error;const key=data?.settings?.theme_key||'signature';savedTheme=themeNames[key]?key:'signature';selectTheme(savedTheme);$('themeMessage').textContent='قالب فعال فعلی: '+themeNames[savedTheme]}catch(e){$('themeMessage').textContent='دریافت قالب ناموفق بود: '+e.message}}
+async function saveTheme(){if(!isAdmin)return;const b=$('saveThemeBtn');b.disabled=true;try{const {data:{user}}=await db.auth.getUser();const {data,error}=await db.from('site_settings').select('settings').eq('id',1).single();if(error)throw error;const settings={...(data?.settings||{}),theme_key:selectedTheme};const {error:up}=await db.from('site_settings').update({settings,updated_at:new Date().toISOString(),updated_by:user.id}).eq('id',1);if(up)throw up;savedTheme=selectedTheme;$('themeMessage').textContent='قالب '+themeNames[savedTheme]+' ذخیره و برای بازدیدکنندگان اعمال شد.';$('themeMessage').className='message-ok'}catch(e){$('themeMessage').textContent='ذخیره قالب انجام نشد: '+e.message}finally{b.disabled=false}}
+function localDateValue(v){if(!v)return '';const d=new Date(v);if(Number.isNaN(d.getTime()))return '';const p=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'T'+p(d.getHours())+':'+p(d.getMinutes())}
+async function loadFeaturedProperties(){if(!isAdmin)return;$('featuredList').innerHTML='<div class="loading">در حال دریافت آگهی‌های منتشرشده…</div>';try{const {data,error}=await db.from('properties').select('id,title,property_type,transaction_type,price,city,is_featured,featured_rank,created_at').eq('status','approved').order('is_featured',{ascending:false}).order('featured_rank',{ascending:true}).order('created_at',{ascending:false}).limit(150);if(error)throw error;if(!data?.length){$('featuredList').innerHTML='<div class="empty">هنوز آگهی منتشرشده‌ای برای انتخاب وجود ندارد.</div>';return}$('featuredList').innerHTML=data.map(p=>'<article class="module-row"><div style="height:80px;border-radius:9px;background:#f1eee6;display:grid;place-items:center;font-size:28px">🏡</div><div><h3>'+esc(p.title||'آگهی بدون عنوان')+'</h3><p>'+esc(p.city||'')+' · '+esc(p.property_type||p.transaction_type||'ملک')+' · '+(p.price?Number(p.price).toLocaleString('fa-IR')+' تومان':'قیمت توافقی')+'</p><p>'+(p.is_featured?'⭐ در بخش اکازیون نمایش داده می‌شود':'در فهرست عادی آگهی‌ها')+'</p><div class="module-actions"><button class="btn '+(p.is_featured?'outline':'primary')+'" onclick="toggleFeatured('+Number(p.id)+','+(!p.is_featured)+')">'+(p.is_featured?'برداشتن از اکازیون':'⭐ افزودن به اکازیون')+'</button><label style="display:flex;align-items:center;gap:6px;font-size:12px">ترتیب <input id="featuredRank'+Number(p.id)+'" type="number" min="0" value="'+Number(p.featured_rank||0)+'" style="width:75px;padding:7px;border:1px solid var(--line);border-radius:7px"></label><button class="btn outline" onclick="saveFeaturedRank('+Number(p.id)+')">ذخیره ترتیب</button></div></div></article>').join('')}catch(e){$('featuredList').innerHTML='<div class="empty">دریافت آگهی‌ها ناموفق بود: '+esc(e.message)+'</div>'}}
+async function toggleFeatured(id,value){if(!isAdmin)return;const {error}=await db.from('properties').update({is_featured:value}).eq('id',id);if(error){$('featuredMessage').textContent='تغییر وضعیت انجام نشد: '+error.message;return}$('featuredMessage').textContent=value?'ملک به بخش اکازیون اضافه شد.':'ملک از بخش اکازیون برداشته شد.';await loadFeaturedProperties()}
+async function saveFeaturedRank(id){const rank=Number($('featuredRank'+id).value);if(!Number.isInteger(rank)||rank<0){$('featuredMessage').textContent='ترتیب نمایش باید عدد صحیح صفر یا بیشتر باشد.';return}const {error}=await db.from('properties').update({featured_rank:rank}).eq('id',id);if(error){$('featuredMessage').textContent='ذخیره ترتیب ناموفق بود: '+error.message;return}$('featuredMessage').textContent='ترتیب نمایش ذخیره شد.';await loadFeaturedProperties()}
+function resetAdForm(){$('adForm').reset();$('adId').value='';$('adActive').checked=true;$('adOrder').value='0';$('adSaveBtn').textContent='ثبت تبلیغ'}
+function editAdvertisement(id){const x=window.adCache?.find(v=>Number(v.id)===Number(id));if(!x)return;$('adId').value=x.id;$('adTitle').value=x.title||'';$('adImage').value=x.image_url||'';$('adTarget').value=x.target_url||'';$('adPlacement').value=x.placement||'home_top';$('adOrder').value=x.sort_order||0;$('adStart').value=localDateValue(x.starts_at);$('adEnd').value=localDateValue(x.ends_at);$('adActive').checked=!!x.is_active;$('adDescription').value=x.description||'';$('adSaveBtn').textContent='ذخیره ویرایش';$('adsPanel').scrollIntoView({behavior:'smooth',block:'start'})}
+async function loadAdvertisements(){if(!isAdmin)return;$('adList').innerHTML='<div class="loading">در حال دریافت تبلیغات…</div>';try{const {data,error}=await db.from('site_advertisements').select('id,title,description,image_url,target_url,placement,is_active,starts_at,ends_at,sort_order,created_at').order('sort_order',{ascending:true}).order('created_at',{ascending:false}).limit(200);if(error)throw error;window.adCache=data||[];if(!data?.length){$('adList').innerHTML='<div class="empty">هنوز تبلیغی ثبت نشده است.</div>';return}const places={home_top:'زیر تصویر اصلی',home_middle:'بعد از دسته‌بندی‌ها',home_bottom:'پایین آگهی‌ها'};$('adList').innerHTML=data.map(x=>'<article class="module-row"><img src="'+esc(x.image_url)+'" alt="" loading="lazy"><div><h3>'+esc(x.title)+'</h3><p>'+esc(places[x.placement]||x.placement)+' · '+(x.is_active?'فعال':'غیرفعال')+' · ترتیب '+Number(x.sort_order||0)+'</p><p>'+esc(x.description||x.target_url)+'</p><div class="module-actions"><button class="btn outline" onclick="editAdvertisement('+Number(x.id)+')">ویرایش</button><button class="btn '+(x.is_active?'outline':'primary')+'" onclick="toggleAdvertisement('+Number(x.id)+','+(!x.is_active)+')">'+(x.is_active?'غیرفعال کردن':'فعال کردن')+'</button><button class="btn danger" onclick="deleteAdvertisement('+Number(x.id)+')">حذف</button></div></div></article>').join('')}catch(e){$('adList').innerHTML='<div class="empty">دریافت تبلیغات ناموفق بود: '+esc(e.message)+'</div>'}}
+async function saveAdvertisement(event){event.preventDefault();if(!isAdmin)return;const title=$('adTitle').value.trim(),image=$('adImage').value.trim(),target=$('adTarget').value.trim();const validURL=x=>/^https?:\/\//i.test(x)||(/^\/(?!\/)/.test(x));if(!title||!validURL(image)||!validURL(target)){$('adMessage').textContent='عنوان و نشانی مستقیم تصویر و لینک مقصد را صحیح وارد کنید.';return}const start=$('adStart').value,end=$('adEnd').value;if(start&&end&&new Date(start)>=new Date(end)){$('adMessage').textContent='زمان پایان باید بعد از زمان شروع باشد.';return}const {data:{user}}=await db.auth.getUser();const payload={title,image_url:image,target_url:target,description:$('adDescription').value.trim()||null,placement:$('adPlacement').value,is_active:$('adActive').checked,sort_order:Number($('adOrder').value)||0,starts_at:start?new Date(start).toISOString():null,ends_at:end?new Date(end).toISOString():null,updated_at:new Date().toISOString()};const id=$('adId').value;const b=$('adSaveBtn');b.disabled=true;try{let result;if(id)result=await db.from('site_advertisements').update(payload).eq('id',Number(id));else result=await db.from('site_advertisements').insert({...payload,created_by:user.id});if(result.error)throw result.error;$('adMessage').textContent=id?'تبلیغ ویرایش شد.':'تبلیغ ثبت شد.';resetAdForm();await loadAdvertisements()}catch(e){$('adMessage').textContent='ذخیره تبلیغ ناموفق بود: '+e.message}finally{b.disabled=false}}
+async function toggleAdvertisement(id,value){const {error}=await db.from('site_advertisements').update({is_active:value,updated_at:new Date().toISOString()}).eq('id',id);if(error){$('adMessage').textContent='تغییر وضعیت تبلیغ ناموفق بود: '+error.message;return}await loadAdvertisements()}
+async function deleteAdvertisement(id){if(!confirm('این تبلیغ حذف شود؟'))return;const {error}=await db.from('site_advertisements').delete().eq('id',id);if(error){$('adMessage').textContent='حذف تبلیغ ناموفق بود: '+error.message;return}resetAdForm();$('adMessage').textContent='تبلیغ حذف شد.';await loadAdvertisements()}
+
 renderFilters();switchTabOnSession();
 </script>
 </body></html>
