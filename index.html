@@ -232,6 +232,59 @@ body.modal-open{overflow:hidden}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
 }
+
+/* Premium Signature 058 — visual refresh */
+:root{--primary:#c9a45f;--gold:#c9a45f;--gold-light:#f0d59a;--gold-deep:#98743b;--ink:#091725;--ink-2:#12283a;--text:#263441;--muted:#8c9296;--bg:#f4f1ea;--paper:#fffdf8;--surface:#f8f5ee;--border:#e4dccd;--shadow:0 16px 42px rgba(6,20,32,.10)}
+body{background:#f4f1ea;color:#25313b}
+header{background:rgba(5,17,29,.97);border-bottom:1px solid rgba(201,164,95,.55);box-shadow:0 8px 30px #06111f25}
+.brand-icon{background:linear-gradient(145deg,#f0d59a,#b88d49);border-radius:50%;box-shadow:0 0 0 1px #f4dfb1aa,inset 0 1px 0 #fff}
+.brand h1{letter-spacing:.2px}
+.hero.container{width:100%;max-width:none;margin:0;padding:clamp(54px,7vw,94px) max(5%,calc((100% - 1240px)/2)) 28px;min-height:480px;border:0;border-radius:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;background-image:linear-gradient(90deg,rgba(4,14,24,.22) 0%,rgba(5,17,29,.74) 47%,rgba(5,17,29,.96) 100%),url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2200&q=85');background-position:center;background-size:cover;background-repeat:no-repeat;box-shadow:inset 0 -70px 100px rgba(4,14,24,.35);position:relative}
+.hero:before{width:440px;height:440px;left:-180px;bottom:-300px;border-color:#d7b66e55;box-shadow:0 0 0 34px #d7b66e12,0 0 0 70px #d7b66e0b}
+.hero h2{max-width:650px;font-size:clamp(30px,4.4vw,54px);line-height:1.45;color:#fff;font-weight:900;text-shadow:0 3px 20px #0007}
+.hero h2:after{content:"";display:block;width:82px;height:3px;margin-top:18px;background:linear-gradient(90deg,#f0d59a,#a87d3e);border-radius:5px}
+.hero>p{font-size:15px;color:#eee5d4;margin:12px 0 28px}
+.search-panel{width:min(100%,940px);grid-template-columns:1fr 1fr 1.5fr auto;gap:8px;padding:10px;border-radius:16px;background:#fffdf8f5;border:1px solid #e7d7b5;box-shadow:0 18px 55px #0005}
+.search-panel input,.search-panel select{border:0;background:#f5f1e8}
+.search-panel .btn-primary{min-width:116px}
+.section{margin:42px auto}
+.section-heading{margin-bottom:20px}
+.section-heading h2{font-size:22px;color:#102337}
+.section-heading h2:after{width:48px;height:3px;background:linear-gradient(90deg,#c9a45f,#f0d59a)}
+#categories .categories{padding:10px;background:linear-gradient(115deg,#071725,#122a3d);border:1px solid #b99555;border-radius:18px;gap:0;box-shadow:0 15px 34px #07172520}
+#categories .category{background:transparent;border:0;border-radius:12px;box-shadow:none;min-height:125px}
+#categories .category:after{background:#d8b66f}
+#categories .category-icon{background:linear-gradient(145deg,#f1d99f,#b58a45);color:#102235;border-radius:15px;box-shadow:0 5px 16px #0003}
+#categories .category strong{color:#fff}
+#categories .category small{color:#d7c7a5}
+#categories .category:hover{background:#ffffff0b;transform:translateY(-2px)}
+.listing-tools{gap:9px}
+.filter-btn{border-radius:30px;padding:9px 17px;background:#fffdf8}
+.filter-btn.active{background:#102638;color:#f1d49a;border-color:#102638}
+.property-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.property-card{border:1px solid #e4dac8;border-radius:17px;box-shadow:0 10px 28px #1525350c}
+.property-card:hover{border-color:#c9a45f;box-shadow:0 18px 38px #1525351a}
+.property-image{height:220px;background:#e8e1d3}
+.property-type{background:#f1e6cf;border-color:#dfc894;color:#765b2d}
+.property-price{color:#99743c}
+.about{background:linear-gradient(120deg,#091b2a,#173449);border:1px solid #b99555;color:#f8f1e4;padding:32px}
+.about h2{color:#f4d89e}
+.about p{color:#d9d9d2}
+footer{background:linear-gradient(120deg,#061522,#132d40);border-top:2px solid #c9a45f}
+@media(max-width:760px){
+ .hero.container{width:100%;margin:0;min-height:420px;padding:48px 20px 22px;background-position:38% center;background-image:linear-gradient(180deg,rgba(5,17,29,.35),rgba(5,17,29,.94) 70%),url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1100&q=82')}
+ .hero h2{font-size:27px;max-width:100%}
+ .hero>p{font-size:12px}
+ .search-panel{grid-template-columns:1fr 1fr;gap:7px}
+ #categories .categories{padding:7px;border-radius:15px}
+ #categories .category{flex:0 0 102px;min-height:108px}
+ .property-grid{display:flex;flex-direction:column;gap:11px}
+ .property-card{border-radius:13px}
+ .property-image{height:auto;min-height:132px}
+ .section{margin:28px auto}
+ .about{padding:20px}
+}
+
 </style>
 </head><body>
 <header><div class="container header-inner"><a class="brand" href="#home"><div class="brand-icon" id="brandIcon" aria-label="نشان املاک ۰۵۸"><svg viewBox="0 0 48 48" role="img" aria-hidden="true" style="width:29px;height:29px;display:block"><path d="M6 22 24 7l18 15" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 20v21h24V20M20 41V28h8v13" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/></svg></div><div><h1>املاک ۰۵۸</h1><small>نیازمندی‌های املاک ۰۵۸</small></div></a><nav><a href="#home">صفحه اصلی</a><a href="#categories">دسته‌بندی‌ها</a><a href="#listings">آگهی‌ها</a><a href="/commission.html">محاسبه کمیسیون</a><a href="/iran/assistant.html" target="_blank" rel="noopener noreferrer">دستیار حقوقی هوشمند ⚖</a></nav><div style="display:flex;gap:7px;align-items:center"><button class="btn btn-outline" id="accountButton" onclick="openAuthModal()">ورود پیامکی</button><button class="btn btn-outline" onclick="openInbox()">پیام‌ها</button><button class="btn btn-primary" onclick="openModal()">+ ثبت آگهی رایگان</button></div></div></header>
