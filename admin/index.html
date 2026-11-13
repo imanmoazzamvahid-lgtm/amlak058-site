@@ -95,7 +95,7 @@
 <div class="stat"><small>آگهی‌های منتشرشده</small><strong id="statApproved">۰</strong></div>
 </div>
 <section class="panel" id="contentPanel">
-<div class="toolbar"><div><h2 id="sectionTitle">درخواست‌های ربات تلگرام</h2><p class="hint">اطلاعات تماس مشتری فقط برای مدیر مجاز نمایش داده می‌شود.</p></div><button class="btn outline" onclick="refreshCurrent()">به‌روزرسانی</button></div>
+<div class="toolbar" id="contentToolbar"><div><h2 id="sectionTitle">درخواست‌های ربات تلگرام</h2><p class="hint">اطلاعات تماس مشتری فقط برای مدیر مجاز نمایش داده می‌شود.</p></div><button class="btn outline" onclick="refreshCurrent()">به‌روزرسانی</button></div>
 <nav class="tabs">
 <button class="tab active" data-tab="leads" onclick="switchTab('leads',this)">درخواست‌های ربات</button>
 <button class="tab" data-tab="requests" onclick="switchTab('requests',this)">درخواست‌های سایت</button>
@@ -169,7 +169,7 @@ function switchTab(tab,el){
  activeTab=tab;
  document.querySelectorAll('.tabs .tab[data-tab]').forEach(x=>x.classList.toggle('active',x.dataset.tab===tab));
  const special={featured:'featuredPanel',ads:'adsPanel',design:'designPanel'};
- $('contentPanel').classList.toggle('hidden',!!special[tab]);
+ $('contentPanel').classList.remove('hidden');$('contentToolbar').classList.toggle('hidden',!!special[tab]);$('searchField').classList.toggle('hidden',!!special[tab]);$('filters').classList.toggle('hidden',!!special[tab]);$('list').classList.toggle('hidden',!!special[tab]);$('appMsg').classList.toggle('hidden',!!special[tab]);
  Object.entries(special).forEach(([k,id])=>$(id).classList.toggle('hidden',k!==tab));
  if(tab==='featured'){loadFeaturedProperties();return}
  if(tab==='ads'){loadAdvertisements();return}
