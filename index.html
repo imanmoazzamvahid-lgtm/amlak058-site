@@ -343,6 +343,36 @@ footer{background:linear-gradient(120deg,#061522,#132d40);border-top:2px solid #
 .legal-ai-entry .ai-action{white-space:nowrap;border-radius:11px;padding:9px 14px;background:#d4b777;color:#15283a;font-size:12px;font-weight:800}
 @media(max-width:600px){.legal-ai-entry{margin:12px auto 5px;padding:14px;gap:11px}.legal-ai-entry .ai-mark{width:42px;height:42px;flex-basis:42px}.legal-ai-entry strong{font-size:14px}.legal-ai-entry p{font-size:10px}.legal-ai-entry .ai-action{font-size:10px;padding:8px 9px}}
 
+
+/* Iman 058 property AI assistant */
+#amlak-ai-launcher{position:fixed;left:22px;bottom:22px;z-index:150;display:flex;align-items:center;gap:9px;border:1px solid #dec48f;border-radius:999px;padding:12px 17px;background:linear-gradient(135deg,#e5d0a3,#b5945e);color:#172838;font:800 13px Vazirmatn,Tahoma,sans-serif;box-shadow:0 12px 32px #0b1b2b35;cursor:pointer;transition:transform .2s,box-shadow .2s}
+#amlak-ai-launcher:hover{transform:translateY(-2px);box-shadow:0 16px 36px #0b1b2b45}
+#amlak-ai-launcher .ai-spark{font-size:18px}
+#amlak-ai-panel{position:fixed;left:22px;bottom:84px;z-index:151;width:min(390px,calc(100vw - 28px));height:min(590px,calc(100dvh - 120px));min-height:390px;display:none;flex-direction:column;overflow:hidden;border:1px solid #d8c69f;border-radius:19px;background:#fffdf8;box-shadow:0 24px 70px #0a172533;color:#26333d}
+#amlak-ai-panel.is-open{display:flex}
+#amlak-ai-head{display:flex;align-items:center;gap:11px;padding:14px 15px;background:linear-gradient(115deg,#10243a,#1b3a52);color:#fff;flex:none}
+#amlak-ai-head .ai-badge{width:39px;height:39px;display:grid;place-items:center;border:1px solid #d2b879;border-radius:12px;color:#f0d99e;background:#ffffff0d;font-size:20px}
+#amlak-ai-head .ai-head-copy{flex:1;min-width:0}
+#amlak-ai-head strong{display:block;color:#f4dfad;font-size:13px}
+#amlak-ai-head small{display:block;color:#d8e0e5;font-size:10px;margin-top:2px}
+#amlak-ai-close{width:34px;height:34px;border:1px solid #ffffff38;border-radius:9px;background:#ffffff10;color:#fff;font-size:20px;cursor:pointer}
+#amlak-ai-messages{flex:1;overflow:auto;padding:13px;background:#f6f2e9;display:flex;flex-direction:column;gap:10px;overscroll-behavior:contain}
+.amlak-ai-msg{max-width:92%;padding:10px 12px;border:1px solid #e5dfd3;border-radius:13px;background:#fff;color:#29353d;font-size:12px;line-height:1.95;white-space:pre-wrap;overflow-wrap:anywhere}
+.amlak-ai-msg.user{align-self:flex-start;background:#e9dfcd;border-color:#dfcfad}
+.amlak-ai-msg.assistant{align-self:flex-end}
+.amlak-ai-msg.error{border-color:#e7c8c0;background:#fff4f1;color:#8e3d32}
+#amlak-ai-suggestions{display:flex;gap:6px;flex-wrap:wrap;padding:9px 11px 3px;background:#fffdf8;flex:none}
+#amlak-ai-suggestions button{border:1px solid #e0d5c1;border-radius:999px;padding:6px 9px;background:#f7f1e5;color:#695333;font:500 10px Vazirmatn,Tahoma,sans-serif;cursor:pointer}
+#amlak-ai-form{display:flex;align-items:flex-end;gap:8px;padding:10px 11px 12px;background:#fffdf8;border-top:1px solid #ece4d7;flex:none}
+#amlak-ai-input{min-height:44px;max-height:110px;resize:vertical;border:1px solid #ded6c8;border-radius:11px;background:#fff;padding:9px 11px;outline:none;font:12px/1.8 Vazirmatn,Tahoma,sans-serif;color:#26333d}
+#amlak-ai-input:focus{border-color:#b99a63;box-shadow:0 0 0 3px #b99a6318}
+#amlak-ai-send{height:44px;min-width:64px;border:0;border-radius:10px;background:#b99a63;color:#172838;font:800 11px Vazirmatn,Tahoma,sans-serif;cursor:pointer}
+#amlak-ai-send:disabled{opacity:.55;cursor:wait}
+.amlak-ai-results{display:grid;gap:7px;width:100%;max-width:92%;align-self:flex-end}
+.amlak-ai-result{display:block;padding:9px 11px;border:1px solid #e0d2b8;border-radius:11px;background:#fff;color:#34414a;text-decoration:none;font-size:11px;line-height:1.8}
+.amlak-ai-result strong{display:block;color:#80643a;font-size:12px}
+.amlak-ai-result small{display:block;color:#7d8586;font-size:10px}
+@media(max-width:600px){#amlak-ai-launcher{left:12px;bottom:15px;padding:10px 13px;font-size:11px}#amlak-ai-panel{left:10px;bottom:70px;width:calc(100vw - 20px);height:min(72dvh,570px);min-height:360px;border-radius:17px}#amlak-ai-messages{padding:10px}#amlak-ai-suggestions{padding-inline:8px}#amlak-ai-form{padding:8px}#amlak-ai-send{min-width:58px}}
 </style>
 
 <style id="amlak058-theme-presets">
@@ -466,4 +496,39 @@ async function loadPublicFeaturedProperties(){const list=document.getElementById
 
 async function loadPublicSiteSettings(){try{const {data,error}=await db.from('site_settings').select('settings').eq('id',1).maybeSingle();if(error){console.warn('تنظیمات عمومی در دسترس نیست:',error.message);return}if(!data?.settings)return;const s=data.settings;applySiteTheme(s.theme_key||'signature');function setText(selector,value){const el=document.querySelector(selector);if(el&&typeof value==='string'&&value.trim())el.textContent=value}setText('header .brand h1',s.site_name);setText('header .brand small',s.tagline);setText('.hero h2',s.hero_title);setText('.hero > p',s.hero_subtitle);setText('#listings .section-heading h2',s.listings_title);setText('.about h2',s.about_title);setText('.about p',s.about_text);setText('footer .footer-inner > div:first-child > strong',s.site_name);if(s.phone)document.getElementById('footerPhone').textContent='تماس با مدیریت سایت: '+s.phone;if(!s.theme_key&&typeof s.primary_color==='string'&&/^#[0-9a-fA-F]{6}$/.test(s.primary_color)){document.documentElement.style.setProperty('--primary',s.primary_color);const h=s.primary_color.slice(1),rgb=[0,2,4].map(i=>parseInt(h.slice(i,i+2),16));document.documentElement.style.setProperty('--dark','#'+rgb.map(n=>Math.max(0,n-25).toString(16).padStart(2,'0')).join(''))}const icon=document.getElementById('brandIcon');if(icon&&s.logo_url){icon.innerHTML='';icon.style.background='transparent';const img=document.createElement('img');img.src=s.logo_url;img.alt=s.site_name||'لوگوی سایت';img.style.cssText='width:100%;height:100%;object-fit:contain';icon.appendChild(img)}if(s.banner_url){const hero=document.querySelector('.hero');hero.style.backgroundImage='linear-gradient(#ffffffd9,#ffffffd9),url("'+s.banner_url.replace(/["\\]/g,'')+'")';hero.style.backgroundSize='cover';hero.style.backgroundPosition='center';hero.style.borderRadius='12px'}}catch(error){console.warn('تنظیمات عمومی بارگذاری نشد:',error)}}
 applySiteTheme("signature");loadPublicSiteSettings();loadProperties();loadPublicFeaturedProperties();loadPublicAdvertisements();refreshAuthState();
-</script></body></html>
+</script>
+<button id="amlak-ai-launcher" type="button" aria-controls="amlak-ai-panel" aria-expanded="false"><span class="ai-spark" aria-hidden="true">✦</span><span>دستیار هوشمند املاک</span></button>
+<section id="amlak-ai-panel" role="dialog" aria-label="دستیار هوشمند املاک" aria-modal="false">
+  <header id="amlak-ai-head"><span class="ai-badge" aria-hidden="true">✦</span><span class="ai-head-copy"><strong>دستیار هوشمند املاک ۰۵۸</strong><small>پرسش ملکی و جست‌وجوی آگهی‌های تأییدشده</small></span><button id="amlak-ai-close" type="button" aria-label="بستن">×</button></header>
+  <div id="amlak-ai-messages" aria-live="polite"><div class="amlak-ai-msg assistant">سلام، من دستیار هوشمند املاک ۰۵۸ هستم. درباره خرید، فروش، رهن و اجاره بپرسید؛ همچنین می‌توانم آگهی‌های تأییدشده سایت را بر اساس نیازتان جست‌وجو کنم.</div></div>
+  <div id="amlak-ai-suggestions"><button type="button" data-prompt="برای خرید آپارتمان در بجنورد چه نکاتی را بررسی کنم؟">راهنمای خرید</button><button type="button" data-prompt="آگهی‌های آپارتمان برای فروش را نشان بده">آپارتمان‌های فروشی</button><button type="button" data-prompt="برای رهن و اجاره چه اطلاعاتی لازم است؟">رهن و اجاره</button></div>
+  <form id="amlak-ai-form"><textarea id="amlak-ai-input" rows="1" maxlength="900" placeholder="سؤال خود را بنویسید…" aria-label="متن پرسش"></textarea><button id="amlak-ai-send" type="submit">ارسال</button></form>
+</section>
+<script>
+(function(){
+  'use strict';
+  const endpoint='https://lsttrmnxauaviyuipnim.supabase.co/functions/v1/property-ai-assistant';
+  const apiKey='sb_publishable_V3ZIfuzEZ4y7KUY88lyv_Q_wF6kQAcb';
+  const launcher=document.getElementById('amlak-ai-launcher');
+  const panel=document.getElementById('amlak-ai-panel');
+  const closeBtn=document.getElementById('amlak-ai-close');
+  const form=document.getElementById('amlak-ai-form');
+  const input=document.getElementById('amlak-ai-input');
+  const sendBtn=document.getElementById('amlak-ai-send');
+  const messages=document.getElementById('amlak-ai-messages');
+  const suggestions=document.getElementById('amlak-ai-suggestions');
+  const history=[];
+  let busy=false;
+  function toggle(open){panel.classList.toggle('is-open',open);launcher.setAttribute('aria-expanded',String(open));if(open)setTimeout(()=>input.focus(),60)}
+  function addMessage(role,text,error){const el=document.createElement('div');el.className='amlak-ai-msg '+role+(error?' error':'');el.textContent=String(text||'');messages.appendChild(el);messages.scrollTop=messages.scrollHeight;return el}
+  function addResults(items){if(!Array.isArray(items)||!items.length)return;const wrap=document.createElement('div');wrap.className='amlak-ai-results';items.slice(0,4).forEach(p=>{if(!p||!p.id)return;const a=document.createElement('a');a.className='amlak-ai-result';a.href='/v/?id='+encodeURIComponent(String(p.id));const title=document.createElement('strong');title.textContent=p.title||'مشاهده آگهی ملک';const detail=document.createElement('small');const bits=[p.city,p.transaction_type,p.property_type,p.area?Number(p.area).toLocaleString('fa-IR')+' متر':''].filter(Boolean);detail.textContent=bits.join(' · ');a.append(title,detail);wrap.appendChild(a)});if(wrap.childElementCount){messages.appendChild(wrap);messages.scrollTop=messages.scrollHeight}}
+  async function ask(text){const question=String(text||'').trim();if(!question||busy)return;if(question.length>900){addMessage('assistant','متن پرسش بیش از حد طولانی است.',true);return}busy=true;sendBtn.disabled=true;input.disabled=true;addMessage('user',question);const pending=addMessage('assistant','در حال بررسی پرسش و آگهی‌های سایت…');try{const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','apikey':apiKey,'Authorization':'Bearer '+apiKey},body:JSON.stringify({message:question,history:history.slice(-8)})});const data=await response.json().catch(()=>({}));if(!response.ok||!data.answer)throw new Error(data.message||'پاسخی دریافت نشد؛ لطفاً دوباره تلاش کنید.');pending.textContent=data.answer;history.push({role:'user',content:question},{role:'assistant',content:data.answer});if(history.length>12)history.splice(0,history.length-12);addResults(data.matches)}catch(error){pending.classList.add('error');pending.textContent=error.message||'ارتباط با دستیار هوشمند برقرار نشد.'}finally{busy=false;sendBtn.disabled=false;input.disabled=false;input.value='';input.focus();messages.scrollTop=messages.scrollHeight}}
+  launcher.addEventListener('click',()=>toggle(!panel.classList.contains('is-open')));
+  closeBtn.addEventListener('click',()=>toggle(false));
+  form.addEventListener('submit',e=>{e.preventDefault();ask(input.value)});
+  input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();form.requestSubmit()}});
+  suggestions.addEventListener('click',e=>{const btn=e.target.closest('button[data-prompt]');if(btn)ask(btn.dataset.prompt)});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&panel.classList.contains('is-open'))toggle(false)});
+})();
+</script>
+</body></html>
