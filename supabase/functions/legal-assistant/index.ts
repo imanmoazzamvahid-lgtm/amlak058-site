@@ -183,15 +183,7 @@ Deno.serve(async (req: Request) => {
   const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
-  const { data: quotaAllowed, error: quotaError } = await supabaseAdmin.rpc("consume_legal_ai_quota", {
-    p_user_id: user.id,
-  });
-  if (quotaError) {
-    return json({ error: "usage_limit_check_failed" }, 500, origin);
-  }
-  if (!quotaAllowed) {
-    return json({ error: "rate_limit_exceeded", message: "سقف ۳۰ پرسش در هر ساعت برای این حساب تکمیل شده است. بعداً دوباره تلاش کنید." }, 429, origin);
-  }
+  // Usage quota is enforced by the authenticated inference worker.
 
   const requestedMode = body.audience_mode === "professional" ? "professional" : body.audience_mode === "public" ? "public" : null;
   let conversationId = body.conversation_id;
@@ -412,7 +404,38 @@ ${modeInstructions}
 منابع بازیابی‌شده:
 ${sourceContext}`;
 
-  const answer = buildEngineAnswer(question, sources, audienceMode);
+  // The authenticated inference worker validates the session and enforces the per-user quota.
+  let answer = "";
+  let modelName = "";
+  try {
+    const inferenceResponse = await fetch("https://iran-legal-ai-inference.imanmoazzamvahid.workers.dev", {
+      method: "POST",
+      headers: {
+        "Authorization": authHeader,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        system_prompt: systemPrompt,
+        messages: [...previousMessages, { role: "user", content: question }],
+      }),
+    });
+    const inferencePayload = await inferenceResponse.json();
+    if (!inferenceResponse.ok) {
+      return json({
+        error: String(inferencePayload.error ?? "model_inference_failed"),
+        message: String(inferencePayload.message ?? "تولید پاسخ با مدل زبانی انجام نشد."),
+      }, inferenceResponse.status, origin);
+    }
+    answer = String(inferencePayload.answer ?? "").trim();
+    modelName = String(inferencePayload.model ?? "");
+    if (!answer) throw new Error("empty_model_answer");
+  } catch (modelError) {
+    console.error("Legal model inference failed", modelError);
+    return json({
+      error: "model_inference_failed",
+      message: "مدل زبانی در حال حاضر پاسخ قابل استفاده‌ای تولید نکرد. لطفاً دوباره تلاش کنید.",
+    }, 502, origin);
+  }
 
   const citations = sources.map((s: Record<string, unknown>) => ({
     ref: s.ref,
@@ -455,6 +478,7 @@ ${sourceContext}`;
     citations,
     retrieved_source_count: sources.length,
     retrieval_method: retrievalMethod,
-    note: "پاسخ بر پایه منابع بازیابی‌شده از بانک حقوقی سامانه تهیه شده است.",
+    model: modelName,
+    note: "پاسخ با مدل زبانی و بر پایه منابع بازیابی‌شده از بانک حقوقی سامانه تهیه شده است.",
   }, 200, origin);
 });
