@@ -2,91 +2,346 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#172b43">
-<title>ایران | پایگاه جست‌وجوی قوانین و مقررات جمهوری اسلامی ایران</title>
-<meta name="description" content="پایگاه جست‌وجوی مستندات حقوقی ایران؛ قوانین، مقررات، آرای وحدت رویه و نظریات مشورتی با ارجاع به منبع رسمی.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/dist/umd/supabase.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#12243a">
+<title>هوش حقوقی ایران</title>
 <style>
-:root{--navy:#172b43;--navy2:#243e5b;--gold:#c8a76b;--paper:#f6f5f1;--ink:#202b38;--muted:#687789;--line:#e5e2d9;--white:#fff;--green:#27735c;--red:#a3443e}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.85}.wrap{max-width:1120px;width:calc(100% - 32px);margin:auto}
-header{height:76px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{display:flex;align-items:center;gap:11px;color:var(--navy);font-weight:800;font-size:19px;text-decoration:none}.mark{width:44px;height:44px;border:1px solid var(--gold);border-radius:13px;display:grid;place-items:center;color:#96733e;font-size:23px;background:#fff}.brand small{display:block;font-size:10px;font-weight:500;color:var(--muted);line-height:1.5}.back{color:var(--navy);text-decoration:none;border:1px solid var(--line);padding:8px 14px;border-radius:10px;background:#fff;font-size:12px}
-.hero{margin:22px 0 20px;padding:35px;border-radius:23px;background:linear-gradient(125deg,var(--navy),var(--navy2));color:#fff;position:relative;overflow:hidden}.hero:after{content:"⚖";position:absolute;left:35px;top:10px;color:#ffffff0e;font-size:180px;line-height:1}.eyebrow{color:#e4cc9d;font-size:12px;font-weight:700}.hero h1{font-size:clamp(24px,4vw,36px);margin:8px 0 4px;line-height:1.5}.hero p{color:#d3dce5;margin:0;max-width:720px;font-size:14px}
-.searchbox{display:flex;gap:9px;max-width:820px;padding:8px;background:#fff;border-radius:14px;margin-top:22px;position:relative;z-index:1}.searchbox input{flex:1;min-width:0;border:0;outline:0;padding:10px 12px;font:inherit;font-size:14px;color:var(--ink)}button{font:inherit;cursor:pointer}.searchbox button,.btn{border:0;border-radius:10px;padding:10px 18px;font-weight:700}.searchbox button,.btn-primary{background:var(--gold);color:#172b43}.searchbox button:disabled{opacity:.6;cursor:wait}.help{font-size:11px;color:#d3dce5;margin-top:8px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0 26px}.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 18px}.stat strong{display:block;font-size:23px;color:var(--navy);line-height:1.4}.stat span{font-size:11px;color:var(--muted)}
-.section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:26px 0 12px}.section-title h2{font-size:18px;margin:0;color:var(--navy)}.section-title small{font-size:11px;color:var(--muted)}
-.filters{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 16px}.filter{border:1px solid var(--line);background:#fff;padding:7px 12px;border-radius:9px;font-size:12px;color:#526172}.filter.active{background:#efe9dc;border-color:#d8c49e;color:#614d2b;font-weight:700}
-.results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:17px;min-width:0}.card h3{font-size:15px;color:var(--navy);margin:0 0 7px}.meta{font-size:11px;color:var(--muted);display:flex;flex-wrap:wrap;gap:5px 12px}.type{display:inline-block;background:#f2eee5;color:#82663a;border-radius:7px;padding:2px 8px;font-size:10px;font-weight:700}.excerpt{font-size:12px;color:#475363;margin:12px 0 8px;white-space:pre-wrap;overflow-wrap:anywhere}.source-link{font-size:11px;color:#315d81;text-decoration:none;font-weight:700;display:inline-block;margin-top:8px}.source-link:hover{text-decoration:underline}.empty,.notice{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;color:var(--muted);font-size:13px}.empty{grid-column:1/-1;text-align:center}.empty strong{display:block;color:var(--navy);font-size:15px;margin-bottom:6px}.notice{margin:18px 0;background:#f0eee8;border-right:3px solid var(--gold);font-size:11px}.status{font-size:11px;color:var(--muted);margin:8px 0}.status.error{color:var(--red)}.assistant{margin-top:28px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:19px}.assistant h2{font-size:16px;margin:0 0 5px;color:var(--navy)}.assistant p{font-size:12px;color:var(--muted);margin:0}.assistant .pill{display:inline-block;background:#f1eee7;color:#80653a;padding:3px 9px;border-radius:8px;font-size:10px;font-weight:700;margin-top:10px}
-footer{padding:24px 0 35px;text-align:center;color:#9098a1;font-size:10px}
-@media(max-width:680px){.wrap{width:calc(100% - 22px)}header{height:68px}.brand{font-size:16px}.mark{width:39px;height:39px}.back{font-size:10px;padding:7px 10px}.hero{padding:24px 17px;margin-top:15px}.hero:after{font-size:120px;left:5px;top:35px}.hero p{font-size:12px}.searchbox{gap:5px}.searchbox input{font-size:12px;padding:8px 7px}.searchbox button{font-size:11px;padding:8px 10px}.stats{gap:7px}.stat{padding:11px 9px}.stat strong{font-size:19px}.stat span{font-size:9px}.results{grid-template-columns:1fr}.section-title h2{font-size:16px}}
+:root{--navy:#12243a;--navy2:#1d3552;--teal:#16877d;--gold:#c9a86a;--paper:#f5f3ee;--white:#fff;--ink:#1c2938;--muted:#718093;--line:#e6e8eb;--soft:#eef4f3;--danger:#a34141}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Tahoma,"Vazirmatn",Arial,sans-serif;line-height:1.8}
+button,input,textarea{font:inherit}button{cursor:pointer}
+.auth-wrap{min-height:100dvh;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 15% 12%,#e4e9e3 0,transparent 38%),var(--paper)}
+.auth-card{width:min(100%,460px);background:#fff;border:1px solid var(--line);border-radius:24px;padding:30px;box-shadow:0 20px 55px #12243a12}
+.brand{display:flex;align-items:center;gap:12px}.seal{width:46px;height:46px;border-radius:15px;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:22px;border:2px solid var(--gold)}
+.brand h1{font-size:20px;margin:0;color:var(--navy)}.brand p{margin:0;color:var(--muted);font-size:12px}
+.auth-title{margin:28px 0 6px;font-size:22px;color:var(--navy)}.muted{color:var(--muted);font-size:13px}
+.field{display:block;margin:15px 0 0}.field span{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.field input,.composer textarea{width:100%;border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px 14px;outline:none;color:var(--ink)}
+.field input:focus,.composer textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px #16877d18}
+.primary{background:var(--navy);color:white;border:0;border-radius:12px;padding:12px 18px;font-weight:700}.primary:hover{background:var(--navy2)}.primary:disabled{opacity:.55;cursor:wait}
+.secondary{background:#fff;color:var(--navy);border:1px solid var(--line);border-radius:11px;padding:9px 13px;font-size:13px}
+.auth-actions{display:flex;gap:10px;margin-top:18px;align-items:center;flex-wrap:wrap}.linkbtn{border:0;background:transparent;color:var(--teal);padding:4px;font-size:13px}
+.notice{padding:11px 13px;border-radius:11px;background:var(--soft);font-size:12px;color:#46625e;margin-top:17px}
+.message{font-size:13px;margin-top:13px;color:var(--danger);min-height:22px}
+#appView{display:none;min-height:100dvh}.topbar{height:72px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 24px;gap:12px;border-bottom:3px solid var(--gold)}
+.topbar .brand h1{color:#fff;font-size:18px}.topbar .brand p{color:#c9d5e2}.topbar-right{display:flex;gap:14px;align-items:center;font-size:12px;color:#dbe3eb}
+.app-grid{display:grid;grid-template-columns:290px minmax(0,1fr);min-height:calc(100dvh - 72px);max-width:1500px;margin:auto}
+.sidebar{background:#fff;border-left:1px solid var(--line);padding:18px;display:flex;flex-direction:column;gap:18px}
+.sidebar h3{font-size:13px;color:var(--navy);margin:0 0 8px}.side-new{width:100%;display:flex;justify-content:center;gap:8px}
+.history{display:flex;flex-direction:column;gap:5px;max-height:280px;overflow:auto}.history button{border:0;background:transparent;text-align:right;border-radius:10px;padding:9px 10px;color:#49596b;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.history button.active,.history button:hover{background:var(--soft);color:var(--navy)}
+.sources{display:flex;flex-direction:column;gap:10px}.admin-form{padding-top:10px}.admin-form .field{margin-top:9px}.admin-form input,.admin-form textarea,.admin-form select{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px;background:#fff;color:var(--ink);font:inherit;font-size:12px}.admin-form .field span{font-size:11px}.admin-form button{width:100%;margin-top:12px}#adminPanel summary{cursor:pointer;color:var(--teal);font-weight:700;font-size:12px}.case-list{display:flex;flex-direction:column;gap:7px;margin-top:10px}.case-item{border:1px solid var(--line);border-radius:10px;padding:9px;font-size:12px;background:#fff}.case-item b{display:block;color:var(--navy);margin-bottom:3px}.case-item span{color:var(--muted);font-size:11px}.source-item{border-top:1px solid var(--line);padding-top:9px;font-size:12px}.source-item a{color:var(--teal);text-decoration:none;font-weight:700}.source-status{display:inline-block;border-radius:30px;background:#f8f0e1;color:#82662f;padding:1px 7px;font-size:10px;margin-top:4px}
+.disclaimer{margin-top:auto;background:#f7f7f5;border:1px solid var(--line);border-radius:13px;padding:12px;color:#6f7c89;font-size:11px}
+.main{padding:24px;display:flex;flex-direction:column;min-width:0;height:calc(100dvh - 72px)}
+.chat-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-bottom:14px;border-bottom:1px solid var(--line)}.chat-head h2{font-size:17px;color:var(--navy);margin:0}.chat-tools{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.mode-label{font-size:11px;color:var(--muted)}#audienceMode{border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);padding:7px 9px;font:inherit;font-size:12px}.doc-count{color:var(--muted);font-size:11px}
+.chat-scroll{flex:1;overflow:auto;padding:24px 8px;display:flex;flex-direction:column;gap:22px;scroll-behavior:smooth}
+.welcome{max-width:780px;margin:auto;text-align:center;padding:34px 12px}.welcome-mark{width:58px;height:58px;margin:0 auto 14px;border-radius:19px;background:linear-gradient(145deg,var(--navy),#294968);border:1px solid var(--gold);color:#fff;display:grid;place-items:center;font-size:26px;box-shadow:0 8px 22px #12243a18}.welcome h2{color:var(--navy);font-size:24px;margin:0 0 8px}.welcome p{color:var(--muted);font-size:13px;margin:0 auto 20px;max-width:600px}
+.suggestions{display:flex;flex-wrap:wrap;justify-content:center;gap:9px}.suggestions button{background:#fff;border:1px solid var(--line);border-radius:18px;color:#536273;padding:10px 14px;font-size:12px;transition:.15s}.suggestions button:hover{border-color:var(--teal);background:#f4faf8}
+.bubble{max-width:min(820px,94%);border-radius:18px;padding:15px 18px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;line-height:2;box-shadow:0 2px 10px #12243a08}.bubble.user{align-self:flex-start;background:#e9eef3;color:#243447;border-bottom-right-radius:5px}.bubble.assistant{align-self:flex-end;background:#fff;border:1px solid var(--line);border-bottom-left-radius:5px;width:min(900px,94%)}
+.bubble-label{font-size:10px;color:var(--muted);margin-bottom:7px;font-weight:700}.assistant .bubble-label{color:var(--teal)}.bubble-content{white-space:pre-wrap;line-height:2}.bubble-actions{display:flex;justify-content:flex-start;margin-top:9px}.copy-answer{border:1px solid var(--line);background:#fff;border-radius:8px;padding:4px 10px;color:var(--muted);font-size:11px}.copy-answer:hover{color:var(--teal);border-color:var(--teal)}
+.citations{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.citation{display:block;border:1px solid #dfe8e5;background:#f7fbfa;border-radius:10px;padding:8px 10px;font-size:11px;color:#36554f;text-decoration:none;max-width:100%}.citation b{display:block}
+.composer{border-top:1px solid var(--line);padding-top:14px;max-width:920px;width:100%;margin:0 auto}.composer-box{background:#fff;border:1px solid #d9dfe5;border-radius:20px;padding:10px;display:flex;gap:10px;align-items:flex-end;box-shadow:0 5px 24px #12243a0a}.composer-box:focus-within{border-color:#a9c9c1;box-shadow:0 0 0 3px #16877d12}.composer textarea{border:0;resize:vertical;min-height:54px;max-height:180px;box-shadow:none!important}.composer textarea:focus{border:0}.composer button{min-width:88px}
+.composer-note{font-size:10px;color:var(--muted);margin:6px 4px 0}.loading{color:var(--muted);font-size:12px}
+@media(max-width:800px){.app-grid{grid-template-columns:1fr}.sidebar{border-left:0;border-bottom:1px solid var(--line);padding:12px 15px}.sidebar .disclaimer{display:none}.sidebar section:nth-child(2){display:none}.history{flex-direction:row;max-height:none;overflow:auto}.history button{min-width:150px}.main{height:auto;min-height:calc(100dvh - 210px);padding:14px}.topbar{height:64px;padding:0 14px}.topbar-right{gap:7px}.topbar-right #userEmail{display:none}.bubble,.bubble.assistant{max-width:100%;width:100%}.welcome{margin:8px auto}.auth-card{padding:24px 20px}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-<a class="brand" href="/"><span class="mark">⚖</span><span>ایران<small>پایگاه حقوقی | املاک ۰۵۸</small></span></a>
-<a class="back" href="/">بازگشت به املاک ۰۵۸ ←</a>
-</header>
-<main>
-<section class="hero">
-<div class="eyebrow">پایگاه جست‌وجوی مستندات حقوقی</div>
-<h1>قوانین و مقررات جمهوری اسلامی ایران</h1>
-<p>جست‌وجو در متن اسناد حقوقی منتشرشده، همراه با مشخصات سند و پیوند منبع رسمی. هر نتیجه باید با نسخه رسمی و اصلاحات بعدی تطبیق داده شود.</p>
-<div class="searchbox"><input id="q" type="search" autocomplete="off" placeholder="عنوان قانون، شماره ماده یا عبارت موردنظر را بنویسید" aria-label="عبارت جست‌وجو"><button id="searchBtn" type="button">جست‌وجو</button></div>
-<div class="help">جست‌وجو فقط در اسنادی انجام می‌شود که پس از بررسی منبع، در پایگاه منتشر شده باشند.</div>
+<section id="authView" class="auth-wrap">
+  <div class="auth-card">
+    <div class="brand"><div class="seal">§</div><div><h1>هوش حقوقی ایران</h1><p>سامانه مستقل پژوهش و دستیار حقوقی</p></div></div>
+    <h2 class="auth-title" id="authHeading">ورود به حساب کاربری</h2>
+    <p class="muted">برای حفظ محرمانگی، گفت‌وگوها فقط در حساب خودتان ذخیره می‌شود.</p>
+    <form id="authForm">
+      <label class="field"><span>ایمیل</span><input id="email" type="email" autocomplete="email" required placeholder="name@example.com"></label>
+      <label class="field"><span>گذرواژه</span><input id="password" type="password" autocomplete="current-password" minlength="8" required placeholder="حداقل ۸ نویسه"></label>
+      <div class="auth-actions"><button class="primary" id="authSubmit" type="submit">ورود</button><button class="linkbtn" id="toggleAuth" type="button">ساخت حساب جدید</button></div>
+    </form>
+    <div class="notice">پاسخ‌ها بر اساس اسناد منتشرشده در بانک سامانه و با ذکر منبع ارائه می‌شوند. در صورت نبود سند معتبر، سامانه باید کمبود مستند را اعلام کند.</div>
+    <div id="authMessage" class="message" role="status"></div>
+  </div>
 </section>
-<section class="stats" aria-label="آمار پایگاه">
-<div class="stat"><strong id="sourceCount">—</strong><span>سند حقوقی منتشرشده</span></div>
-<div class="stat"><strong id="chunkCount">—</strong><span>بخش متنی قابل جست‌وجو</span></div>
-<div class="stat"><strong id="dbStatus">در حال اتصال</strong><span>وضعیت ارتباط با پایگاه</span></div>
+
+<section id="appView">
+  <header class="topbar">
+    <div class="brand"><div class="seal">§</div><div><h1>هوش حقوقی ایران</h1><p>پژوهش مستند در حقوق جمهوری اسلامی ایران</p></div></div>
+    <div class="topbar-right"><span id="userEmail"></span><button id="signOut" class="secondary" type="button">خروج</button></div>
+  </header>
+  <div class="app-grid">
+    <aside class="sidebar">
+      <section><button id="newChat" class="primary side-new" type="button">＋ گفت‌وگوی جدید</button></section>
+      <section><h3>گفت‌وگوهای اخیر</h3><div id="history" class="history"><span class="muted">هنوز گفت‌وگویی ثبت نشده است.</span></div></section>
+      <section id="casePanel"><h3>پرونده‌های من</h3><form id="caseForm" class="admin-form"><label class="field"><span>عنوان پرونده</span><input id="caseTitle" maxlength="240" required placeholder="مثلاً مطالبه وجه قرارداد"></label><label class="field"><span>شماره پرونده (اختیاری)</span><input id="caseNumber" maxlength="120"></label><label class="field"><span>مرجع رسیدگی (اختیاری)</span><input id="caseCourt" maxlength="200"></label><label class="field"><span>نوع پرونده</span><select id="caseType"><option value="civil">حقوقی</option><option value="criminal">کیفری</option><option value="family">خانواده</option><option value="commercial">تجاری</option><option value="administrative">اداری</option><option value="other">سایر</option></select></label><label class="field"><span>خلاصه اولیه (اختیاری)</span><textarea id="caseSummary" rows="3" maxlength="5000"></textarea></label><button class="primary" id="caseSubmit" type="submit">ایجاد پرونده</button><div id="caseMessage" class="message" role="status"></div></form><div id="caseList" class="case-list"><span class="muted">در حال دریافت پرونده‌ها…</span></div></section>
+      <section><h3>منابع مرجع سامانه</h3><div id="sourceCatalog" class="sources"><span class="muted">در حال دریافت فهرست منابع…</span></div></section>
+      <section id="adminPanel" hidden>
+        <details>
+          <summary>مدیریت بانک مستندات</summary>
+          <form id="adminForm" class="admin-form">
+            <label class="field"><span>عنوان سند</span><input id="adminTitle" required maxlength="300" placeholder="مثلاً قانون مدنی"></label>
+            <label class="field"><span>نوع سند</span><select id="adminSourceType"><option value="code">قانون جامع / کد</option><option value="act">قانون</option><option value="regulation">آیین‌نامه</option><option value="bylaw">اساسنامه</option><option value="circular">بخشنامه</option><option value="unification_vote">رأی وحدت رویه</option><option value="advisory_opinion">نظریه مشورتی</option><option value="judgment">رأی قضایی</option><option value="constitution">قانون اساسی</option><option value="other">سایر</option></select></label>
+            <label class="field"><span>مرجع صادرکننده</span><input id="adminAuthority" placeholder="مرجع تصویب یا صادرکننده"></label>
+            <label class="field"><span>شماره سند</span><input id="adminNumber" placeholder="شماره / شناسه"></label>
+            <label class="field"><span>موضوع حقوقی</span><input id="adminSubject" placeholder="مثلاً مسئولیت مدنی"></label>
+            <label class="field"><span>تاریخ تصویب</span><input id="adminEnactment" type="date"></label>
+            <label class="field"><span>تاریخ انتشار</span><input id="adminPublication" type="date"></label>
+            <label class="field"><span>شروع اعتبار</span><input id="adminEffectiveFrom" type="date"></label>
+            <label class="field"><span>پایان اعتبار</span><input id="adminEffectiveTo" type="date"></label>
+            <label class="field"><span>پیوند منبع رسمی (HTTPS)</span><input id="adminUrl" type="url" required placeholder="https://..."></label>
+            <label class="field"><span>متن سند</span><textarea id="adminContent" required minlength="200" maxlength="300000" placeholder="متن کامل یا متن استخراج‌شده سند؛ هر ماده را در پاراگراف جدا قرار دهید." style="min-height:180px"></textarea></label>
+            <label class="field"><span>یادداشت منبع / راستی‌آزمایی</span><textarea id="adminNotes" placeholder="شماره روزنامه رسمی، شماره صفحه یا توضیح تطبیق متن با نسخه رسمی" style="min-height:70px"></textarea></label><label class="field"><span>شماره روزنامه رسمی (اختیاری)</span><input id="adminGazetteNumber" maxlength="100" placeholder="شماره انتشار رسمی"></label><label class="field"><span>تاریخ روزنامه رسمی</span><input id="adminGazetteDate" type="date"></label><label class="field"><span>وضعیت اعتبار سند</span><select id="adminForceStatus"><option value="unknown">نامشخص / بررسی نشده</option><option value="in_force">لازم‌الاجرا</option><option value="amended">اصلاح‌شده</option><option value="repealed">نسخ‌شده</option><option value="expired">منقضی‌شده</option><option value="suspended">معلق</option></select></label><label class="field"><span><input id="adminForceChecked" type="checkbox" style="width:auto"> وضعیت اعتبار (نسخ، اصلاح یا انقضا) جداگانه بررسی شده است</span></label><label class="field"><span>توضیح و مستند بررسی وضعیت اعتبار</span><textarea id="adminForceNotes" maxlength="2000" placeholder="منبع بررسی نسخ یا اصلاح و نتیجه آن" style="min-height:65px"></textarea></label>
+            <label class="field"><span>وضعیت ذخیره</span><select id="adminStatus"><option value="draft">پیش‌نویس (در پاسخ‌ها استفاده نشود)</option><option value="published">انتشار پس از تأیید منبع رسمی</option></select></label>
+            <label class="field"><span><input id="adminVerified" type="checkbox" style="width:auto"> متن با منبع رسمی تطبیق داده شده است</span></label>
+            <button id="adminSubmit" class="primary" type="submit">ثبت سند در بانک</button>
+            <div id="adminMessage" class="message" role="status"></div>
+          </form>
+        </details>
+      </section>
+      <div class="disclaimer">این ابزار دستیار پژوهشی است، نه مرجع رسمی تفسیر قانون. پیش از استناد قضایی، متن رسمی، اصلاحات، تاریخ لازم‌الاجراشدن و وضعیت نسخ را کنترل کنید.</div>
+    </aside>
+    <main class="main">
+      <div class="chat-head"><h2 id="chatTitle">پرسش حقوقی جدید</h2><div class="chat-tools"><label class="mode-label" for="audienceMode">سطح پاسخ</label><select id="audienceMode" aria-label="سطح پاسخ حقوقی"><option value="public">عمومی</option><option value="professional">حرفه‌ای ویژه وکلا</option></select><span id="docCount" class="doc-count">در حال بررسی بانک مستندات…</span></div></div>
+      <div id="chatScroll" class="chat-scroll">
+        <div id="welcome" class="welcome">
+          <div class="welcome-mark">§</div>
+          <h2>چه مسئله حقوقی را بررسی کنیم؟</h2>
+          <p>پرسش را با ذکر تاریخ، مرجع رسیدگی، خواسته و جزئیات مؤثر مطرح کنید. پاسخ مستند فقط در حدود منابع موجود در بانک ارائه می‌شود.</p>
+          <div class="suggestions">
+            <button type="button" data-question="شرایط تحقق خیانت در امانت و ارکان قانونی آن چیست؟">ارکان خیانت در امانت</button>
+            <button type="button" data-question="شرایط مطالبه وجه التزام قراردادی چیست؟">وجه التزام قراردادی</button>
+            <button type="button" data-question="برای تنظیم دادخواست مطالبه خسارت تأخیر در انجام تعهد چه نکاتی لازم است؟">خسارت تأخیر در تعهد</button>
+          </div>
+        </div>
+      </div>
+      <form id="questionForm" class="composer">
+        <div class="composer-box"><textarea id="question" maxlength="12000" placeholder="پرسش حقوقی خود را بنویسید…" required></textarea><button id="send" class="primary" type="submit">ارسال پرسش</button></div>
+        <div class="composer-note">حداکثر ۱۲٬۰۰۰ نویسه. از درج رمزها، اطلاعات بانکی و داده‌های غیرضروری هویتی خودداری کنید.</div>
+      </form>
+    </main>
+  </div>
 </section>
-<div class="section-title"><h2 id="listTitle">اسناد حقوقی منتشرشده</h2><small id="resultCount"></small></div>
-<nav class="filters" id="filters" aria-label="فیلتر نوع سند">
-<button class="filter active" data-type="" type="button">همه اسناد</button>
-<button class="filter" data-type="constitution" type="button">قانون اساسی</button>
-<button class="filter" data-type="code" type="button">قانون</button>
-<button class="filter" data-type="act" type="button">مصوبه</button>
-<button class="filter" data-type="regulation" type="button">آیین‌نامه</button>
-<button class="filter" data-type="unification_vote" type="button">رأی وحدت رویه</button>
-<button class="filter" data-type="advisory_opinion" type="button">نظریه مشورتی</button>
-</nav>
-<div id="status" class="status" role="status">در حال دریافت فهرست اسناد...</div>
-<section id="results" class="results" aria-live="polite"><div class="empty">در حال دریافت اطلاعات پایگاه...</div></section>
-<section class="assistant">
-<h2>دستیار تحلیل حقوقی</h2>
-<p>بخش پاسخ‌گویی هوشمند زمانی فعال می‌شود که موتور مستقل، احراز هویت و مجموعه منابع رسمیِ ارزیابی‌شده تکمیل شوند. در وضعیت فعلی، سامانه از تولید پاسخ بدون مستند قابل بازیابی خودداری می‌کند.</p>
-<span class="pill">پاسخ‌گویی مستند: در دست تکمیل</span>
-</section>
-<div class="notice">هشدار حقوقی: خالی بودن نتیجه جست‌وجو به معنای نبود حکم قانونی نیست. تا زمانی که متن معتبر سند در پایگاه ثبت و منتشر نشده باشد، سامانه درباره شماره ماده، تاریخ تصویب، اصلاحات یا اعتبار فعلی آن ادعایی نمی‌کند. پیش از استناد قضایی، متن رسمی و وضعیت اعتبار سند را کنترل کنید.</div>
-</main>
-<footer>© سامانه ایران | املاک ۰۵۸ — نسخه پایگاه مستندات حقوقی</footer>
-</div>
-<script>
-(function(){
-  'use strict';
-  if(!window.supabase || typeof window.supabase.createClient!=='function'){document.getElementById('dbStatus').textContent='خطای بارگذاری';document.getElementById('status').textContent='کتابخانه اتصال به پایگاه بارگذاری نشد. صفحه را تازه‌سازی کنید.';document.getElementById('status').className='status error';return;}
-  const SUPABASE_URL='https://zjkghjlqzpuxpljiyfcj.supabase.co';
-  const SUPABASE_KEY='sb_publishable_UeuwcJNnFLoeJna3NyYTrg_BsL_CSBe';
-  const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-  const $=id=>document.getElementById(id);
-  const faNumber=n=>new Intl.NumberFormat('fa-IR').format(n||0);
-  const labels={constitution:'قانون اساسی',code:'قانون',act:'مصوبه',regulation:'آیین‌نامه',bylaw:'اساسنامه',circular:'بخشنامه',unification_vote:'رأی وحدت رویه',advisory_opinion:'نظریه مشورتی',judgment:'رأی قضایی',other:'سایر اسناد'};
-  let docs=[],activeType='',isSearching=false;
-  function setStatus(message,error){$('status').textContent=message;$('status').className=error?'status error':'status';}
-  function addText(parent,tag,cls,text){const el=document.createElement(tag);if(cls)el.className=cls;el.textContent=text||'';parent.appendChild(el);return el;}
-  function sourceAnchor(parent,url){if(!url)return;try{const parsed=new URL(url);if(parsed.protocol!=='https:')return;const a=document.createElement('a');a.className='source-link';a.href=parsed.href;a.target='_blank';a.rel='noopener noreferrer';a.textContent='مشاهده منبع رسمی ↗';parent.appendChild(a);}catch(_e){}}
-  function render(items,withExcerpt){const root=$('results');root.replaceChildren();$('resultCount').textContent=faNumber(items.length)+' نتیجه';
-    if(!items.length){const box=addText(root,'div','empty','');addText(box,'strong','',docs.length?'نتیجه‌ای برای این عبارت پیدا نشد':'هنوز سندی در پایگاه منتشر نشده است');addText(box,'span','',docs.length?'عبارت دیگری جست‌وجو کنید یا فیلتر نوع سند را تغییر دهید.':'برای جلوگیری از استناد نادرست، تا زمان ورود و اعتبارسنجی متن رسمی هیچ قانون یا ماده‌ای به‌صورت حدسی نمایش داده نمی‌شود.');return;}
-    for(const item of items){const card=addText(root,'article','card','');addText(card,'span','type',labels[item.source_type]||'سند حقوقی');addText(card,'h3','',item.title||'بدون عنوان');const meta=addText(card,'div','meta','');if(item.issuing_authority)addText(meta,'span','', 'مرجع: '+item.issuing_authority);if(item.document_number)addText(meta,'span','', 'شماره: '+item.document_number);if(item.enactment_date)addText(meta,'span','', 'تصویب: '+item.enactment_date);if(item.effective_from)addText(meta,'span','', 'لازم‌الاجرا از: '+item.effective_from);if(item.heading)addText(card,'div','excerpt',item.heading);if(withExcerpt&&item.content)addText(card,'p','excerpt',item.content);if(item.source_notes)addText(card,'p','excerpt',item.source_notes);sourceAnchor(card,item.official_url);}
+
+<script type="module">
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+const SUPABASE_URL = "https://zjkghjlqzpuxpljiyfcj.supabase.co";
+const SUPABASE_KEY = "sb_publishable_UeuwcJNnFLoeJna3NyYTrg_BsL_CSBe";
+const client = createClient(SUPABASE_URL, SUPABASE_KEY, {auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const $ = (id) => document.getElementById(id);
+let registerMode = false;
+let currentUserId = null;
+let currentConversationId = null;
+let audienceMode = "public";
+let busy = false;
+
+function setAuthMessage(message, good) {
+  $("authMessage").textContent = message || "";
+  $("authMessage").style.color = good ? "#237b59" : "#a34141";
+}
+function showAuth() { $("authView").style.display="grid"; $("appView").style.display="none"; }
+function showApp(user) {
+  currentUserId=user.id;
+  $("authView").style.display="none"; $("appView").style.display="block";
+  $("userEmail").textContent=user.email || "کاربر سامانه";
+  loadConversations(); loadCases(); loadSourceCatalog(); loadDocumentCount(); checkAdmin();
+}
+function setRegisterMode(value) {
+  registerMode=value;
+  $("authHeading").textContent=value ? "ساخت حساب کاربری" : "ورود به حساب کاربری";
+  $("authSubmit").textContent=value ? "ثبت‌نام" : "ورود";
+  $("toggleAuth").textContent=value ? "بازگشت به ورود" : "ساخت حساب جدید";
+  $("password").autocomplete=value ? "new-password" : "current-password";
+  setAuthMessage("");
+}
+$("toggleAuth").addEventListener("click",()=>setRegisterMode(!registerMode));
+$("authForm").addEventListener("submit",async(e)=>{
+  e.preventDefault(); const email=$("email").value.trim(); const password=$("password").value;
+  $("authSubmit").disabled=true; setAuthMessage("در حال بررسی اطلاعات…",true);
+  try {
+    if(registerMode) {
+      const {data,error}=await client.auth.signUp({email,password});
+      if(error) throw error;
+      if(data.session) { showApp(data.user); }
+      else setAuthMessage("حساب ایجاد شد. در صورت فعال بودن تأیید ایمیل، صندوق ایمیل خود را بررسی و سپس وارد شوید.",true);
+    } else {
+      const {data,error}=await client.auth.signInWithPassword({email,password});
+      if(error) throw error; showApp(data.user);
+    }
+  } catch(err) { setAuthMessage(err.message || "ورود ناموفق بود."); }
+  finally { $("authSubmit").disabled=false; }
+});
+$("signOut").addEventListener("click",async()=>{await client.auth.signOut();currentConversationId=null;showAuth();});
+client.auth.onAuthStateChange((_event,session)=>{if(session?.user) showApp(session.user); else showAuth();});
+
+function clearChat() {
+  $("chatScroll").innerHTML="";
+  $("chatTitle").textContent="پرسش حقوقی جدید";
+  currentConversationId=null;
+}
+$("newChat").addEventListener("click",clearChat);
+function node(tag,cls,text) { const el=document.createElement(tag); if(cls) el.className=cls; if(text!==undefined) el.textContent=text; return el; }
+function renderMessage(role,content,citations) {
+  const wrap=node("article","bubble "+(role==="user"?"user":"assistant"));
+  wrap.appendChild(node("div","bubble-label",role==="user"?"پرسش شما":"پاسخ دستیار"));
+  wrap.appendChild(node("div","bubble-content",content));
+  if(role!=="user") {
+    const actions=node("div","bubble-actions");
+    const copy=node("button","copy-answer","کپی پاسخ");
+    copy.type="button";
+    copy.addEventListener("click",async()=>{
+      try { await navigator.clipboard.writeText(content); copy.textContent="کپی شد"; }
+      catch { copy.textContent="کپی در این مرورگر ممکن نیست"; }
+      setTimeout(()=>{copy.textContent="کپی پاسخ";},1800);
+    });
+    actions.appendChild(copy); wrap.appendChild(actions);
   }
-  function applyFilter(){const filtered=activeType?docs.filter(d=>d.source_type===activeType):docs;render(filtered,false);$('listTitle').textContent=activeType?'اسناد بر اساس نوع انتخاب‌شده':'اسناد حقوقی منتشرشده';}
-  async function loadSources(){try{const {data,error}=await db.from('legal_sources').select('id,title,source_type,issuing_authority,document_number,enactment_date,publication_date,effective_from,effective_to,official_url,source_notes').eq('status','published').order('title').limit(500);if(error)throw error;docs=data||[];$('sourceCount').textContent=faNumber(docs.length);const {count,error:countError}=await db.from('legal_chunks').select('id',{count:'exact',head:true});if(countError)throw countError;$('chunkCount').textContent=faNumber(count||0);$('dbStatus').textContent='متصل';setStatus(docs.length?'فهرست اسناد معتبر منتشرشده دریافت شد.':'ارتباط برقرار است؛ هنوز سندی در وضعیت انتشار عمومی ثبت نشده است.');applyFilter();}catch(err){$('dbStatus').textContent='خطا';setStatus('ارتباط با پایگاه برقرار نشد: '+(err.message||'خطای نامشخص'),true);render([],false);}}
-  async function search(){const q=$('q').value.trim();if(!q){applyFilter();return;}if(isSearching)return;isSearching=true;$('searchBtn').disabled=true;setStatus('در حال جست‌وجو در متن اسناد منتشرشده...');try{const {data,error}=await db.rpc('search_legal_chunks',{search_text:q,result_limit:12});if(error)throw error;const filtered=(data||[]).filter(d=>!activeType||d.source_type===activeType);$('listTitle').textContent='نتایج جست‌وجو';render(filtered,true);setStatus((data||[]).length?'جست‌وجو در متن اسناد منتشرشده انجام شد.':'در متن اسناد منتشرشده نتیجه‌ای بازیابی نشد.');}catch(err){setStatus('خطا در جست‌وجو: '+(err.message||'خطای نامشخص'),true);}finally{isSearching=false;$('searchBtn').disabled=false;}}
-  $('searchBtn').addEventListener('click',search);$('q').addEventListener('keydown',e=>{if(e.key==='Enter')search();});$('filters').addEventListener('click',e=>{const btn=e.target.closest('button[data-type]');if(!btn)return;activeType=btn.dataset.type;document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x===btn));if($('q').value.trim())search();else applyFilter();});
-  loadSources();
-})();
+  if(role!=="user" && citations && citations.length) {
+    const refs=node("div","citations");
+    citations.forEach((c)=>{
+      const a=node("a","citation");
+      a.href=c.official_url || "#"; a.target="_blank"; a.rel="noopener noreferrer";
+      const b=node("b","",String(c.ref)+". "+(c.title || "منبع حقوقی"));
+      a.appendChild(b);
+      const meta=[c.source_type,c.document_number,c.effective_from?("اعتبار از "+c.effective_from):""].filter(Boolean).join(" | ");
+      a.appendChild(node("span","",meta || "مشاهده منبع"));
+      if(!c.official_url) { a.removeAttribute("target"); a.removeAttribute("href"); }
+      refs.appendChild(a);
+    });
+    wrap.appendChild(refs);
+  }
+  $("chatScroll").appendChild(wrap);
+  $("chatScroll").scrollTop=$("chatScroll").scrollHeight;
+}
+async function loadConversations() {
+  const {data,error}=await client.from("legal_conversations").select("id,title,updated_at,audience_mode").order("updated_at",{ascending:false}).limit(20);
+  const box=$("history"); box.innerHTML="";
+  if(error || !data?.length) { box.appendChild(node("span","muted","هنوز گفت‌وگویی ثبت نشده است.")); return; }
+  data.forEach((item)=>{
+    const btn=node("button",item.id===currentConversationId?"active":"",item.title || "گفت‌وگوی حقوقی");
+    btn.title=item.title || ""; btn.addEventListener("click",()=>openConversation(item.id,item.title,item.audience_mode)); box.appendChild(btn);
+  });
+}
+async function openConversation(id,title,mode) {
+  currentConversationId=id; audienceMode=mode==="professional"?"professional":"public"; $("audienceMode").value=audienceMode; $("chatTitle").textContent=title || "گفت‌وگوی حقوقی";
+  $("chatScroll").innerHTML="<div class='loading'>در حال بارگذاری گفتگو…</div>";
+  const {data,error}=await client.from("legal_messages").select("role,content,source_refs,created_at").eq("conversation_id",id).order("created_at",{ascending:true});
+  $("chatScroll").innerHTML="";
+  if(error) { $("chatScroll").appendChild(node("div","loading","بارگذاری گفتگو با خطا مواجه شد.")); return; }
+  (data||[]).forEach(m=>renderMessage(m.role,m.content,m.source_refs||[]));
+  loadConversations();
+}
+async function loadCases() {
+  const box=$("caseList"); if(!box) return;
+  const {data,error}=await client.from("legal_cases").select("id,title,case_number,court_name,case_type,status,updated_at").order("updated_at",{ascending:false}).limit(30);
+  box.innerHTML="";
+  if(error || !data?.length) { box.appendChild(node("span","muted",error?"بارگذاری پرونده‌ها ناموفق بود.":"هنوز پرونده‌ای ثبت نشده است.")); return; }
+  data.forEach(item=>{const card=node("div","case-item");card.appendChild(node("b","",item.title));const meta=[item.case_number,item.court_name,item.case_type].filter(Boolean).join(" · ");card.appendChild(node("span","",meta||"بدون مشخصات تکمیلی"));box.appendChild(card);});
+}
+$("caseForm").addEventListener("submit",async(e)=>{
+  e.preventDefault(); const submit=$("caseSubmit"),msg=$("caseMessage");submit.disabled=true;msg.textContent="در حال ایجاد پرونده…";
+  const payload={user_id:currentUserId,title:$("caseTitle").value.trim(),case_number:$("caseNumber").value.trim()||null,court_name:$("caseCourt").value.trim()||null,case_type:$("caseType").value,summary:$("caseSummary").value.trim()||null};
+  try{const {error}=await client.from("legal_cases").insert(payload);if(error)throw error;$("caseForm").reset();msg.textContent="پرونده با موفقیت ثبت شد.";loadCases();}catch(err){msg.textContent="ثبت پرونده ناموفق بود؛ دسترسی حساب و سیاست امنیتی را بررسی کنید.";}finally{submit.disabled=false;}
+});
+
+async function loadSourceCatalog() {
+  const box=$("sourceCatalog");
+  const {data,error}=await client.from("legal_source_catalog").select("name,base_url,source_scope,verification_status").order("name");
+  box.innerHTML="";
+  if(error || !data?.length) { box.appendChild(node("span","muted","فهرست منابع در دسترس نیست.")); return; }
+  data.forEach(s=>{
+    const item=node("div","source-item"); const a=node("a","",s.name); a.href=s.base_url;a.target="_blank";a.rel="noopener noreferrer";
+    item.appendChild(a); item.appendChild(node("div","muted",s.source_scope));
+    item.appendChild(node("span","source-status",s.verification_status==="directly_verified"?"تأیید مستقیم":s.verification_status==="secondary_verified"?"شناسایی‌شده از منابع ثانویه":"نیازمند بررسی مستقیم"));
+    box.appendChild(item);
+  });
+}
+
+async function checkAdmin() {
+  const panel=$("adminPanel");
+  if(!panel) return;
+  const {data,error}=await client.from("legal_admins").select("user_id").limit(1).maybeSingle();
+  panel.hidden=!!error || !data;
+}
+$("adminForm").addEventListener("submit",async(e)=>{
+  e.preventDefault();
+  const submit=$("adminSubmit"), msg=$("adminMessage");
+  submit.disabled=true; msg.textContent="در حال ثبت سند…"; msg.style.color="#237b59";
+  const body={
+    title:$("adminTitle").value.trim(),
+    source_type:$("adminSourceType").value,
+    issuing_authority:$("adminAuthority").value.trim(),
+    document_number:$("adminNumber").value.trim(),
+    legal_subject:$("adminSubject").value.trim(),
+    enactment_date:$("adminEnactment").value || null,
+    publication_date:$("adminPublication").value || null,
+    effective_from:$("adminEffectiveFrom").value || null,
+    effective_to:$("adminEffectiveTo").value || null,
+    official_url:$("adminUrl").value.trim(),
+    content:$("adminContent").value,
+    source_notes:$("adminNotes").value.trim(),
+    official_gazette_number:$("adminGazetteNumber").value.trim() || null,
+    official_gazette_date:$("adminGazetteDate").value || null,
+    legal_force_status:$("adminForceStatus").value,
+    confirm_force_status_checked:$("adminForceChecked").checked,
+    force_status_notes:$("adminForceNotes").value.trim(),
+    status:$("adminStatus").value,
+    confirm_source_verified:$("adminVerified").checked
+  };
+  try {
+    const {data,error}=await client.functions.invoke("legal-admin-import",{body});
+    if(error) {
+      let message="ثبت سند ناموفق بود.";
+      try { const response=await error.context.json(); message=response.message || response.error || message; } catch {}
+      throw new Error(message);
+    }
+    msg.textContent=data.message || "سند ثبت شد.";
+    msg.style.color="#237b59";
+    $("adminForm").reset();
+    loadDocumentCount();
+  } catch(err) {
+    msg.textContent=err.message || "ثبت سند با خطا مواجه شد.";
+    msg.style.color="#a34141";
+  } finally { submit.disabled=false; }
+});
+
+async function loadDocumentCount() {
+  const {count,error}=await client.from("legal_sources").select("id",{count:"exact",head:true}).eq("status","published");
+  $("docCount").textContent=error?"وضعیت بانک نامشخص":"اسناد منتشرشده: "+(count||0);
+}
+$("audienceMode").addEventListener("change",()=>{audienceMode=$("audienceMode").value==="professional"?"professional":"public";});
+$("questionForm").addEventListener("submit",async(e)=>{
+  e.preventDefault(); if(busy) return;
+  const question=$("question").value.trim(); if(!question) return;
+  if(question.length>12000) return;
+  busy=true; $("send").disabled=true; $("question").disabled=true;
+  $("welcome")?.remove();
+  renderMessage("user",question,[]);
+  $("question").value="";
+  const wait=node("div","loading","در حال جست‌وجوی مستندات و تهیه پاسخ…"); $("chatScroll").appendChild(wait);
+  try {
+    const {data,error}=await client.functions.invoke("legal-assistant",{body:{question,conversation_id:currentConversationId,audience_mode:audienceMode}});
+    wait.remove();
+    if(error) {
+      let msg="ارتباط با موتور حقوقی برقرار نشد. وضعیت ورود و اتصال پایگاه داده را بررسی کنید.";
+      try {
+        const body=await error.context.json();
+        if(body?.message) msg=body.message;
+        else if(body?.error==="service_not_configured") msg="تنظیمات داخلی موتور حقوقی کامل نیست.";
+        else if(body?.error==="legal_search_failed") msg="جست‌وجوی بانک مستندات با خطا مواجه شد.";
+        else if(body?.error==="rate_limit_exceeded") msg=body.message || "سقف درخواست‌های این ساعت تکمیل شده است.";
+        else if(body?.error) msg="خطای سرویس: "+body.error;
+      } catch {}
+      renderMessage("assistant",msg,[]);
+    } else {
+      currentConversationId=data.conversation_id;
+      renderMessage("assistant",data.answer || "پاسخی از سرویس دریافت نشد.",data.citations || []);
+      if(!data.retrieved_source_count) {
+        const note=node("div","loading","در حال حاضر منبع منتشرشده‌ای برای این پرسش در بانک بازیابی نشد؛ پاسخ را مستند تلقی نکنید.");
+        $("chatScroll").appendChild(note);
+      }
+      loadConversations(); loadDocumentCount();
+    }
+  } catch(err) { wait.remove(); renderMessage("assistant","خطا در ارتباط با سرویس: "+(err.message||"خطای نامشخص"),[]); }
+  finally { busy=false; $("send").disabled=false; $("question").disabled=false; $("question").focus(); }
+});
+document.querySelectorAll("[data-question]").forEach(btn=>btn.addEventListener("click",()=>{$("question").value=btn.dataset.question;$("question").focus();}));
+$("question").addEventListener("keydown",(e)=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();$("questionForm").requestSubmit();}});
+const {data:{session}}=await client.auth.getSession();
+if(session?.user) showApp(session.user); else showAuth();
 </script>
-</body></html>
+</body>
+</html>
