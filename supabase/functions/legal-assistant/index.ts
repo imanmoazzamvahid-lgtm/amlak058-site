@@ -6,6 +6,8 @@ const allowedOrigins = new Set([
   "https://hoosh-hoghooghi-iran.imanmoazzamvahid.workers.dev",
   "https://amlak058.ir",
   "https://www.amlak058.ir",
+  "https://iran.amlak058.ir",
+  "https://amlak058-site.onrender.com",
   "https://imanmoazzamvahid-lgtm.github.io",
   "http://localhost:3000",
   "http://127.0.0.1:5500",
