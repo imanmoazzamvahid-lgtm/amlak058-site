@@ -253,7 +253,7 @@ async function loadSourceCatalog() {
 async function checkAdmin() {
   const panel=$("adminPanel");
   if(!panel) return;
-  const {data,error}=await client.from("legal_admins").select("user_id").limit(1).maybeSingle();
+  const {data,error}=await client.from("legal_admins").select("user_id").eq("user_id",currentUserId).eq("active",true).maybeSingle();
   panel.hidden=!!error || !data;
 }
 $("adminForm").addEventListener("submit",async(e)=>{
