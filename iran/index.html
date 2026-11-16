@@ -196,7 +196,9 @@ function renderMessage(role,content,citations) {
       a.href=c.official_url || "#"; a.target="_blank"; a.rel="noopener noreferrer";
       const b=node("b","",String(c.ref)+". "+(c.title || "منبع حقوقی"));
       a.appendChild(b);
-      const meta=[c.source_type,c.document_number,c.effective_from?("اعتبار از "+c.effective_from):""].filter(Boolean).join(" | ");
+      const typeLabels={constitution:"قانون اساسی",code:"قانون جامع",act:"قانون",regulation:"آیین‌نامه",bylaw:"اساسنامه",circular:"بخشنامه",unification_vote:"رأی وحدت رویه",advisory_opinion:"نظریه مشورتی",judgment:"رأی قضایی",other:"سایر"};
+      const forceLabels={unknown:"وضعیت اعتبار: بررسی‌نشده",in_force:"وضعیت ثبت‌شده: لازم‌الاجرا",amended:"وضعیت ثبت‌شده: اصلاح‌شده",repealed:"وضعیت ثبت‌شده: نسخ‌شده",expired:"وضعیت ثبت‌شده: منقضی",suspended:"وضعیت ثبت‌شده: معلق"};
+      const meta=[typeLabels[c.source_type]||c.source_type,c.document_number,c.issuing_authority,c.enactment_date?("تصویب: "+c.enactment_date):"",c.publication_date?("انتشار: "+c.publication_date):"",c.status==="published"?"منتشرشده در بانک":"پیش‌نویس",forceLabels[c.legal_force_status]||"وضعیت اعتبار نامشخص",c.last_verified_at?("آخرین راستی‌آزمایی متن: "+String(c.last_verified_at).slice(0,10)):"متن راستی‌آزمایی نشده"].filter(Boolean).join(" | ");
       a.appendChild(node("span","",meta || "مشاهده منبع"));
       if(!c.official_url) { a.removeAttribute("target"); a.removeAttribute("href"); }
       refs.appendChild(a);
