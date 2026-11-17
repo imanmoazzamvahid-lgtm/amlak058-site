@@ -47,5 +47,5 @@ drop policy if exists crm_activities_admin_delete on public.crm_activities;
 create policy crm_activities_admin_delete on public.crm_activities for delete to authenticated using(exists(select 1 from public.site_admins a where a.user_id=(select auth.uid())));
 grant select,insert,update,delete on public.crm_customers,public.crm_activities to authenticated;
 grant usage,select on sequence public.crm_customers_id_seq, public.crm_activities_id_seq to authenticated;
-revoke all on public.crm_customers, public.crm_activities from anon, public;
+revoke all on public.crm_customers, public.crm_activities from anon, public, authenticated;
 grant select,insert,update,delete on public.crm_customers, public.crm_activities to authenticated;
