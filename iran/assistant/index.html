@@ -27,7 +27,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
 .sidebar{background:#fff;border-left:1px solid var(--line);padding:18px;display:flex;flex-direction:column;gap:18px}
 .sidebar h3{font-size:13px;color:var(--navy);margin:0 0 8px}.side-new{width:100%;display:flex;justify-content:center;gap:8px}
 .history{display:flex;flex-direction:column;gap:5px;max-height:280px;overflow:auto}.history button{border:0;background:transparent;text-align:right;border-radius:10px;padding:9px 10px;color:#49596b;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.history button.active,.history button:hover{background:var(--soft);color:var(--navy)}
-.sources{display:flex;flex-direction:column;gap:10px}.admin-form{padding-top:10px}.admin-form .field{margin-top:9px}.admin-form input,.admin-form textarea,.admin-form select{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px;background:#fff;color:var(--ink);font:inherit;font-size:12px}.admin-form .field span{font-size:11px}.admin-form button{width:100%;margin-top:12px}#adminPanel summary{cursor:pointer;color:var(--teal);font-weight:700;font-size:12px}.case-list{display:flex;flex-direction:column;gap:7px;margin-top:10px}.case-item{border:1px solid var(--line);border-radius:10px;padding:9px;font-size:12px;background:#fff}.case-item b{display:block;color:var(--navy);margin-bottom:3px}.case-item span{color:var(--muted);font-size:11px}.source-item{border-top:1px solid var(--line);padding-top:9px;font-size:12px}.source-item a{color:var(--teal);text-decoration:none;font-weight:700}.source-status{display:inline-block;border-radius:30px;background:#f8f0e1;color:#82662f;padding:1px 7px;font-size:10px;margin-top:4px}
+.admin-form{padding-top:10px}.admin-form .field{margin-top:9px}.admin-form input,.admin-form textarea,.admin-form select{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px;background:#fff;color:var(--ink);font:inherit;font-size:12px}.admin-form .field span{font-size:11px}.admin-form button{width:100%;margin-top:12px}#adminPanel summary{cursor:pointer;color:var(--teal);font-weight:700;font-size:12px}.case-list{display:flex;flex-direction:column;gap:7px;margin-top:10px}.case-item{border:1px solid var(--line);border-radius:10px;padding:9px;font-size:12px;background:#fff}.case-item b{display:block;color:var(--navy);margin-bottom:3px}.case-item span{color:var(--muted);font-size:11px}
 .disclaimer{margin-top:auto;background:#f7f7f5;border:1px solid var(--line);border-radius:13px;padding:12px;color:#6f7c89;font-size:11px}
 .main{padding:24px;display:flex;flex-direction:column;min-width:0;height:calc(100dvh - 72px)}
 .chat-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-bottom:14px;border-bottom:1px solid var(--line)}.chat-head h2{font-size:17px;color:var(--navy);margin:0}.chat-tools{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.mode-label{font-size:11px;color:var(--muted)}#audienceMode{border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);padding:7px 9px;font:inherit;font-size:12px}.doc-count{color:var(--muted);font-size:11px}
@@ -68,7 +68,7 @@ button,input,textarea{font:inherit}button{cursor:pointer}
       <section><button id="newChat" class="primary side-new" type="button">＋ گفت‌وگوی جدید</button></section>
       <section><h3>گفت‌وگوهای اخیر</h3><div id="history" class="history"><span class="muted">هنوز گفت‌وگویی ثبت نشده است.</span></div></section>
       <section id="casePanel"><h3>پرونده‌های من</h3><form id="caseForm" class="admin-form"><label class="field"><span>عنوان پرونده</span><input id="caseTitle" maxlength="240" required placeholder="مثلاً مطالبه وجه قرارداد"></label><label class="field"><span>شماره پرونده (اختیاری)</span><input id="caseNumber" maxlength="120"></label><label class="field"><span>مرجع رسیدگی (اختیاری)</span><input id="caseCourt" maxlength="200"></label><label class="field"><span>نوع پرونده</span><select id="caseType"><option value="civil">حقوقی</option><option value="criminal">کیفری</option><option value="family">خانواده</option><option value="commercial">تجاری</option><option value="administrative">اداری</option><option value="other">سایر</option></select></label><label class="field"><span>خلاصه اولیه (اختیاری)</span><textarea id="caseSummary" rows="3" maxlength="5000"></textarea></label><button class="primary" id="caseSubmit" type="submit">ایجاد پرونده</button><div id="caseMessage" class="message" role="status"></div></form><div id="caseList" class="case-list"><span class="muted">در حال دریافت پرونده‌ها…</span></div></section>
-      <section><h3>منابع مرجع سامانه</h3><div id="sourceCatalog" class="sources"><span class="muted">در حال دریافت فهرست منابع…</span></div></section>
+      
       <section id="adminPanel" hidden>
         <details>
           <summary>مدیریت بانک مستندات</summary>
@@ -137,7 +137,7 @@ function showApp(user) {
   currentUserId=user.id;
   $("authView").style.display="none"; $("appView").style.display="block";
   $("userEmail").textContent=user.email || "کاربر سامانه";
-  loadConversations(); loadCases(); loadSourceCatalog(); loadDocumentCount(); checkAdmin();
+  loadConversations(); loadCases(); loadDocumentCount(); checkAdmin();
 }
 function setRegisterMode(value) {
   registerMode=value;
@@ -236,19 +236,6 @@ $("caseForm").addEventListener("submit",async(e)=>{
   const payload={user_id:currentUserId,title:$("caseTitle").value.trim(),case_number:$("caseNumber").value.trim()||null,court_name:$("caseCourt").value.trim()||null,case_type:$("caseType").value,summary:$("caseSummary").value.trim()||null};
   try{const {error}=await client.from("legal_cases").insert(payload);if(error)throw error;$("caseForm").reset();msg.textContent="پرونده با موفقیت ثبت شد.";loadCases();}catch(err){msg.textContent="ثبت پرونده ناموفق بود؛ دسترسی حساب و سیاست امنیتی را بررسی کنید.";}finally{submit.disabled=false;}
 });
-
-async function loadSourceCatalog() {
-  const box=$("sourceCatalog");
-  const {data,error}=await client.from("legal_source_catalog").select("name,base_url,source_scope,verification_status").order("name");
-  box.innerHTML="";
-  if(error || !data?.length) { box.appendChild(node("span","muted","فهرست منابع در دسترس نیست.")); return; }
-  data.forEach(s=>{
-    const item=node("div","source-item"); const a=node("a","",s.name); a.href=s.base_url;a.target="_blank";a.rel="noopener noreferrer";
-    item.appendChild(a); item.appendChild(node("div","muted",s.source_scope));
-    item.appendChild(node("span","source-status",s.verification_status==="directly_verified"?"تأیید مستقیم":s.verification_status==="secondary_verified"?"شناسایی‌شده از منابع ثانویه":"نیازمند بررسی مستقیم"));
-    box.appendChild(item);
-  });
-}
 
 async function checkAdmin() {
   const panel=$("adminPanel");
