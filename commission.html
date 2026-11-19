@@ -671,7 +671,7 @@ header nav{gap:22px!important}
 }
 
 
- #commission-calculator .commission-price-words{display:block;color:#b78317;font-size:12px;line-height:1.8;margin-top:5px}\n</style>
+ #commission-calculator .commission-price-words{display:block;min-height:25px;padding:4px 8px;margin-top:5px;border-radius:7px;background:#f6f5f2;color:#697780;font-size:11px;line-height:1.9;font-weight:600}\n</style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 
 <style id="site-theme-overrides">
@@ -4485,16 +4485,18 @@ body.commission-standalone #authModal{display:none;z-index:10050!important}
   </div>
   <div id="commission-rent-fields" class="commission-fields" hidden>
    <label>نوع قرارداد اجاره<select id="commission-rent-type"><option value="rent">اجاره جدید</option><option value="renewal">تمدید اجاره</option></select></label>
-   <label>مبلغ ودیعه / رهن (تومان)<input id="commission-deposit" type="number" min="0" inputmode="numeric" placeholder="مبلغ رهن"><small id="commission-deposit-words" class="commission-price-words" aria-live="polite">مبلغ به حروف: صفر تومان</small></label>
-   <label>اجاره ماهانه (تومان)<input id="commission-monthly-rent" type="number" min="0" inputmode="numeric" placeholder="اجاره ماهانه"><small id="commission-monthly-rent-words" class="commission-price-words" aria-live="polite">مبلغ به حروف: صفر تومان</small></label>
+   <label>مبلغ ودیعه / رهن (تومان)<input id="commission-deposit" type="text" inputmode="numeric" autocomplete="off" placeholder="مبلغ رهن"><small id="commission-deposit-words" class="commission-price-words" aria-live="polite">مبلغ به حروف: صفر تومان</small></label>
+   <label>اجاره ماهانه (تومان)<input id="commission-monthly-rent" type="text" inputmode="numeric" autocomplete="off" placeholder="اجاره ماهانه"><small id="commission-monthly-rent-words" class="commission-price-words" aria-live="polite">مبلغ به حروف: صفر تومان</small></label>
    <small class="commission-rate-note">مبنای تبدیل ودیعه به اجاره ماهانه: ۴٪ مبلغ ودیعه</small>
   </div>
   <div id="commission-partnership-fields" class="commission-fields" hidden>
    <label>آورده طرف اول (تومان)
     <input id="commission-partner-a-contribution" type="text" inputmode="numeric" autocomplete="off" placeholder="مبلغ آورده طرف اول">
+    <small id="commission-partner-a-words" class="commission-price-words" aria-live="polite">مبلغ به حروف: صفر تومان</small>
    </label>
    <label>آورده طرف دوم (تومان)
     <input id="commission-partner-b-contribution" type="text" inputmode="numeric" autocomplete="off" placeholder="مبلغ آورده طرف دوم">
+    <small id="commission-partner-b-words" class="commission-price-words" aria-live="polite">مبلغ به حروف: صفر تومان</small>
    </label>
    <small class="commission-rate-note">نرخ مشارکت: ۱٪ از آورده هر طرف، به‌صورت جداگانه محاسبه می‌شود.</small>
   </div>
@@ -4721,15 +4723,41 @@ document.addEventListener('DOMContentLoaded',renderCommissionHistory);
   while(n>0&&i<scales.length){let chunk=n%1000;if(chunk){let w=under1000(chunk);if(scales[i])w.push(scales[i]);parts.unshift(w.join(' و '));}n=Math.floor(n/1000);i++;}
   return parts.join(' و ');
  }
+ function formatMoneyInput(input){
+  const oldValue=input.value;
+  const cursor=typeof input.selectionStart==='number'?input.selectionStart:oldValue.length;
+  const digitsBefore=faDigits(oldValue.slice(0,cursor)).replace(/[^0-9]/g,'').length;
+  const raw=faDigits(oldValue).replace(/[^0-9]/g,'');
+  const formatted=raw?Number(raw).toLocaleString('fa-IR'):'';
+  input.value=formatted;
+  if(typeof input.setSelectionRange==='function'){
+   let pos=0,count=0;
+   while(pos<formatted.length&&count<digitsBefore){if(/[۰-۹0-9]/.test(formatted[pos]))count++;pos++;}
+   try{input.setSelectionRange(pos,pos);}catch(e){}
+  }
+  return raw;
+ }
  function updatePriceWords(){
-  const raw=faDigits(priceInput.value).replace(/[^0-9]/g,'');
-  const n=Number(raw);
-  if(!raw){wordsOutput.textContent='مبلغ به حروف: صفر تومان';return;}
-  priceInput.value=Number(raw).toLocaleString('en-US');
+  const raw=formatMoneyInput(priceInput);
+  const n=Number(raw)||0;
   wordsOutput.textContent='مبلغ به حروف: '+toWords(n)+' تومان';
  }
  priceInput.addEventListener('input',updatePriceWords);
  priceInput.addEventListener('blur',updatePriceWords);
+ const partnershipMoneyFields=[
+  ['commission-partner-a-contribution','commission-partner-a-words'],
+  ['commission-partner-b-contribution','commission-partner-b-words']
+ ];
+ partnershipMoneyFields.forEach(function(pair){
+  const input=document.getElementById(pair[0]),output=document.getElementById(pair[1]);
+  if(!input||!output)return;
+  function update(){
+   const raw=formatMoneyInput(input);
+   output.textContent='مبلغ به حروف: '+toWords(Number(raw)||0)+' تومان';
+  }
+  ['input','change','blur'].forEach(eventName=>input.addEventListener(eventName,update));
+  update();
+ });
  window.setCommissionKind=function(kind){
   commissionKind=['sale','rent','partnership'].includes(kind)?kind:'sale';
   document.querySelectorAll('#commission-calculator .commission-tab').forEach(b=>b.classList.toggle('active',b.dataset.kind===commissionKind));
@@ -4828,7 +4856,17 @@ document.addEventListener('DOMContentLoaded',renderCommissionHistory);
  function updateWords(inputId,outputId){
   const input=document.getElementById(inputId),output=document.getElementById(outputId);
   if(!input||!output)return;
-  const raw=digits(input.value).replace(/[^0-9]/g,'');
+  const oldValue=input.value;
+  const cursor=typeof input.selectionStart==='number'?input.selectionStart:oldValue.length;
+  const digitsBefore=digits(oldValue.slice(0,cursor)).replace(/[^0-9]/g,'').length;
+  const raw=digits(oldValue).replace(/[^0-9]/g,'');
+  const formatted=raw?Number(raw).toLocaleString('fa-IR'):'';
+  input.value=formatted;
+  if(typeof input.setSelectionRange==='function'){
+   let pos=0,count=0;
+   while(pos<formatted.length&&count<digitsBefore){if(/[۰-۹0-9]/.test(formatted[pos]))count++;pos++;}
+   try{input.setSelectionRange(pos,pos);}catch(e){}
+  }
   output.textContent='مبلغ به حروف: '+numberToPersianWords(raw)+' تومان';
  }
  [['commission-deposit','commission-deposit-words'],['commission-monthly-rent','commission-monthly-rent-words']].forEach(function(pair){
