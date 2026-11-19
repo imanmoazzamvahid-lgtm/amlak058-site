@@ -4601,10 +4601,10 @@ async function printCommissionReceipt(){
   alert('بخش محاسبه کمیسیون در دسترس نیست. صفحه را تازه‌سازی کنید.');
   return;
  }
- if(!result.textContent.includes('جمع قابل پرداخت هر طرف')&&typeof window.calculateCommission==='function'){
+ if(!result.textContent.includes('جمع قابل پرداخت')&&typeof window.calculateCommission==='function'){
   window.calculateCommission();
  }
- if(!result.textContent.includes('جمع قابل پرداخت هر طرف')){
+ if(!result.textContent.includes('جمع قابل پرداخت')){
   alert('ابتدا مبلغ معامله را وارد و محاسبه کمیسیون را انجام دهید.');
   return;
  }
