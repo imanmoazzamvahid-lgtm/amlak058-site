@@ -4468,10 +4468,11 @@ body.commission-standalone #authModal{display:none;z-index:10050!important}
 
 
 <section class="container section" id="commission-calculator" aria-labelledby="commission-title">
- <div class="section-heading"><h2 id="commission-title">محاسبه آنلاین کمیسیون بنگاه در بجنورد</h2><span class="muted">کمیسیون خرید و فروش، پیش‌فروش، رهن، اجاره و تمدید با امکان چاپ رسید</span></div>
+ <div class="section-heading"><h2 id="commission-title">محاسبه آنلاین کمیسیون بنگاه در بجنورد</h2><span class="muted">خرید و فروش، مشارکت در ساخت، پیش‌فروش، رهن و اجاره با امکان چاپ رسید</span></div>
  <div class="commission-box">
     <div class="commission-tabs" role="group" aria-label="نوع معامله">
    <button type="button" class="commission-tab active" data-kind="sale" onclick="setCommissionKind('sale')">خرید و فروش</button>
+   <button type="button" class="commission-tab" data-kind="partnership" onclick="setCommissionKind('partnership')">مشارکت در ساخت</button>
    <button type="button" class="commission-tab" data-kind="rent" onclick="setCommissionKind('rent')">رهن و اجاره</button>
   </div>
   <div id="commission-sale-fields" class="commission-fields">
@@ -4487,6 +4488,15 @@ body.commission-standalone #authModal{display:none;z-index:10050!important}
    <label>مبلغ ودیعه / رهن (تومان)<input id="commission-deposit" type="number" min="0" inputmode="numeric" placeholder="مبلغ رهن"><small id="commission-deposit-words" class="commission-price-words" aria-live="polite">مبلغ به حروف: صفر تومان</small></label>
    <label>اجاره ماهانه (تومان)<input id="commission-monthly-rent" type="number" min="0" inputmode="numeric" placeholder="اجاره ماهانه"><small id="commission-monthly-rent-words" class="commission-price-words" aria-live="polite">مبلغ به حروف: صفر تومان</small></label>
    <small class="commission-rate-note">مبنای تبدیل ودیعه به اجاره ماهانه: ۴٪ مبلغ ودیعه</small>
+  </div>
+  <div id="commission-partnership-fields" class="commission-fields" hidden>
+   <label>آورده طرف اول (تومان)
+    <input id="commission-partner-a-contribution" type="text" inputmode="numeric" autocomplete="off" placeholder="مبلغ آورده طرف اول">
+   </label>
+   <label>آورده طرف دوم (تومان)
+    <input id="commission-partner-b-contribution" type="text" inputmode="numeric" autocomplete="off" placeholder="مبلغ آورده طرف دوم">
+   </label>
+   <small class="commission-rate-note">نرخ مشارکت: ۱٪ از آورده هر طرف، به‌صورت جداگانه محاسبه می‌شود.</small>
   </div>
   <label class="commission-vat"><input id="commission-vat-on" type="checkbox" checked> محاسبه مالیات بر ارزش افزوده روی کمیسیون</label>
   <div class="commission-vat-rate-row"><label>درصد مالیات<input id="commission-vat-rate" type="number" min="0" max="100" step="1" value="10" inputmode="numeric"></label></div>
@@ -4606,6 +4616,8 @@ async function printCommissionReceipt(){
   'commission-deposit':'مبلغ ودیعه',
   'commission-monthly-rent':'اجاره ماهانه',
   'commission-rent-type':'نوع اجاره',
+  'commission-partner-a-contribution':'آورده طرف اول',
+  'commission-partner-b-contribution':'آورده طرف دوم',
   'commission-vat-rate':'نرخ مالیات بر ارزش افزوده'
  };
  const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
@@ -4624,11 +4636,11 @@ async function printCommissionReceipt(){
   if((child.textContent||'').includes('جمع تقریبی دو طرف'))child.remove();
   else child.innerHTML=child.innerHTML.replace(/جمع قابل پرداخت هر طرف/g,'مبلغ قابل پرداخت این مشتری');
  });
- const html='<header class="cp-head"><div><div class="cp-brand">املاک ۰۵۸</div><div class="cp-sub">محاسبه آنلاین کمیسیون املاک</div><div class="cp-sub">شماره رسید: '+receiptNumber+'</div></div>'+stamp+'</header><div class="cp-title">رسید محاسبه کمیسیون '+(kind==='rent'?'رهن و اجاره':'خرید و فروش')+'</div><div class="cp-location-note">این محاسبه و نرخ‌های کمیسیون صرفاً مخصوص شهر بجنورد است.</div><div>تاریخ چاپ: '+date+'</div><table class="cp-table"><tbody>'+(rows.length?rows.join(''):'<tr><td>اطلاعات معامله ثبت نشده است.</td></tr>')+'</tbody></table><div class="cp-result">'+resultForCustomer.innerHTML+'</div><div class="cp-bottom-stamp"><div class="cp-seal-caption">مهر و تأیید<br>املاک ۰۵۸</div><img src="/stamp-seal.svg?v=10" alt="مهر برجسته املاک ۰۵۸"></div><footer class="cp-foot"><span>املاک ۰۵۸</span></footer>';
+ const html='<header class="cp-head"><div><div class="cp-brand">املاک ۰۵۸</div><div class="cp-sub">محاسبه آنلاین کمیسیون املاک</div><div class="cp-sub">شماره رسید: '+receiptNumber+'</div></div>'+stamp+'</header><div class="cp-title">رسید محاسبه کمیسیون '+(kind==='rent'?'رهن و اجاره':kind==='partnership'?'مشارکت در ساخت':'خرید و فروش')+'</div><div class="cp-location-note">این محاسبه و نرخ‌های کمیسیون صرفاً مخصوص شهر بجنورد است.</div><div>تاریخ چاپ: '+date+'</div><table class="cp-table"><tbody>'+(rows.length?rows.join(''):'<tr><td>اطلاعات معامله ثبت نشده است.</td></tr>')+'</tbody></table><div class="cp-result">'+resultForCustomer.innerHTML+'</div><div class="cp-bottom-stamp"><div class="cp-seal-caption">مهر و تأیید<br>املاک ۰۵۸</div><img src="/stamp-seal.svg?v=10" alt="مهر برجسته املاک ۰۵۸"></div><footer class="cp-foot"><span>املاک ۰۵۸</span></footer>';
 
  try{
   const history=JSON.parse(localStorage.getItem('amlak058_commission_receipts_v1')||'[]');
-  history.unshift({id:receiptNumber,title:(kind==='rent'?'رهن و اجاره':'خرید و فروش')+' | '+'رسید کمیسیون',date:date,html:html});
+  history.unshift({id:receiptNumber,title:(kind==='rent'?'رهن و اجاره':kind==='partnership'?'مشارکت در ساخت':'خرید و فروش')+' | '+'رسید کمیسیون',date:date,html:html});
   localStorage.setItem('amlak058_commission_receipts_v1',JSON.stringify(history.slice(0,30)));
   if(typeof renderCommissionHistory==='function')renderCommissionHistory();
  }catch(error){console.warn('ذخیره رسید انجام نشد',error);}
@@ -4719,19 +4731,45 @@ document.addEventListener('DOMContentLoaded',renderCommissionHistory);
  priceInput.addEventListener('input',updatePriceWords);
  priceInput.addEventListener('blur',updatePriceWords);
  window.setCommissionKind=function(kind){
-  commissionKind=kind;
-  document.querySelectorAll('#commission-calculator .commission-tab').forEach(b=>b.classList.toggle('active',b.dataset.kind===kind));
-  document.getElementById('commission-sale-fields').hidden=kind!=='sale';
-  document.getElementById('commission-rent-fields').hidden=kind!=='rent';
-  document.getElementById('commission-sale-parties').hidden=kind!=='sale';
-  document.getElementById('commission-rent-parties').hidden=kind!=='rent';
+  commissionKind=['sale','rent','partnership'].includes(kind)?kind:'sale';
+  document.querySelectorAll('#commission-calculator .commission-tab').forEach(b=>b.classList.toggle('active',b.dataset.kind===commissionKind));
+  document.getElementById('commission-sale-fields').hidden=commissionKind!=='sale';
+  document.getElementById('commission-rent-fields').hidden=commissionKind!=='rent';
+  document.getElementById('commission-partnership-fields').hidden=commissionKind!=='partnership';
   document.getElementById('commission-result').textContent='اطلاعات معامله را وارد کنید و محاسبه را بزنید.';
  };
  window.calculateCommission=function(){
   const val=id=>{const raw=faDigits(document.getElementById(id)?.value||'').replace(/[٬,،\s]/g,'').replace(/[^0-9.-]/g,'');return Math.max(0,Number(raw)||0);};
   const vatOn=document.getElementById('commission-vat-on').checked;
   const vatRate=vatOn?val('commission-vat-rate')/100:0;
+  const money=n=>Math.round(n).toLocaleString('fa-IR')+' تومان';
   let base=0,details='';
+  if(commissionKind==='partnership'){
+   const contributionA=val('commission-partner-a-contribution');
+   const contributionB=val('commission-partner-b-contribution');
+   if(!contributionA&&!contributionB){
+    document.getElementById('commission-result').textContent='مبلغ آورده حداقل یکی از طرفین را وارد کنید.';
+    return;
+   }
+   const baseA=contributionA*0.01,baseB=contributionB*0.01;
+   const vatA=baseA*vatRate,vatB=baseB*vatRate;
+   const totalA=baseA+vatA,totalB=baseB+vatB;
+   details='مشارکت در ساخت: نرخ ۱٪ از آورده هر طرف، مستقل از آورده طرف دیگر محاسبه می‌شود.';
+   document.getElementById('commission-result').innerHTML=
+    '<div>'+details+'</div>'+
+    '<div>آورده طرف اول: <strong>'+money(contributionA)+'</strong></div>'+
+    '<div>کمیسیون طرف اول پیش از مالیات (۱٪): <strong>'+money(baseA)+'</strong></div>'+
+    '<div>مالیات طرف اول: <strong>'+money(vatA)+'</strong></div>'+
+    '<div>جمع قابل پرداخت طرف اول: <strong>'+money(totalA)+'</strong></div>'+
+    '<hr><div>آورده طرف دوم: <strong>'+money(contributionB)+'</strong></div>'+
+    '<div>کمیسیون طرف دوم پیش از مالیات (۱٪): <strong>'+money(baseB)+'</strong></div>'+
+    '<div>مالیات طرف دوم: <strong>'+money(vatB)+'</strong></div>'+
+    '<div>جمع قابل پرداخت طرف دوم: <strong>'+money(totalB)+'</strong></div>'+
+    '<div>جمع کمیسیون دو طرف پیش از مالیات: <strong>'+money(baseA+baseB)+'</strong></div>'+
+    '<div>جمع مالیات دو طرف: <strong>'+money(vatA+vatB)+'</strong></div>'+
+    '<div>جمع قابل پرداخت هر دو طرف: <strong>'+money(totalA+totalB)+'</strong></div>';
+   return;
+  }
   if(commissionKind==='sale'){
    const price=Number(faDigits(document.getElementById('commission-sale-price').value).replace(/[^0-9]/g,''))||0,type=document.getElementById('commission-sale-type').value;
    if(!price){document.getElementById('commission-result').textContent='لطفاً قیمت کل قرارداد را وارد کنید.';return;}
@@ -4741,9 +4779,9 @@ document.addEventListener('DOMContentLoaded',renderCommissionHistory);
    }else{
     const first=Math.min(price,5000000000)*0.0045;
     const second=Math.min(Math.max(price-5000000000,0),5000000000)*0.0037;
-    const third=Math.max(price-10000000000,0)*0.0025;
+    const third=Math.max(price-10000000000,0)*0.0035;
     base=first+second+third;
-    details='محاسبه پلکانی بر اساس نرخ‌نامه تصویری، برای هر طرف: ۰٫۴۵٪ بخش اول تا ۵ میلیارد، ۰٫۳۷٪ بخش ۵ تا ۱۰ میلیارد و ۰٫۲۵٪ بخش بالاتر از ۱۰ میلیارد تومان';
+    details='محاسبه پلکانی برای هر طرف: ۰٫۴۵٪ تا سقف ۵ میلیارد تومان، ۰٫۳۷٪ نسبت به بخش مازاد بر ۵ تا سقف ۱۰ میلیارد تومان و ۰٫۳۵٪ نسبت به مازاد بر ۱۰ میلیارد تومان.';
    }
   }else{
    const deposit=val('commission-deposit'),rent=val('commission-monthly-rent');
@@ -4756,7 +4794,6 @@ document.addEventListener('DOMContentLoaded',renderCommissionHistory);
    details='تبدیل ودیعه با نرخ ماهانه ۴٪: '+Math.round(rentFromDeposit).toLocaleString('fa-IR')+' تومان | اجاره معادل ماهانه: '+Math.round(monthlyEquivalent).toLocaleString('fa-IR')+' تومان | '+(renewal?'کمیسیون تمدید، ۳ روز':'کمیسیون اجاره جدید، ۷ روز')+' اجاره معادل برای هر طرف';
   }
   const vat=base*vatRate,total=base+vat;
-  const money=n=>Math.round(n).toLocaleString('fa-IR')+' تومان';
   document.getElementById('commission-result').innerHTML='<div>'+details+'</div><div>کمیسیون هر طرف پیش از مالیات: <strong>'+money(base)+'</strong></div><div>مالیات بر ارزش افزوده: <strong>'+money(vat)+'</strong></div><div>جمع قابل پرداخت هر طرف: <strong>'+money(total)+'</strong></div><div>جمع تقریبی دو طرف: <strong>'+money(total*2)+'</strong></div>';
  };
 })();
