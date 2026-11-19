@@ -4512,10 +4512,7 @@ body.commission-standalone #authModal{display:none;z-index:10050!important}
 
 <script id="commission-print-script">
 async function printCommissionSheetInCurrentTab(html){
-  try{
-    const {data:{user},error}=await db.auth.getUser();
-    if(error||!user){accountLoginPending=false;openAuthModal();return;}
-  }catch(authError){accountLoginPending=false;openAuthModal();return;}
+  // Printing a locally generated receipt must not depend on a Supabase login session.
   html=String(html||'').replace(/<tr>\s*<th>نشانی ملک(?: \/ توضیحات معامله)?<\/th>[\s\S]*?<\/tr>/g,'').replace(/<div class="cp-sub">amlak058\.ir<\/div>/g,'').replace(/<span>amlak058\.ir<\/span>/g,'').replace(/<section class="cp-bank">[\s\S]*?<\/section>/gi,'').replace(/5047\s*0642\s*1731\s*6181/g,'');
  const sheet=document.getElementById('commission-print-sheet');
  if(!sheet){alert('بخش چاپ رسید در دسترس نیست. صفحه را تازه‌سازی کنید.');return;}
@@ -4583,19 +4580,7 @@ async function printCommissionSheetInCurrentTab(html){
  }
 }
 async function printCommissionReceipt(){
- try{
-  const authClient=window.db||window.supabaseClient||db;
-  if(!authClient?.auth?.getUser)throw new Error('سامانه ورود در دسترس نیست. صفحه را تازه‌سازی کنید.');
-  const {data:{user},error}=await authClient.auth.getUser();
-  if(error)throw error;
-  if(!user){
-   accountLoginPending=false;
-   if(typeof openAuthModal==='function')openAuthModal();
-   else alert('برای چاپ رسید، ابتدا وارد حساب کاربری شوید یا ثبت‌نام کنید.');
-   return;
-  }
- }catch(e){alert(e.message||'برای چاپ رسید ابتدا وارد حساب کاربری شوید.');return;}
-
+ // A commission receipt is calculated in this page; printing it is available without login.
  const root=document.getElementById('commission-calculator');
  const sheet=document.getElementById('commission-print-sheet');
  const result=document.getElementById('commission-result');
