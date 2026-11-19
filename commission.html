@@ -3933,6 +3933,15 @@ svg [fill="#80560b"],svg [fill="#b78317"],svg [fill="#b69a63"],svg [fill="#c6a36
  body.commission-print-mode #commission-print-sheet .cp-result{break-inside:avoid!important;page-break-inside:avoid!important}
 }
 </style>
+<style id="commission-independent-058-receipt">
+@media print{
+ #commission-print-sheet .cp-brand{font-size:18pt!important;letter-spacing:1px}
+ #commission-print-sheet .cp-site-address{font:700 8pt Arial,sans-serif;color:#e7d3ad;letter-spacing:1px;margin-top:2px}
+ #commission-print-sheet .cp-seal-caption{font-size:7.5pt;line-height:1.9}
+ #commission-print-sheet .cp-seal-caption strong{color:#8e7045}
+ #commission-print-sheet .cp-foot span:last-child{direction:ltr}
+}
+</style>
 <style id="commission-receipt-premium">
 @media print{
  @page{size:A5 portrait;margin:7mm}
@@ -4686,7 +4695,7 @@ async function printCommissionReceipt(){
   if(el.tagName==='SELECT')value=el.options[el.selectedIndex]?.text||value;
   if(value)rows.push('<tr><th>'+escapeHTML(label)+'</th><td>'+escapeHTML(value)+((el.id.includes('price')||el.id.includes('deposit')||el.id.includes('rent'))?' تومان':'')+'</td></tr>');
  });
- const stamp='<img class="cp-stamp" src="/stamp-seal.svg?v=10" alt="مهر برجسته املاک ۰۵۸">';
+ const stamp='<img class="cp-stamp" src="/stamp-seal-058.svg?v=1" alt="نشان مستقل ۰۵۸">';
  const date=new Intl.DateTimeFormat('fa-IR',{year:'numeric',month:'long',day:'numeric'}).format(new Date());
  const receiptNumber='058-'+Date.now().toString().slice(-9);
  const resultForCustomer=result.cloneNode(true);
@@ -4695,7 +4704,7 @@ async function printCommissionReceipt(){
   else child.innerHTML=child.innerHTML.replace(/جمع قابل پرداخت هر طرف/g,'مبلغ قابل پرداخت این مشتری');
  });
  const serviceTitle=kind==='rent'?'رهن و اجاره':kind==='partnership'?'مشارکت در ساخت':'خرید و فروش';
- const html='<article class="cp-receipt"><header class="cp-head"><div class="cp-brand-lockup"><div class="cp-brand-mark">۰۵۸</div><div><div class="cp-brand">املاک ایمان | ۰۵۸</div><div class="cp-sub">مشاور املاک و محاسبه‌گر رسمی کمیسیون</div></div></div><div class="cp-head-side"><span class="cp-head-label">COMMISSION RECEIPT</span><strong>رسید محاسبه کمیسیون</strong></div></header><section class="cp-receipt-title"><div class="cp-title-kicker">گزارش محاسبه خدمات ملکی</div><div class="cp-title">'+serviceTitle+'</div><div class="cp-receipt-meta"><span><b>شماره رسید</b><strong>'+receiptNumber+'</strong></span><span><b>تاریخ صدور</b><strong>'+date+'</strong></span></div></section><div class="cp-location-note">این محاسبه بر اساس نرخ‌های اعلام‌شده برای شهر بجنورد تنظیم شده است.</div><section class="cp-details"><div class="cp-section-label">مشخصات معامله</div><table class="cp-table"><tbody>'+(rows.length?rows.join(''):'<tr><td colspan="2">اطلاعات معامله ثبت نشده است.</td></tr>')+'</tbody></table></section><section class="cp-result-wrap"><div class="cp-section-label">خلاصه محاسبات و مبلغ قابل پرداخت</div><div class="cp-result">'+resultForCustomer.innerHTML+'</div></section><div class="cp-bottom-stamp"><div class="cp-seal-caption">محل مهر و تأیید<br><strong>املاک ۰۵۸</strong></div><img src="/stamp-seal.svg?v=10" alt="مهر املاک ۰۵۸"></div><footer class="cp-foot"><span>املاک ۰۵۸ · بجنورد</span><span>این رسید حاصل محاسبه سامانه است.</span></footer></article>';
+ const html='<article class="cp-receipt"><header class="cp-head"><div class="cp-brand-lockup"><div class="cp-brand-mark">۰۵۸</div><div><div class="cp-brand">۰۵۸</div><div class="cp-sub">سامانه مستقل خدمات ملکی</div><div class="cp-site-address">amlak058.ir</div></div></div><div class="cp-head-side"><span class="cp-head-label">COMMISSION RECEIPT</span><strong>رسید محاسبه کمیسیون</strong></div></header><section class="cp-receipt-title"><div class="cp-title-kicker">گزارش محاسبه خدمات ملکی</div><div class="cp-title">'+serviceTitle+'</div><div class="cp-receipt-meta"><span><b>شماره رسید</b><strong>'+receiptNumber+'</strong></span><span><b>تاریخ صدور</b><strong>'+date+'</strong></span></div></section><div class="cp-location-note">این محاسبه بر اساس نرخ‌های اعلام‌شده برای شهر بجنورد تنظیم شده است.</div><section class="cp-details"><div class="cp-section-label">مشخصات معامله</div><table class="cp-table"><tbody>'+(rows.length?rows.join(''):'<tr><td colspan="2">اطلاعات معامله ثبت نشده است.</td></tr>')+'</tbody></table></section><section class="cp-result-wrap"><div class="cp-section-label">خلاصه محاسبات و مبلغ قابل پرداخت</div><div class="cp-result">'+resultForCustomer.innerHTML+'</div></section><div class="cp-bottom-stamp"><div class="cp-seal-caption">نشان اختصاصی<br><strong>سامانه مستقل ۰۵۸</strong><br>amlak058.ir</div><img src="/stamp-seal-058.svg?v=1" alt="نشان مستقل ۰۵۸"></div><footer class="cp-foot"><span>۰۵۸ | سامانه مستقل خدمات ملکی</span><span>مرجع سامانه: amlak058.ir</span></footer></article>';
 
  try{
   const history=JSON.parse(localStorage.getItem('amlak058_commission_receipts_v1')||'[]');
