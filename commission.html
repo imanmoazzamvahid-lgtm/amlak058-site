@@ -4467,14 +4467,46 @@ body.commission-standalone #authModal{display:none;z-index:10050!important}
 
 
 
+<style id="commission-service-selector-refresh">
+#commission-calculator{max-width:1120px}
+#commission-calculator>.section-heading{display:block;margin-bottom:20px}
+#commission-calculator>.section-heading h2{font-size:clamp(22px,3vw,30px);margin-bottom:6px}
+#commission-calculator>.section-heading .muted{display:block;font-size:12px}
+#commission-calculator .commission-box{background:#fff;border:1px solid #e9e5dc;border-radius:24px;padding:clamp(16px,3vw,30px);box-shadow:0 18px 55px rgba(35,34,30,.07)}
+#commission-calculator .commission-service-heading{text-align:center;margin:0 auto 20px}
+#commission-calculator .commission-eyebrow{display:inline-block;color:#a17b42;font-size:11px;font-weight:800;letter-spacing:.4px;margin-bottom:5px}
+#commission-calculator .commission-service-heading h3{font-size:21px;color:#292721;margin:0 0 4px;font-weight:900}
+#commission-calculator .commission-service-heading p{font-size:12px;color:#7c817e;margin:0}
+#commission-calculator .commission-service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 24px}
+#commission-calculator .commission-service-grid .commission-tab{position:relative;display:flex;flex-direction:column;align-items:flex-start;text-align:right;gap:7px;min-height:150px;padding:18px;border:1px solid #e9e5dc;border-radius:17px;background:linear-gradient(145deg,#fff,#faf9f6);color:#292721;transition:all .2s;white-space:normal}
+#commission-calculator .commission-service-grid .commission-tab:hover{transform:translateY(-3px);border-color:#c5a46c;box-shadow:0 12px 25px rgba(48,43,33,.07)}
+#commission-calculator .commission-service-grid .commission-tab.active{border:1.5px solid #a98248;background:linear-gradient(145deg,#fbf7ef,#fff);box-shadow:0 8px 22px rgba(169,130,72,.12)}
+#commission-calculator .commission-service-icon{width:39px;height:39px;display:grid;place-items:center;border-radius:12px;background:#f1eadc;color:#8b6838;font-size:22px}
+#commission-calculator .commission-service-title{font-size:14px;font-weight:900;color:#292721}
+#commission-calculator .commission-service-grid .commission-tab small{font-size:10px;line-height:1.8;color:#7a817d;font-weight:500}
+#commission-calculator .commission-service-arrow{position:absolute;left:16px;bottom:15px;color:#a98248;font-size:18px}
+#commission-calculator .commission-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;padding:20px;border:1px solid #eee9df;border-radius:17px;background:#fcfbf8;margin-bottom:16px}
+#commission-calculator .commission-fields[hidden]{display:none!important}
+#commission-calculator .commission-fields label{display:flex;flex-direction:column;gap:7px;font-size:12px;font-weight:800;color:#45443f}
+#commission-calculator .commission-fields input,#commission-calculator .commission-fields select{width:100%;min-height:48px}
+#commission-calculator .commission-vat,#commission-calculator .commission-vat-rate-row{margin:12px 0}
+#commission-calculator .commission-calc-btn,#commission-calculator .commission-print-btn{min-height:48px;border-radius:12px;padding-inline:24px}
+#commission-calculator .commission-result{margin:16px 0;padding:18px;border-radius:15px;background:#f7f4ed;border:1px solid #ece4d5}
+@media(max-width:650px){#commission-calculator .commission-service-grid{grid-template-columns:1fr;gap:9px}#commission-calculator .commission-service-grid .commission-tab{min-height:104px;padding:13px 14px 13px 45px;gap:4px}#commission-calculator .commission-service-icon{width:34px;height:34px}#commission-calculator .commission-service-arrow{top:40px;bottom:auto}#commission-calculator .commission-fields{grid-template-columns:1fr;padding:14px;gap:12px}#commission-calculator .commission-service-heading h3{font-size:18px}}
+</style>
 <section class="container section" id="commission-calculator" aria-labelledby="commission-title">
  <div class="section-heading"><h2 id="commission-title">محاسبه آنلاین کمیسیون بنگاه در بجنورد</h2><span class="muted">خرید و فروش، مشارکت در ساخت، پیش‌فروش، رهن و اجاره با امکان چاپ رسید</span></div>
  <div class="commission-box">
-    <div class="commission-tabs" role="group" aria-label="نوع معامله">
-   <button type="button" class="commission-tab active" data-kind="sale" onclick="setCommissionKind('sale')">خرید و فروش</button>
-   <button type="button" class="commission-tab" data-kind="partnership" onclick="setCommissionKind('partnership')">مشارکت در ساخت</button>
-   <button type="button" class="commission-tab" data-kind="rent" onclick="setCommissionKind('rent')">رهن و اجاره</button>
-  </div>
+    <div class="commission-service-heading">
+     <span class="commission-eyebrow">خدمات محاسبه آنلاین</span>
+     <h3>نوع معامله را انتخاب کنید</h3>
+     <p>با انتخاب هر خدمت، فقط فرم مربوط به همان معامله نمایش داده می‌شود.</p>
+    </div>
+    <div class="commission-tabs commission-service-grid" role="group" aria-label="انتخاب نوع معامله">
+     <button type="button" class="commission-tab active" data-kind="sale" onclick="setCommissionKind('sale')"><span class="commission-service-icon">⌂</span><span class="commission-service-title">خرید و فروش</span><small>محاسبه پلکانی کمیسیون فروش و پیش‌فروش</small><span class="commission-service-arrow">←</span></button>
+     <button type="button" class="commission-tab" data-kind="rent" onclick="setCommissionKind('rent')"><span class="commission-service-icon">▤</span><span class="commission-service-title">رهن و اجاره</span><small>محاسبه کمیسیون رهن، اجاره و تمدید</small><span class="commission-service-arrow">←</span></button>
+     <button type="button" class="commission-tab" data-kind="partnership" onclick="setCommissionKind('partnership')"><span class="commission-service-icon">⌑</span><span class="commission-service-title">مشارکت در ساخت</span><small>محاسبه جداگانه سهم کمیسیون هر طرف</small><span class="commission-service-arrow">←</span></button>
+    </div>
   <div id="commission-sale-fields" class="commission-fields">
    <label>نوع قرارداد<select id="commission-sale-type"><option value="sale">خرید و فروش</option><option value="presale">پیش‌فروش</option></select></label>
    <label>قیمت کل قرارداد (تومان)
