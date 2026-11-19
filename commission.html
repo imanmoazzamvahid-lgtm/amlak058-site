@@ -4704,7 +4704,7 @@ async function printCommissionReceipt(){
   else child.innerHTML=child.innerHTML.replace(/جمع قابل پرداخت هر طرف/g,'مبلغ قابل پرداخت این مشتری');
  });
  const serviceTitle=kind==='rent'?'رهن و اجاره':kind==='partnership'?'مشارکت در ساخت':'خرید و فروش';
- const html='<article class="cp-receipt"><header class="cp-head"><div class="cp-brand-lockup"><div class="cp-brand-mark">۰۵۸</div><div><div class="cp-brand">۰۵۸</div><div class="cp-sub">سامانه مستقل خدمات ملکی</div><div class="cp-site-address">amlak058.ir</div></div></div><div class="cp-head-side"><span class="cp-head-label">COMMISSION RECEIPT</span><strong>رسید محاسبه کمیسیون</strong></div></header><section class="cp-receipt-title"><div class="cp-title-kicker">گزارش محاسبه خدمات ملکی</div><div class="cp-title">'+serviceTitle+'</div><div class="cp-receipt-meta"><span><b>شماره رسید</b><strong>'+receiptNumber+'</strong></span><span><b>تاریخ صدور</b><strong>'+date+'</strong></span></div></section><div class="cp-location-note">این محاسبه بر اساس نرخ‌های اعلام‌شده برای شهر بجنورد تنظیم شده است.</div><section class="cp-details"><div class="cp-section-label">مشخصات معامله</div><table class="cp-table"><tbody>'+(rows.length?rows.join(''):'<tr><td colspan="2">اطلاعات معامله ثبت نشده است.</td></tr>')+'</tbody></table></section><section class="cp-result-wrap"><div class="cp-section-label">خلاصه محاسبات و مبلغ قابل پرداخت</div><div class="cp-result">'+resultForCustomer.innerHTML+'</div></section><div class="cp-bottom-stamp"><div class="cp-seal-caption">نشان اختصاصی<br><strong>سامانه مستقل ۰۵۸</strong><br>amlak058.ir</div><img src="/stamp-seal-058.svg?v=1" alt="نشان مستقل ۰۵۸"></div><footer class="cp-foot"><span>۰۵۸ | سامانه مستقل خدمات ملکی</span><span>مرجع سامانه: amlak058.ir</span></footer></article>';
+ const html='<article class="cp-receipt"><header class="cp-head"><div class="cp-brand-lockup"><div class="cp-brand-mark">۰۵۸</div><div class="cp-site-address">amlak058.ir</div></div><div class="cp-head-side"><span class="cp-head-label">۰۵۸</span><strong>رسید محاسبه کمیسیون</strong></div></header><section class="cp-receipt-title"><div class="cp-title-kicker">رسید خدمات ملکی</div><div class="cp-title">'+serviceTitle+'</div><div class="cp-receipt-meta"><span><b>شماره رسید</b><strong>'+receiptNumber+'</strong></span><span><b>تاریخ صدور</b><strong>'+date+'</strong></span></div></section><div class="cp-location-note">محاسبه بر اساس نرخ‌های اعلام‌شده برای شهر بجنورد</div><section class="cp-details"><div class="cp-section-label">مشخصات معامله</div><table class="cp-table"><tbody>'+(rows.length?rows.join(''):'<tr><td colspan="2">اطلاعات معامله ثبت نشده است.</td></tr>')+'</tbody></table></section><section class="cp-result-wrap"><div class="cp-section-label">خلاصه محاسبات</div><div class="cp-result">'+resultForCustomer.innerHTML+'</div></section><div class="cp-signature-row"><span>مهر و امضاء</span><i></i></div><footer class="cp-foot"><span>۰۵۸</span><span>amlak058.ir</span></footer></article>';
 
  try{
   const history=JSON.parse(localStorage.getItem('amlak058_commission_receipts_v1')||'[]');
@@ -4715,7 +4715,18 @@ async function printCommissionReceipt(){
  printCommissionSheetInCurrentTab(html);
 }
 function sanitizeOldCommissionReceipt(html){
- return String(html||'').replace(/<section class="cp-bank">[\s\S]*?<\/section>/gi,'').replace(/5047\s*0642\s*1731\s*6181/g,'');
+ return String(html||'')
+  .replace(/<section class="cp-bank">[\s\S]*?<\/section>/gi,'')
+  .replace(/5047\s*0642\s*1731\s*6181/g,'')
+  .replace(/<div class="cp-brand">املاک(?: ایمان)?\s*[|｜]\s*۰۵۸<\/div>/g,'<div class="cp-brand">۰۵۸</div>')
+  .replace(/<div class="cp-brand">املاک\s*۰۵۸<\/div>/g,'<div class="cp-brand">۰۵۸</div>')
+  .replace(/سامانه مستقل(?: خدمات ملکی|\s*۰۵۸)?/g,'')
+  .replace(/نشان مستقل|نشان اختصاصی/g,'')
+  .replace(/<div class="cp-bottom-stamp">[\s\S]*?<\/div><\/div><footer/gi,'<footer')
+  .replace(/<img[^>]+(?:stamp-seal|cp-stamp)[^>]*>/gi,'')
+  .replace(/املاک ۰۵۸ · بجنورد/g,'۰۵۸')
+  .replace(/۰۵۸\s*\|\s*املاک ایمان/g,'۰۵۸')
+  .replace(/مرجع سامانه:\s*amlak058\.ir/g,'amlak058.ir');
 }
 function getCommissionHistory(){
  try{
@@ -9837,5 +9848,42 @@ footer p,footer a{color:#dce8e0!important;font-size:11px!important}
 </script>
 
 
+<style id="commission-receipt-clean-design">
+@media print{
+ @page{size:A5 portrait;margin:9mm}
+ body.commission-print-mode #commission-print-sheet{width:130mm!important;max-width:130mm!important;min-height:0!important;padding:0!important;font-size:9.5pt!important;line-height:1.65!important;color:#252622!important;background:#fff!important}
+ body.commission-print-mode #commission-print-sheet:before{content:none!important;display:none!important}
+ #commission-print-sheet .cp-receipt{position:relative;min-height:0;padding:0;box-sizing:border-box}
+ #commission-print-sheet .cp-head{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#fff!important;color:#252622!important;border:0;border-bottom:2px solid #292a26!important;border-radius:0!important;padding:0 0 8px!important;margin:0 0 14px!important}
+ #commission-print-sheet .cp-brand-lockup{display:flex;align-items:center;gap:10px}
+ #commission-print-sheet .cp-brand-mark{display:flex;align-items:center;justify-content:center;width:49px;height:42px;border:0;border-radius:3px!important;background:#292a26!important;color:#fff!important;font-size:16pt;font-weight:900}
+ #commission-print-sheet .cp-site-address{direction:ltr;font:700 9pt Arial,sans-serif;letter-spacing:.5px;color:#5f625c!important}
+ #commission-print-sheet .cp-head-side{display:flex;flex-direction:column;gap:2px;text-align:left}
+ #commission-print-sheet .cp-head-label{font:800 8pt Arial,sans-serif;letter-spacing:1px;color:#9a7a45!important}
+ #commission-print-sheet .cp-head-side strong{font-size:10pt;color:#282923!important}
+ #commission-print-sheet .cp-receipt-title{text-align:right;padding:1px 0 10px}
+ #commission-print-sheet .cp-title-kicker{font-size:8pt;color:#7b7d76!important;font-weight:600}
+ #commission-print-sheet .cp-title{font-size:17pt;line-height:1.5;font-weight:900;color:#252622!important;margin:1px 0 8px;text-align:right}
+ #commission-print-sheet .cp-receipt-meta{display:flex;justify-content:flex-start;gap:7px}
+ #commission-print-sheet .cp-receipt-meta span{display:flex;gap:7px;align-items:center;padding:4px 9px;border:1px solid #e6e6e1!important;border-radius:3px!important;background:#fafaf8!important;font-size:7.5pt}
+ #commission-print-sheet .cp-receipt-meta b{color:#77796f!important;font-weight:600}
+ #commission-print-sheet .cp-receipt-meta strong{color:#292a26!important}
+ #commission-print-sheet .cp-location-note{font-size:7.5pt;color:#77796f!important;text-align:right;padding:6px 0;margin:0 0 10px;border-bottom:1px solid #e8e8e3!important}
+ #commission-print-sheet .cp-section-label{font-size:8.5pt;font-weight:900;color:#33352f!important;margin:8px 0 5px;padding:0;border:0}
+ #commission-print-sheet .cp-table{width:100%;border-collapse:collapse;border:0;border-radius:0!important;border-spacing:0;margin:0 0 12px}
+ #commission-print-sheet .cp-table th,#commission-print-sheet .cp-table td{border:0!important;border-bottom:1px solid #e9e9e4!important;border-radius:0!important;padding:6px 7px;text-align:right;vertical-align:middle;line-height:1.5;font-size:8.5pt}
+ #commission-print-sheet .cp-table tr:first-child th,#commission-print-sheet .cp-table tr:first-child td{border-top:1px solid #e9e9e4!important}
+ #commission-print-sheet .cp-table th{width:39%;background:#f6f6f2!important;color:#63655e!important;font-weight:700}
+ #commission-print-sheet .cp-table td{background:#fff!important;color:#292a26!important;font-weight:600}
+ #commission-print-sheet .cp-result-wrap{margin-top:8px}
+ #commission-print-sheet .cp-result{border:0!important;border-right:3px solid #b3915a!important;border-radius:0!important;padding:10px 12px!important;margin:0!important;background:#f6f6f2!important;color:#282923!important;line-height:1.75}
+ #commission-print-sheet .cp-result strong,#commission-print-sheet .cp-result b{color:#5d492b!important}
+ #commission-print-sheet .cp-bottom-stamp{display:none!important}
+ #commission-print-sheet .cp-signature-row{display:flex;align-items:center;justify-content:flex-start;gap:10px;margin-top:15px;font-size:8pt;color:#77796f}
+ #commission-print-sheet .cp-signature-row i{display:block;width:39mm;border-bottom:1px solid #c9c9c2;height:13px}
+ #commission-print-sheet .cp-foot{display:flex;justify-content:space-between;gap:8px;border-top:1px solid #d9d9d2!important;margin-top:15px;padding-top:7px;font-size:8pt;color:#62645d!important}
+ #commission-print-sheet .cp-head,#commission-print-sheet .cp-receipt-title,#commission-print-sheet .cp-details,#commission-print-sheet .cp-result-wrap,#commission-print-sheet .cp-signature-row{break-inside:avoid!important;page-break-inside:avoid!important}
+}
+</style>
 </body>
 </html>
