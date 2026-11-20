@@ -536,31 +536,119 @@ $("questionForm").addEventListener("submit",async(e)=>{
   $("welcome")?.remove();
   renderMessage("user",question,[]);
   $("question").value="";
-  const wait=node("div","loading","در حال جست‌وجوی مستندات و تهیه پاسخ…"); $("chatScroll").appendChild(wait);
-  try {
-    const {data,error}=await client.functions.invoke("legal-assistant",{body:{question,conversation_id:currentConversationId,audience_mode:audienceMode}});
+  const wait=node("div","loading","در حال جست‌وجوی مستندات حقوقی…"); $("chatScroll").appendChild(wait);
+  let answerNode=null, answerText="", streamError=null, finalData=null;
+  const ensureAnswer=()=>{
+    if(answerNode) return answerNode;
     wait.remove();
-    if(error) {
-      let msg="ارتباط با موتور حقوقی برقرار نشد. وضعیت ورود و اتصال پایگاه داده را بررسی کنید.";
-      try {
-        const body=await error.context.json();
-        if(body?.message) msg=body.message;
-        else if(body?.error==="service_not_configured") msg="تنظیمات داخلی موتور حقوقی کامل نیست.";
-        else if(body?.error==="legal_search_failed") msg="جست‌وجوی بانک مستندات با خطا مواجه شد.";
-        else if(body?.error==="rate_limit_exceeded") msg=body.message || "سقف درخواست‌های این ساعت تکمیل شده است.";
-        else if(body?.error) msg="خطای سرویس: "+body.error;
-      } catch {}
-      renderMessage("assistant",msg,[]);
+    const wrap=node("article","bubble assistant");
+    wrap.appendChild(node("div","bubble-label","پاسخ دستیار · در حال نگارش"));
+    const content=node("div","bubble-content","");
+    wrap.appendChild(content);
+    $("chatScroll").appendChild(wrap);
+    $("chatScroll").scrollTop=$("chatScroll").scrollHeight;
+    answerNode={wrap,content};
+    return answerNode;
+  };
+  const addCitations=(wrap,citations)=>{
+    if(!citations?.length) return;
+    const refs=node("div","citations");
+    citations.forEach((c)=>{
+      const a=node("a","citation");
+      a.href=c.official_url || "#"; a.target="_blank"; a.rel="noopener noreferrer";
+      a.appendChild(node("b","",String(c.ref)+". "+(c.title || "منبع حقوقی")));
+      const typeLabels={constitution:"قانون اساسی",code:"قانون جامع",act:"قانون",regulation:"آیین‌نامه",bylaw:"اساسنامه",circular:"بخشنامه",unification_vote:"رأی وحدت رویه",advisory_opinion:"نظریه مشورتی",judgment:"رأی قضایی",other:"سایر"};
+      const forceLabels={unknown:"وضعیت اعتبار: بررسی‌نشده",in_force:"وضعیت ثبت‌شده: لازم‌الاجرا",amended:"وضعیت ثبت‌شده: اصلاح‌شده",repealed:"وضعیت ثبت‌شده: نسخ‌شده",expired:"وضعیت ثبت‌شده: منقضی",suspended:"وضعیت ثبت‌شده: معلق"};
+      const meta=[typeLabels[c.source_type]||c.source_type,c.document_number,c.issuing_authority,c.enactment_date?("تصویب: "+c.enactment_date):"",c.publication_date?("انتشار: "+c.publication_date):"",c.status==="published"?"منتشرشده در بانک":"پیش‌نویس",forceLabels[c.legal_force_status]||"وضعیت اعتبار نامشخص",c.last_verified_at?("آخرین راستی‌آزمایی متن: "+String(c.last_verified_at).slice(0,10)):"متن راستی‌آزمایی نشده"].filter(Boolean).join(" | ");
+      a.appendChild(node("span","",meta || "مشاهده منبع"));
+      if(!c.official_url) { a.removeAttribute("target"); a.removeAttribute("href"); }
+      refs.appendChild(a);
+    });
+    wrap.appendChild(refs);
+  };
+  try {
+    const {data:{session},error:sessionError}=await client.auth.getSession();
+    if(sessionError || !session?.access_token) throw new Error("نشست ورود معتبر نیست؛ لطفاً دوباره وارد حساب شوید.");
+    const response=await fetch(SUPABASE_URL+"/functions/v1/legal-assistant",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "apikey":SUPABASE_KEY,
+        "Authorization":"Bearer "+session.access_token
+      },
+      body:JSON.stringify({question,conversation_id:currentConversationId,audience_mode:audienceMode,stream:true})
+    });
+    if(!response.ok){
+      let msg="ارتباط با موتور حقوقی برقرار نشد.";
+      try { const body=await response.json(); msg=body.message||body.error||msg; } catch {}
+      throw new Error(msg);
+    }
+    const contentType=response.headers.get("content-type")||"";
+    if(!contentType.includes("text/event-stream")){
+      const data=await response.json();
+      currentConversationId=data.conversation_id||currentConversationId;
+      wait.remove();
+      renderMessage("assistant",data.answer||"پاسخی از سرویس دریافت نشد.",data.citations||[]);
+      if(!data.retrieved_source_count) $("chatScroll").appendChild(node("div","loading","منبع منتشرشده‌ای برای این پرسش بازیابی نشد؛ پاسخ را مستند تلقی نکنید."));
+      loadConversations(); loadDocumentCount();
     } else {
-      currentConversationId=data.conversation_id;
-      renderMessage("assistant",data.answer || "پاسخی از سرویس دریافت نشد.",data.citations || []);
-      if(!data.retrieved_source_count) {
-        const note=node("div","loading","در حال حاضر منبع منتشرشده‌ای برای این پرسش در بانک بازیابی نشد؛ پاسخ را مستند تلقی نکنید.");
-        $("chatScroll").appendChild(note);
+      if(!response.body) throw new Error("جریان پاسخ در مرورگر در دسترس نیست.");
+      const reader=response.body.getReader(), decoder=new TextDecoder();
+      let buffer="";
+      const handleLine=(line)=>{
+        const trimmed=line.trim();
+        if(!trimmed.startsWith("data:")) return;
+        const raw=trimmed.slice(5).trim();
+        if(!raw||raw==="[DONE]") return;
+        let item; try { item=JSON.parse(raw); } catch { return; }
+        if(item.type==="meta"){
+          if(item.conversation_id) currentConversationId=item.conversation_id;
+          if(!answerNode) wait.textContent="منابع پیدا شد؛ پاسخ در حال تولید است…";
+        } else if(item.type==="delta" && typeof item.delta==="string"){
+          const target=ensureAnswer(); answerText+=item.delta; target.content.textContent=answerText;
+          $("chatScroll").scrollTop=$("chatScroll").scrollHeight;
+        } else if(item.type==="replace" && typeof item.answer==="string"){
+          const target=ensureAnswer(); answerText=item.answer; target.content.textContent=answerText;
+        } else if(item.type==="done"){
+          finalData=item;
+          if(item.conversation_id) currentConversationId=item.conversation_id;
+        } else if(item.type==="error"){
+          streamError=item.message||"تولید پاسخ متوقف شد.";
+        }
+      };
+      while(true){
+        const {value,done}=await reader.read();
+        buffer+=decoder.decode(value||new Uint8Array(),{stream:!done});
+        let nl;
+        while((nl=buffer.indexOf("\n"))!==-1){
+          const line=buffer.slice(0,nl).replace(/\r$/,""); buffer=buffer.slice(nl+1); handleLine(line);
+        }
+        if(done) break;
       }
+      if(buffer.trim()) handleLine(buffer);
+      try { reader.releaseLock(); } catch {}
+      if(streamError) throw new Error(streamError);
+      if(!answerText.trim()) throw new Error("مدل پاسخ قابل استفاده‌ای تولید نکرد.");
+      const target=ensureAnswer();
+      target.wrap.querySelector(".bubble-label").textContent="پاسخ دستیار";
+      const actions=node("div","bubble-actions");
+      const copy=node("button","copy-answer","کپی پاسخ"); copy.type="button";
+      copy.addEventListener("click",async()=>{
+        try { await navigator.clipboard.writeText(answerText); copy.textContent="کپی شد"; }
+        catch { copy.textContent="کپی در این مرورگر ممکن نیست"; }
+        setTimeout(()=>{copy.textContent="کپی پاسخ";},1800);
+      });
+      actions.appendChild(copy); target.wrap.appendChild(actions);
+      addCitations(target.wrap,finalData?.citations||[]);
+      if(!finalData?.retrieved_source_count) $("chatScroll").appendChild(node("div","loading","منبع منتشرشده‌ای برای این پرسش بازیابی نشد؛ پاسخ را مستند تلقی نکنید."));
       loadConversations(); loadDocumentCount();
     }
-  } catch(err) { wait.remove(); renderMessage("assistant","خطا در ارتباط با سرویس: "+(err.message||"خطای نامشخص"),[]); }
+  } catch(err) {
+    wait.remove();
+    if(answerNode && answerText.trim()){
+      answerNode.wrap.appendChild(node("div","loading","هشدار: "+(err.message||"جریان پاسخ کامل نشد.")+"؛ پاسخ نمایش‌داده‌شده ممکن است ناقص باشد."));
+    } else renderMessage("assistant",err.message||"خطا در ارتباط با سرویس حقوقی.",[]);
+  }
   finally { busy=false; $("send").disabled=false; $("question").disabled=false; $("question").focus(); }
 });
 document.querySelectorAll("[data-question]").forEach(btn=>btn.addEventListener("click",()=>{$("question").value=btn.dataset.question;$("question").focus();}));
