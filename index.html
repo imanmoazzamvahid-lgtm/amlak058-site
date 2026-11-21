@@ -949,6 +949,7 @@ const SUPABASE_KEY='sb_publishable_V3ZIfuzEZ4yKUY88lyv_Q_wF6kQAcb';
 const BUCKET='property-images',MAX_IMAGES=5,MAX_IMAGE_SIZE=5*1024*1024;
 const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 let currentTransaction='',selectedImages=[],pendingOtp=false,activeConversationId=null,activeChatProperty=null,chatRefreshTimer=null;
+const propertyCache=new Map(); // Shared cache for approved listings, detail views, and the AI assistant.
 const FAVORITES_KEY='bojnurd_property_favorites_v1';
 function getFavorites(){try{return JSON.parse(localStorage.getItem(FAVORITES_KEY)||'[]')}catch{return []}}
 function toggleFavorite(id,button){const fav=getFavorites();const key=String(id);const next=fav.includes(key)?fav.filter(x=>x!==key):[...fav,key];localStorage.setItem(FAVORITES_KEY,JSON.stringify(next));button.classList.toggle('saved',next.includes(key));button.textContent=next.includes(key)?'♥ ذخیره شد':'♡ ذخیره آگهی'}
