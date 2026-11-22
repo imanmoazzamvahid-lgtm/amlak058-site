@@ -110,24 +110,66 @@ function chooseTransaction(question) {
   return "";
 }
 
+function parseMoneyConstraint(question) {
+  const full = question.match(/(?:(تا|حداکثر|زیر|کمتر از|حداقل|بالای|بیشتر از|بودجه|قیمت|حدود)\s*)?(\d{7,})\s*تومان/);
+  if (full) {
+    const prefix = full[1] || "";
+    return { value: Number(full[2]), mode: /(حداقل|بالای|بیشتر از)/.test(prefix) ? "min" : "max" };
+  }
+  const unit = question.match(/(?:(تا|حداکثر|زیر|کمتر از|حداقل|بالای|بیشتر از|بودجه|قیمت|حدود)\s*)?(\d+)\s*(میلیارد|میلیون)(?:\s*تومان)?/);
+  if (!unit) return null;
+  const prefix = unit[1] || "";
+  const multiplier = unit[3] === "میلیارد" ? 1_000_000_000 : 1_000_000;
+  return {
+    value: Number(unit[2]) * multiplier,
+    mode: /(حداقل|بالای|بیشتر از)/.test(prefix) ? "min" : "max"
+  };
+}
+
+function parseAreaConstraint(question) {
+  const match = question.match(/(?:(حداکثر|زیر|کمتر از|حداقل|بالای|بیشتر از|حدود)\s*)?(\d+)\s*(?:متر|متری)/);
+  if (!match) return null;
+  const prefix = match[1] || "";
+  let mode = "near";
+  if (/(حداکثر|زیر|کمتر از)/.test(prefix)) mode = "max";
+  if (/(حداقل|بالای|بیشتر از)/.test(prefix)) mode = "min";
+  return { value: Number(match[2]), mode };
+}
+
 function searchListings(message, properties) {
   const question = normalize(message);
   const type = chooseType(question);
   const transaction = chooseTransaction(question);
+  const budget = parseMoneyConstraint(question);
+  const area = parseAreaConstraint(question);
+  const bedroomMatch = question.match(/(\d+)\s*(?:خوابه|خواب)/);
+  const bedrooms = bedroomMatch ? Number(bedroomMatch[1]) : null;
   const cities = [...new Set(properties.map(p => p.city).filter(Boolean))];
   const city = cities.find(value => {
     const candidate = normalize(value);
     return candidate.length > 1 && question.includes(candidate);
   }) || "";
 
+  const guidanceQuestion = /(چه نکاتی|چگونه|چطور|راهنمای|راهنما|مراحل|شرایط حقوقی|قرارداد)/.test(question);
   const explicitIntent =
-    /(آگهی|نشان بده|نشانم بده|پیدا کن|جستجو|لیست|چه گزینه|چه ملکی|موجودی|دارید|دارین)/.test(question);
-  const typeAndDealIntent = Boolean(type && transaction &&
-    !/(قرارداد|حقوقی|قانون|دادخواست|شکایت|اظهارنامه)/.test(question));
+    /(آگهی|نشان بده|نشانم بده|پیدا کن|جستجو|لیست|چه گزینه|چه ملکی|موجودی|دارید|دارین|میخوام|میخواهم|دنبال|نیاز دارم)/.test(question);
+  const typeAndDealIntent = Boolean(type && transaction && !guidanceQuestion &&
+    !/(حقوقی|قانون|دادخواست|شکایت|اظهارنامه)/.test(question));
   const listingIntent = explicitIntent || typeAndDealIntent;
 
+  const filters = {
+    type,
+    transaction,
+    city,
+    budget: budget ? budget.value : null,
+    budget_mode: budget ? budget.mode : null,
+    area: area ? area.value : null,
+    area_mode: area ? area.mode : null,
+    bedrooms
+  };
+
   if (!listingIntent || !properties.length) {
-    return { listingIntent, matches: [], filters: { type, transaction, city } };
+    return { listingIntent, matches: [], filters };
   }
 
   let candidates = properties.slice();
@@ -150,11 +192,37 @@ function searchListings(message, properties) {
     candidates = candidates.filter(p => normalize(p.city) === normalize(city));
   }
 
+  if (budget) {
+    const monthlyRentBudget = transaction === "رهن و اجاره" && /(اجاره ماهانه|اجاره هر ماه)/.test(question);
+    const budgetField = monthlyRentBudget ? "monthly_rent" :
+      (transaction === "رهن و اجاره" || transaction === "رهن کامل" ? "deposit" : "price");
+    candidates = candidates.filter(p => {
+      const value = Number(p[budgetField]);
+      if (!Number.isFinite(value) || value <= 0) return false;
+      return budget.mode === "min" ? value >= budget.value : value <= budget.value;
+    });
+  }
+
+  if (area) {
+    candidates = candidates.filter(p => {
+      const value = Number(p.area ?? p.building_area ?? p.land_area);
+      if (!Number.isFinite(value) || value <= 0) return false;
+      if (area.mode === "min") return value >= area.value;
+      if (area.mode === "max") return value <= area.value;
+      return value >= area.value * 0.85 && value <= area.value * 1.15;
+    });
+  }
+
+  if (bedrooms !== null) {
+    candidates = candidates.filter(p => Number(p.bedrooms) === bedrooms);
+  }
+
   const ignored = new Set([
     "آگهی", "آگهیها", "نشان", "بده", "لطفا", "لطفاً", "برای", "چه", "کجا",
     "دارید", "دارین", "موجود", "میشه", "میخوام", "میخواهم", "جستجو", "پیدا",
     "کن", "کنید", "ملک", "املاک", "خرید", "فروش", "فروشی", "اجاره", "رهن",
-    "بجنورد", "شیروان", "اسفراین", "فاروج", "متری", "متر"
+    "بجنورد", "شیروان", "اسفراین", "فاروج", "متری", "متر", "تا", "حداکثر",
+    "حداقل", "بودجه", "میلیارد", "میلیون", "خوابه", "خواب", "دنبال", "دارم"
   ]);
   const words = question.split(" ").filter(word => word.length >= 3 && !ignored.has(word));
 
@@ -174,6 +242,9 @@ function searchListings(message, properties) {
       (transaction === "رهن و اجاره" && property.transaction_type === "رهن کامل")
     )) score += 8;
     if (city && normalize(property.city) === normalize(city)) score += 6;
+    if (budget) score += 5;
+    if (area) score += 4;
+    if (bedrooms !== null) score += 4;
     for (const word of words) {
       if (searchable.includes(word)) score += 1;
     }
@@ -184,10 +255,9 @@ function searchListings(message, properties) {
   return {
     listingIntent,
     matches: ranked.slice(0, 4).map(item => item.property),
-    filters: { type, transaction, city }
+    filters
   };
 }
-
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
