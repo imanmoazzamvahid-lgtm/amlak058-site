@@ -103,6 +103,18 @@ function chooseType(question) {
   return "";
 }
 
+function matchesPropertyType(propertyType, type) {
+  const actual = normalize(propertyType);
+  const wanted = normalize(type);
+  if (!actual || !wanted) return false;
+  if (actual === wanted || actual.includes(wanted)) return true;
+  if (wanted === "مغازه") return /(مغازه|تجار|فروشگاه)/.test(actual);
+  if (wanted === "دفتر کار") return /(دفتر|ادار)/.test(actual);
+  if (wanted === "خانه و ویلا") return /(خانه|ویلا)/.test(actual);
+  if (wanted === "آپارتمان") return /(آپارتمان|واحد مسکونی)/.test(actual);
+  return false;
+}
+
 function chooseTransaction(question) {
   if (question.includes("رهن کامل")) return "رهن کامل";
   if (/(رهن|اجاره|اجاری|مستاجر)/.test(question)) return "رهن و اجاره";
@@ -175,7 +187,7 @@ function searchListings(message, properties) {
   let candidates = properties.slice();
 
   if (type) {
-    candidates = candidates.filter(p => normalize(p.property_type) === normalize(type));
+    candidates = candidates.filter(p => matchesPropertyType(p.property_type, type));
   }
 
   if (transaction === "رهن و اجاره") {
@@ -236,7 +248,7 @@ function searchListings(message, properties) {
       property.description
     ].join(" "));
     let score = 0;
-    if (type && normalize(property.property_type) === normalize(type)) score += 8;
+    if (type && matchesPropertyType(property.property_type, type)) score += 8;
     if (transaction && (
       normalize(property.transaction_type) === normalize(transaction) ||
       (transaction === "رهن و اجاره" && property.transaction_type === "رهن کامل")
