@@ -56,14 +56,17 @@ function cleanProperties(input) {
     const id = safeText(item.id, 100);
     if (!id || !/^[a-zA-Z0-9_-]+$/.test(id)) return null;
 
+    const validMedia = value => {
+      const key = safeText(value, 300);
+      if (/^https:\/\//i.test(key)) return key;
+      if (/^pending\/[A-Za-z0-9._-]+\.(?:jpg|jpeg|png|webp)$/i.test(key) && !key.includes("..")) return key;
+      return "";
+    };
     const images = Array.isArray(item.image_urls)
-      ? item.image_urls.slice(0, 5).map(value => {
-          const url = safeText(value, 1000);
-          return /^https:\/\//i.test(url) ? url : "";
-        }).filter(Boolean)
+      ? item.image_urls.slice(0, 5).map(validMedia).filter(Boolean)
       : [];
-    const primaryImage = safeText(item.image_url, 1000);
-    const imageUrl = /^https:\/\//i.test(primaryImage) ? primaryImage : (images[0] || "");
+    const primaryImage = validMedia(item.image_url);
+    const imageUrl = primaryImage || (images[0] || "");
 
     return {
       id,
