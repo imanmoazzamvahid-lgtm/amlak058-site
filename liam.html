@@ -266,8 +266,9 @@ function faDigits(value){return String(value||'').replace(/[۰-۹]/g,d=>'۰۱۲�
 function normalizeIranPhone(value){
  let digits=faDigits(value).replace(/\D/g,'');
  if(digits.startsWith('0098'))digits=digits.slice(2);
- if(digits.startsWith('0'))digits='98'+digits.slice(1);
- if(digits.startsWith('9'))digits='98'+digits;
+ else if(digits.startsWith('98'))digits=digits;
+ else if(digits.startsWith('0'))digits='98'+digits.slice(1);
+ else if(digits.startsWith('9'))digits='98'+digits;
  return /^989\d{9}$/.test(digits)?'+'+digits:'';
 }
 function parseMoneyInput(value){
@@ -303,7 +304,7 @@ function isSkip(value){return /(فرقی ندارد|مهم نیست|نامشخص
 function askFlow(step){
  currentFlow.step=step;
  const prompts={
-  request_type:'درخواست شما برای **خرید** است یا **رهن و اجاره**؟',
+  request_type:'درخواست شما برای خرید است یا رهن و اجاره؟',
   request_property_type:'چه نوع ملکی می‌خواهید؟ (آپارتمان، خانه و ویلا، زمین، مغازه، دفتر کار یا باغ)',
   request_city:'ملک را در کدام شهر می‌خواهید؟',
   request_neighborhoods:'کدام محله یا محدوده را ترجیح می‌دهید؟ چند محله را با ویرگول جدا کنید؛ یا بنویسید «فرقی ندارد».',
