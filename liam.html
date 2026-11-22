@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07392f">
+<meta name="description" content="گفت‌وگو با لیام، دستیار هوشمند املاک ۰۵۸؛ جست‌وجوی آگهی‌های تأییدشده خرید، فروش، رهن و اجاره در بجنورد و خراسان شمالی.">
+<title>لیام | دستیار هوشمند املاک ۰۵۸</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<style>
+:root{color-scheme:dark;--bg:#062f28;--bg2:#073b31;--panel:#0b4438;--panel2:#104d40;--line:#ffffff1c;--gold:#d9c89e;--gold2:#bba775;--text:#f4f5ef;--muted:#b8cbc2;--user:#164f43;--white:#fff}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:var(--text)}
+body{min-height:100dvh;background:radial-gradient(ellipse at 50% -15%,#1b6652 0,transparent 52%),linear-gradient(155deg,#052c25,#07392f 56%,#052a24);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(#ffffff0a 1px,transparent 1px),linear-gradient(90deg,#ffffff0a 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,#000,transparent 80%)}
+button,a,textarea{font:inherit}
+a{color:inherit}
+button{cursor:pointer}
+.app{min-height:100dvh;display:flex;flex-direction:column;position:relative}
+.topbar{height:68px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 max(18px,calc((100vw - 1120px)/2));border-bottom:1px solid var(--line);background:#042b24a8;backdrop-filter:blur(16px);position:sticky;top:0;z-index:5}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+.brand-mark{width:41px;height:41px;border:1px solid #d9c89e99;border-radius:13px;display:grid;place-items:center;color:var(--gold);background:#ffffff0a;font-weight:900;font-size:15px;letter-spacing:-1px}
+.brand-copy strong{display:block;font-size:15px;color:#fff}
+.brand-copy small{display:block;margin-top:3px;font-size:10px;color:var(--muted)}
+.top-actions{display:flex;align-items:center;gap:9px}
+.top-link{border:1px solid var(--line);border-radius:10px;padding:9px 13px;text-decoration:none;color:#e2ebe5;font-size:11px;background:#ffffff08}
+.top-link:hover{border-color:#d9c89e77;color:#fff}
+.online{display:flex;align-items:center;gap:7px;color:#d4e1d8;font-size:10px}
+.online-dot{width:7px;height:7px;background:#81d3a2;border-radius:50%;box-shadow:0 0 0 4px #81d3a21b}
+.main{width:min(100% - 32px,920px);margin:0 auto;display:flex;flex-direction:column;flex:1;min-height:calc(100dvh - 68px)}
+.welcome{padding:38px 0 23px;text-align:center}
+.ai-orb{height:74px;width:74px;border:1px solid #d9c89e88;border-radius:25px;margin:0 auto 17px;display:grid;place-items:center;background:linear-gradient(145deg,#1a5c4b,#0b3b31);box-shadow:0 14px 34px #001a153d,inset 0 1px 0 #ffffff26;color:var(--gold);font-size:31px}
+.eyebrow{color:var(--gold);font-size:10px;letter-spacing:1.6px;font-weight:700}
+.welcome h1{margin:9px 0 7px;font-size:clamp(25px,4vw,36px);line-height:1.5;color:#fff}
+.welcome p{max-width:620px;margin:0 auto;color:#c2d1c9;font-size:12px;line-height:2.2}
+.welcome-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:26px auto 0;max-width:780px}
+.action-card{min-height:93px;border:1px solid #ffffff22;border-radius:15px;padding:14px 13px;background:linear-gradient(145deg,#10493d,#0a3b32);color:#f2f5ef;text-align:right;display:flex;flex-direction:column;gap:8px;transition:transform .18s,border-color .18s,background .18s}
+.action-card:hover{transform:translateY(-2px);border-color:#d9c89e88;background:linear-gradient(145deg,#155847,#0d4538)}
+.action-icon{width:29px;height:29px;border-radius:9px;display:grid;place-items:center;color:var(--gold);background:#ffffff0e;font-size:16px}
+.action-card strong{font-size:11px}
+.action-card small{font-size:9px;color:#b9ccc2;line-height:1.7}
+.inventory-note{margin:18px auto 0;color:#a8c3b5;font-size:10px}
+.inventory-note strong{color:#e1d1a9;font-weight:700}
+.conversation{display:flex;flex-direction:column;gap:14px;padding:8px 0 18px;flex:1;min-height:140px}
+.message{max-width:min(78%,700px);padding:12px 15px;border:1px solid var(--line);border-radius:15px;font-size:12px;line-height:2.1;white-space:pre-wrap;overflow-wrap:anywhere;box-shadow:0 5px 18px #001b1520}
+.message.assistant{align-self:flex-end;background:linear-gradient(145deg,#10483c,#0b3b32);border-top-right-radius:5px;color:#f0f5ef}
+.message.user{align-self:flex-start;background:linear-gradient(145deg,#1a5848,#134537);border-color:#c2d9c21c;border-top-left-radius:5px;color:#fff}
+.message.pending{color:#d6c99f}
+.results-label{align-self:flex-end;color:#c9d8ce;font-size:10px;margin-top:2px}
+.results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%}
+.property-card{overflow:hidden;border:1px solid #ffffff26;border-radius:15px;background:linear-gradient(145deg,#10483c,#0a382f);box-shadow:0 12px 26px #001d1726}
+.property-image{width:100%;height:168px;object-fit:cover;display:block;background:#164b3d}
+.no-image{height:168px;display:grid;place-items:center;color:#d7c89f;background:linear-gradient(135deg,#164b3d,#0b332b);font-size:32px}
+.property-content{padding:12px}
+.property-content h3{font-size:12px;line-height:1.8;margin:0 0 5px;color:#fff}
+.property-meta{font-size:9px;color:#bdd0c5;line-height:1.9}
+.property-price{font-size:12px;color:#e7d5a7;font-weight:800;margin:8px 0}
+.property-links{display:flex;gap:7px;margin-top:9px}
+.property-link{flex:1;text-align:center;text-decoration:none;border-radius:9px;padding:8px 7px;font-size:9px;font-weight:700}
+.property-link.primary{background:#d9c89e;color:#16362c}
+.property-link.secondary{border:1px solid #ffffff28;color:#e4eee7}
+.composer-area{position:sticky;bottom:0;margin-top:auto;padding:13px 0 max(14px,env(safe-area-inset-bottom));background:linear-gradient(180deg,#062f2800,#062f28 24%);z-index:4}
+.composer-hint{text-align:center;color:#91aea0;font-size:9px;margin:0 0 8px}
+.composer{display:flex;align-items:flex-end;gap:9px;padding:9px;border:1px solid #d9c89e55;border-radius:17px;background:#f4f5ee;box-shadow:0 15px 34px #001a153d}
+.composer textarea{flex:1;min-width:0;max-height:128px;min-height:43px;resize:none;border:0;outline:0;background:transparent;padding:11px 9px;color:#1e352b;font-size:12px;line-height:1.8}
+.composer textarea::placeholder{color:#78887e}
+.send{width:44px;height:44px;flex:none;border:0;border-radius:12px;background:#0d483a;color:#f3e4b7;font-size:19px;display:grid;place-items:center}
+.send:disabled{opacity:.55;cursor:wait}
+.new-chat{width:36px;height:36px;border:1px solid #ffffff26;border-radius:11px;background:#ffffff0b;color:#d9e4dc;font-size:16px}
+.bottom-note{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;color:#78988a;font-size:9px;margin-top:10px}
+.bottom-note a{text-decoration:none;color:#c8d7ce}
+.error-note{color:#ffd2c4}
+[hidden]{display:none!important}
+@media(max-width:640px){
+ .topbar{height:60px;padding:0 13px}.brand-mark{width:36px;height:36px;border-radius:11px;font-size:13px}.brand-copy strong{font-size:13px}.brand-copy small{font-size:9px}
+ .online{font-size:9px}.top-link{padding:8px 9px;font-size:9px}
+ .main{width:calc(100% - 22px);min-height:calc(100dvh - 60px)}
+ .welcome{padding:29px 0 17px}.ai-orb{width:63px;height:63px;border-radius:21px;font-size:27px;margin-bottom:13px}
+ .welcome h1{font-size:25px}.welcome p{font-size:11px;line-height:2}
+ .welcome-actions{grid-template-columns:1fr;gap:8px;margin-top:18px}
+ .action-card{min-height:66px;padding:10px 11px;display:grid;grid-template-columns:33px 1fr;align-items:center;gap:2px 9px}
+ .action-icon{grid-row:span 2;width:31px;height:31px}
+ .action-card strong{font-size:10px}.action-card small{font-size:9px}
+ .inventory-note{margin-top:13px;font-size:9px}
+ .message{max-width:91%;font-size:11px;padding:10px 12px}
+ .results{grid-template-columns:1fr;gap:9px}
+ .property-card{display:grid;grid-template-columns:112px 1fr;min-height:130px}
+ .property-image,.no-image{height:100%;min-height:130px}
+ .property-content{padding:9px}.property-content h3{font-size:10px}.property-meta{font-size:8px}
+ .property-price{font-size:10px;margin:5px 0}.property-link{font-size:8px;padding:7px 5px}
+ .composer-area{padding-top:9px}.composer{gap:6px;padding:7px;border-radius:14px}
+ .composer textarea{font-size:11px;min-height:42px;padding:9px 6px}
+ .send{width:40px;height:40px}.new-chat{width:34px;height:34px}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <a class="brand" href="/" aria-label="بازگشت به املاک ۰۵۸">
+    <span class="brand-mark">۰۵۸</span>
+    <span class="brand-copy"><strong>لیام</strong><small>دستیار هوشمند املاک ۰۵۸</small></span>
+  </a>
+  <div class="top-actions">
+    <span class="online"><i class="online-dot"></i><span>آماده پاسخ‌گویی</span></span>
+    <a class="top-link" href="/">بازگشت به سایت</a>
+  </div>
+</header>
+<main class="main">
+  <section class="welcome" id="welcome">
+    <div class="ai-orb" aria-hidden="true">✦</div>
+    <div class="eyebrow">LIAM · AMلاک ۰۵۸</div>
+    <h1>سلام، من لیام هستم.</h1>
+    <p>برای پیدا کردن خانه، آپارتمان، زمین یا ملک تجاری در بجنورد و خراسان شمالی به من بگویید چه می‌خواهید. آگهی‌های واقعی و تأییدشده دفتر را بررسی می‌کنم و گزینه‌های مرتبط را همراه تصویر و مشخصات نمایش می‌دهم.</p>
+    <div class="welcome-actions" id="quickActions">
+      <button class="action-card" type="button" data-prompt="آپارتمان فروشی در بجنورد می‌خواهم">
+        <span class="action-icon">⌂</span><strong>خرید آپارتمان</strong><small>مشاهده فایل‌های فروش</small>
+      </button>
+      <button class="action-card" type="button" data-prompt="آپارتمان برای رهن و اجاره در بجنورد می‌خواهم">
+        <span class="action-icon">⌑</span><strong>رهن و اجاره</strong><small>پیدا کردن ملک اجاره‌ای</small>
+      </button>
+      <button class="action-card" type="button" data-prompt="ملک تجاری یا مغازه برای فروش در بجنورد دارید؟">
+        <span class="action-icon">▥</span><strong>ملک تجاری</strong><small>مغازه و دفتر کار</small>
+      </button>
+    </div>
+    <div class="inventory-note" id="inventoryNote">در حال اتصال به بانک آگهی‌های املاک ۰۵۸…</div>
+  </section>
+
+  <section class="conversation" id="conversation" aria-live="polite" aria-label="گفت‌وگو با لیام"></section>
+
+  <div class="composer-area">
+    <p class="composer-hint">می‌توانید آزادانه سؤال بپرسید یا مشخصات ملک موردنظرتان را بنویسید.</p>
+    <form class="composer" id="composerForm">
+      <button class="new-chat" id="newChat" type="button" aria-label="گفت‌وگوی جدید" title="گفت‌وگوی جدید">↻</button>
+      <textarea id="messageInput" rows="1" maxlength="900" placeholder="مثلاً آپارتمان ۱۲۰ متری دوخوابه در فردوسی تا ۴ میلیارد…" aria-label="پیام شما"></textarea>
+      <button class="send" id="sendButton" type="submit" aria-label="ارسال پیام">➤</button>
+    </form>
+    <div class="bottom-note"><span>پاسخ‌ها بر پایه آگهی‌های ثبت‌شده در سایت</span><a href="tel:32228080">تماس با دفتر: ۳۲۲۲۸۰۸۰</a></div>
+  </div>
+</main>
+</div>
+<script>
+(function(){
+'use strict';
+const SUPABASE_URL='https://lsttrmnxauaviyuipnim.supabase.co';
+const SUPABASE_KEY='sb_publishable_V3ZIfuzEZ4y7KUY88lyv_Q_wF6kQAcb';
+const AI_ENDPOINT='https://amlak058-property-ai.imanmoazzamvahid.workers.dev';
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const $=id=>document.getElementById(id);
+let properties=[],history=[],busy=false;
+
+function normalizeDigits(value){
+ return String(value||'').replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g,d=>String(d.charCodeAt(0)-1632));
+}
+function money(value){
+ const n=Number(value);
+ return Number.isFinite(n)&&n>0?n.toLocaleString('fa-IR')+' تومان':'اعلام نشده';
+}
+function setInventoryStatus(message,isError){
+ const el=$('inventoryNote');
+ el.textContent=message;
+ el.classList.toggle('error-note',!!isError);
+}
+function addMessage(role,text,extraClass){
+ const el=document.createElement('div');
+ el.className='message '+role+(extraClass?' '+extraClass:'');
+ el.textContent=String(text||'');
+ $('conversation').appendChild(el);
+ scrollToLatest();
+ return el;
+}
+function scrollToLatest(){
+ requestAnimationFrame(()=>window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'}));
+}
+function safeImage(value){
+ const s=String(value||'').trim();
+ return /^https:\/\/[^\s"'<>]+$/i.test(s)?s:'';
+}
+function makePropertyCard(p){
+ const card=document.createElement('article');
+ card.className='property-card';
+ const image=safeImage(p.image_url)||(Array.isArray(p.image_urls)?safeImage(p.image_urls[0]):'');
+ if(image){
+  const img=document.createElement('img');
+  img.className='property-image';
+  img.src=image;
+  img.alt=p.title||'تصویر ملک';
+  img.loading='lazy';
+  img.referrerPolicy='no-referrer';
+  card.appendChild(img);
+ }else{
+  const fallback=document.createElement('div');
+  fallback.className='no-image';
+  fallback.textContent='⌂';
+  card.appendChild(fallback);
+ }
+ const content=document.createElement('div');
+ content.className='property-content';
+ const title=document.createElement('h3');
+ title.textContent=p.title||'آگهی ملک';
+ const meta=document.createElement('div');
+ meta.className='property-meta';
+ const bits=[p.city,p.transaction_type,p.property_type];
+ const area=Number(p.area||p.building_area||p.land_area);
+ if(Number.isFinite(area)&&area>0)bits.push(area.toLocaleString('fa-IR')+' متر');
+ if(p.bedrooms!==null&&p.bedrooms!==undefined)bits.push(String(p.bedrooms).toLocaleString('fa-IR')+' خوابه');
+ meta.textContent=bits.filter(Boolean).join(' · ');
+ const price=document.createElement('div');
+ price.className='property-price';
+ if(/رهن|اجاره/.test(String(p.transaction_type||''))){
+  const details=[];
+  if(p.deposit)details.push('ودیعه '+money(p.deposit));
+  if(p.monthly_rent)details.push('اجاره '+money(p.monthly_rent));
+  price.textContent=details.join(' · ')||'برای اطلاع از مبلغ تماس بگیرید';
+ }else{
+  price.textContent='قیمت: '+money(p.price);
+ }
+ const links=document.createElement('div');
+ links.className='property-links';
+ const view=document.createElement('a');
+ view.className='property-link primary';
+ view.href='/v/?id='+encodeURIComponent(String(p.id));
+ view.textContent='مشاهده آگهی';
+ const call=document.createElement('a');
+ call.className='property-link secondary';
+ call.href='tel:32228080';
+ call.textContent='تماس با دفتر';
+ links.append(view,call);
+ content.append(title,meta,price,links);
+ card.appendChild(content);
+ return card;
+}
+function addPropertyResults(items){
+ if(!Array.isArray(items)||!items.length)return;
+ const label=document.createElement('div');
+ label.className='results-label';
+ label.textContent='آگهی‌های مرتبط از بانک املاک ۰۵۸';
+ $('conversation').appendChild(label);
+ const grid=document.createElement('div');
+ grid.className='results';
+ items.slice(0,4).forEach(p=>{
+  if(p&&p.id!==undefined)grid.appendChild(makePropertyCard(p));
+ });
+ if(grid.childElementCount)$('conversation').appendChild(grid);
+ scrollToLatest();
+}
+async function loadProperties(){
+ setInventoryStatus('در حال دریافت آگهی‌های تأییدشده…');
+ try{
+  const result=await db.from('properties')
+   .select('id,title,property_type,transaction_type,price,deposit,monthly_rent,area,building_area,land_area,bedrooms,city,address,description,image_url,image_urls')
+   .eq('status','approved')
+   .order('created_at',{ascending:false})
+   .limit(60);
+  if(result.error)throw result.error;
+  properties=Array.isArray(result.data)?result.data:[];
+  setInventoryStatus(properties.length.toLocaleString('fa-IR')+' آگهی تأییدشده در بانک اطلاعاتی آماده جست‌وجو است.');
+ }catch(error){
+  properties=[];
+  setInventoryStatus('اتصال به بانک آگهی‌ها انجام نشد؛ پاسخ‌گویی عمومی ممکن است، اما جست‌وجوی فایل‌ها در دسترس نیست.',true);
+  console.error('Liam listings load failed',error);
+ }
+}
+async function ask(question){
+ const q=String(question||'').trim();
+ if(!q||busy)return;
+ if(q.length>900){addMessage('assistant','متن پیام بیش از حد طولانی است. لطفاً کوتاه‌تر بنویسید.');return;}
+ busy=true;
+ $('welcome').hidden=true;
+ $('sendButton').disabled=true;
+ $('messageInput').disabled=true;
+ addMessage('user',q);
+ const pending=addMessage('assistant','در حال بررسی درخواست و جست‌وجوی فایل‌های مرتبط…','pending');
+ try{
+  const response=await fetch(AI_ENDPOINT,{
+   method:'POST',
+   headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({
+    message:q,
+    history:history.slice(-8),
+    properties:properties.slice(0,60).map(p=>({
+     id:p.id,title:p.title,city:p.city,property_type:p.property_type,transaction_type:p.transaction_type,
+     price:p.price,deposit:p.deposit,monthly_rent:p.monthly_rent,
+     area:p.area,building_area:p.building_area,land_area:p.land_area,bedrooms:p.bedrooms,
+     address:p.address,description:String(p.description||'').slice(0,240),
+     image_url:p.image_url,image_urls:Array.isArray(p.image_urls)?p.image_urls.slice(0,5):[]
+    }))
+   })
+  });
+  const data=await response.json().catch(()=>({}));
+  if(!response.ok||!data.answer)throw new Error(data.message||'پاسخی از موتور لیام دریافت نشد.');
+  pending.textContent=data.answer;
+  pending.classList.remove('pending');
+  history.push({role:'user',content:q},{role:'assistant',content:data.answer});
+  if(history.length>16)history=history.slice(-16);
+  addPropertyResults(data.matches);
+ }catch(error){
+  pending.textContent='در پاسخ‌گویی مشکلی پیش آمد: '+(error.message||'خطای ارتباط با سرویس');
+  pending.classList.remove('pending');
+  pending.classList.add('error-note');
+  console.error('Liam assistant request failed',error);
+ }finally{
+  busy=false;
+  $('sendButton').disabled=false;
+  $('messageInput').disabled=false;
+  $('messageInput').focus();
+  scrollToLatest();
+ }
+}
+$('composerForm').addEventListener('submit',event=>{
+ event.preventDefault();
+ const input=$('messageInput');
+ const value=input.value.trim();
+ if(!value)return;
+ input.value='';
+ input.style.height='auto';
+ ask(value);
+});
+$('messageInput').addEventListener('input',event=>{
+ const el=event.currentTarget;
+ el.style.height='auto';
+ el.style.height=Math.min(el.scrollHeight,128)+'px';
+});
+$('messageInput').addEventListener('keydown',event=>{
+ if(event.key==='Enter'&&!event.shiftKey){
+  event.preventDefault();
+  $('composerForm').requestSubmit();
+ }
+});
+$('quickActions').addEventListener('click',event=>{
+ const button=event.target.closest('[data-prompt]');
+ if(button)ask(button.getAttribute('data-prompt'));
+});
+$('newChat').addEventListener('click',()=>{
+ if(busy)return;
+ history=[];
+ $('conversation').replaceChildren();
+ $('welcome').hidden=false;
+ $('messageInput').value='';
+ $('messageInput').focus();
+});
+loadProperties();
+})();
+</script>
+</body>
+</html>
