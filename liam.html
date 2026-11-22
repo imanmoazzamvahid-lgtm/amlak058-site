@@ -33,7 +33,7 @@ button{cursor:pointer}
 .eyebrow{color:var(--gold);font-size:10px;letter-spacing:1.6px;font-weight:700}
 .welcome h1{margin:9px 0 7px;font-size:clamp(25px,4vw,36px);line-height:1.5;color:#fff}
 .welcome p{max-width:620px;margin:0 auto;color:#c2d1c9;font-size:12px;line-height:2.2}
-.welcome-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:26px auto 0;max-width:780px}
+.welcome-actions{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:26px auto 0;max-width:920px}
 .action-card{min-height:93px;border:1px solid #ffffff22;border-radius:15px;padding:14px 13px;background:linear-gradient(145deg,#10493d,#0a3b32);color:#f2f5ef;text-align:right;display:flex;flex-direction:column;gap:8px;transition:transform .18s,border-color .18s,background .18s}
 .action-card:hover{transform:translateY(-2px);border-color:#d9c89e88;background:linear-gradient(145deg,#155847,#0d4538)}
 .action-icon{width:29px;height:29px;border-radius:9px;display:grid;place-items:center;color:var(--gold);background:#ffffff0e;font-size:16px}
@@ -66,6 +66,9 @@ button{cursor:pointer}
 .composer textarea::placeholder{color:#78887e}
 .send{width:44px;height:44px;flex:none;border:0;border-radius:12px;background:#0d483a;color:#f3e4b7;font-size:19px;display:grid;place-items:center}
 .send:disabled{opacity:.55;cursor:wait}
+.attach{width:40px;height:40px;flex:none;border:1px solid #dfe3d9;border-radius:12px;background:#edf1e9;color:#285644;font-size:18px;display:grid;place-items:center}
+.attach[hidden]{display:none}
+.attach-count{color:#e6d7b4;font-size:9px;margin-top:5px;text-align:right}
 .new-chat{width:36px;height:36px;border:1px solid #ffffff26;border-radius:11px;background:#ffffff0b;color:#d9e4dc;font-size:16px}
 .bottom-note{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;color:#78988a;font-size:9px;margin-top:10px}
 .bottom-note a{text-decoration:none;color:#c8d7ce}
@@ -115,15 +118,11 @@ button{cursor:pointer}
     <h1>سلام، من لیام هستم.</h1>
     <p>برای پیدا کردن خانه، آپارتمان، زمین یا ملک تجاری در بجنورد و خراسان شمالی به من بگویید چه می‌خواهید. آگهی‌های واقعی و تأییدشده دفتر را بررسی می‌کنم و گزینه‌های مرتبط را همراه تصویر و مشخصات نمایش می‌دهم.</p>
     <div class="welcome-actions" id="quickActions">
-      <button class="action-card" type="button" data-prompt="آپارتمان فروشی در بجنورد می‌خواهم">
-        <span class="action-icon">⌂</span><strong>خرید آپارتمان</strong><small>مشاهده فایل‌های فروش</small>
-      </button>
-      <button class="action-card" type="button" data-prompt="آپارتمان برای رهن و اجاره در بجنورد می‌خواهم">
-        <span class="action-icon">⌑</span><strong>رهن و اجاره</strong><small>پیدا کردن ملک اجاره‌ای</small>
-      </button>
-      <button class="action-card" type="button" data-prompt="ملک تجاری یا مغازه برای فروش در بجنورد دارید؟">
-        <span class="action-icon">▥</span><strong>ملک تجاری</strong><small>مغازه و دفتر کار</small>
-      </button>
+      <button class="action-card" type="button" data-prompt="آپارتمان فروشی در بجنورد می‌خواهم"><span class="action-icon">⌂</span><strong>خرید آپارتمان</strong><small>مشاهده فایل‌های فروش</small></button>
+      <button class="action-card" type="button" data-prompt="آپارتمان برای رهن و اجاره در بجنورد می‌خواهم"><span class="action-icon">⌑</span><strong>رهن و اجاره</strong><small>پیدا کردن ملک اجاره‌ای</small></button>
+      <button class="action-card" type="button" data-prompt="ملک تجاری یا مغازه برای فروش در بجنورد دارید؟"><span class="action-icon">▥</span><strong>ملک تجاری</strong><small>مغازه و دفتر کار</small></button>
+      <button class="action-card" type="button" data-flow="request"><span class="action-icon">⌕</span><strong>ثبت درخواست ملک</strong><small>به‌عنوان خریدار یا مستأجر</small></button>
+      <button class="action-card" type="button" data-flow="property"><span class="action-icon">＋</span><strong>ثبت آگهی ملک</strong><small>برای مالک و فروشنده</small></button>
     </div>
     <div class="inventory-note" id="inventoryNote">در حال اتصال به بانک آگهی‌های املاک ۰۵۸…</div>
   </section>
@@ -135,8 +134,11 @@ button{cursor:pointer}
     <form class="composer" id="composerForm">
       <button class="new-chat" id="newChat" type="button" aria-label="گفت‌وگوی جدید" title="گفت‌وگوی جدید">↻</button>
       <textarea id="messageInput" rows="1" maxlength="900" placeholder="مثلاً آپارتمان ۱۲۰ متری دوخوابه در فردوسی تا ۴ میلیارد…" aria-label="پیام شما"></textarea>
+      <input id="propertyFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden>
+      <button class="attach" id="attachButton" type="button" hidden aria-label="افزودن تصاویر ملک" title="افزودن حداکثر ۵ تصویر">📎</button>
       <button class="send" id="sendButton" type="submit" aria-label="ارسال پیام">➤</button>
     </form>
+    <div class="attach-count" id="attachCount" hidden></div>
     <div class="bottom-note"><span>پاسخ‌ها بر پایه آگهی‌های ثبت‌شده در سایت</span><a href="tel:32228080">تماس با دفتر: ۳۲۲۲۸۰۸۰</a></div>
   </div>
 </main>
@@ -150,6 +152,7 @@ const AI_ENDPOINT='https://amlak058-property-ai.imanmoazzamvahid.workers.dev';
 const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const $=id=>document.getElementById(id);
 let properties=[],history=[],busy=false;
+let currentFlow=null,selectedPropertyFiles=[],otpPhone='';
 
 function normalizeDigits(value){
  return String(value||'').replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g,d=>String(d.charCodeAt(0)-1632));
@@ -232,7 +235,15 @@ function makePropertyCard(p){
  card.appendChild(content);
  return card;
 }
-function addPropertyResults(items){
+async function signedPropertyImage(value){
+ const raw=String(value||'').trim();
+ if(/^https:\/\/[^\s"'<>]+$/i.test(raw))return raw;
+ if(!/^pending\/[A-Za-z0-9._-]+\.(?:jpg|jpeg|png|webp)$/i.test(raw)||raw.includes('..'))return '';
+ const result=await db.storage.from('property-images').createSignedUrl(raw,3600);
+ if(result.error){console.warn('دریافت تصویر آگهی ناموفق بود:',result.error);return ''}
+ return result.data?.signedUrl||'';
+}
+async function addPropertyResults(items){
  if(!Array.isArray(items)||!items.length)return;
  const label=document.createElement('div');
  label.className='results-label';
@@ -240,12 +251,278 @@ function addPropertyResults(items){
  $('conversation').appendChild(label);
  const grid=document.createElement('div');
  grid.className='results';
- items.slice(0,4).forEach(p=>{
-  if(p&&p.id!==undefined)grid.appendChild(makePropertyCard(p));
- });
+ for(const p of items.slice(0,4)){
+  if(!p||p.id===undefined)continue;
+  const media=[p.image_url,...(Array.isArray(p.image_urls)?p.image_urls:[])].filter(Boolean);
+  let signed='';
+  for(const path of media){signed=await signedPropertyImage(path);if(signed)break;}
+  if(signed)p.image_url=signed;
+  grid.appendChild(makePropertyCard(p));
+ }
  if(grid.childElementCount)$('conversation').appendChild(grid);
  scrollToLatest();
 }
+function faDigits(value){return String(value||'').replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g,d=>String(d.charCodeAt(0)-1632));}
+function normalizeIranPhone(value){
+ let digits=faDigits(value).replace(/\D/g,'');
+ if(digits.startsWith('0098'))digits=digits.slice(2);
+ if(digits.startsWith('0'))digits='98'+digits.slice(1);
+ if(digits.startsWith('9'))digits='98'+digits;
+ return /^989\d{9}$/.test(digits)?'+'+digits:'';
+}
+function parseMoneyInput(value){
+ const text=faDigits(value).replace(/[٬,]/g,'').replace(/\s+/g,' ').trim();
+ if(/(توافقی|فرقی ندارد|مهم نیست|نامشخص|هر مبلغ|ندارد)/.test(text))return null;
+ const match=text.match(/(\d+(?:\.\d+)?)\s*(میلیارد|میلیون|هزار)?/);
+ if(!match)return NaN;
+ let amount=Number(match[1]);
+ if(match[2]==='میلیارد')amount*=1000000000;
+ else if(match[2]==='میلیون')amount*=1000000;
+ else if(match[2]==='هزار')amount*=1000;
+ return Number.isFinite(amount)&&amount>0?Math.round(amount):NaN;
+}
+function parsePropertyType(value){
+ const t=String(value||'').replace(/[يى]/g,'ی').replace(/ك/g,'ک');
+ if(/آپارتمان|واحد مسکونی|سوئیت/.test(t))return 'آپارتمان';
+ if(/خانه|ویلا/.test(t))return 'خانه و ویلا';
+ if(/زمین/.test(t))return 'زمین';
+ if(/مغازه|تجار|فروشگاه|غرفه/.test(t))return 'مغازه و غرفه';
+ if(/دفتر|ادار/.test(t))return 'دفتر کار';
+ if(/باغ/.test(t))return 'باغ';
+ if(/سایر|متفرقه/.test(t))return 'سایر';
+ return '';
+}
+function parseTransaction(value){
+ const t=String(value||'');
+ if(/رهن\s*کامل/.test(t))return 'رهن کامل';
+ if(/رهن|اجاره|اجاری|مستأجر|مستاجر/.test(t))return 'رهن و اجاره';
+ if(/فروش|فروشی|خرید/.test(t))return 'فروش';
+ return '';
+}
+function isSkip(value){return /(فرقی ندارد|مهم نیست|نامشخص|ندارم|ندارد|بدون|توافقی|ثبت نکن|لازم نیست)/.test(String(value||''));}
+function askFlow(step){
+ currentFlow.step=step;
+ const prompts={
+  request_type:'درخواست شما برای **خرید** است یا **رهن و اجاره**؟',
+  request_property_type:'چه نوع ملکی می‌خواهید؟ (آپارتمان، خانه و ویلا، زمین، مغازه، دفتر کار یا باغ)',
+  request_city:'ملک را در کدام شهر می‌خواهید؟',
+  request_neighborhoods:'کدام محله یا محدوده را ترجیح می‌دهید؟ چند محله را با ویرگول جدا کنید؛ یا بنویسید «فرقی ندارد».',
+  request_budget:'حداکثر بودجه شما چقدر است؟ مثلاً ۴ میلیارد تومان؛ اگر محدودیتی ندارید بنویسید «توافقی».',
+  request_area:'حداقل متراژ موردنیازتان چند متر است؟ اگر مهم نیست بنویسید «فرقی ندارد».',
+  request_bedrooms:'چند خوابه می‌خواهید؟ عدد را بنویسید؛ در غیر این صورت «مهم نیست».',
+  request_description:'توضیح یا شرط دیگری دارید؟ (اختیاری؛ در صورت نداشتن بنویسید «ندارم»)',
+  property_title:'عنوان آگهی را بنویسید؛ مثلاً «آپارتمان دوخوابه در خیابان فردوسی».',
+  property_type:'نوع ملک چیست؟ (آپارتمان، خانه و ویلا، زمین، مغازه، دفتر کار یا باغ)',
+  property_transaction:'قصد فروش دارید یا رهن و اجاره؟',
+  property_city:'ملک در کدام شهر قرار دارد؟',
+  property_address:'محله و نشانی یا محدوده ملک را بنویسید.',
+  property_price:'قیمت پیشنهادی را به تومان وارد کنید. برای اجاره، مبلغ اجاره ماهانه را بنویسید؛ مثلاً ۱۵ میلیون تومان.',
+  property_deposit:'مبلغ ودیعه یا رهن چقدر است؟ اگر ندارد یا توافقی است بنویسید «ندارد».',
+  property_area:'متراژ ملک چند متر است؟ اگر مشخص نیست بنویسید «نامشخص».',
+  property_bedrooms:'تعداد اتاق خواب چندتاست؟ اگر مشخص نیست بنویسید «نامشخص».',
+  property_description:'توضیحات و ویژگی‌های مهم ملک را بنویسید؛ در صورت نداشتن بنویسید «ندارد».',
+  property_images:'می‌توانید از دکمه سنجاق کنار کادر پیام، حداکثر ۵ عکس ملک را اضافه کنید. سپس بنویسید «ادامه»؛ اگر عکس ندارید، بنویسید «بدون عکس».',
+  phone:'برای ثبت نهایی، شماره موبایلی را وارد کنید که بتوانیم برای هماهنگی با شما تماس بگیریم. کد تأیید پیامکی ارسال می‌شود.',
+  otp:'کد تأیید پیامکی ارسال‌شده را وارد کنید.'
+ };
+ addMessage('assistant',prompts[step]||'اطلاعات را وارد کنید.');
+ $('attachButton').hidden=!(currentFlow.kind==='property'&&step==='property_images');
+ $('attachCount').hidden=selectedPropertyFiles.length===0;
+ $('attachCount').textContent=selectedPropertyFiles.length?selectedPropertyFiles.length.toLocaleString('fa-IR')+' تصویر انتخاب شده است.':'';
+ $('messageInput').placeholder=step==='otp'?'کد پیامکی را وارد کنید…':(step==='phone'?'شماره موبایل ۰۹۱۵…':'پاسخ خود را بنویسید…');
+ scrollToLatest();
+}
+function startStructuredFlow(kind){
+ currentFlow={kind,step:'',data:{}};
+ selectedPropertyFiles=[];$('propertyFiles').value='';
+ $('attachButton').hidden=true;$('attachCount').hidden=true;$('welcome').hidden=true;
+ if(kind==='request'){
+  addMessage('assistant','درخواست خرید یا اجاره را با چند سؤال کوتاه ثبت می‌کنم. پس از تأیید شماره موبایل، درخواست شما در پنل مدیریت املاک ۰۵۸ قرار می‌گیرد.');
+  askFlow('request_type');
+ }else{
+  addMessage('assistant','اطلاعات ملک را دریافت می‌کنم و آگهی را پس از احراز شماره موبایل با وضعیت «در انتظار تأیید مدیریت» ثبت خواهم کرد. آگهی تا زمان تأیید مدیر منتشر نمی‌شود.');
+  askFlow('property_title');
+ }
+}
+function nextRequestStep(step){
+ const order=['request_type','request_property_type','request_city','request_neighborhoods','request_budget','request_area','request_bedrooms','request_description','phone'];
+ const i=order.indexOf(step);askFlow(order[Math.min(i+1,order.length-1)]);
+}
+function nextPropertyStep(step){
+ const d=currentFlow.data;
+ const order=['property_title','property_type','property_transaction','property_city','property_address','property_price'];
+ if(step==='property_price'&&d.transaction_type!=='فروش'){askFlow('property_deposit');return;}
+ if(step==='property_deposit'||step==='property_price'){askFlow('property_area');return;}
+ const tail=['property_area','property_bedrooms','property_description','property_images','phone'];
+ const i=tail.indexOf(step);
+ if(i>=0)askFlow(tail[Math.min(i+1,tail.length-1)]);
+ else askFlow(order[Math.min(order.indexOf(step)+1,order.length-1)]);
+}
+async function beginPhoneVerification(value){
+ const phone=normalizeIranPhone(value);
+ if(!phone){addMessage('assistant','شماره موبایل معتبر ایران را به شکل ۰۹۱۲۳۴۵۶۷۸۹ وارد کنید.');askFlow('phone');return;}
+ currentFlow.data.contact_phone=phone;
+ const {data:{user}}=await db.auth.getUser();
+ if(user&&normalizeIranPhone(user.phone||'')===phone){
+  addMessage('assistant','شماره موبایل حساب شما قبلاً تأیید شده است؛ ثبت را نهایی می‌کنم.');
+  await saveCurrentFlow();return;
+ }
+ otpPhone=phone;
+ try{
+  const {error}=await db.auth.signInWithOtp({phone:phone});
+  if(error)throw error;
+  askFlow('otp');
+  addMessage('assistant','کد پیامکی ارسال شد. در صورت نرسیدن پیامک، تنظیمات سرویس پیامک ورود در Supabase باید فعال باشد.');
+ }catch(error){
+  addMessage('assistant','ارسال کد انجام نشد: '+(error.message||'خطای سرویس پیامک')+'. اطلاعات واردشده حفظ شد؛ شماره را دوباره وارد کنید یا بعداً تلاش کنید.','error-note');
+  askFlow('phone');
+ }
+}
+async function uploadLiamPropertyImages(){
+ const paths=[];
+ for(const file of selectedPropertyFiles){
+  const ext=file.type==='image/png'?'png':file.type==='image/webp'?'webp':'jpg';
+  const path='pending/'+crypto.randomUUID()+'.'+ext;
+  const {error}=await db.storage.from('property-images').upload(path,file,{contentType:file.type,upsert:false});
+  if(error){if(paths.length)await db.storage.from('property-images').remove(paths);throw new Error('بارگذاری تصویر انجام نشد: '+error.message);}
+  paths.push(path);
+ }
+ return paths;
+}
+async function saveCurrentFlow(){
+ const {data:{user},error:userError}=await db.auth.getUser();
+ if(userError||!user){addMessage('assistant','ابتدا باید شماره موبایل را با کد پیامکی تأیید کنید.');askFlow('phone');return;}
+ const d=currentFlow.data;
+ try{
+  if(currentFlow.kind==='request'){
+   const row={user_id:user.id,request_type:d.request_type,property_type:d.property_type,city:d.city,neighborhoods:d.neighborhoods||[],max_budget:d.max_budget??null,min_area:d.min_area??null,bedrooms:d.bedrooms??null,contact_phone:d.contact_phone,description:d.description||null,status:'pending'};
+   const result=await db.from('property_requests').insert(row).select('id').single();
+   if(result.error)throw result.error;
+   addMessage('assistant','درخواست شما با موفقیت ثبت شد. شماره پیگیری: '+String(result.data.id).toLocaleString('fa-IR')+' . درخواست در پنل مدیریت املاک ۰۵۸ قرار گرفت و برای هماهنگی با شما تماس گرفته می‌شود.');
+  }else{
+   const paths=await uploadLiamPropertyImages();
+   const row={owner_id:user.id,title:d.title,property_type:d.property_type,transaction_type:d.transaction_type,city:d.city,address:d.address,price:d.price,deposit:d.deposit??null,monthly_rent:d.transaction_type==='فروش'?null:d.price,area:d.area??null,bedrooms:d.bedrooms??null,phone:d.contact_phone,description:d.description||null,image_url:paths[0]||null,image_urls:paths,status:'pending'};
+   const result=await db.from('properties').insert(row).select('id').single();
+   if(result.error){if(paths.length)await db.storage.from('property-images').remove(paths);throw result.error;}
+   addMessage('assistant','آگهی ملک شما با موفقیت ثبت شد و در وضعیت «در انتظار تأیید مدیریت» قرار گرفت. شماره آگهی: '+String(result.data.id).toLocaleString('fa-IR')+' . پس از بررسی مدیریت، در سایت منتشر خواهد شد.');
+  }
+  currentFlow=null;selectedPropertyFiles=[];otpPhone='';
+  $('propertyFiles').value='';$('attachButton').hidden=true;$('attachCount').hidden=true;
+  $('messageInput').placeholder='سؤال خود را بنویسید یا جست‌وجوی ملک بخواهید…';
+ }catch(error){
+  console.error('Liam lead submission failed',error);
+  addMessage('assistant','ثبت اطلاعات انجام نشد: '+(error.message||'خطای نامشخص')+'. اطلاعات واردشده حذف نشده است؛ برای تلاش دوباره بنویسید «ثبت نهایی».','error-note');
+  currentFlow.step='submit_retry';
+ }
+}
+async function handleFlowAnswer(value){
+ if(!currentFlow)return;
+ const answer=String(value||'').trim();if(!answer)return;
+ if(/^(انصراف|لغو|بی‌خیال|بیخیال)$/i.test(answer)){
+  currentFlow=null;selectedPropertyFiles=[];otpPhone='';$('propertyFiles').value='';
+  $('attachButton').hidden=true;$('attachCount').hidden=true;$('messageInput').placeholder='سؤال خود را بنویسید…';
+  addMessage('assistant','فرایند ثبت لغو شد. هر زمان خواستید می‌توانید دوباره درخواست یا آگهی ثبت کنید.');return;
+ }
+ if(currentFlow.step==='submit_retry'){await saveCurrentFlow();return;}
+ if(currentFlow.step==='otp'){
+  const token=faDigits(answer).replace(/\D/g,'');
+  if(!/^\d{4,8}$/.test(token)){addMessage('assistant','کد پیامکی باید ۴ تا ۸ رقم باشد.');return;}
+  try{
+   const {data,error}=await db.auth.verifyOtp({phone:otpPhone,token,type:'sms'});
+   if(error)throw error;
+   if(!data?.user&&!data?.session)throw new Error('تأیید پیامک انجام نشد.');
+   addMessage('assistant','شماره موبایل تأیید شد. در حال ثبت اطلاعات…');await saveCurrentFlow();
+  }catch(error){addMessage('assistant','کد تأیید نشد: '+(error.message||'کد اشتباه یا منقضی شده است')+'. دوباره کد را وارد کنید.','error-note');}
+  return;
+ }
+ const step=currentFlow.step,d=currentFlow.data;
+ addMessage('user',answer);
+ if(currentFlow.kind==='request'){
+  switch(step){
+   case 'request_type':
+    if(/کوتاه.?مدت/.test(answer))d.request_type='short_rent';
+    else if(/اجاره|رهن|مستأجر|مستاجر/.test(answer))d.request_type='rent';
+    else if(/خرید|فروش/.test(answer))d.request_type='buy';
+    else{addMessage('assistant','لطفاً یکی از این دو مورد را مشخص کنید: خرید یا رهن و اجاره.');return;}break;
+   case 'request_property_type':
+    d.property_type=parsePropertyType(answer);
+    if(!d.property_type){addMessage('assistant','نوع ملک را از میان آپارتمان، خانه و ویلا، زمین، مغازه، دفتر کار یا باغ انتخاب کنید.');return;}break;
+   case 'request_city':
+    if(answer.length>60){addMessage('assistant','نام شهر بیش از حد طولانی است؛ کوتاه‌تر وارد کنید.');return;}d.city=answer;break;
+   case 'request_neighborhoods':
+    d.neighborhoods=isSkip(answer)?[]:answer.split(/[،,؛;]/).map(x=>x.trim()).filter(Boolean).slice(0,10);break;
+   case 'request_budget':{
+    const amount=parseMoneyInput(answer);
+    if(Number.isNaN(amount)){addMessage('assistant','مبلغ را با عدد و در صورت نیاز با واحد میلیون یا میلیارد وارد کنید؛ مثلاً ۳٫۵ میلیارد.');return;}d.max_budget=amount;break;
+   }
+   case 'request_area':{
+    if(isSkip(answer))d.min_area=null;
+    else{const n=Number(faDigits(answer).match(/\d+(?:\.\d+)?/)?.[0]);if(!Number.isFinite(n)||n<=0){addMessage('assistant','متراژ را به عدد وارد کنید یا بنویسید «فرقی ندارد».');return;}d.min_area=n;}break;
+   }
+   case 'request_bedrooms':{
+    if(isSkip(answer))d.bedrooms=null;
+    else{const n=Number(faDigits(answer).match(/\d+/)?.[0]);if(!Number.isInteger(n)||n<0||n>20){addMessage('assistant','تعداد اتاق را به عدد وارد کنید یا بنویسید «مهم نیست».');return;}d.bedrooms=n;}break;
+   }
+   case 'request_description':d.description=isSkip(answer)?'':answer.slice(0,1000);break;
+   case 'phone':await beginPhoneVerification(answer);return;
+  }
+  nextRequestStep(step);return;
+ }
+ switch(step){
+  case 'property_title':
+   if(answer.length<5||answer.length>150){addMessage('assistant','عنوان آگهی باید بین ۵ تا ۱۵۰ نویسه باشد.');return;}d.title=answer;break;
+  case 'property_type':
+   d.property_type=parsePropertyType(answer);
+   if(!d.property_type){addMessage('assistant','نوع ملک را از میان آپارتمان، خانه و ویلا، زمین، مغازه، دفتر کار یا باغ انتخاب کنید.');return;}break;
+  case 'property_transaction':
+   d.transaction_type=parseTransaction(answer);
+   if(!d.transaction_type){addMessage('assistant','نوع معامله را «فروش»، «رهن و اجاره» یا «رهن کامل» وارد کنید.');return;}break;
+  case 'property_city':d.city=answer.slice(0,60);break;
+  case 'property_address':
+   if(answer.length<2||answer.length>250){addMessage('assistant','محله یا محدوده ملک را کوتاه و دقیق وارد کنید.');return;}d.address=answer;break;
+  case 'property_price':{
+   const amount=parseMoneyInput(answer);
+   if(!Number.isFinite(amount)||amount<=0){addMessage('assistant','مبلغ معتبر و بزرگ‌تر از صفر وارد کنید؛ مثلاً ۳ میلیارد یا ۱۵ میلیون.');return;}d.price=amount;break;
+  }
+  case 'property_deposit':{
+   const amount=parseMoneyInput(answer);
+   if(Number.isNaN(amount)){addMessage('assistant','مبلغ ودیعه را وارد کنید یا بنویسید «ندارد».');return;}d.deposit=amount;break;
+  }
+  case 'property_area':{
+   if(isSkip(answer))d.area=null;
+   else{const n=Number(faDigits(answer).match(/\d+(?:\.\d+)?/)?.[0]);if(!Number.isFinite(n)||n<=0){addMessage('assistant','متراژ را به عدد وارد کنید یا بنویسید «نامشخص».');return;}d.area=n;}break;
+  }
+  case 'property_bedrooms':{
+   if(isSkip(answer))d.bedrooms=null;
+   else{const n=Number(faDigits(answer).match(/\d+/)?.[0]);if(!Number.isInteger(n)||n<0||n>20){addMessage('assistant','تعداد اتاق خواب را به عدد وارد کنید یا بنویسید «نامشخص».');return;}d.bedrooms=n;}break;
+  }
+  case 'property_description':d.description=isSkip(answer)?'':answer.slice(0,2000);break;
+  case 'property_images':
+   if(!selectedPropertyFiles.length&&!isSkip(answer)&&!/(ادامه|ثبت|بدون عکس)/.test(answer)){addMessage('assistant','برای افزودن تصاویر، دکمه سنجاق را انتخاب کنید؛ در غیر این صورت بنویسید «بدون عکس».');return;}
+   askFlow('phone');return;
+  case 'phone':await beginPhoneVerification(answer);return;
+ }
+ nextPropertyStep(step);
+}
+function autoStartFlowFromMessage(value){
+ const text=String(value||'').replace(/[يى]/g,'ی').replace(/ك/g,'ک');
+ if(/(ثبت|درج|ارسال).{0,15}(آگهی|ملک)|(ملکم|ملک خودم).{0,20}(فروش|ثبت|اجاره)/.test(text)){startStructuredFlow('property');return true;}
+ if(/(ثبت|ارسال).{0,15}(درخواست|تقاضا)|(متقاضی|دنبال).{0,20}(خرید|اجاره|ملک)/.test(text)){startStructuredFlow('request');return true;}
+ return false;
+}
+$('propertyFiles').addEventListener('change',function(){
+ const files=Array.from(this.files||[]);
+ if(files.length>5){addMessage('assistant','حداکثر ۵ عکس می‌توانید انتخاب کنید.');this.value='';selectedPropertyFiles=[];return;}
+ for(const file of files){
+  if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>5*1024*1024){
+   addMessage('assistant','فرمت تصاویر باید JPG، PNG یا WebP و حجم هر عکس حداکثر ۵ مگابایت باشد.');this.value='';selectedPropertyFiles=[];return;
+  }
+ }
+ selectedPropertyFiles=files;
+ $('attachCount').hidden=!files.length;
+ $('attachCount').textContent=files.length?files.length.toLocaleString('fa-IR')+' تصویر برای آگهی انتخاب شده است.':'';
+});
+$('attachButton').addEventListener('click',()=> $('propertyFiles').click());
 async function loadProperties(){
  setInventoryStatus('در حال دریافت آگهی‌های تأییدشده…');
  try{
@@ -316,6 +593,8 @@ $('composerForm').addEventListener('submit',event=>{
  if(!value)return;
  input.value='';
  input.style.height='auto';
+ if(currentFlow){handleFlowAnswer(value);return;}
+ if(autoStartFlowFromMessage(value))return;
  ask(value);
 });
 $('messageInput').addEventListener('input',event=>{
@@ -330,16 +609,18 @@ $('messageInput').addEventListener('keydown',event=>{
  }
 });
 $('quickActions').addEventListener('click',event=>{
- const button=event.target.closest('[data-prompt]');
- if(button)ask(button.getAttribute('data-prompt'));
+ const button=event.target.closest('[data-prompt],[data-flow]');
+ if(!button)return;
+ const flow=button.getAttribute('data-flow');
+ if(flow){startStructuredFlow(flow);return;}
+ ask(button.getAttribute('data-prompt'));
 });
 $('newChat').addEventListener('click',()=>{
  if(busy)return;
- history=[];
- $('conversation').replaceChildren();
- $('welcome').hidden=false;
- $('messageInput').value='';
- $('messageInput').focus();
+ history=[];currentFlow=null;selectedPropertyFiles=[];otpPhone='';
+ $('propertyFiles').value='';$('attachButton').hidden=true;$('attachCount').hidden=true;
+ $('conversation').replaceChildren();$('welcome').hidden=false;
+ $('messageInput').value='';$('messageInput').placeholder='سؤال خود را بنویسید…';$('messageInput').focus();
 });
 loadProperties();
 })();
