@@ -209,7 +209,7 @@ export default {
     const now = Date.now();
     const bucket = buckets.get(ip);
 
-    if (bucket && now - bucket.start < 60000 && bucket.count >= 60) {
+    if (bucket && now - bucket.start < 60000 && bucket.count >= 300) {
       return json({
         error: "RATE_LIMIT",
         message: "تعداد درخواست‌ها زیاد است؛ کمی بعد دوباره امتحان کنید."
