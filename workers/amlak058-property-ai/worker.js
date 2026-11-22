@@ -56,6 +56,15 @@ function cleanProperties(input) {
     const id = safeText(item.id, 100);
     if (!id || !/^[a-zA-Z0-9_-]+$/.test(id)) return null;
 
+    const images = Array.isArray(item.image_urls)
+      ? item.image_urls.slice(0, 5).map(value => {
+          const url = safeText(value, 1000);
+          return /^https:\/\//i.test(url) ? url : "";
+        }).filter(Boolean)
+      : [];
+    const primaryImage = safeText(item.image_url, 1000);
+    const imageUrl = /^https:\/\//i.test(primaryImage) ? primaryImage : (images[0] || "");
+
     return {
       id,
       title: safeText(item.title, 150),
@@ -63,10 +72,14 @@ function cleanProperties(input) {
       property_type: safeText(item.property_type, 60),
       transaction_type: safeText(item.transaction_type, 60),
       price: safeNumber(item.price),
-      area: safeNumber(item.area),
+      deposit: safeNumber(item.deposit),
+      monthly_rent: safeNumber(item.monthly_rent),
+      area: safeNumber(item.area ?? item.building_area ?? item.land_area),
       bedrooms: safeNumber(item.bedrooms),
       address: safeText(item.address, 120),
-      description: safeText(item.description, 240)
+      description: safeText(item.description, 240),
+      image_url: imageUrl,
+      image_urls: images
     };
   }).filter(Boolean);
 }
@@ -260,6 +273,7 @@ export default {
     const system = [
       "تو لیام هستی؛ دستیار هوشمند املاک ۰۵۸ در بجنورد. اگر کاربر نامت را پرسید، بگو «لیام». فقط به زبان فارسی روان، محترمانه و کاربردی پاسخ بده.",
       "در معرفی ملک، قیمت، متراژ، نشانی و ویژگی‌ها فقط به نتایج واقعی بخش اطلاعات آگهی‌ها تکیه کن. هیچ ملک، قیمت، شماره تماس، نشانی یا ویژگی‌ای را حدس نزن.",
+      "در آگهی‌های رهن و اجاره، مبلغ ودیعه و اجاره ماهانه را فقط از اطلاعات همان آگهی اعلام کن؛ اگر ثبت نشده است، صریح بگو اعلام نشده است.",
       "نتایج فهرست‌شده صرفاً آگهی‌های تأییدشده ارسالی سایت هستند؛ تأیید آگهی به‌معنای تضمین موجود بودن ملک نیست. برای موجودی و بازدید، هماهنگی با مشاور لازم است.",
       "اگر نتیجه‌ای وجود ندارد، صریح بگو گزینه تأییدشده‌ای با فیلترهای فعلی پیدا نشد و یک سؤال روشن درباره بودجه، محله یا نوع ملک بپرس.",
       "برای پرسش عمومی درباره خرید، فروش، رهن، اجاره، قیمت‌گذاری و بازدید راهنمایی عملی بده. درباره امور حقوقی تخصصی یا تضمین نتیجه قضایی اظهارنظر قطعی نکن و کاربر را به بررسی موضوع با وکیل ارجاع بده.",
