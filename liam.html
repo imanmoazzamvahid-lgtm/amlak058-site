@@ -318,7 +318,7 @@ function askFlow(step){
   property_city:'ملک در کدام شهر قرار دارد؟',
   property_address:'محله و نشانی یا محدوده ملک را بنویسید.',
   property_price:'قیمت پیشنهادی را به تومان وارد کنید. برای اجاره، مبلغ اجاره ماهانه را بنویسید؛ مثلاً ۱۵ میلیون تومان.',
-  property_deposit:'مبلغ ودیعه یا رهن چقدر است؟ اگر ندارد یا توافقی است بنویسید «ندارد».',
+  property_deposit:'مبلغ ودیعه یا رهن را به تومان وارد کنید؛ اگر منظورتان ۵۰۰ میلیون است دقیقاً بنویسید «۵۰۰ میلیون». اگر ندارد بنویسید «ندارد». ',
   property_area:'متراژ ملک چند متر است؟ اگر مشخص نیست بنویسید «نامشخص».',
   property_bedrooms:'تعداد اتاق خواب چندتاست؟ اگر مشخص نیست بنویسید «نامشخص».',
   property_description:'توضیحات و ویژگی‌های مهم ملک را بنویسید؛ در صورت نداشتن بنویسید «ندارد».',
@@ -373,7 +373,7 @@ async function beginPhoneVerification(value){
   const {error}=await db.auth.signInWithOtp({phone:phone});
   if(error)throw error;
   askFlow('otp');
-  addMessage('assistant','کد پیامکی ارسال شد. در صورت نرسیدن پیامک، تنظیمات سرویس پیامک ورود در Supabase باید فعال باشد.');
+  addMessage('assistant','درخواست ارسال کد ثبت شد؛ اما تحویل پیامک هنوز تأیید نشده است. اگر پیامک دریافت نکردید، سرویس پیامک و قالب SMS در تنظیمات احراز هویت Supabase باید بررسی و فعال شود.');
  }catch(error){
   addMessage('assistant','ارسال کد انجام نشد: '+(error.message||'خطای سرویس پیامک')+'. اطلاعات واردشده حفظ شد؛ شماره را دوباره وارد کنید یا بعداً تلاش کنید.','error-note');
   askFlow('phone');
@@ -487,7 +487,7 @@ async function handleFlowAnswer(value){
   }
   case 'property_deposit':{
    const amount=parseMoneyInput(answer);
-   if(Number.isNaN(amount)){addMessage('assistant','مبلغ ودیعه را وارد کنید یا بنویسید «ندارد».');return;}d.deposit=amount;break;
+   if(Number.isNaN(amount)){addMessage('assistant','مبلغ ودیعه را وارد کنید یا بنویسید «ندارد».');return;}if(amount!==null&&amount<100000){addMessage('assistant','مبلغ واردشده برای ودیعه بسیار کم است. مبلغ را با واحد روشن وارد کنید؛ مثلاً «۵۰۰ میلیون» یا «۵۰۰ هزار تومان».');return;}d.deposit=amount;break;
   }
   case 'property_area':{
    if(isSkip(answer))d.area=null;
