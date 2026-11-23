@@ -426,7 +426,6 @@ async function beginPhoneVerification(value){
   const {error}=await db.auth.signInWithOtp({phone:phone});
   if(error)throw error;
   askFlow('otp');
-  addMessage('assistant','درخواست ارسال کد ثبت شد؛ اما تحویل پیامک هنوز تأیید نشده است. اگر پیامک دریافت نکردید، سرویس پیامک و قالب SMS در تنظیمات احراز هویت Supabase باید بررسی و فعال شود.');
  }catch(error){
   addMessage('assistant','ارسال کد انجام نشد: '+(error.message||'خطای سرویس پیامک')+'. اطلاعات واردشده حفظ شد؛ شماره را دوباره وارد کنید یا بعداً تلاش کنید.','error-note');
   askFlow('phone');
