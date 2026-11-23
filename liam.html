@@ -367,10 +367,10 @@ function askFlow(step){
   request_description:'توضیح یا شرط دیگری دارید؟ (اختیاری؛ در صورت نداشتن بنویسید «ندارم»)',
   property_title:'عنوان آگهی را بنویسید؛ مثلاً «آپارتمان دوخوابه در خیابان فردوسی».',
   property_type:'نوع ملک چیست؟ (آپارتمان، خانه و ویلا، زمین، مغازه، دفتر کار یا باغ)',
-  property_transaction:'قصد فروش دارید یا رهن و اجاره؟',
-  property_city:'ملک در کدام شهر قرار دارد؟',
-  property_address:'محله و نشانی یا محدوده ملک را بنویسید.',
-  property_price:'قیمت پیشنهادی را به تومان وارد کنید. برای اجاره، مبلغ اجاره ماهانه را بنویسید؛ مثلاً ۱۵ میلیون تومان.',
+  property_transaction:'نوع معامله را انتخاب کنید؛ فروش یا اجاره؟',
+  property_city:'شهر ملک را انتخاب کنید.',
+  property_address:'فقط محله و نشانی ملک را وارد کنید؛ مثلاً فردوسی ۴۴.',
+  property_price:'مبلغ را با واحد وارد کنید؛ برای فروش قیمت کل و برای اجاره مبلغ اجاره ماهانه، مثلاً ۱۵ میلیون تومان.',
   property_deposit:'مبلغ ودیعه یا رهن را به تومان وارد کنید؛ اگر منظورتان ۵۰۰ میلیون است دقیقاً بنویسید «۵۰۰ میلیون». اگر ندارد بنویسید «ندارد». ',
   property_area:'متراژ ملک چند متر است؟ اگر مشخص نیست بنویسید «نامشخص».',
   property_bedrooms:'تعداد اتاق خواب چندتاست؟ اگر مشخص نیست بنویسید «نامشخص».',
@@ -388,15 +388,15 @@ function askFlow(step){
  scrollToLatest();
 }
 function startStructuredFlow(kind){
- currentFlow={kind,step:'',data:{}};
+ currentFlow={kind,step:'',data:kind==='property'?{city:'بجنورد',area:null,bedrooms:null,description:''}:{}};
  selectedPropertyFiles=[];$('propertyFiles').value='';
  $('attachButton').hidden=true;$('attachCount').hidden=true;$('welcome').hidden=true;
  if(kind==='request'){
   addMessage('assistant','درخواست خرید یا اجاره را با چند سؤال کوتاه ثبت می‌کنم. پس از تأیید شماره موبایل، درخواست شما در پنل مدیریت املاک ۰۵۸ قرار می‌گیرد.');
   askFlow('request_type');
  }else{
-  addMessage('assistant','اطلاعات ملک را دریافت می‌کنم و آگهی را پس از احراز شماره موبایل با وضعیت «در انتظار تأیید مدیریت» ثبت خواهم کرد. آگهی تا زمان تأیید مدیر منتشر نمی‌شود.');
-  askFlow('property_title');
+  addMessage('assistant','ثبت سریع آگهی فعال است: فقط نوع معامله، نوع ملک، نشانی و مبلغ را مشخص کنید؛ شهر بجنورد و عنوان آگهی به‌صورت خودکار تکمیل می‌شود. پس از تأیید موبایل، آگهی فوراً در صف بررسی مدیریت ثبت خواهد شد.');
+  askFlow('property_transaction');
  }
 }
 function nextRequestStep(step){
@@ -405,13 +405,12 @@ function nextRequestStep(step){
 }
 function nextPropertyStep(step){
  const d=currentFlow.data;
- const order=['property_title','property_type','property_transaction','property_city','property_address','property_price'];
- if(step==='property_price'&&d.transaction_type!=='فروش'){askFlow('property_deposit');return;}
- if(step==='property_deposit'||step==='property_price'){askFlow('property_area');return;}
- const tail=['property_area','property_bedrooms','property_description','property_images','phone'];
- const i=tail.indexOf(step);
- if(i>=0)askFlow(tail[Math.min(i+1,tail.length-1)]);
- else askFlow(order[Math.min(order.indexOf(step)+1,order.length-1)]);
+ if(step==='property_transaction'){askFlow('property_type');return;}
+ if(step==='property_type'){askFlow('property_city');return;}
+ if(step==='property_city'){askFlow('property_address');return;}
+ if(step==='property_address'){askFlow('property_price');return;}
+ if(step==='property_price'){if(d.transaction_type!=='فروش'){askFlow('property_deposit');return;}askFlow('phone');return;}
+ if(step==='property_deposit'){askFlow('phone');return;}
 }
 async function beginPhoneVerification(value){
  const phone=normalizeIranPhone(value);
@@ -535,7 +534,7 @@ async function handleFlowAnswer(value){
    if(!d.transaction_type){addMessage('assistant','نوع معامله را «فروش»، «رهن و اجاره» یا «رهن کامل» وارد کنید.');return;}break;
   case 'property_city':d.city=answer.slice(0,60);break;
   case 'property_address':
-   if(answer.length<2||answer.length>250){addMessage('assistant','محله یا محدوده ملک را کوتاه و دقیق وارد کنید.');return;}d.address=answer;break;
+   if(answer.length<2||answer.length>250){addMessage('assistant','محله یا محدوده ملک را کوتاه و دقیق وارد کنید.');return;}d.address=answer;d.title=(d.property_type||'ملک')+' '+(d.transaction_type==='فروش'?'فروشی':'برای اجاره')+' در '+answer;break;
   case 'property_price':{
    const amount=parseMoneyInput(answer);
    if(!Number.isFinite(amount)||amount<=0){addMessage('assistant','مبلغ معتبر و بزرگ‌تر از صفر وارد کنید؛ مثلاً ۳ میلیارد یا ۱۵ میلیون.');return;}d.price=amount;break;
