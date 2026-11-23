@@ -605,23 +605,33 @@ async function ask(question){
  addMessage('user',q);
  const pending=addMessage('assistant','در حال بررسی درخواست و جست‌وجوی فایل‌های مرتبط…','pending');
  try{
-  const response=await fetch(AI_ENDPOINT,{
-   method:'POST',
-   headers:{'Content-Type':'application/json'},
-   body:JSON.stringify({
-    message:q,
-    history:history.slice(-8),
-    properties:properties.slice(0,60).map(p=>({
-     id:p.id,title:p.title,city:p.city,property_type:p.property_type,transaction_type:p.transaction_type,
-     price:p.price,deposit:p.deposit,monthly_rent:p.monthly_rent,
-     area:p.area,building_area:p.building_area,land_area:p.land_area,bedrooms:p.bedrooms,
-     address:p.address,description:String(p.description||'').slice(0,240),
-     image_url:p.image_url,image_urls:Array.isArray(p.image_urls)?p.image_urls.slice(0,5):[]
-    }))
-   })
+  const payload=JSON.stringify({
+   message:q,
+   history:history.slice(-8),
+   properties:properties.slice(0,60).map(p=>({
+    id:p.id,title:p.title,city:p.city,property_type:p.property_type,transaction_type:p.transaction_type,
+    price:p.price,deposit:p.deposit,monthly_rent:p.monthly_rent,
+    area:p.area,building_area:p.building_area,land_area:p.land_area,bedrooms:p.bedrooms,
+    address:p.address,description:String(p.description||'').slice(0,240),
+    image_url:p.image_url,image_urls:Array.isArray(p.image_urls)?p.image_urls.slice(0,5):[]
+   }))
   });
-  const data=await response.json().catch(()=>({}));
-  if(!response.ok||!data.answer)throw new Error(data.message||'پاسخی از موتور لیام دریافت نشد.');
+  let data=null,lastError=null;
+  for(const endpoint of [AI_ENDPOINT,'https://ai.amlak058.ir']){
+   try{
+    const response=await fetch(endpoint,{
+     method:'POST',
+     headers:{'Content-Type':'application/json'},
+     body:payload
+    });
+    const raw=await response.text();
+    let parsed={};
+    try{parsed=JSON.parse(raw)}catch{}
+    if(response.ok&&parsed.answer){data=parsed;break;}
+    lastError=new Error(parsed.message||('پاسخ نامعتبر از موتور لیام؛ کد '+response.status));
+   }catch(error){lastError=error;}
+  }
+  if(!data)throw new Error(lastError?.message||'ارتباط با موتور لیام برقرار نشد.');
   pending.textContent=data.answer;
   pending.classList.remove('pending');
   history.push({role:'user',content:q},{role:'assistant',content:data.answer});
