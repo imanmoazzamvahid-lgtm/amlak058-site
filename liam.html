@@ -154,7 +154,7 @@ button{cursor:pointer}
 'use strict';
 const SUPABASE_URL='https://lsttrmnxauaviyuipnim.supabase.co';
 const SUPABASE_KEY='sb_publishable_V3ZIfuzEZ4y7KUY88lyv_Q_wF6kQAcb';
-const AI_ENDPOINT='/api/liam';
+const AI_ENDPOINT='https://ai.amlak058.ir/';
 const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const $=id=>document.getElementById(id);
 let properties=[],history=[],busy=false;
@@ -634,8 +634,8 @@ async function ask(question){
   });
   const response=await fetch(AI_ENDPOINT,{
    method:'POST',
-   mode:'same-origin',
-   credentials:'same-origin',
+   mode:'cors',
+   credentials:'omit',
    cache:'no-store',
    headers:{'Content-Type':'application/json'},
    body:payload
