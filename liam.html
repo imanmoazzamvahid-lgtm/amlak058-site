@@ -46,6 +46,12 @@ button{cursor:pointer}
 .message.assistant{align-self:flex-end;background:linear-gradient(145deg,#10483c,#0b3b32);border-top-right-radius:5px;color:#f0f5ef}
 .message.user{align-self:flex-start;background:linear-gradient(145deg,#1a5848,#134537);border-color:#c2d9c21c;border-top-left-radius:5px;color:#fff}
 .message.pending{color:#d6c99f}
+.quick-options{align-self:flex-end;width:min(100%,700px);display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:8px;margin-top:-6px}
+.quick-option{min-height:42px;padding:10px 12px;border:1px solid #d9c89e77;border-radius:12px;background:linear-gradient(145deg,#174f41,#0b3b32);color:#f7edcf;font-size:11px;line-height:1.6;text-align:center;transition:background .15s,border-color .15s,transform .15s}
+.quick-option:hover{background:linear-gradient(145deg,#21634f,#104637);border-color:#e6d6ad;transform:translateY(-1px)}
+.quick-option:focus-visible{outline:2px solid #e7d6a8;outline-offset:2px}
+.quick-option:disabled{opacity:.55;cursor:default;transform:none}
+@media(max-width:640px){.quick-options{grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:7px}.quick-option{min-height:40px;padding:9px 7px;font-size:10px}}
 .results-label{align-self:flex-end;color:#c9d8ce;font-size:10px;margin-top:2px}
 .results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%}
 .property-card{overflow:hidden;border:1px solid #ffffff26;border-radius:15px;background:linear-gradient(145deg,#10483c,#0a382f);box-shadow:0 12px 26px #001d1726}
@@ -284,7 +290,7 @@ function parseMoneyInput(value){
 }
 function parsePropertyType(value){
  const t=String(value||'').replace(/[يى]/g,'ی').replace(/ك/g,'ک');
- if(/آپارتمان|واحد مسکونی|سوئیت/.test(t))return 'آپارتمان';
+ if(/آپارتمان|آپادتمان|واحد مسکونی|سوئیت/.test(t))return 'آپارتمان';
  if(/خانه|ویلا/.test(t))return 'خانه و ویلا';
  if(/زمین/.test(t))return 'زمین';
  if(/مغازه|تجار|فروشگاه|غرفه/.test(t))return 'مغازه و غرفه';
@@ -301,6 +307,53 @@ function parseTransaction(value){
  return '';
 }
 function isSkip(value){return /(فرقی ندارد|مهم نیست|نامشخص|ندارم|ندارد|بدون|توافقی|ثبت نکن|لازم نیست)/.test(String(value||''));}
+function flowQuickOptions(step){
+ const propertyTypes=['آپارتمان','خانه و ویلا','زمین','مغازه','دفتر کار','باغ'];
+ const bedroomOptions=['۱','۲','۳','۴','۵'];
+ const options={
+  request_type:['خرید','رهن و اجاره'],
+  request_property_type:propertyTypes,
+  request_city:['بجنورد'],
+  request_neighborhoods:['فرقی ندارد'],
+  request_budget:['توافقی'],
+  request_area:['فرقی ندارد'],
+  request_bedrooms:[...bedroomOptions,'مهم نیست'],
+  request_description:['ندارم'],
+  property_type:propertyTypes,
+  property_transaction:['فروش','رهن و اجاره','رهن کامل'],
+  property_city:['بجنورد'],
+  property_deposit:['ندارد','توافقی'],
+  property_area:['نامشخص'],
+  property_bedrooms:[...bedroomOptions,'نامشخص'],
+  property_description:['ندارد'],
+  property_images:selectedPropertyFiles.length?['ادامه']:['بدون عکس','ادامه']
+ };
+ return options[step]||[];
+}
+function disableQuickOptions(){
+ document.querySelectorAll('.quick-options button').forEach(button=>{button.disabled=true;});
+}
+function addFlowQuickOptions(step){
+ const choices=flowQuickOptions(step);
+ if(!choices.length)return;
+ const wrap=document.createElement('div');
+ wrap.className='quick-options';
+ wrap.setAttribute('role','group');
+ wrap.setAttribute('aria-label','گزینه‌های پیشنهادی');
+ choices.forEach(value=>{
+  const button=document.createElement('button');
+  button.type='button';
+  button.className='quick-option';
+  button.textContent=value;
+  button.addEventListener('click',()=>{
+   if(!currentFlow||currentFlow.step!==step||button.disabled)return;
+   disableQuickOptions();
+   handleFlowAnswer(value);
+  });
+  wrap.appendChild(button);
+ });
+ $('conversation').appendChild(wrap);
+}
 function askFlow(step){
  currentFlow.step=step;
  const prompts={
@@ -327,6 +380,7 @@ function askFlow(step){
   otp:'کد تأیید پیامکی ارسال‌شده را وارد کنید.'
  };
  addMessage('assistant',prompts[step]||'اطلاعات را وارد کنید.');
+ addFlowQuickOptions(step);
  $('attachButton').hidden=!(currentFlow.kind==='property'&&step==='property_images');
  $('attachCount').hidden=selectedPropertyFiles.length===0;
  $('attachCount').textContent=selectedPropertyFiles.length?selectedPropertyFiles.length.toLocaleString('fa-IR')+' تصویر انتخاب شده است.':'';
@@ -419,6 +473,7 @@ async function saveCurrentFlow(){
 async function handleFlowAnswer(value){
  if(!currentFlow)return;
  const answer=String(value||'').trim();if(!answer)return;
+ disableQuickOptions();
  if(/^(انصراف|لغو|بی‌خیال|بیخیال)$/i.test(answer)){
   currentFlow=null;selectedPropertyFiles=[];otpPhone='';$('propertyFiles').value='';
   $('attachButton').hidden=true;$('attachCount').hidden=true;$('messageInput').placeholder='سؤال خود را بنویسید…';
