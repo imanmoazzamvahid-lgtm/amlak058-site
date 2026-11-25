@@ -173,6 +173,10 @@ html.iam-embed .inventory-note{font-size:9px;margin-top:8px}
 const SUPABASE_URL='https://lsttrmnxauaviyuipnim.supabase.co';
 const SUPABASE_KEY='sb_publishable_V3ZIfuzEZ4y7KUY88lyv_Q_wF6kQAcb';
 const AI_ENDPOINT='/api/liam';
+// The assistant page is hosted on amlak058.ir, but may be embedded on another site.
+// Never expose 058 inventory or CRM flows to an external host.
+const requestedHost=new URLSearchParams(location.search).get('source')||location.hostname;
+const is058Tenant=['amlak058.ir','www.amlak058.ir'].includes(requestedHost.toLowerCase());
 const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const $=id=>document.getElementById(id);
 let properties=[],history=[],busy=false;
@@ -718,7 +722,17 @@ $('newChat').addEventListener('click',()=>{
  $('conversation').replaceChildren();$('welcome').hidden=false;
  $('messageInput').value='';$('messageInput').placeholder='سؤال خود را بنویسید…';$('messageInput').focus();
 });
-loadProperties();
+if(is058Tenant){
+ loadProperties();
+}else{
+ properties=[];
+ setInventoryStatus('مشاور آنلاین فعال است؛ برای جست‌وجوی آگهی‌های این سایت، اتصال منبع آگهی‌های اختصاصی آن لازم است.');
+ $('quickActions').querySelectorAll('[data-flow]').forEach(button=>button.hidden=true);
+ const contactLink=document.querySelector('.bottom-note a');
+ if(contactLink)contactLink.hidden=true;
+ const note=document.querySelector('.bottom-note span');
+ if(note)note.textContent='پاسخ‌گویی عمومی؛ اطلاعات آگهی‌های این سایت هنوز متصل نشده است.';
+}
 })();
 </script>
 </body>
