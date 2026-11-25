@@ -694,7 +694,7 @@ $('composerForm').addEventListener('submit',event=>{
  input.value='';
  input.style.height='auto';
  if(currentFlow){handleFlowAnswer(value);return;}
- if(autoStartFlowFromMessage(value))return;
+ if(is058Tenant && autoStartFlowFromMessage(value))return;
  ask(value);
 });
 $('messageInput').addEventListener('input',event=>{
