@@ -976,6 +976,39 @@ document.getElementById('propertyForm').addEventListener('submit',async function
 
 function mobileNavHome(){document.getElementById('home').scrollIntoView({behavior:'smooth'});document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===0))}
 function mobileNavMyProperties(){const saved=getFavorites();if(!saved.length){alert('هنوز آگهی‌ای ذخیره نکرده‌اید. برای نگه‌داشتن آگهی‌ها، روی «♡ ذخیره آگهی» بزنید.');return}const list=document.getElementById('propertyList');const cards=[...list.querySelectorAll('.property-card')];cards.forEach(card=>{const button=card.querySelector('.favorite-btn');card.style.display=button&&button.classList.contains('saved')?'':'none'});document.getElementById('listings').scrollIntoView({behavior:'smooth'});document.getElementById('resultCount').textContent='آگهی‌های ذخیره‌شده';document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===1))}
+async function mobileNavSaved(){
+ const favorites=getFavorites();
+ const saved=Array.isArray(favorites)?favorites.filter(id=>id!==null&&id!==undefined).map(String).slice(0,100):[];
+ const list=document.getElementById('propertyList');
+ const count=document.getElementById('resultCount');
+ if(!saved.length){
+  if(list)list.innerHTML='<div class="empty">هنوز آگهی‌ای نشان نکرده‌اید. برای نگه‌داشتن آگهی‌ها، روی «♡ ذخیره آگهی» بزنید.</div>';
+  if(count)count.textContent='۰ آگهی نشان‌شده';
+  return;
+ }
+ if(!list)return;
+ list.innerHTML='<div class="empty">در حال دریافت آگهی‌های نشان‌شده...</div>';
+ try{
+  const {data,error}=await db.from('properties')
+   .select('id,title,property_type,transaction_type,price,area,bedrooms,address,city,description,image_url,image_urls,created_at,owner_id')
+   .eq('status','approved')
+   .in('id',saved)
+   .limit(100);
+  if(error)throw error;
+  const rows=(data||[]).sort((a,b)=>saved.indexOf(String(a.id))-saved.indexOf(String(b.id)));
+  list.innerHTML=rows.length
+   ?(await Promise.all(rows.map(renderProperty))).join('')
+   :'<div class="empty">آگهی نشان‌شده‌ای که هنوز منتشر باشد پیدا نشد.</div>';
+  if(count)count.textContent=rows.length.toLocaleString('fa-IR')+' آگهی نشان‌شده';
+ }catch(error){
+  console.error('دریافت آگهی‌های نشان‌شده ناموفق بود:',error);
+  list.innerHTML='<div class="empty">دریافت آگهی‌های نشان‌شده ناموفق بود. اتصال پایگاه داده را بررسی کنید.</div>';
+  if(count)count.textContent='خطا';
+ }
+ const listings=document.getElementById('listings');
+ if(listings)listings.scrollIntoView({behavior:'smooth'});
+ document.querySelectorAll('.mobile-bottom-nav .mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===1));
+}
 function openLocationModal(){document.getElementById('locationModal').style.display='block';document.getElementById('locationSearch').value=document.getElementById('searchAddress').value}
 function closeLocationModal(){document.getElementById('locationModal').style.display='none'}
 function applyLocation(){document.getElementById('searchAddress').value=document.getElementById('locationSearch').value.trim();closeLocationModal();loadProperties();document.getElementById('listings').scrollIntoView({behavior:'smooth'});document.querySelectorAll('.mobile-nav-item').forEach((b,i)=>b.classList.toggle('active',i===4))}
