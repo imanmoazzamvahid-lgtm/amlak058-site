@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#07392f">
-<meta name="description" content="مشاور آنلاین املاک ایمان؛ جست‌وجوی آگهی‌های تأییدشده خرید، فروش، رهن و اجاره در بجنورد و خراسان شمالی.">
-<title>مشاور آنلاین | املاک ایمان</title>
+<meta name="description" content="دستیار هوشمند لیام در املاک ۰۵۸؛ راهنمای جست‌وجوی آگهی‌های تأییدشده خرید، فروش، رهن و اجاره در بجنورد و خراسان شمالی.">
+<title>دستیار لیام | املاک ۰۵۸</title>
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
 <style>
 :root{color-scheme:dark;--bg:#062f28;--bg2:#073b31;--panel:#0b4438;--panel2:#104d40;--line:#ffffff1c;--gold:#d9c89e;--gold2:#bba775;--text:#f4f5ef;--muted:#b8cbc2;--user:#164f43;--white:#fff}
@@ -139,7 +139,7 @@ html.iam-embed .inventory-note{font-size:9px;margin-top:8px}
   <section class="welcome" id="welcome">
     <div class="ai-orb"><img src="/icon.svg" alt="لوگوی املاک ایمان" style="width:100%;height:100%;object-fit:contain;border-radius:20px"></div>
     <div class="eyebrow">AMLAK IMAN · BOJNORD</div>
-    <h1>سلام، من مشاور آنلاین املاک ایمان هستم.</h1>
+    <h1>سلام، من لیام هستم.</h1>
     <p>ممنون، خوشحالم که ارتباط برقرار شد. بفرمایید دنبال چه ملکی هستید تا راهنمایی کنم.</p>
     <div class="welcome-actions" id="quickActions">
       <button class="action-card" type="button" data-prompt="آپارتمان فروشی در بجنورد می‌خواهم"><span class="action-icon">⌂</span><strong>خرید آپارتمان</strong><small>مشاهده فایل‌های فروش</small></button>
@@ -151,7 +151,7 @@ html.iam-embed .inventory-note{font-size:9px;margin-top:8px}
     <div class="inventory-note" id="inventoryNote">در حال اتصال به بانک آگهی‌های املاک ۰۵۸…</div>
   </section>
 
-  <section class="conversation" id="conversation" aria-live="polite" aria-label="گفت‌وگو با مشاور آنلاین املاک ایمان"></section>
+  <section class="conversation" id="conversation" aria-live="polite" aria-label="گفت‌وگو با لیام"></section>
 
   <div class="composer-area">
     <p class="composer-hint">می‌توانید آزادانه سؤال بپرسید یا مشخصات ملک موردنظرتان را بنویسید.</p>
@@ -665,7 +665,7 @@ async function ask(question){
   const raw=await response.text();
   let data={};
   try{data=JSON.parse(raw)}catch{}
-  if(!response.ok)throw new Error(data.message||'سرور مشاور آنلاین پاسخ مناسبی نداد (کد '+response.status+').');
+  if(!response.ok)throw new Error(data.message||'موتور پاسخ‌گویی لیام پاسخ مناسبی نداد (کد '+response.status+').');
   if(!data.answer)throw new Error(data.message||'پاسخ موتور لیام خالی است.');
   pending.textContent=data.answer;
   pending.classList.remove('pending');
@@ -674,7 +674,7 @@ async function ask(question){
   addPropertyResults(data.matches);
  }catch(error){
   const reason=error instanceof TypeError?'ارتباط مرورگر با سرور برقرار نشد؛ صفحه را یک‌بار تازه‌سازی کنید.':(error.message||'خطای ارتباط با سرویس');
-  pending.textContent='مشاور آنلاین نتوانست پاسخ را دریافت کند: '+reason;
+  pending.textContent='لیام نتوانست پاسخ را دریافت کند: '+reason;
   pending.classList.remove('pending');
   pending.classList.add('error-note');
   console.error('Property assistant assistant request failed',error);
@@ -726,7 +726,7 @@ if(is058Tenant){
  loadProperties();
 }else{
  properties=[];
- setInventoryStatus('مشاور آنلاین فعال است؛ برای جست‌وجوی آگهی‌های این سایت، اتصال منبع آگهی‌های اختصاصی آن لازم است.');
+ setInventoryStatus('لیام فعال است؛ برای جست‌وجوی آگهی‌های این سایت، اتصال منبع آگهی‌های اختصاصی آن لازم است.');
  $('quickActions').querySelectorAll('[data-flow]').forEach(button=>button.hidden=true);
  const contactLink=document.querySelector('.bottom-note a');
  if(contactLink)contactLink.hidden=true;
