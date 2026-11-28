@@ -21,7 +21,7 @@
   var script = document.currentScript;
   var base = (script && script.getAttribute('data-base')) || 'https://amlak058.ir';
   base = base.replace(/\/+$/, '');
-  var title = (script && script.getAttribute('data-title')) || 'مشاور آنلاین املاک ایمان';
+  var title = (script && script.getAttribute('data-title')) || 'دستیار لیام';
   var logo = base + '/icon.svg';
   var frameUrl = base + '/liam.html?embed=1&source=' + encodeURIComponent(location.hostname);
 
