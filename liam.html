@@ -172,7 +172,7 @@ html.iam-embed .inventory-note{font-size:9px;margin-top:8px}
 'use strict';
 const SUPABASE_URL='https://lsttrmnxauaviyuipnim.supabase.co';
 const SUPABASE_KEY='sb_publishable_V3ZIfuzEZ4y7KUY88lyv_Q_wF6kQAcb';
-const AI_ENDPOINT='/api/liam';
+const AI_ENDPOINT='https://ai.amlak058.ir/';
 // The assistant page is hosted on amlak058.ir, but may be embedded on another site.
 // Never expose 058 inventory or CRM flows to an external host.
 const requestedHost=new URLSearchParams(location.search).get('source')||location.hostname;
@@ -656,8 +656,8 @@ async function ask(question){
   });
   const response=await fetch(AI_ENDPOINT,{
    method:'POST',
-   mode:'same-origin',
-   credentials:'same-origin',
+   mode:'cors',
+   credentials:'omit',
    cache:'no-store',
    headers:{'Content-Type':'application/json'},
    body:payload
